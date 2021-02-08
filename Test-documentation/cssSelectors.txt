@@ -1,0 +1,69 @@
+cssSelectors
+
+/login
+email-textbox = input[name='username'][type='email']
+password-textbox = input[name='password'][type='password']
+remember-me-checkbox = input[name='remember-me'][type='checkbox']
+login-button = button[type='submit']
+forgot-password-link = div[class='text-center'] a[class='small']
+
+AccordionSidebar{
+accordionSidebar = ul#accordionSidebar
+	dashboard-link = ul[id='accordionSidebar'] a.nav-link[href*='home']
+	view-link = ul#accordionSidebar a.nav-link[data-target='#collapseTwo']
+		consultancy-skills-link = ul[id='accordionSidebar'] a[href*='consultancy']
+		trainee-guide-link = ul[id='accordionSidebar'] a[href*='guide']
+	trainer-options-link = ul[id='accordionSidebar'] a[target='#collapsePages']
+		class-management-link = ul[id='accordionSidebar'] a[href*='manageClass']
+		trainee-management-link = ul[id='accordionSidebar'] a[href*='manageTrainee']
+		add-weeks-link = ul[id='accordionSidebar'] a[href*='newWeek']
+		assessments-link = ul[id='accordionSidebar'] a[href*='assessments']
+		enter-attendance-link = ul[id='accordionSidebar'] a[href*='attendanceEntry']
+		weekly-attendance-link = ul[id='accordionSidebar'] a[href*='weekly-attendance']
+}
+
+ProfileTopbar{
+profileTopbar = ul[class*='navbar-nav']
+	user-dropdown-photo = ul[class*='navbar-nav'] a[id*='userDropdown']
+		change-password = ul[class*='navbar-nav'] li > div > a[href*='changePassword']
+		logout = ul[class*='navbar-nav'] li > div > a[data-target*='logout']
+}
+
+/trainer/home{
+AccordionSidebar
+ProfileTopbar
+
+	[main-body]
+	first row(fullname, assigned-class, course assigned, current week of course) = main > div > div:nth-of-type(1)
+		full-name-value = main > div > div:nth-of-type(1) > div:nth-of-type(1) div[class*='h5']
+		assigned-class-value = main > div > div:nth-of-type(1) > div:nth-of-type(2) div[class*='h5']
+		course-assigned-value = main > div > div:nth-of-type(1) > div:nth-of-type(3) div[class*='h5']
+		current-week-of-course-value = main > div > div:nth-of-type(1) > div:nth-of-type(4) div[class*='h5']
+
+	second row(overall-group-attendance) = main > div > div:nth-of-type(2)
+		on-time-value = main > div > div:nth-of-type(2) div[class='card-deck'] > div:nth-of-type(1) > div[class='card-body']
+		late-value = main > div > div:nth-of-type(2) div[class='card-deck'] > div:nth-of-type(2) > div[class='card-body']
+		excused-absence-value = main > div > div:nth-of-type(2) div[class='card-deck'] > div:nth-of-type(3) > div[class='card-body']
+		unexcused-absence-value = main > div > div:nth-of-type(2) div[class='card-deck'] > div:nth-of-type(4) > div[class='card-body']
+		enter-class-attendance-link = main > div > div:nth-of-type(2) a[href*='attendanceEntry']
+}
+
+
+/trainer/manageTrainee{
+AccordionSidebar
+ProfileTopbar
+
+	[main-body]
+	create-new-trainee-form = main form[class*='form-signin']
+		email-textbox = main form[class*='form-signin'] input[id='email']
+		first-name-textbox = main form[class*='form-signin'] input[id='firstName']
+		last-name-textbox = main form[class*='form-signin'] input[id='lastName']
+		class-dropdown = main form[class*='form-signin'] select[id*='groupId']
+			options-list = main form[class*='form-signin'] select[id*='groupId'] option:not([value='']) (multiple elements)
+		create-new-trainee-button = main form[class*='form-signin'] button[type='submit']
+
+	delete-trainee-form = main form[action*='delete']
+		trainees-dropdown = main form[action*='delete'] select[name*='trainee']
+			options-list = main form[action*='delete'] select[name*='trainee'] option:not([value='']) (multiple elements)
+		delete-selected-trainee-button = main form[action*='delete'] button[type='submit']
+}
