@@ -18,7 +18,6 @@ public class ReportTrainee {
     public ReportTrainee(WebDriver webDriverArg) {
         this.webDriver = webDriverArg;
         webDriver.get("http://localhost:8080/trainee/report");
-
     }
 
     public String getUrl() {
