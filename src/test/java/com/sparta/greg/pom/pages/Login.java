@@ -17,6 +17,19 @@ public class Login {
         webDriver.get("http://localhost:8080");
     }
 
+    public HomeTrainer logInAsTrainer(String username, String password) {
+        enterUsernameAddress(username);
+        enterPassword(password);
+        clickSubmitButton();
+        return new HomeTrainer(webDriver);
+    }
+
+//    public HomeTrainee logInAsTrainee(String username, String password) {
+//        enterUsernameAddress(username);
+//        enterPassword(password);
+//        clickSubmitButton();
+//        return new HomeTrainee(webDriver);
+//    }
 
     public void enterUsernameAddress(String username) {
         webDriver.findElement(loginEmail).sendKeys(username);
