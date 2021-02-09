@@ -3,17 +3,18 @@ package com.sparta.greg.pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import java.lang.reflect.Array;
+import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class ReportTrainee {
     WebDriver   webDriver;
 
-    By          weekReportTable  = new By.ByCssSelector("table[class*='table']");
     By          weekReportSingle = new By.ByCssSelector("tr[id*='accordion1']");
     By          expand           = new By.ByCssSelector("td[class*='expand']");
     By          weekReportNumber = new By.ByCssSelector("th[scope*='row']");
+
+    @FindBy(id = "accordion1")
+    List<WebElement> weekReports;
 
     public ReportTrainee(WebDriver webDriverArg) {
         this.webDriver = webDriverArg;
@@ -77,13 +78,9 @@ public class ReportTrainee {
     }
 
     public boolean isWeekNumberCorrect() {
-        //in table, week numbers should descend
-        //get its elements in a list
-        WebElement reportTable = webDriver.findElement(weekReportTable);
-        List<WebElement> weekReports = reportTable.findElements(weekReportSingle);
 
         //get highest week number
-        int weekNumberCurrent = Integer.parseInt(weekReports.get(0).getAttribute(weekReportNumber.toString()).substring(5));
+        int weekNumberCurrent = weekReports.size();
         int weekNumberPrevious = weekNumberCurrent;
 
         //if next weekNumber is not one less, return false
