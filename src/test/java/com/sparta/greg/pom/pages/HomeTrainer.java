@@ -21,15 +21,15 @@ public class HomeTrainer extends TrainerPage {
         webDriver.get("http://localhost:8080/trainer/home");
     }
 
-    public EnterAttendancePage goToEnterAttendanceThroughDashboard() {
+    public EnterAttendance goToEnterAttendanceThroughDashboard() {
         webDriver.findElement(enterClassAttendanceButton).click();
-        return new EnterAttendancePage(webDriver);
+        return new EnterAttendance(webDriver);
     }
 
-    public TraineeProfile goToTraineeProfile() {
-        webDriver.findElement(viewTraineeProfile).click();
-        return new TraineeProfile(webDriver);
-    }
+//    public TraineeProfile goToTraineeProfile() {
+//        webDriver.findElement(viewTraineeProfile).click();
+//        return new TraineeProfile(webDriver);
+//    }
 
     public String getFullName() {
         return webDriver.findElement(trainerName).getText();

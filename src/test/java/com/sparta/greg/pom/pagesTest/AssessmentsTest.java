@@ -43,15 +43,15 @@ public class AssessmentsTest {
     }
 
 
-    @Test
-    void canClickFirstTrainee() {
-        Assertions.assertDoesNotThrow(assessmentsPage.clickTrainee(assessmentsPage.selectFirstTrainee()));
-    }
+//    @Test
+//    void canClickFirstTrainee() {
+//        Assertions.assertDoesNotThrow(assessmentsPage.clickTrainee(assessmentsPage.selectFirstTrainee()));
+//    }
 
-    @Test
-    void canClickTraineeByName() {
-        Assertions.assertDoesNotThrow(assessmentsPage.clickTraineeByName("David Trieu"));
-    }
+//    @Test
+//    void canClickTraineeByName() {
+//        Assertions.assertDoesNotThrow(assessmentsPage.clickTraineeByName("David Trieu"));
+//    }
 
     @Test
     void clickEmptyTraineeByNameThrowsNullException() {

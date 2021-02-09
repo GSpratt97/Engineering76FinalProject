@@ -1,10 +1,8 @@
 package com.sparta.greg.pom.pagesTest;
 
-import com.sparta.greg.pom.pages.EnterAttendancePage;
+import com.sparta.greg.pom.pages.EnterAttendance;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class EnterAttendancePageTest {
 
     WebDriver webDriver = new ChromeDriver();
-    EnterAttendancePage attendancePage;
+    EnterAttendance attendancePage;
 
     @Test
     public void radioButtons()
@@ -23,7 +21,7 @@ public class EnterAttendancePageTest {
         webDriver.findElement(By.name("password")).sendKeys();
         webDriver.findElement(By.cssSelector("button[type='submit']")).click();
         webDriver.get("http://localhost:8080/trainer/attendanceEntry");
-        attendancePage = new EnterAttendancePage(webDriver);
+        attendancePage = new EnterAttendance(webDriver);
 
         //assertions
         attendancePage.selectDate("22-09-2020");
@@ -43,7 +41,7 @@ public class EnterAttendancePageTest {
         webDriver.findElement(By.name("password")).sendKeys();
         webDriver.findElement(By.cssSelector("button[type='submit']")).click();
         webDriver.get("http://localhost:8080/trainer/attendanceEntry");
-        attendancePage = new EnterAttendancePage(webDriver);
+        attendancePage = new EnterAttendance(webDriver);
 
         //assertions
         attendancePage.selectTrainee("David");
