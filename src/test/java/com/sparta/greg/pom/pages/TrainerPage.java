@@ -3,7 +3,8 @@ package com.sparta.greg.pom.pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public abstract class TrainerPage implements Page {
+public abstract class TrainerPage extends Page {
+
     @FindBy(css = "a[href*='/trainer/home']")
     WebElement dashboardLink;
     @FindBy(css = "a[aria-controls*='collapsePages']")
@@ -25,9 +26,9 @@ public abstract class TrainerPage implements Page {
         trainerOptionsButton.click();
     }
 
-    public TrainerHome goToTrainerHome() {
+    public HomeTrainer goToTrainerHome() {
         dashboardLink.click();
-        return new TrainerHome(webDriver);
+        return new HomeTrainer(webDriver);
     }
 
     public ClassManagement goToClassManagement() {
