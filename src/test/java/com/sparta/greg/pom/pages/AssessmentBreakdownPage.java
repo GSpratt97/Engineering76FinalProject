@@ -32,5 +32,8 @@ public class AssessmentBreakdownPage {
         webDriver.findElement(By.cssSelector("a[href*='collapseSQL'])")).click();
     }
 
+    public void clickPlusIconSecondModule(){
+        webDriver.findElement(By.cssSelector("a[href*='collapseNotSQL'])")).click();
+    }
 
 }
