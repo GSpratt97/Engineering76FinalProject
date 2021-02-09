@@ -1,6 +1,7 @@
 package com.sparta.greg.pom.pagesTest;
 
 import com.sparta.greg.pom.pages.ClassManagement;
+import com.sparta.greg.pom.pages.HomeTrainer;
 import com.sparta.greg.pom.pages.Login;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
@@ -39,19 +40,10 @@ public class ClassManagementTest {
 			webDriver = new ChromeDriver();
 		}
 
-		//TODO : REPLACE WITH LOGIN PAGE CODE AND REDIRECTION TO CLASS MANAGEMENT
-		webDriver.get("http://localhost:8080/");
-		webDriver.findElement(By.id("inputEmail")).sendKeys(username);
-		webDriver.findElement(By.id("inputPassword")).sendKeys(password);
-		webDriver.findElement(By.cssSelector(".btn")).click();
-		webDriver.get("http://localhost:8080/trainer/manageClass");
-
-		/* waiting for homeTrainer to extend TrainerPage
 		Login login = new Login(webDriver);
-		login.logInAsTrainer(username, password);
-
-		*/
-		classManagement = new ClassManagement(webDriver);
+		HomeTrainer homeTrainer= login.logInAsTrainer(username, password);
+		classManagement = homeTrainer.goToClassManagement();
+		
 
 	}
 
