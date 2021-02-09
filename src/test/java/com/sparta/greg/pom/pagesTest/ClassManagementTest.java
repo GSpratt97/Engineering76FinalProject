@@ -39,11 +39,11 @@ public class ClassManagementTest {
 		}else {
 			webDriver = new ChromeDriver();
 		}
-
+		
 		Login login = new Login(webDriver);
 		HomeTrainer homeTrainer= login.logInAsTrainer(username, password);
 		classManagement = homeTrainer.goToClassManagement();
-		
+
 
 	}
 
