@@ -3,17 +3,17 @@ package com.sparta.greg.pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ReportTrainee {
     WebDriver   webDriver;
 
-    By          weekReportSingle = new By.ByCssSelector("tr[id*='accordion1']");
-    By          expand           = new By.ByCssSelector("td[class*='expand']");
-    By          weekReportNumber = new By.ByCssSelector("th[scope*='row']");
+    By weekReportSingle = new By.ByCssSelector("tr[id*='accordion1']");
+    By areaExpanded     = new By.ByCssSelector("tr[class*='accordion-toggle']");
+    By expand           = new By.ByCssSelector("td[class*='expand']");
+    By weekReportNumber = new By.ByCssSelector("th[scope*='row']");
 
-    @FindBy(id = "accordion1")
     List<WebElement> weekReports;
 
     public ReportTrainee(WebDriver webDriverArg) {
@@ -25,68 +25,62 @@ public class ReportTrainee {
         return webDriver.getCurrentUrl();
     }
 
+    public void setWeekReports() {
+        weekReports = webDriver.findElements(By.tagName("tbody"));
+    }
+
+    public List<WebElement> getWeekReports() {
+        return weekReports;
+    }
+
     public boolean doesExpandButtonExpand() {
-        //find week report
         WebElement weekReport = webDriver.findElement(weekReportSingle);
-        //find expand button
         WebElement expandButton = weekReport.findElement(expand);
-        //click expand button
         expandButton.click();
 
-        //return 'aria-expanded'
-        return weekReport.getAttribute("aria-expanded").equals("true");
+        return weekReport.findElement(areaExpanded).getAttribute("aria-expanded").equals("true");
     }
 
     public boolean doesExpandButtonExpand(WebElement weekReport) {
-        //find expand button
         WebElement expandButton = weekReport.findElement(expand);
-        //click expand button
         expandButton.click();
 
-        //return 'aria-expanded'
-        return weekReport.getAttribute("aria-expanded").equals("true");
+        return weekReport.findElement(areaExpanded).getAttribute("aria-expanded").equals("true");
     }
 
     public boolean doesExpandButtonCollapse() {
-        //find week report
         WebElement weekReport = webDriver.findElement(weekReportSingle);
-        //find expand button
         WebElement expandButton = weekReport.findElement(expand);
+        expandButton.click();
+        webDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS); //must wait between clicks
 
-        if(weekReport.getAttribute("aria-expanded").equals("true")) {
+        if(weekReport.findElement(areaExpanded).getAttribute("aria-expanded").equals("true")) {
             expandButton.click();
-            return weekReport.getAttribute("aria-expanded").equals("false");
-        } else {
-            expandButton.click();
-            expandButton.click();
-            return weekReport.getAttribute("aria-expanded").equals("false");
         }
+
+        return weekReport.findElement(areaExpanded).getAttribute("aria-expanded").equals("false");
     }
 
     public boolean doesExpandButtonCollapse(WebElement weekReport) {
-        //find expand button
         WebElement expandButton = weekReport.findElement(expand);
+        expandButton.click();
+        webDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS); //must wait between clicks
 
-        if(weekReport.getAttribute("aria-expanded").equals("true")) {
+        if(weekReport.findElement(areaExpanded).getAttribute("aria-expanded").equals("true")) {
             expandButton.click();
-            return weekReport.getAttribute("aria-expanded").equals("false");
-        } else {
-            expandButton.click();
-            expandButton.click();
-            return weekReport.getAttribute("aria-expanded").equals("false");
         }
+
+        return weekReport.findElement(areaExpanded).getAttribute("aria-expanded").equals("false");
     }
 
     public boolean isWeekNumberCorrect() {
-
-        //get highest week number
         int weekNumberCurrent = weekReports.size();
         int weekNumberPrevious = weekNumberCurrent;
 
-        //if next weekNumber is not one less, return false
-        for(WebElement weekReport:weekReports) {
-            weekNumberCurrent = Integer.parseInt(weekReport.getAttribute(weekReportNumber.toString()).substring(5));
-            if(weekNumberCurrent != (weekNumberPrevious - 1)) {
+        for(WebElement weekReport:getWeekReports()) {
+            weekNumberCurrent = Integer.parseInt(weekReport.findElement(weekReportNumber).getText().substring(5));
+
+            if(weekNumberCurrent != (weekNumberPrevious - 1) && weekNumberCurrent != weekReports.size()) {
                 return false;
             } else {
                 weekNumberPrevious = weekNumberCurrent;
