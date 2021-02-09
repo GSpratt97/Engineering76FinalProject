@@ -1,9 +1,10 @@
 package com.sparta.greg.pom.pagesTest;
 
+import com.sparta.greg.pom.pages.HomeTrainee;
+import com.sparta.greg.pom.pages.HomeTrainer;
 import com.sparta.greg.pom.pages.Login;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -11,7 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class LoginTest {
+public class ChangePasswordTest {
 
     private static final Properties properties = new Properties();
     private static Login login;
@@ -20,11 +21,14 @@ public class LoginTest {
     private static String trainerPassword;
     private static String traineeUsername;
     private static String traineePassword;
+    private static HomeTrainer homeTrainer;
+    private static HomeTrainee homeTrainee;
 
     @BeforeEach
     void setup() {
         webDriver = new ChromeDriver();
         login = new Login(webDriver);
+
 
         try {
             properties.load(new FileReader("src/test/resources/login.properties"));
@@ -37,32 +41,13 @@ public class LoginTest {
         }
     }
 
-    @Test
-    void checkLoginPageLoaded() {
-        Assertions.assertEquals("http://localhost:8080/login", webDriver.getCurrentUrl());
+    void changePasswordAsTrainer() {
+        homeTrainer = login.logInAsTrainer(trainerUsername, trainerPassword);
+//        homeTrainer.clickChangePassword();
     }
 
-    @Test
-    void canSignInAsTrainer() {
-        login.logInAsTrainer(trainerUsername, trainerPassword);
-        Assertions.assertEquals("http://localhost:8080/trainer/home", webDriver.getCurrentUrl());
+    void changePasswordAsTrainee() {
+        homeTrainee = login.logInAsTrainee(traineeUsername, traineePassword);
+//        homeTrainee.clickChangePassword();
     }
-
-    @Test
-    void canSignInAsTrainee() {
-        login.logInAsTrainee(traineeUsername, traineePassword);
-        Assertions.assertEquals("http://localhost:8080/trainee/home", webDriver.getCurrentUrl());
-    }
-
-    @Test
-    void wrongDetailsFail() {
-        login.enterUsernameAddress("wrong@email.com");
-        login.enterPassword("wrong");
-        login.clickSubmitButton();
-        Assertions.assertEquals("http://localhost:8080/login?error", webDriver.getCurrentUrl());
-    }
-
-
-
-
 }

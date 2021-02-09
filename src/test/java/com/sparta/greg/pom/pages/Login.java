@@ -24,12 +24,12 @@ public class Login {
         return new HomeTrainer(webDriver);
     }
 
-//    public HomeTrainee logInAsTrainee(String username, String password) {
-//        enterUsernameAddress(username);
-//        enterPassword(password);
-//        clickSubmitButton();
-//        return new HomeTrainee(webDriver);
-//    }
+    public HomeTrainee logInAsTrainee(String username, String password) {
+        enterUsernameAddress(username);
+        enterPassword(password);
+        clickSubmitButton();
+        return new HomeTrainee(webDriver);
+    }
 
     public void enterUsernameAddress(String username) {
         webDriver.findElement(loginEmail).sendKeys(username);
