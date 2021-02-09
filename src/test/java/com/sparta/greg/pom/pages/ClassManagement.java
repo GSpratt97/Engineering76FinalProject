@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 public class ClassManagement extends TrainerPage{
-	WebDriver webDriver;
 
 	By selectTrainee = By.id("traineeId");
 	By selectClass = By.id("groupId");
