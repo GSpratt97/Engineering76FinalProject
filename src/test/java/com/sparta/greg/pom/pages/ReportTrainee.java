@@ -4,16 +4,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 public class ReportTrainee {
     WebDriver webDriver;
-    By report = new By.ByCssSelector("tr[id*='accordion1']");
+    By weekReportTable = new By.ByCssSelector("table[class*='table']");
+    By weekReportSingle = new By.ByCssSelector("tr[id*='accordion1']");
     By expand = new By.ByCssSelector("td[class*='expand']");
-    By weekNumber = new By.ByCssSelector("th[scope*='row']");
+    By weekReportNumber = new By.ByCssSelector("th[scope*='row']");
 
-    public ReportTrainee(WebDriver webDriver) {
-        this.webDriver = webDriver;
+    public ReportTrainee(WebDriver webDriverArg) {
+        this.webDriver = webDriverArg;
+        webDriver.get("http://localhost:8080/trainee/report");
+
     }
 
     public String getUrl() {
@@ -22,7 +26,7 @@ public class ReportTrainee {
 
     public boolean doesExpandButtonWork() {
         //find week report
-        WebElement weekReport = webDriver.findElement(report);
+        WebElement weekReport = webDriver.findElement(weekReportSingle);
         //find expand button
         WebElement expandButton = weekReport.findElement(expand);
         //click expand button
@@ -45,13 +49,23 @@ public class ReportTrainee {
     public boolean isWeekNumberCorrect() {
         //in table, week numbers should descend
         //get its elements in a list
-        List<WebElement> weekReports = webDriver.findElements(By.tagName("tbody"));
-        boolean isWeekCorrect = false;
+        WebElement reportTable = webDriver.findElement(weekReportTable);
+        List<WebElement> weekReports = reportTable.findElements(weekReportSingle);
 
-        //set bool true until a week number is not one less than the previous week
+        //get highest week number
+        int weekNumberCurrent = Integer.parseInt(weekReports.get(0).getAttribute(weekReportNumber.toString()).substring(5));
+        int weekNumberPrevious = weekNumberCurrent;
 
-        return false;
+        //if next weekNumber is not one less, return false
+        for(WebElement weekReport:weekReports) {
+            weekNumberCurrent = Integer.parseInt(weekReport.getAttribute(weekReportNumber.toString()).substring(5));
+            if(weekNumberCurrent != (weekNumberPrevious - 1)) {
+                return false;
+            } else {
+                weekNumberPrevious = weekNumberCurrent;
+            }
+        }
+
+        return true;
     }
-
-
 }
