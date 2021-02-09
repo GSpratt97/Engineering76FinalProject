@@ -20,6 +20,7 @@ public class ClassManagement {
 	By createClassButton = By.cssSelector("form.form-signin:nth-child(2) button");
 
 	By successMessage = By.cssSelector("p.letterGradeA");
+	By errorMessage = By.cssSelector("p.letterGradeF");
 
 
 	public ClassManagement(WebDriver webDriver){
@@ -92,5 +93,9 @@ public class ClassManagement {
 
 	public WebElement getSuccessMessage(){
 		return webDriver.findElement(successMessage);
+	}
+
+	public WebElement getErrorMessage(){
+		return webDriver.findElement(errorMessage);
 	}
 }
