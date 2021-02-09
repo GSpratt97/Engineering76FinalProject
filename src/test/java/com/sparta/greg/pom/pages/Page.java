@@ -24,7 +24,7 @@ public abstract class Page {
         webDriver.findElement(userDropDownPhoto).click();
     }
 
-    public Login logOut() {
+    public Login logout() {
         webDriver.findElement(logout).click();
         return new Login(webDriver);
     }
