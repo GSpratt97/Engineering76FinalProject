@@ -1,6 +1,7 @@
 package com.sparta.greg.pom.pagesTest;
 
 import com.sparta.greg.pom.pages.Assessments;
+import com.sparta.greg.pom.pages.HomeTrainer;
 import com.sparta.greg.pom.pages.Login;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -16,8 +17,6 @@ import java.util.Properties;
 public class AssessmentsTest {
 
     private static WebDriver webDriver;
-    private static Login loginPage;
-    private static Home homePage;
     private static Assessments assessmentsPage;
     private static Properties properties;
     private static String usernameTrainer;
@@ -26,9 +25,7 @@ public class AssessmentsTest {
     @BeforeEach
     void setup() {
         webDriver = new ChromeDriver();
-        loginPage = new Login(webDriver);
-
-        // Name of properties file to change depending on what is sent by Ben
+        webDriver.get("http://localhost:8080/login");
 
         try {
             properties.load(new FileReader("src/test/resources/login.properties"));
@@ -38,24 +35,43 @@ public class AssessmentsTest {
             e.printStackTrace();
         }
 
+        Login login = new Login(webDriver);
+        login.logInAsTrainer(usernameTrainer, passwordTrainer);
+
+        webDriver.get("http://localhost:8080/trainer/assessments");
+
     }
+
 
     @Test
     void canClickFirstTrainee() {
-
-        loginPage.enterUsernameAddress(usernameTrainer);
-        loginPage.enterPassword(passwordTrainer);
-        homePage = loginPage.clickSubmitButton();
-        assessmentsPage = homePage.goToAssessments();
         Assertions.assertDoesNotThrow(assessmentsPage.clickTrainee(assessmentsPage.selectFirstTrainee()));
     }
 
+    @Test
+    void canClickTraineeByName() {
+        Assertions.assertDoesNotThrow(assessmentsPage.clickTraineeByName("David Trieu"));
+    }
+
+    @Test
+    void clickEmptyTraineeByNameThrowsNullException() {
+        Exception exception = Assertions.assertThrows(NullPointerException.class, () -> {
+            assessmentsPage.clickTraineeByName(" ");
+        });
+    }
+
+    @Test
+    void clickNullTraineeThrowsNullException() {
+        Exception exception = Assertions.assertThrows(NullPointerException.class, () -> {
+            assessmentsPage.clickTrainee(null);
+        });
+    }
 
 
     @AfterEach
-    void close() {webDriver.close();}
-
-
+    void close() {
+        webDriver.close();
+    }
 
 
 }
