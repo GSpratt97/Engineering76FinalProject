@@ -24,7 +24,7 @@ public class ReportTrainee {
         return webDriver.getCurrentUrl();
     }
 
-    public boolean doesExpandButtonWork() {
+    public boolean doesExpandButtonExpand() {
         //find week report
         WebElement weekReport = webDriver.findElement(weekReportSingle);
         //find expand button
@@ -44,6 +44,22 @@ public class ReportTrainee {
 
         //return 'aria-expanded'
         return weekReport.getAttribute("aria-expanded").equals("true");
+    }
+
+    public boolean doesExpandButtonCollapse() {
+        //find week report
+        WebElement weekReport = webDriver.findElement(weekReportSingle);
+        //find expand button
+        WebElement expandButton = weekReport.findElement(expand);
+
+        if(weekReport.getAttribute("aria-expanded").equals("true")) {
+            expandButton.click();
+            return weekReport.getAttribute("aria-expanded").equals("false");
+        } else {
+            expandButton.click();
+            expandButton.click();
+            return weekReport.getAttribute("aria-expanded").equals("false");
+        }
     }
 
     public boolean isWeekNumberCorrect() {
