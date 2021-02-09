@@ -30,7 +30,7 @@ public abstract class Page {
     }
 
     public void selectView() {
-        webDriver.findElement(viewLink);
+        webDriver.findElement(viewLink).click();
     }
 
     public ConsultancySkills selectConsultancySkills() {
