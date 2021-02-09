@@ -5,13 +5,10 @@ import org.openqa.selenium.WebDriver;
 
 public class ConsultancySkills{
     WebDriver webDriver;
-    public ConsultancySkills(WebDriver webDriver) {
-        this.webDriver = webDriver;
-    }
 
     public ConsultancySkills goToConsultancySkillsPage(){
         webDriver.get("http://localhost:8080/consultancy");
-        return new ConsultancySkills(webDriver);
+        return new ConsultancySkills();
     }
 
     public void clickWhatTheseSkillsMakeButton(){
@@ -21,8 +18,8 @@ public class ConsultancySkills{
     public void clickBackToProfileOrDashBoardButtonOnConsultancySkills(){
         webDriver.findElement(By.className("btn btn-primary mb-3")).click();
     }
-
-    public void clickStudiousButtonOnConsultancySkills(){
-        webDriver.findElement(By.cssSelector("a[aria-controls='collapseCard1']")).click();
+// Card name would be the class name of that specific button for example for studios it is collapseCard1
+    public void clickCollapsableButtonOnConsultancySkills(String cardName){
+        webDriver.findElement(By.cssSelector("a[aria-controls="+"'"+cardName+"']")).click();
     }
 }
