@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class HomeTrainer {
 
     By enterClassAttendanceButton = By.linkText("Enter Class Attendance");
-    By viewTraineeProfile = By.className("btn btn-primary");
+    By viewTraineeProfile = By.cssSelector("button[type='submit'][value='profile']");
     By trainerName = By.cssSelector("main > div > div:nth-of-type(1) > div:nth-of-type(1) div[class*='h5']");
     By assignedClass = By.cssSelector("main > div > div:nth-of-type(1) > div:nth-of-type(2) div[class*='h5']");
     By courseAssigned = By.cssSelector("main > div > div:nth-of-type(1) > div:nth-of-type(3) div[class*='h5']");
