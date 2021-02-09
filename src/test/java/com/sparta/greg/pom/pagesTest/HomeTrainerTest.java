@@ -50,7 +50,7 @@ public class HomeTrainerTest {
     @Test
     @DisplayName("Go to Enter Class Attendance")
     void goToEnterClassAttendance() {
-        homeTrainer.goToEnterAttendance();
+        homeTrainer.goToEnterAttendanceThroughDashboard();
         Assertions.assertEquals("http://localhost:8080/trainer/attendanceEntry", webDriver.getCurrentUrl());
     }
 
