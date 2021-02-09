@@ -3,7 +3,7 @@ package com.sparta.greg.pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class HomeTrainee {
+public class HomeTrainee extends TraineePage {
 
     private WebDriver webDriver;
 
@@ -29,16 +29,16 @@ public class HomeTrainee {
     }
 
     // WAITING FOR TraineeAttendance CLASS
-//    public TraineeAttendance goToWeeklyAttendance(){
-//        webDriver.findElement(attendenceDetailsButton).click();
-//        return new TraineeAttendance(webDriver);
-//    }
+    public TraineeAttendance goToWeeklyAttendance(){
+        webDriver.findElement(attendenceDetailsButton).click();
+        return new TraineeAttendance(webDriver);
+    }
 
     // WAITING FOR ReportTrainee CLASS
-//    public ReportTrainee goToReportForTrainee(){
-//        webDriver.findElement(reportDetailsButton).click();
-//        return new ReportTrainee(webDriver);
-//    }
+    public ReportTrainee goToReportForTrainee(){
+        webDriver.findElement(reportDetailsButton).click();
+        return new ReportTrainee(webDriver);
+    }
 
     public String getFullName() {
         return webDriver.findElement(traineeName).getText();
