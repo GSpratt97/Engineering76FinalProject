@@ -19,8 +19,8 @@ public class EnterAttendancePageTest {
     {
         //SetUp
         webDriver.get("http://localhost:8080");
-        webDriver.findElement(By.name("username")).sendKeys("MGadhvi@sparta.com");
-        webDriver.findElement(By.name("password")).sendKeys("startrek");
+        webDriver.findElement(By.name("username")).sendKeys();
+        webDriver.findElement(By.name("password")).sendKeys();
         webDriver.findElement(By.cssSelector("button[type='submit']")).click();
         webDriver.get("http://localhost:8080/trainer/attendanceEntry");
         attendancePage = new EnterAttendancePage(webDriver);
@@ -39,8 +39,8 @@ public class EnterAttendancePageTest {
     {
         //setup
         webDriver.get("http://localhost:8080");
-        webDriver.findElement(By.name("username")).sendKeys("MGadhvi@sparta.com");
-        webDriver.findElement(By.name("password")).sendKeys("startrek");
+        webDriver.findElement(By.name("username")).sendKeys();
+        webDriver.findElement(By.name("password")).sendKeys();
         webDriver.findElement(By.cssSelector("button[type='submit']")).click();
         webDriver.get("http://localhost:8080/trainer/attendanceEntry");
         attendancePage = new EnterAttendancePage(webDriver);

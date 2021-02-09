@@ -20,8 +20,8 @@ public class EnterAttendSD {
         webDriver = new ChromeDriver();
         //SignIn
         webDriver.get("http://localhost:8080");
-        webDriver.findElement(By.name("username")).sendKeys("MGadhvi@sparta.com");
-        webDriver.findElement(By.name("password")).sendKeys("startrek");
+        webDriver.findElement(By.name("username")).sendKeys();
+        webDriver.findElement(By.name("password")).sendKeys();
         webDriver.findElement(By.cssSelector("button[type='submit']")).click();
 
         //Go to right page
