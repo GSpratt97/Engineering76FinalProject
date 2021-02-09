@@ -20,7 +20,6 @@ public class ClassManagementTest {
 	private String password;
 
 
-
 	@BeforeEach
 	void setup(){
 		try {
@@ -39,9 +38,8 @@ public class ClassManagementTest {
 			webDriver = new ChromeDriver();
 		}
 
-		webDriver.get("http://localhost:8080/");
-
 		//TODO : REPLACE WITH LOGIN PAGE CODE AND REDIRECTION TO CLASS MANAGEMENT
+		webDriver.get("http://localhost:8080/");
 		webDriver.findElement(By.id("inputEmail")).sendKeys(username);
 		webDriver.findElement(By.id("inputPassword")).sendKeys(password);
 		webDriver.findElement(By.cssSelector(".btn")).click();
@@ -62,8 +60,8 @@ public class ClassManagementTest {
 //	}
 
 	@Test
-	@DisplayName("Does dropdown work")
-	void doesDropdownWork() {
+	@DisplayName("Assigning a Trainee")
+	void assigningTrainee() {
 		classManagement.selectTrainee("Bill Bird");
 		classManagement.selectClass("Engineering 65");
 
@@ -71,6 +69,28 @@ public class ClassManagementTest {
 		Assertions.assertEquals("Engineering 65", classManagement.getSelectClass().getFirstSelectedOption().getText());
 
 		classManagement.clickAssignTrainee();
+		System.out.println(classManagement.getSuccessMessage().getText());
 
 	}
+
+
+	@Test
+	@DisplayName("Testing date entries")
+	void testingDateEntries() {
+		classManagement.enterStartDate("01", "03", "2021", "00", "00");
+		classManagement.enterEndDate("20", "12", "2022", "16", "30");
+	}
+
+	@Test
+	@DisplayName("Testing creating class")
+	void testingCreatingClass() {
+		classManagement.enterClassName("Testing 101");
+		classManagement.selectCourse("Java SDET");
+		classManagement.enterStartDate("01", "03", "2021", "00", "00");
+		classManagement.enterEndDate("20", "04", "2021", "00", "30");
+
+		classManagement.clickCreateClass();
+
+	}
+
 }
