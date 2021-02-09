@@ -12,7 +12,7 @@ public class WeeklyAttendance {
 
     private WebDriver webDriver;
 
-    @FindBy(how = How.ID, using = "#accordionExample")
+    @FindBy(id = "#accordionExample")
     private List<WebElement> weekList;
 
     public WeeklyAttendance(WebDriver webDriver) {

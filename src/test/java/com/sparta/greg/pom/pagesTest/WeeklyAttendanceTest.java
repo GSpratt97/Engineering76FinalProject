@@ -8,9 +8,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class WeeklyAttendanceTest {
 
     @Test
-    @DisplayName("ClickWeekRow returns false")
-    void clickWeekRowReturnsFalse() {
-        
+    @DisplayName("clickWeekRow returns true for populated list")
+    void clickWeekRowReturnsTrueForPopulatedList() {
         org.junit.jupiter.api.Assertions.fail("Not implemented");
     }
 }
