@@ -1,6 +1,7 @@
 package com.sparta.greg.pom.pagesTest;
 
 import com.sparta.greg.pom.pages.ClassManagement;
+import com.sparta.greg.pom.pages.Login;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -45,6 +46,11 @@ public class ClassManagementTest {
 		webDriver.findElement(By.cssSelector(".btn")).click();
 		webDriver.get("http://localhost:8080/trainer/manageClass");
 
+		/* waiting for homeTrainer to extend TrainerPage
+		Login login = new Login(webDriver);
+		login.logInAsTrainer(username, password);
+
+		*/
 		classManagement = new ClassManagement(webDriver);
 
 	}
@@ -90,6 +96,7 @@ public class ClassManagementTest {
 		classManagement.enterEndDate("20", "04", "2021", "00", "30");
 
 		classManagement.clickCreateClass();
+		System.out.println(classManagement.getErrorMessage());
 
 	}
 
