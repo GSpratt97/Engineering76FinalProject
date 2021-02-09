@@ -20,12 +20,21 @@ AssessmentBreakDownPageTest {
     }
 
     @Test
-    @DisplayName("Test icon")
-    void clickPlusIcon() {
+    @DisplayName("Test the first click plus icon")
+    void clickFirstPlusIcon() {
         assessmentBreakdownPage.goToAssessmentBreakdownPage();
         assessmentBreakdownPage.clickPlusIconFirstModule();
         //Assertions.assertEquals();
     }
+
+    @Test
+    @DisplayName("Test the second click plus icon")
+    void clickSecondPlusIcon() {
+        assessmentBreakdownPage.goToAssessmentBreakdownPage();
+        assessmentBreakdownPage.clickPlusIconSecondModule();
+        //Assertions.assertEquals();
+    }
+
     @AfterEach
 	void close(){
 		webDriver.close();
