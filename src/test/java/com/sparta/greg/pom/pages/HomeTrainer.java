@@ -3,7 +3,7 @@ package com.sparta.greg.pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class HomeTrainer {
+public class HomeTrainer extends TrainerPage{
 
     By enterClassAttendanceButton = By.linkText("Enter Class Attendance");
     By viewTraineeProfile = By.cssSelector("button[type='submit'][value='profile']");
@@ -24,15 +24,15 @@ public class HomeTrainer {
         webDriver.get("http://localhost:8080/trainer/home");
     }
 
-    public EnterAttendancePage goToEnterAttendance() {
+    public EnterAttendancePage goToEnterAttendanceThroughDashboard() {
         webDriver.findElement(enterClassAttendanceButton).click();
         return new EnterAttendancePage(webDriver);
     }
 
-//    public TraineeProfile goToTraineeProfile() {
-//        webDriver.findElement(viewTraineeProfile).click();
-//        return new TraineeProfile(webDriver);
-//    }
+    public TraineeProfile goToTraineeProfile() {
+        webDriver.findElement(viewTraineeProfile).click();
+        return new TraineeProfile(webDriver);
+    }
 
     public String getFullName() {
         return webDriver.findElement(trainerName).getText();
@@ -75,6 +75,5 @@ public class HomeTrainer {
         return new String[]{webDriver.findElement(onTime).getText(), webDriver.findElement(late).getText(),
                 webDriver.findElement(excusedAbsence).getText(), webDriver.findElement(unexcusedAbsence).getText()};
     }
-
 
 }
