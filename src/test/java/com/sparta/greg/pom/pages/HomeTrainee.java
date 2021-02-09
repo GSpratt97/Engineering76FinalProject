@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 
 public class HomeTrainee extends TraineePage {
 
-    private WebDriver webDriver;
-
     By traineeName = By.cssSelector("main > div > div:nth-of-type(1) > div:nth-of-type(1) div[class*='h5']");
     By assignedClass = By.cssSelector("main > div > div:nth-of-type(1) > div:nth-of-type(2) div[class*='h5']");
     By courseAssigned = By.cssSelector("main > div > div:nth-of-type(1) > div:nth-of-type(3) div[class*='h5']");
