@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class FeedbackFormTest {
 
@@ -34,16 +34,16 @@ public class FeedbackFormTest {
         login.enterUsernameAddress(properties.getProperty("traineeUsername"));
         login.enterPassword(properties.getProperty("traineePassword"));
         login.clickSubmitButton();
-
-
         feedbackForm = new FeedbackForm(webDriver);
+        feedbackForm.clickTraineeOptions();
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        feedbackForm.goToFeedbackForm();
     }
 
 
     @Test
     @DisplayName("Checking can access and edit the start text box")
     void checkCanAccessStart(){
-        webDriver.get("http://localhost:8080/trainee/report/12");
         Assertions.assertTrue(feedbackForm.enterStart("Editing start"));
     }
 
@@ -58,7 +58,6 @@ public class FeedbackFormTest {
     @Test
     @DisplayName("Checking can access and edit the stop text box")
     void checkCanAccessStop(){
-        webDriver.get("http://localhost:8080/trainee/report/12");
         Assertions.assertTrue(feedbackForm.enterStop("Editing stop"));
     }
 
@@ -71,7 +70,6 @@ public class FeedbackFormTest {
     @Test
     @DisplayName("Checking can access and edit the continue text box")
     void checkCanAccessContinue(){
-        webDriver.get("http://localhost:8080/trainee/report/12");
         Assertions.assertTrue(feedbackForm.enterContinue("Editing continue"));
     }
 
