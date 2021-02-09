@@ -7,12 +7,12 @@ public class ConsultancySkills {
     WebDriver webDriver;
 
     public enum buttonsOnTheConsultancySkills {
-        studious("collapseCard1"),
-        professional("collapseCard2"),
-        independent("collapseCard3"),
-        imaginative("collapseCard4"),
-        determined("collapseCard5"),
-        analytic("collapseCard6");
+        Studious("collapseCard1"),
+        Professional("collapseCard2"),
+        Independent("collapseCard3"),
+        Imaginative("collapseCard4"),
+        Determined("collapseCard5"),
+        Analytic("collapseCard6");
 
 
         public String button;
@@ -43,10 +43,6 @@ public class ConsultancySkills {
 
     // Card name would be the class name of that specific button for example for studios it is collapseCard1
     public void clickCollapsableButtonOnConsultancySkills(buttonsOnTheConsultancySkills buttonName) {
-        webDriver.findElement(By.cssSelector("a[aria-controls=" + "'" + buttonName + "']")).click();
-    }
-
-    public static void main(String[] args) {
-
+        webDriver.findElement(By.cssSelector("a[aria-controls=" + "'" + buttonName.getButton() + "']")).click();
     }
 }
