@@ -2,6 +2,7 @@ package com.sparta.greg.pom.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public abstract class Page {
@@ -15,9 +16,8 @@ public abstract class Page {
     By traineeGuideLink = new By.ByCssSelector("ul[id='accordionSidebar'] a[href*='guide']");
     By sideBarSizeSelector = new By.ByCssSelector("ul[id='accordionSidebar'] button[id='sidebarToggle']");
 
-    public Home gotoHomePage() {
-        webDriver.findElement(brandLogoLink).click();
-        return new Home(webDriver);
+    public WebElement gotoHomePage() {
+        return webDriver.findElement(brandLogoLink);
     }
 
     public void selectProfileImage() {
