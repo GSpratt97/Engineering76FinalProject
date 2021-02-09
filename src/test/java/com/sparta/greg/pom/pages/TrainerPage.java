@@ -4,6 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public abstract class TrainerPage implements Page {
+    @FindBy(css = "a[href*='/trainer/home']")
+    WebElement dashboardLink;
     @FindBy(css = "a[aria-controls*='collapsePages']")
     WebElement trainerOptionsButton;
     @FindBy(css = "a[href*='/trainer/manageClass']")
@@ -21,6 +23,11 @@ public abstract class TrainerPage implements Page {
 
     public void clickTrainerOptions() {
         trainerOptionsButton.click();
+    }
+
+    public void goToTrainerHome() {
+        dashboardLink.click();
+        return new TrainerHome(webDriver);
     }
 
     public void goToClassManagement() {
