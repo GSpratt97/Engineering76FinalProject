@@ -37,7 +37,7 @@ public class ConsultancySkillTests {
     @DisplayName("Click Studious Button On Consultancy Skills")
     public void clickStudiousButtonOnConsultancySkills() {
         consultancySkills.goToConsultancySkillsPage();
-        consultancySkills.clickCollapsableButtonOnConsultancySkills(ConsultancySkills.buttonsOnTheConsultancySkills.studious);
+        consultancySkills.clickCollapsableButtonOnConsultancySkills(ConsultancySkills.buttonsOnTheConsultancySkills.STUDIOUS);
         webDriver.close();
     }
 }
