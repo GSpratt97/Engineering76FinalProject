@@ -1,17 +1,10 @@
 package com.sparta.greg.pom.pagesTest;
 
 import com.sparta.greg.pom.pages.ConsultancySkills;
-import com.sparta.greg.pom.pages.Login;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
-import java.util.Properties;
 
 public class ConsultancySkillTests {
     WebDriver webDriver = new ChromeDriver();
@@ -42,7 +35,7 @@ public class ConsultancySkillTests {
     @DisplayName("Click Studious Button On Consultancy Skills")
     public void clickStudiousButtonOnConsultancySkills() {
         consultancySkills.goToConsultancySkillsPage();
-        consultancySkills.clickStudiousButtonOnConsultancySkills();
+        consultancySkills.clickCollapsableButtonOnConsultancySkills("collapseCard1");
         webDriver.close();
     }
 }
