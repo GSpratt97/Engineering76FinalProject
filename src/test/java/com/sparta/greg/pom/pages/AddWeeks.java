@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.sql.Driver;
+import java.util.concurrent.TimeUnit;
 
 public class AddWeeks {
 
@@ -26,12 +27,13 @@ public class AddWeeks {
 
     public void selectGroupToAdd(String group){
 
-        driver.findElement(dropDownMenu).click();
+        driver.findElement(dropDownMenu2).click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.findElement(selectGroup(group)).click();
     }
 
     public void pressAddWeekButton(){
-        driver.findElement(addWeekButton);
+        driver.findElement(addWeekButton).click();
     }
 
     private By selectGroup(String group){
