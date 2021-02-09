@@ -41,7 +41,7 @@ public class TraineeAttendanceTest {
     @Test
     @DisplayName("Get an element")
     public void works(){
-        //traineeAttendancePage = homePage.go;
+        traineeAttendancePage = homePage.go;
         traineeAttendancePage.clickWeek(1);
     }
 }
