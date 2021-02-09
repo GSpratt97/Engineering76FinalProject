@@ -24,15 +24,15 @@ public class HomeTrainer {
         webDriver.get("http://localhost:8080/trainer/home");
     }
 
-    public EnterAttendance goToEnterAttendance() {
+    public EnterAttendancePage goToEnterAttendance() {
         webDriver.findElement(enterClassAttendanceButton).click();
-        return new EnterAttendance(webDriver);
+        return new EnterAttendancePage(webDriver);
     }
 
-    public TraineeProfile goToTraineeProfile() {
-        webDriver.findElement(viewTraineeProfile).click();
-        return new TraineeProfile(webDriver);
-    }
+//    public TraineeProfile goToTraineeProfile() {
+//        webDriver.findElement(viewTraineeProfile).click();
+//        return new TraineeProfile(webDriver);
+//    }
 
     public String getFullName() {
         return webDriver.findElement(trainerName).getText();
