@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 public abstract class TrainerPage extends Page {
 
     By dashboardLink = new By.ByCssSelector("a[href*='/trainer/home']");
-    By trainerOptionsButton = new By.ByCssSelector("a[aria-controls*='collapsePages']");
+    By trainerOptionsButton = new By.ByCssSelector("a[data-target*='#collapsePages']");
     By classManagementLink = new By.ByCssSelector("a[href*='/trainer/manageClass']");
     By traineeManagementLink = new By.ByCssSelector("a[href*='/trainer/manageTrainee']");
     By addWeeksLink = new By.ByCssSelector("a[href*='/trainer/newWeek']");
