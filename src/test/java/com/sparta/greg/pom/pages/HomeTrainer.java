@@ -3,7 +3,7 @@ package com.sparta.greg.pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class HomeTrainer extends TrainerPage{
+public class HomeTrainer extends TrainerPage {
 
     By enterClassAttendanceButton = By.linkText("Enter Class Attendance");
     By viewTraineeProfile = By.cssSelector("button[type='submit'][value='profile']");
@@ -15,9 +15,6 @@ public class HomeTrainer extends TrainerPage{
     By late = By.cssSelector("main > div > div:nth-of-type(2) div[class='card-deck'] > div:nth-of-type(2) > div[class='card-body']");
     By excusedAbsence = By.cssSelector("main > div > div:nth-of-type(2) div[class='card-deck'] > div:nth-of-type(3) > div[class='card-body']");
     By unexcusedAbsence = By.cssSelector("main > div > div:nth-of-type(2) div[class='card-deck'] > div:nth-of-type(4) > div[class='card-body']");
-
-
-    private WebDriver webDriver;
 
     public HomeTrainer(WebDriver driver) {
         this.webDriver = driver;

@@ -61,6 +61,13 @@ public class HomeTraineeTest {
     }
 
     @Test
+    @DisplayName("testTraineePage")
+    void testTraineePage() {
+        homeTrainee.selectView();
+        homeTrainee.selectConsultancySkills();
+    }
+
+    @Test
     @DisplayName("Get Trainee Course Assigned")
     void getTraineeCourseAssigned() {
         Assertions.assertEquals("C# SDET", homeTrainee.getCourseAssigned());
