@@ -1,63 +1,56 @@
 package com.sparta.greg.pom.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public abstract class TrainerPage extends Page {
 
-    @FindBy(css = "a[href*='/trainer/home']")
-    WebElement dashboardLink;
-    @FindBy(css = "a[aria-controls*='collapsePages']")
-    WebElement trainerOptionsButton;
-    @FindBy(css = "a[href*='/trainer/manageClass']")
-    WebElement classManagementLink;
-    @FindBy(css = "a[href*='/trainer/manageTrainee']")
-    WebElement traineeManagementLink;
-    @FindBy(css = "a[href*='/trainer/newWeek']")
-    WebElement addWeeksLink;
-    @FindBy(css = "a[href*='/trainer/assessments']")
-    WebElement assessmentsLink;
-    @FindBy(css = "a[href*='/trainer/attendanceEntry']")
-    WebElement enterAttendanceLink;
-    @FindBy(css = "a[href*='/trainer/weekly-attendance']")
-    WebElement weeklyAttendanceLink;
+    By dashboardLink = new By.ByCssSelector("a[href*='/trainer/home']");
+    By trainerOptionsButton = new By.ByCssSelector("a[data-target*='#collapsePages']");
+    By classManagementLink = new By.ByCssSelector("a[href*='/trainer/manageClass']");
+    By traineeManagementLink = new By.ByCssSelector("a[href*='/trainer/manageTrainee']");
+    By addWeeksLink = new By.ByCssSelector("a[href*='/trainer/newWeek']");
+    By assessmentsLink = new By.ByCssSelector("a[href*='/trainer/assessments']");;
+    By enterAttendanceLink = new By.ByCssSelector("a[href*='/trainer/attendanceEntry']");;
+    By weeklyAttendanceLink = new By.ByCssSelector("a[href*='/trainer/weekly-attendance']");;
 
     public void clickTrainerOptions() {
-        trainerOptionsButton.click();
+        webDriver.findElement(trainerOptionsButton).click();
     }
 
     public HomeTrainer goToTrainerHome() {
-        dashboardLink.click();
+        webDriver.findElement(dashboardLink).click();
         return new HomeTrainer(webDriver);
     }
 
     public ClassManagement goToClassManagement() {
-        classManagementLink.click();
+        webDriver.findElement(classManagementLink).click();
         return new ClassManagement(webDriver);
     }
 
     public TraineeManagement goToTraineeManagement() {
-        traineeManagementLink.click();
+        webDriver.findElement(traineeManagementLink).click();
         return new TraineeManagement(webDriver);
     }
 
     public AddWeeks goToAddWeeks() {
-        addWeeksLink.click();
+        webDriver.findElement(addWeeksLink).click();
         return new AddWeeks(webDriver);
     }
 
     public Assessments goToAssessments() {
-        assessmentsLink.click();
+        webDriver.findElement(assessmentsLink).click();
         return new Assessments(webDriver);
     }
 
     public EnterAttendance goToEnterAttendance() {
-        enterAttendanceLink.click();
+        webDriver.findElement(enterAttendanceLink).click();
         return new EnterAttendance(webDriver);
     }
 
     public WeeklyAttendance goToWeeklyAttendance() {
-        weeklyAttendanceLink.click();
+        webDriver.findElement(weeklyAttendanceLink).click();
         return new WeeklyAttendance(webDriver);
     }
 }
