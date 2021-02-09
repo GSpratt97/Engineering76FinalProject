@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public abstract class TrainerPage extends Page {
+
     @FindBy(css = "a[href*='/trainer/home']")
     WebElement dashboardLink;
     @FindBy(css = "a[aria-controls*='collapsePages']")
