@@ -44,17 +44,13 @@ public class LoginTest {
 
     @Test
     void canSignInAsTrainer() {
-        login.enterUsernameAddress(trainerUsername);
-        login.enterPassword(trainerPassword);
-        login.clickSubmitButton();
+        login.logInAsTrainer(trainerUsername, trainerPassword);
         Assertions.assertEquals("http://localhost:8080/trainer/home", webDriver.getCurrentUrl());
     }
 
     @Test
     void canSignInAsTrainee() {
-        login.enterUsernameAddress(traineeUsername);
-        login.enterPassword(traineePassword);
-        login.clickSubmitButton();
+        login.logInAsTrainee(traineeUsername, traineePassword);
         Assertions.assertEquals("http://localhost:8080/trainee/home", webDriver.getCurrentUrl());
     }
 
