@@ -5,10 +5,12 @@ import org.openqa.selenium.WebDriver;
 
 public class ConsultancySkills{
     WebDriver webDriver;
-
+    public ConsultancySkills(WebDriver webDriver) {
+        this.webDriver = webDriver;
+    }
     public ConsultancySkills goToConsultancySkillsPage(){
         webDriver.get("http://localhost:8080/consultancy");
-        return new ConsultancySkills();
+        return new ConsultancySkills(webDriver);
     }
 
     public void clickWhatTheseSkillsMakeButton(){
