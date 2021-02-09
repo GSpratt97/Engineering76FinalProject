@@ -18,7 +18,7 @@ public class TraineeAttendanceTest {
     protected WebDriver webDriver;
     private Login loginPage;
     private HomeTrainee homePage;
-    private TraineeAttendance traineeAttendancePage;
+    private TraineeAttendance traineeAttendance;
     private Properties properties;
     private String usernameTrainee;
     private String passwordTrainee;
@@ -41,7 +41,7 @@ public class TraineeAttendanceTest {
     @Test
     @DisplayName("Get an element")
     public void works(){
-        traineeAttendancePage = homePage.go;
-        traineeAttendancePage.clickWeek(1);
+        traineeAttendance = homePage.goToWeeklyAttendance();
+        traineeAttendance.clickWeek(1);
     }
 }
