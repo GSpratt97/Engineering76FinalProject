@@ -6,7 +6,7 @@ Feature: As a user i want to able to use the Consultancy skills page and click d
   Scenario: Testing if the studious collapse menu button works
     Given I am on the Consultancy Skills page
     When I am click on the Studious collapse card
-    Then The Studious card will shink to tab
+    Then The Studious card will shrink to tab
 
   Scenario: Testing if the all collapse menu button works
     Given I am on the Consultancy Skills page
