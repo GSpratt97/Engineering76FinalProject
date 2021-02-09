@@ -47,7 +47,7 @@ public class AssessmentsTest {
         loginPage.enterPassword(passwordTrainer);
         homePage = loginPage.clickSubmitButton();
         assessmentsPage = homePage.goToAssessments();
-        Assertions.assertDoesNotThrow(assessmentsPage.clickTrainee(assessmentsPage.selectFirstTrainee()););
+        Assertions.assertDoesNotThrow(assessmentsPage.clickTrainee(assessmentsPage.selectFirstTrainee()));
     }
 
 
