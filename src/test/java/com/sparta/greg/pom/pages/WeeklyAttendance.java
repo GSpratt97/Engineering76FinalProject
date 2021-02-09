@@ -1,10 +1,12 @@
 package com.sparta.greg.pom.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
@@ -12,11 +14,12 @@ public class WeeklyAttendance {
 
     private WebDriver webDriver;
 
-    @FindBy(id = "#accordionExample")
+    @FindBy(id = "accordion1")
     private List<WebElement> weekList;
 
     public WeeklyAttendance(WebDriver webDriver) {
         this.webDriver = webDriver;
+        PageFactory.initElements(webDriver, this);
     }
 
     public boolean clickWeekRow(int weekNumber) {
@@ -25,7 +28,7 @@ public class WeeklyAttendance {
             System.err.println("Cannot click week row - no weeks are available");
             return false;
         }
-        weekList.get(weekCount + 1 - weekNumber).click();
+        weekList.get(weekCount - weekNumber).click();
         return true;
     }
 }
