@@ -17,7 +17,6 @@ public abstract class Page {
     By sideBarSizeSelector = new By.ByCssSelector("ul[id='accordionSidebar'] button[id='sidebarToggle']");
 
     public WebElement gotoHomePage() {
-        System.out.println("jhjhj");
         return webDriver.findElement(brandLogoLink);
     }
 
