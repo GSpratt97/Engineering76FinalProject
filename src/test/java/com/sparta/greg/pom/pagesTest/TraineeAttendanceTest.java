@@ -1,12 +1,11 @@
 package com.sparta.greg.pom.pagesTest;
 
-import com.sparta.greg.pom.pages.Assessments;
+import com.sparta.greg.pom.pages.HomeTrainee;
 import com.sparta.greg.pom.pages.Login;
-import com.sparta.greg.pom.pages.TraineeAttendancePage;
+import com.sparta.greg.pom.pages.TraineeAttendance;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -14,12 +13,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class TraineeAttendancePageTest {
+public class TraineeAttendanceTest {
 
     protected WebDriver webDriver;
     private Login loginPage;
     private HomeTrainee homePage;
-    private TraineeAttendancePage traineeAttendancePage;
+    private TraineeAttendance traineeAttendancePage;
     private Properties properties;
     private String usernameTrainee;
     private String passwordTrainee;
@@ -36,12 +35,13 @@ public class TraineeAttendancePageTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        homePage = loginPage.logInAsTrainee(usernameTrainee, passwordTrainee);
     }
 
     @Test
     @DisplayName("Get an element")
     public void works(){
-        traineeAttendancePage = new TraineeAttendancePage(webDriver);
+        //traineeAttendancePage = homePage.go;
         traineeAttendancePage.clickWeek(1);
     }
 }

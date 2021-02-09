@@ -7,14 +7,14 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class TraineeAttendancePage {
+public class TraineeAttendance {
 
     WebDriver webDriver;
 
     @FindBy(id = "accordionExample")
     List<WebElement> weeks;
 
-    public TraineeAttendancePage(WebDriver webDriver){
+    public TraineeAttendance(WebDriver webDriver){
         this.webDriver = webDriver;
     }
 
