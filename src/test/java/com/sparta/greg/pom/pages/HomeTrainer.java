@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class HomeTrainer {
 
     By enterClassAttendanceButton = By.linkText("Enter Class Attendance");
-    By viewTraineeProfile = By.className("btn btn-primary");
+    By viewTraineeProfile = By.cssSelector("button[type='submit'][value='profile']");
     By trainerName = By.cssSelector("main > div > div:nth-of-type(1) > div:nth-of-type(1) div[class*='h5']");
     By assignedClass = By.cssSelector("main > div > div:nth-of-type(1) > div:nth-of-type(2) div[class*='h5']");
     By courseAssigned = By.cssSelector("main > div > div:nth-of-type(1) > div:nth-of-type(3) div[class*='h5']");
@@ -24,15 +24,15 @@ public class HomeTrainer {
         webDriver.get("http://localhost:8080/trainer/home");
     }
 
-    public EnterAttendance goToEnterAttendance() {
+    public EnterAttendancePage goToEnterAttendance() {
         webDriver.findElement(enterClassAttendanceButton).click();
-        return new EnterAttendance(webDriver);
+        return new EnterAttendancePage(webDriver);
     }
 
-    public TraineeProfile goToTraineeProfile() {
-        webDriver.findElement(viewTraineeProfile).click();
-        return new TraineeProfile(webDriver);
-    }
+//    public TraineeProfile goToTraineeProfile() {
+//        webDriver.findElement(viewTraineeProfile).click();
+//        return new TraineeProfile(webDriver);
+//    }
 
     public String getFullName() {
         return webDriver.findElement(trainerName).getText();
