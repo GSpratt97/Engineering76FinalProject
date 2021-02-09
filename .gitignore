@@ -34,3 +34,5 @@ out/
 *.ipr
 *.iws
 *.properties
+
+*.exe
