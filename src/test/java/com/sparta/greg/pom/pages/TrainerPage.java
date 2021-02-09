@@ -25,37 +25,37 @@ public abstract class TrainerPage implements Page {
         trainerOptionsButton.click();
     }
 
-    public void goToTrainerHome() {
+    public TrainerHome goToTrainerHome() {
         dashboardLink.click();
         return new TrainerHome(webDriver);
     }
 
-    public void goToClassManagement() {
+    public ClassManagement goToClassManagement() {
         classManagementLink.click();
         return new ClassManagement(webDriver);
     }
 
-    public void goToTraineeManagement() {
+    public TraineeManagement goToTraineeManagement() {
         traineeManagementLink.click();
         return new TraineeManagement(webDriver);
     }
 
-    public void goToAddWeeks() {
+    public AddWeeks goToAddWeeks() {
         addWeeksLink.click();
         return new AddWeeks(webDriver);
     }
 
-    public void goToAssessments() {
+    public Assessments goToAssessments() {
         assessmentsLink.click();
         return new Assessments(webDriver);
     }
 
-    public void goToEnterAttendance() {
+    public EnterAttendance goToEnterAttendance() {
         enterAttendanceLink.click();
         return new EnterAttendance(webDriver);
     }
 
-    public void goToWeeklyAttendance() {
+    public WeeklyAttendance goToWeeklyAttendance() {
         weeklyAttendanceLink.click();
         return new WeeklyAttendance(webDriver);
     }
