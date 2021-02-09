@@ -7,12 +7,12 @@ public class ConsultancySkills {
     WebDriver webDriver;
 
     public enum buttonsOnTheConsultancySkills {
-        Studious("collapseCard1"),
-        Professional("collapseCard2"),
-        Independent("collapseCard3"),
-        Imaginative("collapseCard4"),
-        Determined("collapseCard5"),
-        Analytic("collapseCard6");
+        STUDIOUS("collapseCard1"),
+        PROFESSIONAL("collapseCard2"),
+        INDEPENDENT("collapseCard3"),
+        IMAGINATIVE("collapseCard4"),
+        DETERMINED("collapseCard5"),
+        ANALYTIC("collapseCard6");
 
 
         public String button;
