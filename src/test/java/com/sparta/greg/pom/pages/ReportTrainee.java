@@ -8,11 +8,12 @@ import java.lang.reflect.Array;
 import java.util.List;
 
 public class ReportTrainee {
-    WebDriver webDriver;
-    By weekReportTable = new By.ByCssSelector("table[class*='table']");
-    By weekReportSingle = new By.ByCssSelector("tr[id*='accordion1']");
-    By expand = new By.ByCssSelector("td[class*='expand']");
-    By weekReportNumber = new By.ByCssSelector("th[scope*='row']");
+    WebDriver   webDriver;
+
+    By          weekReportTable  = new By.ByCssSelector("table[class*='table']");
+    By          weekReportSingle = new By.ByCssSelector("tr[id*='accordion1']");
+    By          expand           = new By.ByCssSelector("td[class*='expand']");
+    By          weekReportNumber = new By.ByCssSelector("th[scope*='row']");
 
     public ReportTrainee(WebDriver webDriverArg) {
         this.webDriver = webDriverArg;
@@ -36,7 +37,7 @@ public class ReportTrainee {
         return weekReport.getAttribute("aria-expanded").equals("true");
     }
 
-    public boolean doesExpandButtonWork(WebElement weekReport) {
+    public boolean doesExpandButtonExpand(WebElement weekReport) {
         //find expand button
         WebElement expandButton = weekReport.findElement(expand);
         //click expand button
@@ -49,6 +50,20 @@ public class ReportTrainee {
     public boolean doesExpandButtonCollapse() {
         //find week report
         WebElement weekReport = webDriver.findElement(weekReportSingle);
+        //find expand button
+        WebElement expandButton = weekReport.findElement(expand);
+
+        if(weekReport.getAttribute("aria-expanded").equals("true")) {
+            expandButton.click();
+            return weekReport.getAttribute("aria-expanded").equals("false");
+        } else {
+            expandButton.click();
+            expandButton.click();
+            return weekReport.getAttribute("aria-expanded").equals("false");
+        }
+    }
+
+    public boolean doesExpandButtonCollapse(WebElement weekReport) {
         //find expand button
         WebElement expandButton = weekReport.findElement(expand);
 
