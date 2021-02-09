@@ -93,4 +93,9 @@ public class HomeTrainee {
         return new String[]{webDriver.findElement(onTime).getText(), webDriver.findElement(late).getText(),
                 webDriver.findElement(excusedAbsence).getText(), webDriver.findElement(unexcusedAbsence).getText()};
     }
+
+    public String[] getTraineeGrades() {
+        return new String[]{webDriver.findElement(consultantGrade).getText(), webDriver.findElement(technicalGrade).getText(),
+                webDriver.findElement(overallGrade).getText()};
+    }
 }
