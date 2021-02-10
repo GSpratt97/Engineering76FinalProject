@@ -73,9 +73,47 @@ public class HomeTrainerTest {
     }
 
     @Test
+    @DisplayName("Get Trainer Course Assigned")
+    void getTrainerCourseAssigned() {
+        Assertions.assertEquals("Java Development", homeTrainer.getCourseAssigned());
+    }
+
+    @Test
+    @DisplayName("Get Current Week of Course")
+    void getCurrentWeekOfCourse() {
+        Assertions.assertEquals("12", homeTrainer.getCurrentWeekOfCourse());
+    }
+
+    @Test
     @DisplayName("Get Average On Time ")
     void getAverageOnTime() {
         //the expected result will probably need to change as time goes
         Assertions.assertEquals("89.47%", homeTrainer.getOnTime());
+    }
+
+    @Test
+    @DisplayName("Get Average Late")
+    void getAverageLate() {
+        Assertions.assertEquals("7.24%", homeTrainer.getLate());
+    }
+
+    @Test
+    @DisplayName("Get Excused Absence")
+    void getExcusedAbsence() {
+        Assertions.assertEquals("1.97%", homeTrainer.getExcusedAbsence());
+    }
+
+    @Test
+    @DisplayName("Get Unexcused Absence")
+    void getUnexcusedAbsence() {
+        Assertions.assertEquals("1.32%", homeTrainer.getUnexcusedAbsence());
+    }
+
+    @Test
+    @DisplayName("Find Specific Trainee in Dropdown")
+    void findSpecificTraineeInDropdown() {
+        homeTrainer.findTraineeFromDropdown("Reece Louch");
+        homeTrainer.goToTraineeProfile();
+        Assertions.assertEquals("http://localhost:8080/trainer/traineeProfile/187", webDriver.getCurrentUrl());
     }
 }
