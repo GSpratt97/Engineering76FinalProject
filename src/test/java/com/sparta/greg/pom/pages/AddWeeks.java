@@ -1,16 +1,21 @@
 package com.sparta.greg.pom.pages;
 
+import com.sparta.greg.pom.pages.components.SideBarTrainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class AddWeeks extends TrainerPage{
+public class AddWeeks extends Page{
+
+    private final SideBarTrainer sideBarTrainer;
 
     By dropDownMenu = By.id("dropdown");
     By addWeekButton = By.cssSelector("button[name='submit']");
 
-    public AddWeeks(WebDriver driver){
-        this.webDriver = driver;
+    public AddWeeks(WebDriver webDriver){
+        super(webDriver);
+        sideBarTrainer = new SideBarTrainer(webDriver);
     }
 
     public void selectGroupToAdd(String group){

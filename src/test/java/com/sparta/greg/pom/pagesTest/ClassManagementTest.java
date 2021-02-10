@@ -41,8 +41,10 @@ public class ClassManagementTest {
 		
 		Login login = new Login(webDriver);
 		HomeTrainer homeTrainer= login.logInAsTrainer(username, password);
+
 		homeTrainer.getSideBarTrainer().clickTrainerOptions();
 		classManagement = homeTrainer.getSideBarTrainer().goToClassManagement();
+
 
 
 	}
