@@ -3,10 +3,7 @@ package com.sparta.greg.pom.pagesTest;
 import com.sparta.greg.pom.pages.HomeTrainee;
 import com.sparta.greg.pom.pages.HomeTrainer;
 import com.sparta.greg.pom.pages.Login;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -25,8 +22,8 @@ public class HomeTraineeTest {
     private static String traineePassword;
 
 
-    @BeforeAll
-    static void setup() {
+    @BeforeEach
+    void setup() {
         webDriver = new ChromeDriver();
         login = new Login(webDriver);
         try {
@@ -57,7 +54,7 @@ public class HomeTraineeTest {
     @Test
     @DisplayName("Get Trainee Assigned Class")
     void getTraineeAssignedClass() {
-        Assertions.assertEquals("Engineering 65", homeTrainee.getAssignedClass());
+        Assertions.assertEquals("Engineering 72", homeTrainee.getAssignedClass());
     }
 
     @Test
@@ -70,7 +67,7 @@ public class HomeTraineeTest {
     @Test
     @DisplayName("Get Trainee Course Assigned")
     void getTraineeCourseAssigned() {
-        Assertions.assertEquals("C# SDET", homeTrainee.getCourseAssigned());
+        Assertions.assertEquals("Java Development", homeTrainee.getCourseAssigned());
     }
 
     @Test
