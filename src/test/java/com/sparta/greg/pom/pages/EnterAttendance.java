@@ -3,27 +3,21 @@ package com.sparta.greg.pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class EnterAttendance {
+public class EnterAttendance extends TrainerPage{
 
     private String submitMessage;
+
+    private String pageConfirm;
+
+    public String getSubmitMessage() {
+        return submitMessage;
+    }
+
 
     public void setPageConfirm() {
         this.pageConfirm = webDriver
                 .findElement(By.cssSelector("h1[class*='h3 mb-3 font-weight-normal']"))
                 .getText();
-    }
-
-    private String pageConfirm;
-    private String dateSelected;
-
-    WebDriver webDriver;
-
-    public String getDateSelected() {
-        return dateSelected;
-    }
-
-    public String getSubmitMessage() {
-        return submitMessage;
     }
 
     public EnterAttendance(WebDriver webDriver)
@@ -35,15 +29,10 @@ public class EnterAttendance {
         return pageConfirm;
     }
 
-    public void dateCheck()
-    {
-        dateSelected = webDriver.findElement(By.name("attendanceDate")).getAttribute("value");
-    }
-
     public void setSubmitMessage(String isSuccess) {
         if(isSuccess.equals("success"))
         {
-            this.submitMessage = webDriver.findElement(By.cssSelector("#content-wrapper > main > div > div > div > div > div > div > div > form > p")).getText();
+            this.submitMessage = webDriver.findElement(By.cssSelector("p[class*='letterGradeA mt-3']")).getText();
         }
         else{
             this.submitMessage = webDriver.findElement(By.cssSelector("p[class*='letterGradeF']")).getText();
