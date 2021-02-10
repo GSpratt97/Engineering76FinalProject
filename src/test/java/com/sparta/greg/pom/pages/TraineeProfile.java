@@ -65,16 +65,15 @@ public class TraineeProfile extends Page {
 
     }
 
-    // Method needs a ReportTrainer Page
-//    public ReportTrainer goToTraineeReport() {
-//        if (webDriver.findElement(traineeReport) != null) {
-//            WebElement reportButton = webDriver.findElement(traineeReport);
-//            reportButton.click();
-//            return new ReportTrainer(webDriver);
-//        }
-//
-//        throw new NullPointerException("No report details available");
-//    }
+    public ReportTrainer goToTraineeReport() {
+        if (webDriver.findElement(traineeReport) != null) {
+            WebElement reportButton = webDriver.findElement(traineeReport);
+            reportButton.click();
+            return new ReportTrainer(webDriver);
+        }
+
+        throw new NullPointerException("No report details available");
+    }
 
     public void toggleExpandSQLBreakdown() {
         List<WebElement> generalList = webDriver.findElements(generalCard);
