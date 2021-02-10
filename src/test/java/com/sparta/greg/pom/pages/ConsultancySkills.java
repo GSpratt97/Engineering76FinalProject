@@ -30,10 +30,6 @@ abstract class ConsultancySkills extends Page{
         webDriver.findElement(By.cssSelector("button[class='btn btn-primary text-center']")).click();
     }
 
-    public void clickBackToDashBoardButtonOnConsultancySkillsTrainerLogin() {
-        webDriver.findElement(By.linkText("Back To Dashboard")).click();
-    }
-
     // Card name would be the class name of that specific button for example for studios it is collapseCard1
     public void clickCollapsableButtonOnConsultancySkills(buttonsOnTheConsultancySkills buttonName) {
         webDriver.findElement(By.cssSelector("a[aria-controls=" + "'" + buttonName.getButton() + "']")).click();
