@@ -1,13 +1,7 @@
 package com.sparta.greg.pom.pagesTest;
 
-import com.sparta.greg.pom.pages.HomeTrainer;
-import com.sparta.greg.pom.pages.Login;
-import com.sparta.greg.pom.pages.TraineeAttendance;
-import com.sparta.greg.pom.pages.TraineeProfile;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.sparta.greg.pom.pages.*;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,8 +18,8 @@ public class TraineeProfileTest {
     private static TraineeProfile traineeProfilePage;
     private static TraineeProfile traineeProfilePageEmpty;
 
-    @BeforeEach
-    void setup() {
+    @BeforeAll
+    static void setup() {
         webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080/login");
         Properties properties = new Properties();
@@ -57,10 +51,10 @@ public class TraineeProfileTest {
         Assertions.assertEquals(TraineeAttendance.class, traineeProfilePage.goToTraineeAttendance().getClass());
     }
 
-//    @Test
-//    void canClickReportBreakdown() {
-//        Assertions.assertEquals(ReportTrainer.class, traineeProfilePage.);
-//    }
+    @Test
+    void canClickReportBreakdown() {
+        Assertions.assertEquals(ReportTrainer.class, traineeProfilePage.goToTraineeReport().getClass());
+    }
 
     @Test
     void canToggleSQLBreakdown() {
@@ -120,8 +114,89 @@ public class TraineeProfileTest {
         });
     }
 
+    @Nested
+    @DisplayName("Tests for selecting specific data")
+    class SelectingData {
+
+        @Test
+        void canSelectTraineeName() {
+            Assertions.assertEquals(String.class, traineeProfilePage.getFullName().getClass());
+        }
+
+        @Test
+        void cansSelectAssignedClass() {
+            Assertions.assertEquals(String.class, traineeProfilePage.getAssignedClass().getClass());
+        }
+
+        @Test
+        void canSelectCourseAssigned() {
+            Assertions.assertEquals(String.class, traineeProfilePage.getCourseAssigned().getClass());
+        }
+
+        @Test
+        void canSelectCurrentWeekOfCourse() {
+            Assertions.assertEquals(String.class, traineeProfilePage.getCurrentWeekOfCourse().getClass());
+        }
+
+        @Test
+        void canSelectGetOnTime() {
+            Assertions.assertEquals(String.class, traineeProfilePage.getOnTime().getClass());
+        }
+
+        @Test
+        void canSelectLate() {
+            Assertions.assertEquals(String.class, traineeProfilePage.getLate().getClass());
+        }
+
+        @Test
+        void canSelectExcusedAbsence() {
+            Assertions.assertEquals(String.class, traineeProfilePage.getExcusedAbsence().getClass());
+        }
+
+        @Test
+        void canSelectUnexcusedAbsence() {
+            Assertions.assertEquals(String.class, traineeProfilePage.getUnexcusedAbsence().getClass());
+        }
+
+        @Test
+        void canSelectConsultantGrade() {
+            Assertions.assertEquals(String.class, traineeProfilePage.getConsultantGrade().getClass());
+        }
+
+        @Test
+        void canSelectTechnicalGrade() {
+            Assertions.assertEquals(String.class, traineeProfilePage.getTechnicalGrade().getClass());
+        }
+
+        @Test
+        void canSelectOverallGrade() {
+            Assertions.assertEquals(String.class, traineeProfilePage.getOverallGrade().getClass());
+        }
+
+        @Test
+        void canSelectGradeSQL() {
+            Assertions.assertEquals(String.class, traineeProfilePage.getGradeSQL().getClass());
+            Assertions.assertEquals("FAIL", traineeProfilePage.getGradeSQL());
+        }
+
+        @Test
+        void canSelectGradeNotSQL() {
+            Assertions.assertEquals(String.class, traineeProfilePage.getGradeNotSQL().getClass());
+            Assertions.assertEquals("B-", traineeProfilePage.getGradeNotSQL());
+        }
+    }
+
+
+
+
+
+
     @AfterEach
     void close() {
-        webDriver.close();
+        webDriver.get("http://localhost:8080/trainer/traineeProfile/41");
+        traineeProfilePage = new TraineeProfile(webDriver);
     }
+
+    @AfterAll
+    static void quit() { webDriver.quit(); }
 }

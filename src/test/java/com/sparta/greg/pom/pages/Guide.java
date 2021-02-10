@@ -2,10 +2,8 @@ package com.sparta.greg.pom.pages;
 
 import org.openqa.selenium.WebDriver;
 
-public class Guide {
+abstract class Guide extends Page{
 
-    WebDriver webDriver;
-
-    public Guide(WebDriver webDriver) {this.webDriver = webDriver;}
+    public Guide(WebDriver webDriver) {super(webDriver);}
 
 }

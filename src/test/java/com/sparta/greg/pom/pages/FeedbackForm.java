@@ -1,23 +1,33 @@
 package com.sparta.greg.pom.pages;
 
+import com.sparta.greg.pom.pages.components.SideBarTrainee;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class FeedbackForm extends TraineePage {
+public class FeedbackForm extends Page {
 
     private By stop = By.name("stopTrainee");
     private By start = By.name("startTrainee");
     private By continueTrainee = By.name("continueTrainee");
     private By input = By.tagName("input");
     private List<WebElement> radioButtons;
+    private SideBarTrainee sideBarTrainee;
 
     public FeedbackForm(WebDriver webDriver){
-        this.webDriver = webDriver;
+        super(webDriver);
+        sideBarTrainee = new SideBarTrainee(webDriver);
+        PageFactory.initElements(webDriver, this);
+
+    }
+
+    public SideBarTrainee getSideBarTrainee(){
+        return sideBarTrainee;
     }
 
     public boolean enterStart(String sentence){

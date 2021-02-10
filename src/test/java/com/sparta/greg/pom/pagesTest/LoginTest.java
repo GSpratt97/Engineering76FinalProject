@@ -54,15 +54,4 @@ public class LoginTest {
         Assertions.assertEquals("http://localhost:8080/trainee/home", webDriver.getCurrentUrl());
     }
 
-    @Test
-    void wrongDetailsFail() {
-        login.enterUsernameAddress("wrong@email.com");
-        login.enterPassword("wrong");
-        login.clickSubmitButton();
-        Assertions.assertEquals("http://localhost:8080/login?error", webDriver.getCurrentUrl());
-    }
-
-
-
-
 }

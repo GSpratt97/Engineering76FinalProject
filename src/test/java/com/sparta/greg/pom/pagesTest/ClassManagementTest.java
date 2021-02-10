@@ -4,7 +4,6 @@ import com.sparta.greg.pom.pages.ClassManagement;
 import com.sparta.greg.pom.pages.HomeTrainer;
 import com.sparta.greg.pom.pages.Login;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -39,11 +38,12 @@ public class ClassManagementTest {
 		}else {
 			webDriver = new ChromeDriver();
 		}
-
+		
 		Login login = new Login(webDriver);
 		HomeTrainer homeTrainer= login.logInAsTrainer(username, password);
-		classManagement = homeTrainer.goToClassManagement();
-		
+		homeTrainer.getSideBarTrainer().clickTrainerOptions();
+		classManagement = homeTrainer.getSideBarTrainer().goToClassManagement();
+
 
 	}
 
@@ -61,14 +61,13 @@ public class ClassManagementTest {
 	@DisplayName("Assigning a Trainee")
 	void assigningTrainee() {
 		classManagement.selectTrainee("Bill Bird");
-		classManagement.selectClass("Engineering 65");
-
+		classManagement.selectClass("Engineering 72");
+		
 		Assertions.assertEquals("Bill Bird", classManagement.getSelectTrainee().getFirstSelectedOption().getText());
-		Assertions.assertEquals("Engineering 65", classManagement.getSelectClass().getFirstSelectedOption().getText());
+		Assertions.assertEquals("Engineering 72", classManagement.getSelectClass().getFirstSelectedOption().getText());
 
 		classManagement.clickAssignTrainee();
-		System.out.println(classManagement.getSuccessMessage().getText());
-
+		Assertions.assertNotNull(classManagement.getSuccessMessage());
 	}
 
 
@@ -88,7 +87,8 @@ public class ClassManagementTest {
 		classManagement.enterEndDate("20", "04", "2021", "00", "30");
 
 		classManagement.clickCreateClass();
-		System.out.println(classManagement.getErrorMessage());
+		//TESTING 101 ALREADY EXISTS => error message
+		Assertions.assertNotNull(classManagement.getErrorMessage());
 
 	}
 
