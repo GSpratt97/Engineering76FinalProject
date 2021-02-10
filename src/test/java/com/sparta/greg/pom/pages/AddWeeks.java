@@ -16,7 +16,6 @@ public class AddWeeks extends Page{
     public AddWeeks(WebDriver webDriver){
         super(webDriver);
         sideBarTrainer = new SideBarTrainer(webDriver);
-        PageFactory.initElements(webDriver,this);
     }
 
     public void selectGroupToAdd(String group){
