@@ -1,4 +1,4 @@
-package com.sparta.greg.cucumber.stepDefs;
+package com.sparta.greg.cucumber.stepdefs;
 
 import com.sparta.greg.pom.pages.EnterAttendance;
 import com.sparta.greg.pom.pages.HomeTrainer;
@@ -16,7 +16,10 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.Duration;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -25,13 +28,19 @@ public class EnterAttendSD {
 
     private static WebDriver webDriver;
     EnterAttendance attendancePage;
+    Properties properties = new Properties();
 
     @Given("I am on the attendance page")
     public void iAmOnTheAttendancePage() {
         webDriver = new ChromeDriver();
+        try {
+            properties.load(new FileReader("src/test/resources/login.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //SignIn
         Login login = new Login(webDriver);
-        HomeTrainer trainer = login.logInAsTrainer();
+        HomeTrainer trainer = login.logInAsTrainer(properties.getProperty("trainerUsername"),properties.getProperty("trainerPassword") );
         attendancePage = trainer.goToEnterAttendanceThroughDashboard();
 
         //Go to right page

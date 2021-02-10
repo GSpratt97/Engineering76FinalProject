@@ -34,7 +34,7 @@ public class EnterAttendance {
     public void setSubmitMessage(String isSuccess) {
         if(isSuccess.equals("success"))
         {
-            this.submitMessage = webDriver.findElement(By.cssSelector("#content-wrapper > main > div > div > div > div > div > div > div > form > p")).getText();
+            this.submitMessage = webDriver.findElement(By.cssSelector("p[class*='letterGradeA mt-3']")).getText();
         }
         else{
             this.submitMessage = webDriver.findElement(By.cssSelector("p[class*='letterGradeF']")).getText();

@@ -1,6 +1,8 @@
 package com.sparta.greg.pom.pagesTest;
 
 import com.sparta.greg.pom.pages.EnterAttendance;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -10,24 +12,37 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class EnterAttendanceTest {
 
     WebDriver webDriver = new ChromeDriver();
     EnterAttendance attendancePage;
+    Properties properties = new Properties();
+
+    @Before
+    public void setUp()
+    {
+        try {
+            properties.load(new FileReader("src/test/resources/login.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        webDriver.get("http://localhost:8080");
+        webDriver.findElement(By.name("username")).sendKeys(properties.getProperty("trainerUsername"));
+        webDriver.findElement(By.name("password")).sendKeys(properties.getProperty("trainerPassword"));
+        webDriver.findElement(By.cssSelector("button[type='submit']")).click();
+        webDriver.get("http://localhost:8080/trainer/attendanceEntry");
+        attendancePage = new EnterAttendance(webDriver);
+    }
+
 
     @Test
     public void radioButtons()
     {
-        //SetUp
-        webDriver.get("http://localhost:8080");
-        webDriver.findElement(By.name("username")).sendKeys();
-        webDriver.findElement(By.name("password")).sendKeys();
-        webDriver.findElement(By.cssSelector("button[type='submit']")).click();
-        webDriver.get("http://localhost:8080/trainer/attendanceEntry");
-        attendancePage = new EnterAttendance(webDriver);
-
         //assertions
         //R1
         attendancePage.selectAttendanceType("On Time");
@@ -50,18 +65,16 @@ public class EnterAttendanceTest {
     @Test
     public void changeTrainee()
     {
-        //setup
-        webDriver.get("http://localhost:8080");
-        webDriver.findElement(By.name("username")).sendKeys();
-        webDriver.findElement(By.name("password")).sendKeys();
-        webDriver.findElement(By.cssSelector("button[type='submit']")).click();
-        webDriver.get("http://localhost:8080/trainer/attendanceEntry");
-        attendancePage = new EnterAttendance(webDriver);
-
         //assertions
         attendancePage.selectTrainee("David");
         Assertions.assertTrue(webDriver.findElement(By.name("traineeId")).getText().contains("David"));
         attendancePage.selectTrainee("Bill");
         Assertions.assertTrue(webDriver.findElement(By.name("traineeId")).getText().contains("Bill"));
+    }
+
+    @After
+    public void tearDown()
+    {
+        webDriver.quit();
     }
 }
