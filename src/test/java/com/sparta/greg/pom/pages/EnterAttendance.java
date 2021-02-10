@@ -3,23 +3,21 @@ package com.sparta.greg.pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class EnterAttendance {
+public class EnterAttendance extends TrainerPage{
 
     private String submitMessage;
+
+    private String pageConfirm;
+
+    public String getSubmitMessage() {
+        return submitMessage;
+    }
+
 
     public void setPageConfirm() {
         this.pageConfirm = webDriver
                 .findElement(By.cssSelector("h1[class*='h3 mb-3 font-weight-normal']"))
                 .getText();
-    }
-
-    private String pageConfirm;
-    private String dateSelected;
-
-    WebDriver webDriver;
-
-    public String getSubmitMessage() {
-        return submitMessage;
     }
 
     public EnterAttendance(WebDriver webDriver)
