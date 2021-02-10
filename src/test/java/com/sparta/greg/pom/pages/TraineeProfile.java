@@ -1,12 +1,15 @@
 package com.sparta.greg.pom.pages;
 
+import com.sparta.greg.pom.pages.components.SideBarTrainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class TraineeProfile extends TrainerPage {
+public class TraineeProfile extends Page {
+
+    private SideBarTrainer sideBarTrainer;
 
     By traineeName = By.cssSelector("main > div > div:nth-of-type(1) > div:nth-of-type(1) div[class*='h5']");
     By assignedClass = By.cssSelector("main > div > div:nth-of-type(1) > div:nth-of-type(2) div[class*='h5']");
@@ -30,7 +33,12 @@ public class TraineeProfile extends TrainerPage {
     By findLetterGrade = By.cssSelector("span[class*='letterGrade']");
 
     public TraineeProfile(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver);
+        sideBarTrainer = new SideBarTrainer(webDriver);
+    }
+
+    public SideBarTrainer getSideBarTrainer() {
+        return sideBarTrainer;
     }
 
     public HomeTrainer goBackToHomePageViaBackToDashboardButton() {

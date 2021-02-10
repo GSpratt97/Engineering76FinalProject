@@ -1,17 +1,28 @@
 package com.sparta.greg.pom.pages;
 
+import com.sparta.greg.pom.pages.components.SideBarTrainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class Assessments extends TrainerPage {
+public class Assessments extends Page {
+
+    private SideBarTrainer sideBarTrainer;
 
     By listGroup = By.cssSelector("div[class='list-group']");
     By trainees = By.cssSelector("a[class*='list-group-item']");
 
-    public Assessments(WebDriver webDriver) {this.webDriver = webDriver;}
+
+    public Assessments(WebDriver webDriver) {
+        super(webDriver);
+        sideBarTrainer = new SideBarTrainer(webDriver);
+    }
+
+    public SideBarTrainer getSideBarTrainer() {
+        return sideBarTrainer;
+    }
 
 
     public WebElement selectFirstTrainee() {
