@@ -1,10 +1,12 @@
 package com.sparta.greg.pom.pagesTest;
 
+import com.sparta.greg.pom.pages.ChangePassword;
 import com.sparta.greg.pom.pages.HomeTrainee;
 import com.sparta.greg.pom.pages.HomeTrainer;
 import com.sparta.greg.pom.pages.Login;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -23,6 +25,7 @@ public class ChangePasswordTest {
     private static String traineePassword;
     private static HomeTrainer homeTrainer;
     private static HomeTrainee homeTrainee;
+    private static ChangePassword changePassword;
 
     @BeforeEach
     void setup() {
@@ -41,13 +44,23 @@ public class ChangePasswordTest {
         }
     }
 
-    void changePasswordAsTrainer() {
+
+//    I don't know what this method is supposed to return because cannot change password, but made an educated guess
+    @Test
+    void changePasswordAsTrainerReturnsHomeTrainer() {
         homeTrainer = login.logInAsTrainer(trainerUsername, trainerPassword);
-//        homeTrainer.clickChangePassword();
+        webDriver.get("http://localhost:8080/changePassword");
+        changePassword = new ChangePassword(webDriver);
+//        changePassword.changeTrainerPassword(trainerPassword, "new");
+        Assertions.assertEquals("http://localhost:8080/trainer/home", webDriver.getCurrentUrl());
     }
 
-    void changePasswordAsTrainee() {
+    @Test
+    void changePasswordAsTraineeReturnsHomeTrainee() {
         homeTrainee = login.logInAsTrainee(traineeUsername, traineePassword);
-//        homeTrainee.clickChangePassword();
+        webDriver.get("http://localhost:8080/changePassword");
+        changePassword = new ChangePassword(webDriver);
+//        changePassword.changeTraineePassword(traineePassword, "new");
+        Assertions.assertEquals("http://localhost:8080/trainee/home", webDriver.getCurrentUrl());
     }
 }

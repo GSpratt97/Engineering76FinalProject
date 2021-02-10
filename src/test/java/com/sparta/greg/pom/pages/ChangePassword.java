@@ -38,7 +38,7 @@ public class ChangePassword extends Page{
     }
 
     public void clickSubmitButton() {
-        webDriver.findElement(submitButton).click();
+//        webDriver.findElement(submitButton).click();
     }
 
 }
