@@ -15,7 +15,6 @@ public class ChangePassword extends Page{
 
     public ChangePassword(WebDriver webDriver) {
         super(webDriver);
-        PageFactory.initElements(webDriver, this);
     }
 
 //    I commented out the click submit button for safety in case anyone runs any tests
