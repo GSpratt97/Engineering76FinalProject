@@ -42,15 +42,33 @@ public class LoginStepdef {
         login = new Login(webDriver);
     }
 
-    @When("I enter my trainer email and password")
-    public void iEnterMyTrainerEmailAndPassword() {
-        login.enterUsernameAddress(trainerUsername);
-        login.enterPassword(trainerPassword);
+    @Given("I have been logged out")
+    public void iHaveBeenLoggedOut() {
+        webDriver = new ChromeDriver();
+        login = new Login(webDriver);
+        webDriver.get("http://localhost:8080/login?logout");
     }
 
-    @And("I click submit")
-    public void iClickSubmit() {
+    @When("I log in with trainer email and password")
+    public void iLogInWithTrainerEmailAndPassword() {
+        login.logInAsTrainer(trainerUsername, trainerPassword);
+    }
+
+    @When("I log in with trainee email and password")
+    public void iLogInWithTraineeEmailAndPassword() {
+        login.logInAsTrainee(traineeUsername, traineePassword);
+    }
+
+    @When("I log in with incorrect email and password")
+    public void iLogInWithIncorrectEmailAndPassword() {
+        login.enterUsernameAddress("wrong@email.com");
+        login.enterPassword("wrongPassword");
         login.clickSubmitButton();
+    }
+
+    @Then("I am on the trainee home page")
+    public void iAmOnTheTraineeHomePage() {
+        Assertions.assertEquals("http://localhost:8080/trainee/home", webDriver.getCurrentUrl());
     }
 
     @Then("I am on the trainer home page")
@@ -58,14 +76,8 @@ public class LoginStepdef {
         Assertions.assertEquals("http://localhost:8080/trainer/home", webDriver.getCurrentUrl());
     }
 
-    @When("I enter my trainee email and password")
-    public void iEnterMyTraineeEmailAndPassword() {
-        login.enterUsernameAddress(traineeUsername);
-        login.enterPassword(traineePassword);
-    }
-
-    @Then("I am on the trainee home page")
-    public void iAmOnTheTraineeHomePage() {
-        Assertions.assertEquals("http://localhost:8080/trainee/home", webDriver.getCurrentUrl());
+    @Then("I am on the login error page")
+    public void iAmOnTheLoginErrorPage() {
+        Assertions.assertEquals("http://localhost:8080/login?error", webDriver.getCurrentUrl());
     }
 }
