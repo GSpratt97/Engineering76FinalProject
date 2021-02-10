@@ -3,10 +3,10 @@ package com.sparta.greg.pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class ConsultancySkills extends TrainerPage{
+abstract class ConsultancySkills extends Page{
 
     public ConsultancySkills(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver);
     }
 
     public enum buttonsOnTheConsultancySkills {
@@ -26,20 +26,12 @@ public class ConsultancySkills extends TrainerPage{
         }
     }
 
-    public ConsultancySkills goToConsultancySkillsPage() {
-        webDriver.get("http://localhost:8080/consultancy");
-        return new ConsultancySkills(webDriver);
-    }
-
     public void clickWhatTheseSkillsMakeButton() {
         webDriver.findElement(By.cssSelector("button[class='btn btn-primary text-center']")).click();
     }
 
     public void clickBackToDashBoardButtonOnConsultancySkillsTrainerLogin() {
         webDriver.findElement(By.linkText("Back To Dashboard")).click();
-    }
-    public void clickBackToProfileButtonOnConsultancySkillsTraineeLogin() {
-        webDriver.findElement(By.linkText("Back To Profile")).click();
     }
 
     // Card name would be the class name of that specific button for example for studios it is collapseCard1
