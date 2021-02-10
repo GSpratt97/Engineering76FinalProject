@@ -1,5 +1,6 @@
 package com.sparta.greg.pom.pages;
 
+import com.sparta.greg.pom.pages.trainer.ManageTrainee;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,9 +30,9 @@ public abstract class TrainerPage extends Page {
         return new ClassManagement(webDriver);
     }
 
-    public TraineeManagement goToTraineeManagement() {
+    public ManageTrainee goToTraineeManagement() {
         webDriver.findElement(traineeManagementLink).click();
-        return new TraineeManagement(webDriver);
+        return new ManageTrainee(webDriver);
     }
 
     public AddWeeks goToAddWeeks() {

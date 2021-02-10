@@ -1,6 +1,6 @@
 package com.sparta.greg.cucumber.stepDefs;
 
-import com.sparta.greg.pom.pages.EnterAttendancePage;
+import com.sparta.greg.pom.pages.EnterAttendance;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,7 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class EnterAttendSD {
 
     private static WebDriver webDriver;
-    EnterAttendancePage attendancePage;
+    EnterAttendance attendancePage;
 
     @Given("I am on the attendance page")
     public void iAmOnTheAttendancePage() {
@@ -26,7 +26,7 @@ public class EnterAttendSD {
 
         //Go to right page
         webDriver.get("http://localhost:8080/trainer/attendanceEntry");
-        attendancePage = new EnterAttendancePage(webDriver);
+        attendancePage = new EnterAttendance(webDriver);
         attendancePage.setPageConfirm();
         Assertions.assertEquals("Set Trainee Attendance", attendancePage.getPageConfirm());
     }
@@ -59,7 +59,7 @@ public class EnterAttendSD {
     @Given("I am signed in for radioButton check")
     public void iAmSignedInForRadioButtonCheck() {
         webDriver.get("http://localhost:8080/trainer/attendanceEntry");
-        attendancePage = new EnterAttendancePage(webDriver);
+        attendancePage = new EnterAttendance(webDriver);
         attendancePage.setPageConfirm();
         Assertions.assertEquals("Set Trainee Attendance", attendancePage.getPageConfirm());
     }
@@ -86,7 +86,7 @@ public class EnterAttendSD {
     @Given("I am signed in on the attendance page")
     public void iAmSignedInOnTheAttendancePage() {
         webDriver.get("http://localhost:8080/trainer/attendanceEntry");
-        attendancePage = new EnterAttendancePage(webDriver);
+        attendancePage = new EnterAttendance(webDriver);
         attendancePage.setPageConfirm();
         Assertions.assertEquals("Set Trainee Attendance", attendancePage.getPageConfirm());
     }

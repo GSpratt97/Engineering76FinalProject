@@ -3,7 +3,7 @@ package com.sparta.greg.pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class EnterAttendancePage {
+public class EnterAttendance {
 
     private String submitMessage;
 
@@ -26,7 +26,7 @@ public class EnterAttendancePage {
         return submitMessage;
     }
 
-    public EnterAttendancePage(WebDriver webDriver)
+    public EnterAttendance(WebDriver webDriver)
     {
         this.webDriver = webDriver;
     }

@@ -2,14 +2,8 @@ package com.sparta.greg.pom.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 
-import java.util.List;
-
-public class AssessmentBreakdownPage {
+public class AssessmentBreakdown {
     /* need to inherit from default page class for:
     * click logo to go homepage
     * go back to dashboard
@@ -19,13 +13,13 @@ public class AssessmentBreakdownPage {
     * change pass word and login*/
     private WebDriver webDriver;
 
-    public AssessmentBreakdownPage(WebDriver driver) {
+    public AssessmentBreakdown(WebDriver driver) {
         this.webDriver = driver;
     }
 
-    public AssessmentBreakdownPage goToAssessmentBreakdownPage(){
+    public AssessmentBreakdown goToAssessmentBreakdownPage(){
         webDriver.get("http://localhost:8080/trainer/assessments/41");
-        return new AssessmentBreakdownPage(webDriver);
+        return new AssessmentBreakdown(webDriver);
     }
 
     public void clickPlusIconFirstModule(){

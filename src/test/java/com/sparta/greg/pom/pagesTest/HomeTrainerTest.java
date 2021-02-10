@@ -57,7 +57,7 @@ public class HomeTrainerTest {
     @Test
     @DisplayName("Go to view trainee profile")
     void goToViewTraineeProfile() {
-        homeTrainer.goToTraineeProfile();
+        homeTrainer.goToTraineeManagement();
         //for DAVID TRIEU!!!!
         //the expected will change, depends on the trainee selected
         Assertions.assertEquals("http://localhost:8080/trainer/traineeProfile/10", webDriver.getCurrentUrl());

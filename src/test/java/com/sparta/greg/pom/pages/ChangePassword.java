@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 
 public class ChangePassword extends Page{
 
-    WebDriver webDriver;
     By oldPassword = By.cssSelector("input[name='oldPassword'][type='password']");
     By newPassword = By.cssSelector("input[name='password'][type='password']");
     By submitButton = By.cssSelector("button[type='submit']");

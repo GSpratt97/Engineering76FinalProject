@@ -1,14 +1,14 @@
 package com.sparta.greg.pom.pagesTest;
 
-import com.sparta.greg.pom.pages.AssessmentBreakdownPage;
+import com.sparta.greg.pom.pages.AssessmentBreakdown;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class
-AssessmentBreakDownPageTest {
+AssessmentBreakDownTest {
     WebDriver webDriver;
-    AssessmentBreakdownPage  assessmentBreakdownPage;
+    AssessmentBreakdown assessmentBreakdownPage;
     //add previous pages here for path with trainer name and password
 
     @BeforeEach
@@ -16,7 +16,7 @@ AssessmentBreakDownPageTest {
         webDriver = new ChromeDriver();
         //log in as a trainer
         //assessment page and choose a trainee
-        assessmentBreakdownPage = new AssessmentBreakdownPage(webDriver);
+        assessmentBreakdownPage = new AssessmentBreakdown(webDriver);
     }
 
     @Test
