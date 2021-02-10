@@ -1,12 +1,7 @@
 package com.sparta.greg.pom.pagesTest.components;
 
-import com.sparta.greg.pom.pages.HomeTrainer;
-import com.sparta.greg.pom.pages.Login;
-import com.sparta.greg.pom.pages.WeeklyAttendance;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import com.sparta.greg.pom.pages.*;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -14,7 +9,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class SideBarTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class SideBarTrainerTest {
 
     private static final Properties properties = new Properties();
     private static WebDriver webDriver;
@@ -40,19 +37,28 @@ public class SideBarTest {
         weeklyAttendance = new WeeklyAttendance(webDriver);
     }
 
-    @Test
-    @DisplayName("change side bar size test")
-    void changeSideBarSizeTest() {
-        String initialSideBarSize = weeklyAttendance.getSideBarTrainer().getSideBarSize();
-        weeklyAttendance.getSideBarTrainer().changeSideBarSize();
-        String postSideBarSize = weeklyAttendance.getSideBarTrainer().getSideBarSize();
-        Assertions.assertNotEquals(initialSideBarSize, postSideBarSize);
+    @AfterEach
+    void refresh() {
+        webDriver.navigate().refresh();
+    }
+
+    @AfterAll
+    static void tearDown() {
+        webDriver.quit();
     }
 
     @Test
-    @DisplayName("select view icon test")
-    void selectViewIconTest() {
+    @DisplayName("goToConsultancySkillsTest")
+    void goToConsultancySkillsTest() {
         weeklyAttendance.getSideBarTrainer().selectView();
+        Assertions.assertEquals(TrainerConsultancySkills.class, weeklyAttendance.getSideBarTrainer().goToConsultancySkills().getClass());
+    }
+
+    @Test
+    @DisplayName("go to guide page")
+    void goToGuidePage() {
+        weeklyAttendance.getSideBarTrainer().selectView();
+        Assertions.assertEquals(TrainerGuide.class, weeklyAttendance.getSideBarTrainer().goToTraineeGuide().getClass());
     }
 
 }
