@@ -47,6 +47,14 @@ public class WeeklyAttendanceTest {
         webDriver.quit();
     }
 
+    //TODO: remove this after finish
+    @Test
+    @DisplayName("TempSideBarTest")
+    void tempSideBarTest() {
+        weeklyAttendance.getSideBarTrainer().clickTrainerOptions();
+        weeklyAttendance.getSideBarTrainer().goToEnterAttendance();
+    }
+
     @Test
     @DisplayName("Page type is WeeklyAttendance")
     void pageTypeIsWeeklyAttendance() {
