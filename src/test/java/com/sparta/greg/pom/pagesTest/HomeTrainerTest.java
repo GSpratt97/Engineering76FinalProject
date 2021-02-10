@@ -2,10 +2,7 @@ package com.sparta.greg.pom.pagesTest;
 
 import com.sparta.greg.pom.pages.HomeTrainer;
 import com.sparta.greg.pom.pages.Login;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -24,8 +21,8 @@ public class HomeTrainerTest {
     private static String trainerPassword;
 
 
-    @BeforeAll
-    static void setup() {
+    @BeforeEach
+    void setup() {
         webDriver = new ChromeDriver();
         login = new Login(webDriver);
         try {
@@ -57,7 +54,7 @@ public class HomeTrainerTest {
     @Test
     @DisplayName("Go to view trainee profile")
     void goToViewTraineeProfile() {
-        homeTrainer.goToTraineeManagement();
+        homeTrainer.goToTraineeProfile();
         //for DAVID TRIEU!!!!
         //the expected will change, depends on the trainee selected
         Assertions.assertEquals("http://localhost:8080/trainer/traineeProfile/10", webDriver.getCurrentUrl());
@@ -79,6 +76,6 @@ public class HomeTrainerTest {
     @DisplayName("Get Average On Time ")
     void getAverageOnTime() {
         //the expected result will probably need to change as time goes
-        Assertions.assertEquals("89.84%", homeTrainer.getOnTime());
+        Assertions.assertEquals("89.47%", homeTrainer.getOnTime());
     }
 }

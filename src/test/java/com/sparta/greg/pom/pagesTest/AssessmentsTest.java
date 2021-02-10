@@ -1,7 +1,7 @@
 package com.sparta.greg.pom.pagesTest;
 
+import com.sparta.greg.pom.pages.AssessmentBreakdown;
 import com.sparta.greg.pom.pages.Assessments;
-import com.sparta.greg.pom.pages.HomeTrainer;
 import com.sparta.greg.pom.pages.Login;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -18,7 +18,6 @@ public class AssessmentsTest {
 
     private static WebDriver webDriver;
     private static Assessments assessmentsPage;
-    private static Properties properties;
     private static String usernameTrainer;
     private static String passwordTrainer;
 
@@ -26,6 +25,7 @@ public class AssessmentsTest {
     void setup() {
         webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080/login");
+        Properties properties = new Properties();
 
         try {
             properties.load(new FileReader("src/test/resources/login.properties"));
@@ -39,19 +39,21 @@ public class AssessmentsTest {
         login.logInAsTrainer(usernameTrainer, passwordTrainer);
 
         webDriver.get("http://localhost:8080/trainer/assessments");
+
         assessmentsPage = new Assessments(webDriver);
+
     }
 
 
-//    @Test
-//    void canClickFirstTrainee() {
-//        Assertions.assertDoesNotThrow(assessmentsPage.clickTrainee(assessmentsPage.selectFirstTrainee()));
-//    }
+    @Test
+    void canClickFirstTrainee() {
+        Assertions.assertEquals(AssessmentBreakdown.class, assessmentsPage.clickTrainee(assessmentsPage.selectFirstTrainee()).getClass());
+    }
 
-//    @Test
-//    void canClickTraineeByName() {
-//        Assertions.assertDoesNotThrow(assessmentsPage.clickTraineeByName("David Trieu"));
-//    }
+    @Test
+    void canClickTraineeByName() {
+        Assertions.assertEquals(AssessmentBreakdown.class, assessmentsPage.clickTraineeByName("David Trieu").getClass());
+    }
 
     @Test
     void clickEmptyTraineeByNameThrowsNullException() {
