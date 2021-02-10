@@ -8,15 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class ChangePassword extends Page{
 
-    public SideBarTrainer getSideBarTrainer() {
-        return sideBarTrainer;
-    }
-    public SideBarTrainee getSideBarTrainee() {
-        return sideBarTrainee;
-    }
-
-    private final SideBarTrainer sideBarTrainer;
-    private final SideBarTrainee sideBarTrainee;
 
     By oldPassword = By.cssSelector("input[name='oldPassword'][type='password']");
     By newPassword = By.cssSelector("input[name='password'][type='password']");
@@ -24,8 +15,6 @@ public class ChangePassword extends Page{
 
     public ChangePassword(WebDriver webDriver) {
         super(webDriver);
-        sideBarTrainer = new SideBarTrainer(webDriver);
-        sideBarTrainee = new SideBarTrainee(webDriver);
         PageFactory.initElements(webDriver, this);
     }
 
