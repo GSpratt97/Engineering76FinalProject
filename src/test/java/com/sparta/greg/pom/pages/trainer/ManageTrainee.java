@@ -1,10 +1,12 @@
 package com.sparta.greg.pom.pages.trainer;
 
+import com.sparta.greg.pom.pages.TrainerPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 import java.util.Locale;
@@ -15,7 +17,7 @@ import java.util.Locale;
  * @author Samurah
  * @version 1.0
  */
-public class ManageTrainee {
+public class ManageTrainee extends TrainerPage {
 
     /**
      * Css selector for {@code Create Trainee Form}.
@@ -26,11 +28,6 @@ public class ManageTrainee {
      * Css selector for {@code Delete Trainee Form}.
      */
     private final By deleteTraineeFormSelector = By.cssSelector("main form[action*='delete']");
-
-    /**
-     * The instance of {@link WebDriver} used to navigate the web page.
-     */
-    private final WebDriver webDriver;
 
     /**
      * {@link WebElement} containing {@code Create Trainee Form}.
@@ -121,7 +118,7 @@ public class ManageTrainee {
         /**
          * Css selector for {@code Class Dropdown elements}.
          */
-        private final By classDropDownListSelector = By.cssSelector("select[id*='groupId']option:not([value=''])");
+        private final By classDropDownListSelector = By.cssSelector("select[id*='groupId'] option:not([value=''])");
 
         /**
          * The instance of {@link WebDriver} used to navigate the web page.
@@ -231,11 +228,12 @@ public class ManageTrainee {
          *                                {@code Class Dropdown} list.
          */
         public CreateTraineeForm selectClass(String className) {
-            new Actions(webDriver).click(classDropDownElement).perform();
+            new Actions(webDriver).click(classDropDownElement).click().perform();
             List<WebElement> listElements = webElement.findElements(classDropDownListSelector);
             for (WebElement listElement : listElements) {
                 if (listElement.getText().equalsIgnoreCase(className)) {
-                    new Actions(webDriver).click(listElement).perform();
+                    System.out.println(listElement.getText());
+                    new Actions(webDriver).moveToElement(listElement).click(listElement).perform();
                     return this;
                 }
             }
@@ -257,7 +255,7 @@ public class ManageTrainee {
      * @author Samurah
      * @version 1.0
      */
-    private static class DeleteTraineeForm {
+    public static class DeleteTraineeForm {
 
         /**
          * Css selector for {@code Trainees Dropdown}.
@@ -301,6 +299,7 @@ public class ManageTrainee {
          * @param webDriver instance of {@link WebDriver}
          * @throws IllegalArgumentException if the {@link WebElement} provided
          *                                  does not have the {@code form} tag.
+         * @hidden Not working properly yet.
          */
         public DeleteTraineeForm(WebElement webElement, WebDriver webDriver) {
             if (!webElement.getTagName().equalsIgnoreCase("form")) {
@@ -328,17 +327,16 @@ public class ManageTrainee {
          * @return {@link DeleteTraineeForm the same instance}.
          * @throws NoSuchElementException if {@code name} could not be found in
          *                                {@code Trainees Dropdown} list.
+         * @hidden Not working properly yet.
          */
         public DeleteTraineeForm selectTrainee(String name) {
-            new Actions(webDriver).moveToElement(traineesDropDownElement).perform();
-            List<WebElement> listElements = webElement.findElements(traineesDropDownListSelector);
-            for (WebElement listElement : listElements) {
-                if (listElement.getText().equalsIgnoreCase(name)) {
-                    new Actions(webDriver).click(listElement).perform();
-                    return this;
-                }
+            new Actions(webDriver).moveToElement(traineesDropDownElement).click().perform();
+            try {
+                new Select(traineesDropDownElement).selectByValue(name);
+            }catch (Exception e) {
+                throw new NoSuchElementException(String.format("In trainees dropdown, trainee with name: %s does not exist!", name));
             }
-            throw new NoSuchElementException(String.format("In trainees dropdown, trainee with name: %s does not exist!", name));
+            return this;
         }
 
         /**
