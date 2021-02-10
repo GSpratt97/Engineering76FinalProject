@@ -39,7 +39,7 @@ public class AssessmentsTest {
         login.logInAsTrainer(usernameTrainer, passwordTrainer);
 
         webDriver.get("http://localhost:8080/trainer/assessments");
-
+        assessmentsPage = new Assessments(webDriver);
     }
 
 
