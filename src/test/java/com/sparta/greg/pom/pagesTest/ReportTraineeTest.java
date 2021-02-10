@@ -1,7 +1,9 @@
 package com.sparta.greg.pom.pagesTest;
 
+import com.sparta.greg.pom.pages.HomeTrainee;
 import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.ReportTrainee;
+import com.sparta.greg.pom.pages.TraineePage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,13 +11,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class ReportTraineeTest {
 
     private static final    Properties      properties = new Properties();
+
     private static          Login           login;
     private static          ReportTrainee   reportTrainee;
     private static          WebDriver       webDriver;
+
     private static          String          traineeUsername;
     private static          String          traineePassword;
 
@@ -32,12 +37,8 @@ public class ReportTraineeTest {
             e.printStackTrace();
         }
 
-        login.enterUsernameAddress(traineeUsername);
-        login.enterPassword(traineePassword);
-        login.clickSubmitButton();
-
+        login.logInAsTrainee(traineeUsername, traineePassword);
         reportTrainee = new ReportTrainee(webDriver);
-        reportTrainee.setWeekReports();
     }
 
     @AfterEach
@@ -52,15 +53,21 @@ public class ReportTraineeTest {
     }
 
     @Test
-    @DisplayName("Does the 'expand' button expand a weekly report?")
+    @DisplayName("Does the first 'expand' button expand its weekly report?")
     void doesReportExpand() {
         Assertions.assertTrue(reportTrainee.doesExpandButtonExpand(reportTrainee.getWeekReports().get(0)));
     }
 
     @Test
-    @DisplayName("Does the 'expand' button collapse a weekly report?")
+    @DisplayName("Does the first 'expand' button collapse its weekly report?")
     void doesReportCollapse() {
         Assertions.assertTrue(reportTrainee.doesExpandButtonCollapse(reportTrainee.getWeekReports().get(0)));
+    }
+
+    @Test
+    @DisplayName("Do all 'expand' buttons expand their weekly report and collapse it?")
+    void doAllReportsExpandAndCollapse() {
+        Assertions.assertTrue(reportTrainee.doAllExpandButtonsWork());
     }
 
     @Test
