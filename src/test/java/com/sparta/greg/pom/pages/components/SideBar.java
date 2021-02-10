@@ -20,22 +20,8 @@ public abstract class SideBar {
         this.webDriver = webDriver;
     }
 
-    public WebElement gotoHomePage() {
-        return webDriver.findElement(brandLogoLink);
-    }
-
     public void selectView() {
         webDriver.findElement(viewLink).click();
-    }
-
-    public ConsultancySkills selectConsultancySkills() {
-        webDriver.findElement(consultancySkillsLink).click();
-        return new ConsultancySkills(webDriver);
-    }
-
-    public Guide selectTraineeGuide() {
-        webDriver.findElement(traineeGuideLink).click();
-        return new Guide(webDriver);
     }
 
     public void changeSideBarSize() {

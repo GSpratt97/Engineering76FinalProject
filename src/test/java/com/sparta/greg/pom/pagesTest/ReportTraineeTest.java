@@ -11,7 +11,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class ReportTraineeTest {
 

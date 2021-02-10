@@ -24,6 +24,10 @@ public class TraineeProfile extends TrainerPage {
     By attendanceDetails = By.cssSelector("a[href*='/trainer/traineeAttendance/']");
     By traineeReport = By.cssSelector("a[href*='/trainer/report/41']");
     By toggleButtons = By.cssSelector("tr[class*='accordion-toggle");
+    By generalCard = By.cssSelector("div[class='card shadow mb-4']");
+    By findSQL = By.cssSelector("tr[href*='collapseSQL']");
+    By finNotSQL = By.cssSelector("tr[href*='collapseNotSQL']");
+    By findLetterGrade = By.cssSelector("span[class*='letterGrade']");
 
     public TraineeProfile(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -65,7 +69,7 @@ public class TraineeProfile extends TrainerPage {
 //    }
 
     public void toggleExpandSQLBreakdown() {
-        List<WebElement> generalList = webDriver.findElements(By.cssSelector("div[class='card shadow mb-4']"));
+        List<WebElement> generalList = webDriver.findElements(generalCard);
 
         for (WebElement element : generalList) {
             if (element.getText().contains("No grades yet for") && !element.getText().contains("collapseSQL")) {
@@ -73,8 +77,8 @@ public class TraineeProfile extends TrainerPage {
             }
         }
 
-        if (webDriver.findElements(By.cssSelector("tr[href*='collapseSQL']")) != null) {
-            webDriver.findElement(By.cssSelector("tr[href*='collapseSQL']")).click();
+        if (webDriver.findElements(findSQL) != null) {
+            webDriver.findElement(findSQL).click();
         } else {
             throw new NullPointerException("No SQL Breakdown Available");
         }
@@ -82,7 +86,7 @@ public class TraineeProfile extends TrainerPage {
     }
 
     public void toggleExpandNotSQLBreakdown() {
-        List<WebElement> generalList = webDriver.findElements(By.cssSelector("div[class='card shadow mb-4']"));
+        List<WebElement> generalList = webDriver.findElements(generalCard);
 
         for (WebElement element : generalList) {
             if (element.getText().contains("No grades yet for") && !element.getText().contains("collapseNotSQL")) {
@@ -90,12 +94,89 @@ public class TraineeProfile extends TrainerPage {
             }
         }
 
-        if (webDriver.findElement(By.cssSelector("tr[href*='collapseNotSQL']")) != null) {
-            webDriver.findElement(By.cssSelector("tr[href*='collapseNotSQL']")).click();
+        if (webDriver.findElement(finNotSQL) != null) {
+            webDriver.findElement(finNotSQL).click();
         } else {
             throw new NullPointerException("No NotSQL Breakdown Available");
         }
     }
+
+    public String getFullName() {
+        return webDriver.findElement(traineeName).getText();
+    }
+
+    public String getAssignedClass() {
+        return webDriver.findElement(assignedClass).getText();
+    }
+
+    public String getCourseAssigned() {
+        return webDriver.findElement(courseAssigned).getText();
+    }
+
+    public String getCurrentWeekOfCourse() {
+        return webDriver.findElement(currentWeekOfCourse).getText();
+    }
+
+    public String getOnTime() {
+        return webDriver.findElement(onTime).getText();
+    }
+
+    public String getLate() {
+        return webDriver.findElement(late).getText();
+    }
+
+    public String getExcusedAbsence() {
+        return webDriver.findElement(excusedAbsence).getText();
+    }
+
+    public String getUnexcusedAbsence() {
+        return webDriver.findElement(unexcusedAbsence).getText();
+    }
+
+    public String getConsultantGrade() { return webDriver.findElement(consultantGrade).getText();}
+
+    public String getTechnicalGrade() { return webDriver.findElement(technicalGrade).getText();}
+
+    public String getOverallGrade() { return webDriver.findElement(overallGrade).getText();}
+
+    public String getGradeSQL() {
+        List<WebElement> generalList = webDriver.findElements(generalCard);
+        String grade;
+
+        for (WebElement element : generalList) {
+            if (element.getText().contains("No grades yet for") && !element.getText().contains("collapseSQL")) {
+                throw new NullPointerException("No grades yet for this trainee");
+            }
+        }
+
+        if (webDriver.findElements(findSQL) != null) {
+            grade = webDriver.findElement(findSQL).findElement(findLetterGrade).getText();
+        } else {
+            throw new NullPointerException("No SQL Breakdown Available");
+        }
+
+        return grade;
+    }
+
+    public String getGradeNotSQL() {
+        List<WebElement> generalList = webDriver.findElements(generalCard);
+        String grade;
+
+        for (WebElement element : generalList) {
+            if (element.getText().contains("No grades yet for") && !element.getText().contains("collapseNotSQL")) {
+                throw new NullPointerException("No grades yet for this trainee");
+            }
+        }
+
+        if (webDriver.findElements(finNotSQL) != null) {
+            grade = webDriver.findElement(finNotSQL).findElement(findLetterGrade).getText();
+        } else {
+            throw new NullPointerException("No NotSQL Breakdown Available");
+        }
+
+        return grade;
+    }
+
 
 
 }

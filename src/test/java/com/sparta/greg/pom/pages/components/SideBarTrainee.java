@@ -1,15 +1,15 @@
 package com.sparta.greg.pom.pages.components;
 
-import com.sparta.greg.pom.pages.FeedbackForm;
-import com.sparta.greg.pom.pages.ReportTrainee;
-import com.sparta.greg.pom.pages.TraineeAttendance;
+import com.sparta.greg.pom.pages.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.concurrent.TimeUnit;
 
 public class SideBarTrainee extends SideBar {
 
+    By profileLink = new By.ByCssSelector("a[href*='/trainee/home']");
     By traineeOptionsButton = new By.ByCssSelector("a[data-target*='#collapseUtilities']");
     By feedbackFormLink = new By.ByCssSelector("a[href='/traineeRecentReport']");
     By reportsHistoryLink = new By.ByCssSelector("a[href='/trainee/report']");
@@ -21,6 +21,28 @@ public class SideBarTrainee extends SideBar {
 
     public void clickTraineeOptions() {
         webDriver.findElement(traineeOptionsButton).click();
+    }
+
+    public HomeTrainer goToHomePageByClickingLogo() {
+        webDriver.findElement(brandLogoLink).click();
+        return new HomeTrainer(webDriver);
+    }
+
+    public HomeTrainer goToHomePageByClickingProfile() {
+        webDriver.findElement(profileLink).click();
+        return new HomeTrainer(webDriver);
+    }
+
+    public TraineeConsultancySkills goToConsultancySkills() {
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        webDriver.findElement(consultancySkillsLink).click();
+        return new TraineeConsultancySkills(webDriver);
+    }
+
+    public TraineeGuide goToTraineeGuide() {
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        webDriver.findElement(traineeGuideLink).click();
+        return new TraineeGuide(webDriver);
     }
 
     public FeedbackForm goToFeedbackForm() {

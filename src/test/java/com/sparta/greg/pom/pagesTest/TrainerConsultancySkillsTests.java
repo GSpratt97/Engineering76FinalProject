@@ -1,7 +1,7 @@
 package com.sparta.greg.pom.pagesTest;
 
-import com.sparta.greg.pom.pages.ConsultancySkills;
 import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.pages.TrainerConsultancySkills;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.*;
@@ -12,10 +12,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ConsultancySkillTests {
+public class TrainerConsultancySkillsTests {
 
     private static WebDriver webDriver;
-    private static ConsultancySkills consultancySkills;
+    private static TrainerConsultancySkills trainerConsultancySkills;
     private static String usernameTrainer;
     private static String passwordTrainer;
 
@@ -37,32 +37,31 @@ public class ConsultancySkillTests {
         login.logInAsTrainer(usernameTrainer, passwordTrainer);
 
         webDriver.get("http://localhost:8080/consultancy");
-        consultancySkills = new ConsultancySkills(webDriver);
+        trainerConsultancySkills = new TrainerConsultancySkills(webDriver);
     }
-
 
     @Test
     @DisplayName("Click what these skills make button")
     public void clickWhatTheseSkillsMakeButton() throws InterruptedException {
-        consultancySkills.clickWhatTheseSkillsMakeButton();
+        trainerConsultancySkills.clickWhatTheseSkillsMakeButton();
         Thread.sleep(2000);
         Assertions.assertTrue(webDriver.findElement(By.cssSelector("h5[id='ModalLabel']")).isDisplayed());
     }
     @Test
-    @DisplayName("Click back to profile or dashBoard button on consultancy skills")
+    @DisplayName("Click back to dashBoard button on consultancy skills")
     public void clickBackToDashBoardButtonOnConsultancySkillsTrainerLogin() {
-        consultancySkills.clickBackToDashBoardButtonOnConsultancySkillsTrainerLogin();
+        trainerConsultancySkills.clickBackToDashBoardButtonOnConsultancySkillsTrainerLogin();
         Assertions.assertEquals("http://localhost:8080/trainer/home",webDriver.getCurrentUrl());
     }
     @Test
     @DisplayName("Click Studious Button On Consultancy Skills")
     public void clickStudiousButtonOnConsultancySkills() {
-        consultancySkills.clickCollapsableButtonOnConsultancySkills(ConsultancySkills.buttonsOnTheConsultancySkills.STUDIOUS);
+        trainerConsultancySkills.clickCollapsableButtonOnConsultancySkills(TrainerConsultancySkills.buttonsOnTheConsultancySkills.STUDIOUS);
     }
     @Test
     @DisplayName("Click All Skills Button On Consultancy Skills")
     public void clickAllButtonOnConsultancySkills() {
-        consultancySkills.clickAllCollapsableButtonOnConsultancySkills();
+        trainerConsultancySkills.clickAllCollapsableButtonOnConsultancySkills();
     }
     @AfterEach
     void close(){webDriver.close();}
