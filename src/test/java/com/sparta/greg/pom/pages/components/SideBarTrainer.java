@@ -26,9 +26,26 @@ public class SideBarTrainer extends SideBar {
         webDriver.findElement(trainerOptionsButton).click();
     }
 
-    public HomeTrainer goToTrainerHome() {
+    public HomeTrainer goToHomePageByClickingLogo() {
+        webDriver.findElement(brandLogoLink).click();
+        return new HomeTrainer(webDriver);
+    }
+
+    public HomeTrainer goToHomePageByClickingDashboard() {
         webDriver.findElement(dashboardLink).click();
         return new HomeTrainer(webDriver);
+    }
+
+    public TrainerConsultancySkills goToConsultancySkills() {
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        webDriver.findElement(consultancySkillsLink).click();
+        return new TrainerConsultancySkills(webDriver);
+    }
+
+    public TrainerGuide goToTraineeGuide() {
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        webDriver.findElement(traineeGuideLink).click();
+        return new TrainerGuide(webDriver);
     }
 
     public ClassManagement goToClassManagement() {
