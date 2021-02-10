@@ -18,13 +18,13 @@ public abstract class TraineePage extends Page {
         return new FeedbackForm(webDriver);
     }
 
-    public ReportTrainee goToReportsHistory() {
+    public ReportTrainee goToReportTrainee() {
         webDriver.findElement(reportsHistoryLink).click();
         return new ReportTrainee(webDriver);
     }
 
-    public WeeklyAttendance goToAttendanceHistory() {
+    public TraineeAttendance goToTraineeAttendance() {
         webDriver.findElement(attendanceHistoryLink).click();
-        return new WeeklyAttendance(webDriver);
+        return new TraineeAttendance(webDriver);
     }
 }
