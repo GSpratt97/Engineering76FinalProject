@@ -18,10 +18,6 @@ public class EnterAttendance {
 
     WebDriver webDriver;
 
-    public String getDateSelected() {
-        return dateSelected;
-    }
-
     public String getSubmitMessage() {
         return submitMessage;
     }
@@ -33,11 +29,6 @@ public class EnterAttendance {
 
     public String getPageConfirm() {
         return pageConfirm;
-    }
-
-    public void dateCheck()
-    {
-        dateSelected = webDriver.findElement(By.name("attendanceDate")).getAttribute("value");
     }
 
     public void setSubmitMessage(String isSuccess) {
