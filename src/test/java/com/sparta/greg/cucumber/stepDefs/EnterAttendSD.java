@@ -31,7 +31,7 @@ public class EnterAttendSD {
         webDriver = new ChromeDriver();
         //SignIn
         Login login = new Login(webDriver);
-        HomeTrainer trainer = login.logInAsTrainer("MGadhvi@sparta.com","startrek");
+        HomeTrainer trainer = login.logInAsTrainer();
         attendancePage = trainer.goToEnterAttendanceThroughDashboard();
 
         //Go to right page
