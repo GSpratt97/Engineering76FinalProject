@@ -1,4 +1,4 @@
-package com.sparta.greg.cucumber.stepDefs;
+package com.sparta.greg.cucumber.stepdefs;
 
 import com.sparta.greg.pom.pages.EnterAttendance;
 import com.sparta.greg.pom.pages.HomeTrainer;
