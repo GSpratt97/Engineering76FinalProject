@@ -1,16 +1,32 @@
 package com.sparta.greg.pom.pages;
 
+import com.sparta.greg.pom.pages.components.SideBarTrainee;
+import com.sparta.greg.pom.pages.components.SideBarTrainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 public class ChangePassword extends Page{
+
+    public SideBarTrainer getSideBarTrainer() {
+        return sideBarTrainer;
+    }
+    public SideBarTrainee getSideBarTrainee() {
+        return sideBarTrainee;
+    }
+
+    private final SideBarTrainer sideBarTrainer;
+    private final SideBarTrainee sideBarTrainee;
 
     By oldPassword = By.cssSelector("input[name='oldPassword'][type='password']");
     By newPassword = By.cssSelector("input[name='password'][type='password']");
     By submitButton = By.cssSelector("button[type='submit']");
 
     public ChangePassword(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver);
+        sideBarTrainer = new SideBarTrainer(webDriver);
+        sideBarTrainee = new SideBarTrainee(webDriver);
+        PageFactory.initElements(webDriver, this);
     }
 
 //    I commented out the click submit button for safety in case anyone runs any tests
