@@ -1,9 +1,7 @@
 package com.sparta.greg.pom.pagesTest;
 
-import com.sparta.greg.pom.pages.HomeTrainee;
 import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.ReportTrainee;
-import com.sparta.greg.pom.pages.TraineePage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -48,7 +46,7 @@ public class ReportTraineeTest {
     @Test
     @DisplayName("Does http://localhost:8080/trainee/report load to WebDriver on class instantiation?")
     void isReportTraineePageLoaded() {
-        Assertions.assertEquals("http://localhost:8080/trainee/report", reportTrainee.getUrl());
+        Assertions.assertEquals("http://localhost:8080/trainee/report", reportTrainee.getURL());
     }
 
     @Test
