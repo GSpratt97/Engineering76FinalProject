@@ -5,14 +5,12 @@ import com.sparta.greg.pom.pages.Login;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class AddWeeksTest {
 
@@ -21,12 +19,13 @@ public class AddWeeksTest {
     private static WebDriver webDriver;
     private static String trainerUsername;
     private static String trainerPassword;
-    private AddWeeks addWeeks;
+    private static AddWeeks addWeeks;
 
     @BeforeEach
     void setup() {
         webDriver = new ChromeDriver();
         login = new Login(webDriver);
+        addWeeks = new AddWeeks(webDriver);
 
         try {
             properties.load(new FileReader("src/test/resources/login.properties"));
@@ -36,12 +35,9 @@ public class AddWeeksTest {
             e.printStackTrace();
         }
 
-        login.enterUsernameAddress(trainerUsername);
-        login.enterPassword(trainerPassword);
-        login.clickSubmitButton();
+        logInToTrainer();
         goToAddWeeks();
         addWeeks = new AddWeeks(webDriver);
-
     }
 
     @Test
@@ -51,14 +47,17 @@ public class AddWeeksTest {
 
     @Test
     public void test2(){
-        addWeeks.selectGroupToAdd("Data 17");
+        addWeeks.selectGroupToAdd("Engineering 76");
+        addWeeks.pressAddWeekButton();
     }
 
     private void goToAddWeeks(){
-        webDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        webDriver.findElement(By.linkText("Trainer Options")).click();
-        webDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        webDriver.findElement(By.linkText("Add Weeks")).click();
+        webDriver.get("http://localhost:8080/trainer/newWeek");
 
+    }
+    private void logInToTrainer(){
+        login.enterUsernameAddress(trainerUsername);
+        login.enterPassword(trainerPassword);
+        login.clickSubmitButton();
     }
 }
