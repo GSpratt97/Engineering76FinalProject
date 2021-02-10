@@ -10,9 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class WeeklyAttendance {
-
-    private WebDriver webDriver;
+public class WeeklyAttendance extends TrainerPage {
 
     @FindBy(id = "accordion1")
     private List<WebElement> weekList;
