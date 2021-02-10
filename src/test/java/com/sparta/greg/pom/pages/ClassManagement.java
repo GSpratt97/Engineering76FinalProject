@@ -1,12 +1,13 @@
 package com.sparta.greg.pom.pages;
 
+import com.sparta.greg.pom.pages.components.SideBarTrainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class ClassManagement extends TrainerPage{
+public class ClassManagement extends Page{
 
 	By selectTrainee = By.id("traineeId");
 	By selectClass = By.id("groupId");
@@ -21,9 +22,15 @@ public class ClassManagement extends TrainerPage{
 	By successMessage = By.cssSelector("p.letterGradeA");
 	By errorMessage = By.cssSelector("p.letterGradeF");
 
+	private final SideBarTrainer sideBarTrainer;
 
 	public ClassManagement(WebDriver webDriver){
-		this.webDriver = webDriver;
+		super(webDriver);
+		sideBarTrainer = new SideBarTrainer(webDriver);
+	}
+
+	public SideBarTrainer getSideBarTrainer(){
+		return sideBarTrainer;
 	}
 
 	public Select getSelectTrainee(){
