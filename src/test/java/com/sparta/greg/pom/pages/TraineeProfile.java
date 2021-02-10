@@ -20,7 +20,7 @@ public class TraineeProfile extends TrainerPage {
     By technicalGrade = By.cssSelector("main > div > div:nth-child(3) > div > div.card-body > div > div > div > div:nth-child(2) > div.card-body > big");
     By overallGrade = By.cssSelector("main > div > div:nth-child(3) > div > div.card-body > div > div > div > div:nth-child(3) > div.card-body > big");
 
-    By bathToDashboard = By.cssSelector("a[class='btn btn-primary']");
+    By backToDashboard = By.cssSelector("a[class='btn btn-primary']");
     By attendanceDetails = By.cssSelector("a[href*='/trainer/traineeAttendance/']");
     By traineeReport = By.cssSelector("a[href*='/trainer/report/41']");
     By toggleButtons = By.cssSelector("tr[class*='accordion-toggle");
@@ -30,7 +30,7 @@ public class TraineeProfile extends TrainerPage {
     }
 
     public HomeTrainer goBackToHomePageViaBackToDashboardButton() {
-        List<WebElement> primaryButtons = webDriver.findElements(bathToDashboard);
+        List<WebElement> primaryButtons = webDriver.findElements(backToDashboard);
 
         for (WebElement button : primaryButtons) {
             if (button.getText().equals("Back To Dashboard")) {
