@@ -9,17 +9,21 @@ public class ReportTrainer extends Report {
 
     private final SideBarTrainer sideBarTrainer;
 
+
     By traineeDropdown      = By.id("traineeSelector");
     By viewTraineeProfile   = new By.ByCssSelector("button[value='profile']");
     By viewTraineeReport    = new By.ByCssSelector("a[href*='trainer/report']");
     By backToTraineeProfile = new By.ByCssSelector("a[href*='traineeProfile']");
 
+
     public ReportTrainer(WebDriver webDriver) {
         super(webDriver);
         sideBarTrainer = new SideBarTrainer(webDriver);
+
         findTrainee("Bill Bird");
         viewTraineeProfile();
         viewTraineeReport();
+
     }
 
     public SideBarTrainer getSideBarTrainer() {
@@ -32,6 +36,7 @@ public class ReportTrainer extends Report {
         select.selectByVisibleText(traineeName);
     }
 
+
     public void viewTraineeProfile() {
         webDriver.findElement(viewTraineeProfile).click();
     }
@@ -42,5 +47,6 @@ public class ReportTrainer extends Report {
 
     public void backToTraineeProfile() {
         webDriver.findElement(backToTraineeProfile).click();
+
     }
 }
