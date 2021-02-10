@@ -17,10 +17,6 @@ public abstract class Report extends Page{
         super(webDriver);
     }
 
-    public String getUrl() {
-        return webDriver.getCurrentUrl();
-    }
-
     public void setWeekReports() {
         weekReports = webDriver.findElements(By.tagName("tbody"));
     }
