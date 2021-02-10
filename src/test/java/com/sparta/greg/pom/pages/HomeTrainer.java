@@ -26,10 +26,10 @@ public class HomeTrainer extends TrainerPage {
         return new EnterAttendance(webDriver);
     }
 
-//    public TraineeProfile goToTraineeProfile() {
-//        webDriver.findElement(viewTraineeProfile).click();
-//        return new TraineeProfile(webDriver);
-//    }
+    public TraineeProfile goToTraineeProfile() {
+        webDriver.findElement(viewTraineeProfile).click();
+        return new TraineeProfile(webDriver);
+    }
 
     public String getFullName() {
         return webDriver.findElement(trainerName).getText();

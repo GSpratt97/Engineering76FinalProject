@@ -26,13 +26,11 @@ public class HomeTrainee extends TraineePage {
         webDriver.get("http://localhost:8080/trainee/home");
     }
 
-    // WAITING FOR TraineeAttendance CLASS
     public TraineeAttendance goToWeeklyAttendance(){
         webDriver.findElement(attendenceDetailsButton).click();
         return new TraineeAttendance(webDriver);
     }
 
-    // WAITING FOR ReportTrainee CLASS
     public ReportTrainee goToReportForTrainee(){
         webDriver.findElement(reportDetailsButton).click();
         return new ReportTrainee(webDriver);
