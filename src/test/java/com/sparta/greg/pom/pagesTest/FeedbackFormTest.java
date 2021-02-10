@@ -12,7 +12,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
+
+
 
 public class FeedbackFormTest {
 
@@ -35,9 +36,9 @@ public class FeedbackFormTest {
         login.enterPassword(properties.getProperty("traineePassword"));
         login.clickSubmitButton();
         feedbackForm = new FeedbackForm(webDriver);
-        feedbackForm.clickTraineeOptions();
-        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        feedbackForm.goToFeedbackForm();
+
+        webDriver.get("http://localhost:8080/trainee/report/12");
+
     }
 
 
@@ -54,6 +55,12 @@ public class FeedbackFormTest {
         Assertions.assertFalse(feedbackForm.enterStart(null));
     }
 
+    @Test
+    @DisplayName("Checking start method can handle empty values")
+    void checkStartCanHandleEmpty(){
+        Assertions.assertFalse(feedbackForm.enterStart(" "));
+    }
+
 
     @Test
     @DisplayName("Checking can access and edit the stop text box")
@@ -68,6 +75,12 @@ public class FeedbackFormTest {
     }
 
     @Test
+    @DisplayName("Checking stop method can handle null values")
+    void checkStopCanHandleNull(){
+        Assertions.assertFalse(feedbackForm.enterStop(null));
+    }
+
+    @Test
     @DisplayName("Checking can access and edit the continue text box")
     void checkCanAccessContinue(){
         Assertions.assertTrue(feedbackForm.enterContinue("Editing continue"));
@@ -79,11 +92,24 @@ public class FeedbackFormTest {
         Assertions.assertFalse(feedbackForm.enterContinue(" "));
     }
 
+    @Test
+    @DisplayName("Checking continue method can handle null values")
+    void checkContinueCanHandleNull(){
+        Assertions.assertFalse(feedbackForm.enterContinue(null));
+    }
+
 
     @Test
     @DisplayName("Checking that the technical grade can be selected")
     void checkCanAccessTechnicalButton(){
-         Assertions.assertTrue(feedbackForm.isTechnicalGradeSelected("A"));
+        Assertions.assertTrue(feedbackForm.isTechnicalGradeSelected("A"));
+    }
+
+
+    @Test
+    @DisplayName("Checking that the technical grade method can handle empty values")
+    void checkTechnicalCanHandleEmpty(){
+        Assertions.assertFalse(feedbackForm.isTechnicalGradeSelected(" "));
     }
 
 
@@ -104,5 +130,21 @@ public class FeedbackFormTest {
     void checkCanHandleEmpty(){
         Assertions.assertFalse(feedbackForm.isConsultantGradeSelected(" "));
     }
+
+    @Test
+    @DisplayName("Checking that the consultant grade method can handle null values")
+    void checkConsultantCanHandleNull(){
+        Assertions.assertFalse(feedbackForm.isConsultantGradeSelected(null));
+    }
+
+    @Test
+    @DisplayName("Checking that a null element can be handled")
+    void checkCanHandleNullElement(){
+        Assertions.assertFalse(feedbackForm.checkElement(null));
+    }
+
+
+
+
 
 }
