@@ -3,6 +3,7 @@ package com.sparta.greg.pom.pagesTest;
 import com.sparta.greg.pom.pages.HomeTrainee;
 import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.TraineeAttendance;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,16 +19,13 @@ public class TraineeAttendanceTest {
     protected WebDriver webDriver;
     private Login loginPage;
     private HomeTrainee homePage;
-
     private TraineeAttendance traineeAttendance;
-
-
-    private Properties properties;
+    private Properties properties = new Properties();
     private String usernameTrainee;
     private String passwordTrainee;
 
-    @BeforeEach
-    void setup(){
+    @Before
+    public void setup(){
         webDriver = new ChromeDriver();
         loginPage = new Login(webDriver);
 
@@ -44,9 +42,7 @@ public class TraineeAttendanceTest {
     @Test
     @DisplayName("Get an element")
     public void works(){
-
         traineeAttendance = homePage.goToWeeklyAttendance();
-        traineeAttendance.clickWeek(1);
-
+        traineeAttendance.clickWeek(7);
     }
 }
