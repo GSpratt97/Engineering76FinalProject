@@ -44,4 +44,4 @@ Feature: Actions on the Feedback Form page
     Given I am on the feedback page
     And  I have filled the form
     When I click submit
-    Then #to do - figure what to test here for confirmation of submitting 
+    Then #to do - figure what to test here for confirmation of submitting

@@ -47,10 +47,21 @@ public class WebDriverFactoryTest {
     }
 
     @Test
-    @DisplayName("Testing that a Opera driver is returned")
-    void checkForOpera(){
-        Assertions.assertEquals(OperaDriver.class, WebDriverFactory.getWebDriver(WebDriverType.OPERA).getClass());
+    @DisplayName("Testing that a Chrome driver is returned headlessly")
+    void checkForChromeHeadless(){
+        Assertions.assertEquals(ChromeDriver.class, WebDriverFactory.runHeadless(WebDriverType.CHROME).getClass());
     }
+
+    @Test
+    @DisplayName("Testing that a Firefox driver is returned headlessly")
+    void checkForFirefoxHeadless(){
+        Assertions.assertEquals(FirefoxDriver.class, WebDriverFactory.runHeadless(WebDriverType.FIREFOX).getClass());
+    }
+
+
+
+
+
 
 
 
