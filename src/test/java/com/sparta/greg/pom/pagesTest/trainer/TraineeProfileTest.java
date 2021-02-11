@@ -295,7 +295,7 @@ public class TraineeProfileTest {
         }
 
         @Test
-        @DisplayName("Get NotSQL Comparative Score")
+        @DisplayName("Get Not SQL Comparative Score")
         void getNotSqlComparativeScore() {
             traineeProfilePage.toggleExpandNotSQLBreakdown();
             WebDriverWait wait = new WebDriverWait(webDriver, 10);
