@@ -3,16 +3,15 @@ package com.sparta.greg.pom.pagesTest.components;
 import com.sparta.greg.pom.pages.HomeTrainer;
 import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.WeeklyAttendance;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class SideBarTest {
 
@@ -21,7 +20,6 @@ public class SideBarTest {
     private static WeeklyAttendance weeklyAttendance;
     private static String trainerUsername;
     private static String trainerPassword;
-    private static HomeTrainer homeTrainer;
 
     @BeforeAll
     static void setup() {
@@ -40,6 +38,16 @@ public class SideBarTest {
         weeklyAttendance = new WeeklyAttendance(webDriver);
     }
 
+    @AfterEach
+    void refresh() {
+        webDriver.navigate().refresh();
+    }
+
+    @AfterAll
+    static void tearDown() {
+        webDriver.quit();
+    }
+
     @Test
     @DisplayName("change side bar size test")
     void changeSideBarSizeTest() {
@@ -47,6 +55,12 @@ public class SideBarTest {
         weeklyAttendance.getSideBarTrainer().changeSideBarSize();
         String postSideBarSize = weeklyAttendance.getSideBarTrainer().getSideBarSize();
         Assertions.assertNotEquals(initialSideBarSize, postSideBarSize);
+    }
+
+    @Test
+    @DisplayName("get sidebar size returns String")
+    void getSidebarSizeReturnsString() {
+        Assertions.assertEquals(String.class, weeklyAttendance.getSideBarTrainer().getSideBarSize().getClass());
     }
 
     @Test
