@@ -23,14 +23,14 @@ public class SideBarTrainee extends SideBar {
         webDriver.findElement(traineeOptionsButton).click();
     }
 
-    public HomeTrainer goToHomePageByClickingLogo() {
+    public HomeTrainee goToHomePageByClickingLogo() {
         webDriver.findElement(brandLogoLink).click();
-        return new HomeTrainer(webDriver);
+        return new HomeTrainee(webDriver);
     }
 
-    public HomeTrainer goToHomePageByClickingProfile() {
+    public HomeTrainee goToHomePageByClickingProfile() {
         webDriver.findElement(profileLink).click();
-        return new HomeTrainer(webDriver);
+        return new HomeTrainee(webDriver);
     }
 
     public TraineeConsultancySkills goToConsultancySkills() {

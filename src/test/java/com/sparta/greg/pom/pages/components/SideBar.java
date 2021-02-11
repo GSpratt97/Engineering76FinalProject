@@ -1,10 +1,7 @@
 package com.sparta.greg.pom.pages.components;
 
-import com.sparta.greg.pom.pages.ConsultancySkills;
-import com.sparta.greg.pom.pages.Guide;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public abstract class SideBar {
 
@@ -15,6 +12,7 @@ public abstract class SideBar {
     By consultancySkillsLink = new By.ByCssSelector("ul[id='accordionSidebar'] a[href*='consultancy']");
     By traineeGuideLink = new By.ByCssSelector("ul[id='accordionSidebar'] a[href*='guide']");
     By sideBarSizeSelector = new By.ByCssSelector("ul[id='accordionSidebar'] button[id='sidebarToggle']");
+    By sideBar = new By.ByCssSelector("nav[class*='sidebar']");
 
     public SideBar(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -27,4 +25,9 @@ public abstract class SideBar {
     public void changeSideBarSize() {
         webDriver.findElement(sideBarSizeSelector).click();
     }
+
+    public String getSideBarSize() {
+        return webDriver.findElement(sideBar).getCssValue("width");
+    }
+
 }

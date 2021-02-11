@@ -51,7 +51,8 @@ public class TraineeAttendanceTest {
     @Test
     @DisplayName("Click on a week sidebar path")
     public void clickOnAWeekSideBar(){
-        //implement sidebar method
+        homePage.getSideBarTrainee().clickTraineeOptions();
+        traineeAttendance = homePage.getSideBarTrainee().goToTraineeAttendance();
         traineeAttendance.clickWeek(11);
     }
 
@@ -60,6 +61,11 @@ public class TraineeAttendanceTest {
     public void doesToggleWork(){
         traineeAttendance = homePage.goToWeeklyAttendance();
         traineeAttendance.clickWeek(12);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Assertions.assertTrue(traineeAttendance.isToggledOnWeek(12));
     }
 }
