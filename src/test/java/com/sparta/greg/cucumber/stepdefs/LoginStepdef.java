@@ -1,7 +1,6 @@
 package com.sparta.greg.cucumber.stepdefs;
 
-import com.sparta.greg.pom.pages.Login;
-import io.cucumber.java.en.And;
+import com.sparta.greg.pom.pages.components.Login;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -66,18 +65,18 @@ public class LoginStepdef {
         login.clickSubmitButton();
     }
 
-    @Then("I am on the trainee home page")
-    public void iAmOnTheTraineeHomePage() {
+    @Then("I am taken to the trainer home page from the login page")
+    public void iAmTakenToTheTrainerHomePageFromTheLoginPage() {
         Assertions.assertEquals("http://localhost:8080/trainee/home", webDriver.getCurrentUrl());
     }
 
-    @Then("I am on the trainer home page")
-    public void iAmOnTheTrainerHomePage() {
+    @Then("I am taken to the trainee home page from the login page")
+    public void iAmTakenToTheTraineeHomePageFromTheLoginPage() {
         Assertions.assertEquals("http://localhost:8080/trainer/home", webDriver.getCurrentUrl());
     }
 
-    @Then("I am on the login error page")
-    public void iAmOnTheLoginErrorPage() {
+    @Then("I am taken to the login error page from the login page")
+    public void iAmTakenToTheLoginErrorPageFromTheLoginPage() {
         Assertions.assertEquals("http://localhost:8080/login?error", webDriver.getCurrentUrl());
     }
 }

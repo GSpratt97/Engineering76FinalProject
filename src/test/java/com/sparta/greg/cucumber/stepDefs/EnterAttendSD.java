@@ -1,8 +1,8 @@
 package com.sparta.greg.cucumber.stepdefs;
 
-import com.sparta.greg.pom.pages.EnterAttendance;
-import com.sparta.greg.pom.pages.HomeTrainer;
-import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.pages.trainer.EnterAttendance;
+import com.sparta.greg.pom.pages.trainer.HomeTrainer;
+import com.sparta.greg.pom.pages.components.Login;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

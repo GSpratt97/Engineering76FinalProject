@@ -1,9 +1,8 @@
 package com.sparta.greg.pom.pages.components;
 
-import com.sparta.greg.pom.pages.*;
+import com.sparta.greg.pom.pages.trainee.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +16,15 @@ public class SideBarTrainee extends SideBar {
 
     public SideBarTrainee(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    public boolean isTraineeOptionsExpanded() {
+        boolean isExpanded = !webDriver.findElement(traineeOptionsButton).getAttribute("class").contains("collapsed");
+        if (!isExpanded) {
+            System.err.println("WARNING: 'Trainer Options' tab is not expanded. Expand it by calling the 'clickTrainerOptions()' method.");
+            return false;
+        }
+        return true;
     }
 
     public void clickTraineeOptions() {
@@ -34,30 +42,35 @@ public class SideBarTrainee extends SideBar {
     }
 
     public TraineeConsultancySkills goToConsultancySkills() {
+        isViewExpanded();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(consultancySkillsLink).click();
         return new TraineeConsultancySkills(webDriver);
     }
 
     public TraineeGuide goToTraineeGuide() {
+        isViewExpanded();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(traineeGuideLink).click();
         return new TraineeGuide(webDriver);
     }
 
     public FeedbackForm goToFeedbackForm() {
+        isTraineeOptionsExpanded();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(feedbackFormLink).click();
         return new FeedbackForm(webDriver);
     }
 
     public ReportTrainee goToReportTrainee() {
+        isTraineeOptionsExpanded();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(reportsHistoryLink).click();
         return new ReportTrainee(webDriver);
     }
 
     public TraineeAttendance goToTraineeAttendance() {
+        isTraineeOptionsExpanded();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(attendanceHistoryLink).click();
         return new TraineeAttendance(webDriver);

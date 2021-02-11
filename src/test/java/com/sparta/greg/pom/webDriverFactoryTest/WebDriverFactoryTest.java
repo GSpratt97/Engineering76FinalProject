@@ -9,8 +9,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
+
+
+/**
+ * TESTS WILL NOT WORK IF YOU DO NOT HAVE ALL THE WEB DRIVERS INSTALLED
+ */
+
+
 
 public class WebDriverFactoryTest {
 
@@ -47,10 +53,21 @@ public class WebDriverFactoryTest {
     }
 
     @Test
-    @DisplayName("Testing that a Opera driver is returned")
-    void checkForOpera(){
-        Assertions.assertEquals(OperaDriver.class, WebDriverFactory.getWebDriver(WebDriverType.OPERA).getClass());
+    @DisplayName("Testing that a Chrome driver is returned headlessly")
+    void checkForChromeHeadless(){
+        Assertions.assertEquals(ChromeDriver.class, WebDriverFactory.runHeadless(WebDriverType.CHROME).getClass());
     }
+
+    @Test
+    @DisplayName("Testing that a Firefox driver is returned headlessly")
+    void checkForFirefoxHeadless(){
+        Assertions.assertEquals(FirefoxDriver.class, WebDriverFactory.runHeadless(WebDriverType.FIREFOX).getClass());
+    }
+
+
+
+
+
 
 
 

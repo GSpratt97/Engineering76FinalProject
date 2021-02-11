@@ -1,7 +1,9 @@
 package com.sparta.greg.pom.pagesTest.components;
 
-import com.sparta.greg.pom.pages.*;
+import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.trainer.*;
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -9,16 +11,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class SideBarTrainerTest {
 
     private static final Properties properties = new Properties();
     private static WebDriver webDriver;
-    private static WeeklyAttendance weeklyAttendance;
+    private static HomeTrainer homeTrainer;
     private static String trainerUsername;
     private static String trainerPassword;
-    private static HomeTrainer homeTrainer;
 
     @BeforeAll
     static void setup() {
@@ -33,8 +32,8 @@ class SideBarTrainerTest {
         }
 
         login.logInAsTrainer(trainerUsername, trainerPassword);
-        webDriver.get("http://localhost:8080/trainer/weekly-attendance");
-        weeklyAttendance = new WeeklyAttendance(webDriver);
+        webDriver.get("http://localhost:8080/trainer/home");
+        homeTrainer = new HomeTrainer(webDriver);
     }
 
     @AfterEach
@@ -50,15 +49,92 @@ class SideBarTrainerTest {
     @Test
     @DisplayName("goToConsultancySkillsTest")
     void goToConsultancySkillsTest() {
-        weeklyAttendance.getSideBarTrainer().selectView();
-        Assertions.assertEquals(TrainerConsultancySkills.class, weeklyAttendance.getSideBarTrainer().goToConsultancySkills().getClass());
+        homeTrainer.getSideBarTrainer().selectView();
+        Assertions.assertEquals(TrainerConsultancySkills.class, homeTrainer.getSideBarTrainer().goToConsultancySkills().getClass());
     }
 
     @Test
     @DisplayName("go to guide page")
     void goToGuidePage() {
-        weeklyAttendance.getSideBarTrainer().selectView();
-        Assertions.assertEquals(TrainerGuide.class, weeklyAttendance.getSideBarTrainer().goToTraineeGuide().getClass());
+        homeTrainer.getSideBarTrainer().selectView();
+        Assertions.assertEquals(TrainerGuide.class, homeTrainer.getSideBarTrainer().goToTraineeGuide().getClass());
     }
 
+    @Test
+    @DisplayName("go to home trainer page by selecting logo by selecting logo test")
+    void goToHomeTrainerPageBySelectingLogoTest() {
+        Assertions.assertEquals(HomeTrainer.class, homeTrainer.getSideBarTrainer().goToHomePageByClickingLogo().getClass());
+    }
+
+    @Test
+    @DisplayName("go to home trainer page by clicking dashboard")
+    void goToHomeTrainerPageByClickingDashboard() {
+        Assertions.assertEquals(HomeTrainer.class, homeTrainer.getSideBarTrainer().goToHomePageByClickingDashboard().getClass());
+    }
+
+    @Test
+    @DisplayName("go to class management page test")
+    void goToClassManagementPageTest() {
+        homeTrainer.getSideBarTrainer().clickTrainerOptions();
+        Assertions.assertEquals(ClassManagement.class, homeTrainer.getSideBarTrainer().goToClassManagement().getClass());
+    }
+
+    @Test
+    @DisplayName("go to trainee managment page test")
+    void goToTraineeManagementPageTest() {
+        homeTrainer.getSideBarTrainer().clickTrainerOptions();
+        Assertions.assertEquals(ManageTrainee.class, homeTrainer.getSideBarTrainer().goToTraineeManagement().getClass());
+    }
+
+    @Test
+    @DisplayName("go to add weeks page test ")
+    void goToAddWeeksPageTest() {
+        homeTrainer.getSideBarTrainer().clickTrainerOptions();
+        Assertions.assertEquals(AddWeeks.class, homeTrainer.getSideBarTrainer().goToAddWeeks().getClass());
+    }
+
+    @Test
+    @DisplayName("go to assessments page test")
+    void goToAssessmentsPageTest() {
+        homeTrainer.getSideBarTrainer().clickTrainerOptions();
+        Assertions.assertEquals(Assessments.class, homeTrainer.getSideBarTrainer().goToAssessments().getClass());
+    }
+
+    @Test
+    @DisplayName("go to enter attendance page test")
+    void goToEnterAttendancePageTest() {
+        homeTrainer.getSideBarTrainer().clickTrainerOptions();
+        Assertions.assertEquals(EnterAttendance.class, homeTrainer.getSideBarTrainer().goToEnterAttendance().getClass());
+    }
+
+    @Test
+    @DisplayName("isTrainerOptionsExpanded returns false when not expanded")
+    void isTrainerOptionsExpandedReturnsFalseWhenNotExpanded() {
+        Assertions.assertFalse(homeTrainer.getSideBarTrainer().isTrainerOptionsExpanded());
+    }
+
+    @Test
+    @DisplayName("isTrainerOptionsExpanded returns true when expanded")
+    void isTrainerOptionsExpandedReturnsTrueWhenExpanded() {
+        homeTrainer.getSideBarTrainer().clickTrainerOptions();
+        Assertions.assertTrue(homeTrainer.getSideBarTrainer().isTrainerOptionsExpanded());
+    }
+
+    @Test
+    @DisplayName("go to weekly attendance page test")
+    void goToWeeklyAttendancePageTest() {
+        homeTrainer.getSideBarTrainer().clickTrainerOptions();
+        Assertions.assertEquals(WeeklyAttendance.class, homeTrainer.getSideBarTrainer().goToWeeklyAttendance().getClass());
+    }
+
+    @Test
+    @DisplayName("click trainer options test")
+    void clickTrainerOptionsTest() {
+        homeTrainer.getSideBarTrainer().clickTrainerOptions();
+        String status = webDriver.findElement(new By.ByCssSelector("a[data-target*='#collapsePages']")).getAttribute("aria-expanded");
+        Assertions.assertEquals("true", status);
+    }
+
+
 }
+
