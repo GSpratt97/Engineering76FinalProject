@@ -192,14 +192,8 @@ public class ManageTrainee extends Page {
             createNewTraineeButtonElement = webElement.findElement(createNewTraineeButtonSelector);
         }
 
-        /**
-         * Moves focus to {@code E-mail Text Box} and writes {@link String firstName}.
-         *
-         * @param email to be written in the {@code E-mail Text Box}.
-         * @return {@link CreateTraineeForm the same instance}.
-         */
         public CreateTraineeForm withEmail(String email) {
-            new Actions(webDriver).moveToElement(emailTextBoxElement).sendKeys(email).perform();
+            emailTextBoxElement.sendKeys(email);
             return this;
         }
 
@@ -210,7 +204,7 @@ public class ManageTrainee extends Page {
          * @return {@link CreateTraineeForm the same instance}.
          */
         public CreateTraineeForm withFirstName(String firstName) {
-            new Actions(webDriver).moveToElement(firstNameTextBoxElement).sendKeys(firstName).perform();
+            firstNameTextBoxElement.sendKeys(firstName);
             return this;
         }
 
@@ -221,7 +215,7 @@ public class ManageTrainee extends Page {
          * @return {@link CreateTraineeForm the same instance}.
          */
         public CreateTraineeForm withLastName(String lastName) {
-            new Actions(webDriver).moveToElement(lastNameTextBoxElement).sendKeys(lastName).perform();
+            lastNameTextBoxElement.sendKeys(lastName);
             return this;
         }
 
