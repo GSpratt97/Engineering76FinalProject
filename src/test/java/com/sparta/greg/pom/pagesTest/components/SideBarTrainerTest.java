@@ -1,8 +1,6 @@
 package com.sparta.greg.pom.pagesTest.components;
 
-import com.sparta.greg.pom.pages.HomeTrainer;
-import com.sparta.greg.pom.pages.Login;
-import com.sparta.greg.pom.pages.WeeklyAttendance;
+import com.sparta.greg.pom.pages.*;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,15 +9,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class SideBarTest {
+class SideBarTrainerTest {
 
     private static final Properties properties = new Properties();
     private static WebDriver webDriver;
     private static WeeklyAttendance weeklyAttendance;
     private static String trainerUsername;
     private static String trainerPassword;
+    private static HomeTrainer homeTrainer;
 
     @BeforeAll
     static void setup() {
@@ -49,24 +48,17 @@ public class SideBarTest {
     }
 
     @Test
-    @DisplayName("change side bar size test")
-    void changeSideBarSizeTest() {
-        String initialSideBarSize = weeklyAttendance.getSideBarTrainer().getSideBarSize();
-        weeklyAttendance.getSideBarTrainer().changeSideBarSize();
-        String postSideBarSize = weeklyAttendance.getSideBarTrainer().getSideBarSize();
-        Assertions.assertNotEquals(initialSideBarSize, postSideBarSize);
-    }
-
-    @Test
-    @DisplayName("get sidebar size returns String")
-    void getSidebarSizeReturnsString() {
-        Assertions.assertEquals(String.class, weeklyAttendance.getSideBarTrainer().getSideBarSize().getClass());
-    }
-
-    @Test
-    @DisplayName("select view icon test")
-    void selectViewIconTest() {
+    @DisplayName("goToConsultancySkillsTest")
+    void goToConsultancySkillsTest() {
         weeklyAttendance.getSideBarTrainer().selectView();
+        Assertions.assertEquals(TrainerConsultancySkills.class, weeklyAttendance.getSideBarTrainer().goToConsultancySkills().getClass());
+    }
+
+    @Test
+    @DisplayName("go to guide page")
+    void goToGuidePage() {
+        weeklyAttendance.getSideBarTrainer().selectView();
+        Assertions.assertEquals(TrainerGuide.class, weeklyAttendance.getSideBarTrainer().goToTraineeGuide().getClass());
     }
 
 }
