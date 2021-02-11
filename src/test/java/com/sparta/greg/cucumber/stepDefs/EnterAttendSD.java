@@ -3,7 +3,6 @@ package com.sparta.greg.cucumber.stepdefs;
 import com.sparta.greg.pom.pages.EnterAttendance;
 import com.sparta.greg.pom.pages.HomeTrainer;
 import com.sparta.greg.pom.pages.Login;
-import com.sparta.greg.pom.pages.EnterAttendance;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,17 +11,10 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class EnterAttendSD {
 
@@ -90,7 +82,7 @@ public class EnterAttendSD {
         Assertions.assertTrue(webDriver.findElement(By.id("attendanceId1")).isSelected());
     }
 
-    @And("I click submit")
+    @And("I click submit Attendance")
     public void iClickSubmit() {
         attendancePage.submit();
     }

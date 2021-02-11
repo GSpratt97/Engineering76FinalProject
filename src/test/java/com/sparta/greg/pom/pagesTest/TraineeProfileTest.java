@@ -1,11 +1,10 @@
 package com.sparta.greg.pom.pagesTest;
 
-import com.sparta.greg.pom.pages.HomeTrainer;
-import com.sparta.greg.pom.pages.Login;
-import com.sparta.greg.pom.pages.TraineeAttendance;
-import com.sparta.greg.pom.pages.TraineeProfile;
+
+import com.sparta.greg.pom.pages.*;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -54,10 +53,10 @@ public class TraineeProfileTest {
         Assertions.assertEquals(TraineeAttendance.class, traineeProfilePage.goToTraineeAttendance().getClass());
     }
 
-//    @Test
-//    void canClickReportBreakdown() {
-//        Assertions.assertEquals(ReportTrainer.class, traineeProfilePage.);
-//    }
+    @Test
+    void canClickReportBreakdown() {
+        Assertions.assertEquals(ReportTrainer.class, traineeProfilePage.goToTraineeReport().getClass());
+    }
 
     @Test
     void canToggleSQLBreakdown() {
@@ -103,7 +102,7 @@ public class TraineeProfileTest {
     void toggleSQLCanHandleNoGrades() {
         webDriver.get("http://localhost:8080/trainer/traineeProfile/10");
         traineeProfilePageEmpty = new TraineeProfile(webDriver);
-        Exception exception = Assertions.assertThrows(NullPointerException.class, () -> {
+        Exception exception = Assertions.assertThrows(NoSuchElementException.class, () -> {
             traineeProfilePageEmpty.toggleExpandSQLBreakdown();
         });
     }
@@ -112,7 +111,7 @@ public class TraineeProfileTest {
     void toggleNotSQLCanHandleNoGrades() {
         webDriver.get("http://localhost:8080/trainer/traineeProfile/10");
         traineeProfilePageEmpty = new TraineeProfile(webDriver);
-        Exception exception = Assertions.assertThrows(NullPointerException.class, () -> {
+        Exception exception = Assertions.assertThrows(NoSuchElementException.class, () -> {
             traineeProfilePageEmpty.toggleExpandNotSQLBreakdown();
         });
     }

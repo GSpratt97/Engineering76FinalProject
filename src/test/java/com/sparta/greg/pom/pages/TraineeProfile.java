@@ -1,12 +1,16 @@
 package com.sparta.greg.pom.pages;
 
+import com.sparta.greg.pom.pages.components.SideBarTrainer;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class TraineeProfile extends TrainerPage {
+public class TraineeProfile extends Page {
+
+    private SideBarTrainer sideBarTrainer;
 
     By traineeName = By.cssSelector("main > div > div:nth-of-type(1) > div:nth-of-type(1) div[class*='h5']");
     By assignedClass = By.cssSelector("main > div > div:nth-of-type(1) > div:nth-of-type(2) div[class*='h5']");
@@ -30,7 +34,12 @@ public class TraineeProfile extends TrainerPage {
     By findLetterGrade = By.cssSelector("span[class*='letterGrade']");
 
     public TraineeProfile(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver);
+        sideBarTrainer = new SideBarTrainer(webDriver);
+    }
+
+    public SideBarTrainer getSideBarTrainer() {
+        return sideBarTrainer;
     }
 
     public HomeTrainer goBackToHomePageViaBackToDashboardButton() {
@@ -53,34 +62,33 @@ public class TraineeProfile extends TrainerPage {
             return new TraineeAttendance(webDriver);
         }
 
-        throw new NullPointerException("No attendance details available");
+        throw new NoSuchElementException("No attendance details available");
 
     }
 
-    // Method needs a ReportTrainer Page
-//    public ReportTrainer goToTraineeReport() {
-//        if (webDriver.findElement(traineeReport) != null) {
-//            WebElement reportButton = webDriver.findElement(traineeReport);
-//            reportButton.click();
-//            return new ReportTrainer(webDriver);
-//        }
-//
-//        throw new NullPointerException("No report details available");
-//    }
+    public ReportTrainer goToTraineeReport() {
+        if (webDriver.findElement(traineeReport) != null) {
+            WebElement reportButton = webDriver.findElement(traineeReport);
+            reportButton.click();
+            return new ReportTrainer(webDriver);
+        }
+
+        throw new NoSuchElementException("No report details available");
+    }
 
     public void toggleExpandSQLBreakdown() {
         List<WebElement> generalList = webDriver.findElements(generalCard);
 
         for (WebElement element : generalList) {
             if (element.getText().contains("No grades yet for") && !element.getText().contains("collapseSQL")) {
-                throw new NullPointerException("No grades yet for this trainee");
+                throw new NoSuchElementException("No grades yet for this trainee");
             }
         }
 
         if (webDriver.findElements(findSQL) != null) {
             webDriver.findElement(findSQL).click();
         } else {
-            throw new NullPointerException("No SQL Breakdown Available");
+            throw new NoSuchElementException("No SQL Breakdown Available");
         }
 
     }
@@ -88,16 +96,17 @@ public class TraineeProfile extends TrainerPage {
     public void toggleExpandNotSQLBreakdown() {
         List<WebElement> generalList = webDriver.findElements(generalCard);
 
+
         for (WebElement element : generalList) {
             if (element.getText().contains("No grades yet for") && !element.getText().contains("collapseNotSQL")) {
-                throw new NullPointerException("No grades yet for this trainee");
+                throw new NoSuchElementException("No grades yet for this trainee");
             }
         }
 
         if (webDriver.findElement(finNotSQL) != null) {
             webDriver.findElement(finNotSQL).click();
         } else {
-            throw new NullPointerException("No NotSQL Breakdown Available");
+            throw new NoSuchElementException("No NotSQL Breakdown Available");
         }
     }
 
@@ -145,14 +154,14 @@ public class TraineeProfile extends TrainerPage {
 
         for (WebElement element : generalList) {
             if (element.getText().contains("No grades yet for") && !element.getText().contains("collapseSQL")) {
-                throw new NullPointerException("No grades yet for this trainee");
+                throw new NoSuchElementException("No grades yet for this trainee");
             }
         }
 
         if (webDriver.findElements(findSQL) != null) {
             grade = webDriver.findElement(findSQL).findElement(findLetterGrade).getText();
         } else {
-            throw new NullPointerException("No SQL Breakdown Available");
+            throw new NoSuchElementException("No SQL Breakdown Available");
         }
 
         return grade;
@@ -164,18 +173,19 @@ public class TraineeProfile extends TrainerPage {
 
         for (WebElement element : generalList) {
             if (element.getText().contains("No grades yet for") && !element.getText().contains("collapseNotSQL")) {
-                throw new NullPointerException("No grades yet for this trainee");
+                throw new NoSuchElementException("No grades yet for this trainee");
             }
         }
 
         if (webDriver.findElements(finNotSQL) != null) {
             grade = webDriver.findElement(finNotSQL).findElement(findLetterGrade).getText();
         } else {
-            throw new NullPointerException("No NotSQL Breakdown Available");
+            throw new NoSuchElementException("No NotSQL Breakdown Available");
         }
 
         return grade;
     }
+
 
 
 

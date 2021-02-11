@@ -1,17 +1,29 @@
 package com.sparta.greg.pom.pages;
 
+import com.sparta.greg.pom.pages.components.SideBarTrainer;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class Assessments extends TrainerPage {
+public class Assessments extends Page {
+
+    private SideBarTrainer sideBarTrainer;
 
     By listGroup = By.cssSelector("div[class='list-group']");
     By trainees = By.cssSelector("a[class*='list-group-item']");
 
-    public Assessments(WebDriver webDriver) {this.webDriver = webDriver;}
+
+    public Assessments(WebDriver webDriver) {
+        super(webDriver);
+        sideBarTrainer = new SideBarTrainer(webDriver);
+    }
+
+    public SideBarTrainer getSideBarTrainer() {
+        return sideBarTrainer;
+    }
 
 
     public WebElement selectFirstTrainee() {
@@ -21,8 +33,7 @@ public class Assessments extends TrainerPage {
         if (listOfTrainees.get(0) != null) {
             return listOfTrainees.get(0);
         } else {
-            System.out.println("No Trainees found");
-            throw new NullPointerException();
+            throw new NoSuchElementException("No Trainees found");
         }
 
     }
@@ -45,10 +56,11 @@ public class Assessments extends TrainerPage {
                 }
             }
 
-            return null;
+            throw new NoSuchElementException("No Trainees found");
+
 
         } else {
-            throw new NullPointerException("Enter a non null or non empty string");
+            throw new NullPointerException("Enter a non null string");
         }
 
     }
@@ -58,7 +70,7 @@ public class Assessments extends TrainerPage {
             selectTraineeByName(name).click();
             return new AssessmentBreakdown(webDriver);
         } else {
-            throw new NullPointerException("Enter a non null or non empty string");
+            throw new NullPointerException("Enter a non null string");
         }
 
     }

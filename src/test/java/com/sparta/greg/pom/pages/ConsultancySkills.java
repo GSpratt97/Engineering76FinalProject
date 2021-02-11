@@ -3,7 +3,7 @@ package com.sparta.greg.pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-abstract class ConsultancySkills extends Page{
+public abstract class ConsultancySkills extends Page{
 
     public ConsultancySkills(WebDriver webDriver) {
         super(webDriver);

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -57,7 +58,7 @@ public class AssessmentsTest {
 
     @Test
     void clickEmptyTraineeByNameThrowsNullException() {
-        Exception exception = Assertions.assertThrows(NullPointerException.class, () -> {
+        Exception exception = Assertions.assertThrows(NoSuchElementException.class, () -> {
             assessmentsPage.clickTraineeByName(" ");
         });
     }

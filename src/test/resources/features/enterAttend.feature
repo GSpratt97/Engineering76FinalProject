@@ -15,7 +15,7 @@ Feature: Attendance page features
     Scenario: Change attendance type
       Given I am signed in for radioButton check
       When I change the radio button attendance type
-      And I click submit
+      And I click submit Attendance
       Then I will still receive a completed successfully message
 
       @AttendMe
