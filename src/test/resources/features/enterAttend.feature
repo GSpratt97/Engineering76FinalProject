@@ -3,7 +3,7 @@
 
 Feature: Attendance page features
 
-  @AttendMe
+  @AttendMeDone
   Scenario: Add Attendance
     Given I am on the attendance page
     When I select a trainee
@@ -11,27 +11,35 @@ Feature: Attendance page features
     And Select a date within the course limits
     Then I will receive a completed successfully message
 
-    @AttendMe
+    @AttendMeDone
     Scenario: Change attendance type
-      Given I am signed in for radioButton check
-      When I change the radio button attendance type
+      Given I am on the attendance page
+      When Select the desired radio button
+      And Select a date within the course limits
       And I click submit Attendance
-      Then I will still receive a completed successfully message
+      Then I will receive a completed successfully message
 
-      @AttendMe
+      @AttendMeDone
         Scenario: Error message
-          Given I am signed in on the attendance page
+          Given I am on the attendance page
           When I put in a date that's outside the course bounds
           Then I should receive an error message
 
-        @AttendMe
+        @AttendMeDone
         Scenario: Correct date added to
-          Given I have selected a date
-          When I submit my request
+          Given I have selected a date on Attendance Page
+          When I click submit Attendance
           Then I will receive a completed successfully message with a matching date
 
-          @AttendMe
-          Scenario: Multiple additions
-            Given I have multiple trainee
-            When I change the employee
-            Then I can add their attendance easily
+          @AttendMeDone
+          Scenario Outline: Multiple additions of trainees
+            Given I am on the attendance page
+            When I change the trainee to <Trainee>
+            Then I get a success message containing <TraineeSuccess>
+            Examples:
+              | Trainee  | TraineeSuccess |
+              | "Reece"  | "Reece"        |
+              | "David"  | "David"        |
+              | "Toyin"  | "Toyin"        |
+              | "Shahid" | "Shahid"       |
+
