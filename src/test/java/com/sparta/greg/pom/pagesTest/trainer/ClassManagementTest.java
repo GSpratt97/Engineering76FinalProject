@@ -45,19 +45,17 @@ public class ClassManagementTest {
 		homeTrainer.getSideBarTrainer().clickTrainerOptions();
 		classManagement = homeTrainer.getSideBarTrainer().goToClassManagement();
 
-
-
 	}
 
-//	@AfterEach
-//	void close(){
-//		webDriver.close();
-//	}
-//
-//	@AfterAll
-//	static void quit(){
-//		webDriver.quit();
-//	}
+	@AfterEach
+	void close(){
+		webDriver.close();
+	}
+
+	@AfterAll
+	static void quit(){
+		webDriver.quit();
+	}
 
 	@Test
 	@DisplayName("Assigning a Trainee")
@@ -83,6 +81,7 @@ public class ClassManagementTest {
 	@Test
 	@DisplayName("Testing creating class")
 	void testingCreatingClass() {
+		webDriver.navigate().refresh();
 		classManagement.enterClassName("Testing 101");
 		classManagement.selectCourse("Java SDET");
 		classManagement.enterStartDate("01", "03", "2021", "00", "00");
