@@ -27,11 +27,13 @@ public class EnterAttendanceTest {
     @Before
     public void setUp()
     {
+        // Get properties for sign in
         try {
             properties.load(new FileReader("src/test/resources/login.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //set up a webpage in isolation for testing
         ChromeOptions option = new ChromeOptions();
         option.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors");
         webDriver = new ChromeDriver(option);
