@@ -99,31 +99,24 @@ public class EnterAttendance extends Page {
         }
     }
 
-    public String dateFormatter(String date, String newDate)
+    public String dateFormatter(String date)
     {
         String[] dates = null;
-        String[] formattedDate = null;
         StringBuilder build = new StringBuilder();
         if(date.contains("/"))
         {
             dates = date.split(("/"));
-            formattedDate = newDate.split(("/"));
         }
         else
         {
             dates = date.split("-");
-            formattedDate = newDate.split("-");
         }
         if(dates[0].length() != 2){
-            build.append(formattedDate[2]);
+            build.append(dates[2]);
             build.append("-");
-            build.append(formattedDate[1]);
+            build.append(dates[1]);
             build.append("-");
-            build.append(formattedDate[0]);
-        }
-        else
-        {
-            return newDate;
+            build.append(dates[0]);
         }
 
         return build.toString();

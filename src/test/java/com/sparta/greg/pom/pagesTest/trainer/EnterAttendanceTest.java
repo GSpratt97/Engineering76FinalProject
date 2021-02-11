@@ -1,6 +1,7 @@
 package com.sparta.greg.pom.pagesTest.trainer;
 
 import com.sparta.greg.pom.pages.trainer.EnterAttendance;
+import com.sparta.greg.pom.pages.trainer.ManageTrainee;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,11 +13,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class EnterAttendanceTest {
 
-    WebDriver webDriver = new ChromeDriver();
+    WebDriver webDriver;
     EnterAttendance attendancePage;
     Properties properties = new Properties();
 
@@ -28,13 +32,14 @@ public class EnterAttendanceTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        webDriver.get("http://localhost:8080");
-        webDriver.findElement(By.name("username")).sendKeys(properties.getProperty("trainerUsername"));
-        webDriver.findElement(By.name("password")).sendKeys(properties.getProperty("trainerPassword"));
-        webDriver.findElement(By.cssSelector("button[type='submit']")).click();
-        webDriver.get("http://localhost:8080/trainer/attendanceEntry");
-        attendancePage = new EnterAttendance(webDriver);
-        ChromeOptions options = new ChromeOptions();
+        ChromeOptions option = new ChromeOptions();
+        option.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors");
+        webDriver = new ChromeDriver(option);
+        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Path path = Paths.get("src/test/resources/localHtml/Attendance.html");
+        webDriver.get(path.toUri().toString());
+        Assertions.assertDoesNotThrow(()->attendancePage = new EnterAttendance(webDriver),
+                "Initializing /trainer/attendanceEntry page");
     }
 
 
@@ -68,6 +73,15 @@ public class EnterAttendanceTest {
         Assertions.assertTrue(webDriver.findElement(By.name("traineeId")).getText().contains("David"));
         attendancePage.selectTrainee("Bill");
         Assertions.assertTrue(webDriver.findElement(By.name("traineeId")).getText().contains("Bill"));
+    }
+
+    @Test
+    public void changeDate()
+    {
+        String date = "22-09-2020";
+        attendancePage.selectDate(date);
+        Assertions.assertEquals(attendancePage.dateFormatter(webDriver
+                .findElement(By.id("attendanceDate")).getAttribute("value")), date);
     }
 
     @After
