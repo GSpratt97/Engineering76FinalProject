@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public abstract class Page {
 
-    WebDriver webDriver;
+    public WebDriver webDriver;
     By brandLogoLink = new By.ByCssSelector("[class*='sidebar'] a[href*='home'] [class*='sidebar-brand-icon']");
     By userDropDownPhoto = new By.ByCssSelector("ul[class*='navbar-nav'] a[id*='userDropdown']");
     By logout = new By.ByCssSelector("ul[class*='navbar-nav'] li > div > a[data-target*='logout']");
