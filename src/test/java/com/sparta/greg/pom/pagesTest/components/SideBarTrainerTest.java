@@ -18,7 +18,6 @@ class SideBarTrainerTest {
     private static WeeklyAttendance weeklyAttendance;
     private static String trainerUsername;
     private static String trainerPassword;
-    private static HomeTrainer homeTrainer;
 
     @BeforeAll
     static void setup() {
