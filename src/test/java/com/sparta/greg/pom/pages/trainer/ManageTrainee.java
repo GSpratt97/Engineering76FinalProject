@@ -1,6 +1,7 @@
 package com.sparta.greg.pom.pages.trainer;
 
-import com.sparta.greg.pom.pages.TrainerPage;
+import com.sparta.greg.pom.pages.Page;
+import com.sparta.greg.pom.pages.components.SideBarTrainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -17,8 +18,12 @@ import java.util.Locale;
  * @author Samurah
  * @version 1.0
  */
-public class ManageTrainee extends TrainerPage {
+public class ManageTrainee extends Page {
 
+    /**
+     * Sidebar abstract class added
+     */
+    private static SideBarTrainer sideBarTrainer;
     /**
      * Css selector for {@code Create Trainee Form}.
      */
@@ -47,10 +52,11 @@ public class ManageTrainee extends TrainerPage {
      *                                at trainer/manageTrainee page when the object is trying to be instantiated.
      */
     public ManageTrainee(WebDriver webDriver) {
+        super(webDriver);
+        sideBarTrainer = new SideBarTrainer(webDriver);
         if (!webDriver.getCurrentUrl().toUpperCase(Locale.ROOT).contains("TRAINER/MANAGETRAINEE")) {
             throw new IllegalCallerException("Web driver is not at the correct location to instantiate this page.");
         }
-        this.webDriver = webDriver;
         loadPage();
     }
 
