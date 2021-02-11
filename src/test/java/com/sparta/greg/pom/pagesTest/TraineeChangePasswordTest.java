@@ -18,8 +18,6 @@ public class TraineeChangePasswordTest {
     private static WebDriver webDriver;
     private static String traineeUsername;
     private static String traineePassword;
-    private static HomeTrainee homeTrainee;
-    private static TraineeChangePassword traineeChangePassword;
 
     @BeforeEach
     void setup() {
@@ -39,10 +37,10 @@ public class TraineeChangePasswordTest {
 
     @Test
     void changePasswordAsTraineeReturnsHomeTrainee() {
-        homeTrainee = login.logInAsTrainee(traineeUsername, traineePassword);
+        login.logInAsTrainee(traineeUsername, traineePassword);
         webDriver.get("http://localhost:8080/changePassword");
-        traineeChangePassword = new TraineeChangePassword(webDriver);
-//        homeTrainee = traineeChangePassword.traineeChangePassword(traineePassword, "new");
-        Assertions.assertEquals("http://localhost:8080/trainee/home", webDriver.getCurrentUrl());
+        TraineeChangePassword traineeChangePassword = new TraineeChangePassword(webDriver);
+        HomeTrainee homeTrainee = traineeChangePassword.changePassword(traineePassword, "new");
+        Assertions.assertEquals(HomeTrainee.class, homeTrainee.getClass());
     }
 }

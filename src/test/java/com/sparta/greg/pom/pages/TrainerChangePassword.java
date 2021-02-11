@@ -16,7 +16,7 @@ public class TrainerChangePassword extends ChangePassword {
         this.sideBarTrainer = new SideBarTrainer(webDriver);
     }
 
-    public HomeTrainer trainerChangePassword(String oldPassword, String newPassword) {
+    public HomeTrainer changePassword(String oldPassword, String newPassword) {
         enterOldPassword(oldPassword);
         enterNewPassword(newPassword);
 //        clickSubmitButton();

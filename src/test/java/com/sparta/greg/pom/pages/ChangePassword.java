@@ -19,19 +19,7 @@ public class ChangePassword extends Page{
 
 //    I commented out the click submit button for safety in case anyone runs any tests
 
-    public HomeTrainer changeTrainerPassword(String oldPassword, String newPassword) {
-        enterOldPassword(oldPassword);
-        enterNewPassword(newPassword);
-//        clickSubmitButton();
-        return new HomeTrainer(webDriver);
-    }
 
-    public HomeTrainee changeTraineePassword(String oldPassword, String newPassword) {
-        enterOldPassword(oldPassword);
-        enterNewPassword(newPassword);
-//        clickSubmitButton();
-        return new HomeTrainee(webDriver);
-    }
 
     public void enterOldPassword(String password) {
         webDriver.findElement(oldPassword).sendKeys(password);
