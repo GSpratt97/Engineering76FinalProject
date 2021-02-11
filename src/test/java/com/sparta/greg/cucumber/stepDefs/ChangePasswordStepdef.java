@@ -1,6 +1,9 @@
 package com.sparta.greg.cucumber.stepdefs;
 
-import com.sparta.greg.pom.pages.*;
+import com.sparta.greg.pom.pages.components.ChangePassword;
+import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.trainee.HomeTrainee;
+import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
