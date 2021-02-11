@@ -7,7 +7,7 @@ Feature: Actions on the Feedback Form page
 
   Scenario: Selecting technical
    Given I am on the feedback page
-   When I select a technical
+   When I select a technical grade
    Then The grade should be selected
 
   Scenario: Selecting consultant grade
