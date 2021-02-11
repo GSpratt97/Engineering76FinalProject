@@ -10,7 +10,6 @@ public class ReportTrainer extends Report {
 
     private final SideBarTrainer sideBarTrainer;
 
-
     By traineeDropdown      = By.id("traineeSelector");
     By viewTraineeProfile   = new By.ByCssSelector("button[value='profile']");
     By viewTraineeReport    = new By.ByCssSelector("a[href*='trainer/report']");
