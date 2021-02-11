@@ -110,14 +110,14 @@ class SideBarTrainerTest {
     @Test
     @DisplayName("isTrainerOptionsExpanded returns false when not expanded")
     void isTrainerOptionsExpandedReturnsFalseWhenNotExpanded() {
-        Assertions.assertFalse(weeklyAttendance.getSideBarTrainer().isTrainerOptionsExpanded());
+        Assertions.assertFalse(homeTrainer.getSideBarTrainer().isTrainerOptionsExpanded());
     }
 
     @Test
     @DisplayName("isTrainerOptionsExpanded returns true when expanded")
     void isTrainerOptionsExpandedReturnsTrueWhenExpanded() {
-        weeklyAttendance.getSideBarTrainer().clickTrainerOptions();
-        Assertions.assertTrue(weeklyAttendance.getSideBarTrainer().isTrainerOptionsExpanded());
+        homeTrainer.getSideBarTrainer().clickTrainerOptions();
+        Assertions.assertTrue(homeTrainer.getSideBarTrainer().isTrainerOptionsExpanded());
     }
 
     @Test
