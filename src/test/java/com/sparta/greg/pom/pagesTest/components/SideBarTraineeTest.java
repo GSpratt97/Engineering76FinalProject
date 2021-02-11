@@ -1,6 +1,7 @@
 package com.sparta.greg.pom.pagesTest.components;
 
-import com.sparta.greg.pom.pages.*;
+import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.trainee.*;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
