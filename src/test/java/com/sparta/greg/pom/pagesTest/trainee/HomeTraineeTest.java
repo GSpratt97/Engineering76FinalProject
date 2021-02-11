@@ -62,6 +62,7 @@ public class HomeTraineeTest {
     @Test
     @DisplayName("Go to Consultancy Skills")
     void goToConsultancySkills() {
+        homeTrainee.getSideBarTrainee().selectView();
         homeTrainee.getSideBarTrainee().goToConsultancySkills();
     }
 
