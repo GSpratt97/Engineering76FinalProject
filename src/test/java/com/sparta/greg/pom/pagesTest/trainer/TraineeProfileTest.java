@@ -6,6 +6,7 @@ import com.sparta.greg.pom.pages.trainee.TraineeAttendance;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.trainer.ReportTrainer;
 import com.sparta.greg.pom.pages.trainer.TraineeProfile;
+import com.sparta.greg.pom.pages.trainer.WeeklyAttendance;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -54,7 +55,7 @@ public class TraineeProfileTest {
 
     @Test
     void canClickAttendanceDetails() {
-        Assertions.assertEquals(TraineeAttendance.class, traineeProfilePage.goToTraineeAttendance().getClass());
+        Assertions.assertEquals(WeeklyAttendance.class, traineeProfilePage.goToTraineeWeeklyAttendance().getClass());
     }
 
     @Test

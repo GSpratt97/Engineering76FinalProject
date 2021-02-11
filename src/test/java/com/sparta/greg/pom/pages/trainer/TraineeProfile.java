@@ -27,8 +27,8 @@ public class TraineeProfile extends Page {
     By overallGrade = By.cssSelector("main > div > div:nth-child(3) > div > div.card-body > div > div > div > div:nth-child(3) > div.card-body > big");
 
     By backToDashboard = By.cssSelector("a[class='btn btn-primary']");
-    By attendanceDetails = By.cssSelector("a[href*='/trainer/traineeAttendance/']");
-    By traineeReport = By.cssSelector("a[href*='/trainer/report/41']");
+    By attendanceDetails = By.cssSelector("a[href*='trainer/traineeAttendance']");
+    By traineeReport = By.cssSelector("a[href*='trainer/report]");
     By toggleButtons = By.cssSelector("tr[class*='accordion-toggle");
     By generalCard = By.cssSelector("div[class='card shadow mb-4']");
     By findSQL = By.cssSelector("tr[href*='collapseSQL']");
@@ -57,11 +57,11 @@ public class TraineeProfile extends Page {
         return null;
     }
 
-    public TraineeAttendance goToTraineeAttendance() {
+    public WeeklyAttendance goToTraineeWeeklyAttendance() {
         if (webDriver.findElement(attendanceDetails) != null) {
             WebElement attendanceBreakdown = webDriver.findElement(attendanceDetails);
             attendanceBreakdown.click();
-            return new TraineeAttendance(webDriver);
+            return new WeeklyAttendance(webDriver);
         }
 
         throw new NoSuchElementException("No attendance details available");
