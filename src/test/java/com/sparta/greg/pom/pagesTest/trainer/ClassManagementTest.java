@@ -92,5 +92,6 @@ public class ClassManagementTest {
 		Assertions.assertNotNull(classManagement.getErrorMessage());
 
 	}
+	
 
 }
