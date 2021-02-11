@@ -87,14 +87,13 @@ public class ConsultancySkills {
 
     @Then("All the cards will shrink")
     public void allTheCardsWillShrink() {
+        Assertions.assertTrue(webDriver.findElement(By.cssSelector("a[aria-expanded='false'][aria-controls='collapseCard1']")).isDisplayed());
+        Assertions.assertTrue(webDriver.findElement(By.cssSelector("a[aria-expanded='false'][aria-controls='collapseCard2']")).isDisplayed());
+        Assertions.assertTrue(webDriver.findElement(By.cssSelector("a[aria-expanded='false'][aria-controls='collapseCard3']")).isDisplayed());
+        Assertions.assertTrue(webDriver.findElement(By.cssSelector("a[aria-expanded='false'][aria-controls='collapseCard4']")).isDisplayed());
+        Assertions.assertTrue(webDriver.findElement(By.cssSelector("a[aria-expanded='false'][aria-controls='collapseCard5']")).isDisplayed());
+        Assertions.assertTrue(webDriver.findElement(By.cssSelector("a[aria-expanded='false'][aria-controls='collapseCard6']")).isDisplayed());
         webDriver.close();
-        Assertions.assertTrue(webDriver.findElement(By.cssSelector("a[aria-expanded='true'][aria-controls='collapseCard1']")).isDisplayed());
-        Assertions.assertTrue(webDriver.findElement(By.cssSelector("a[aria-expanded='true'][aria-controls='collapseCard2']")).isDisplayed());
-        Assertions.assertTrue(webDriver.findElement(By.cssSelector("a[aria-expanded='true'][aria-controls='collapseCard3']")).isDisplayed());
-        Assertions.assertTrue(webDriver.findElement(By.cssSelector("a[aria-expanded='true'][aria-controls='collapseCard4']")).isDisplayed());
-        Assertions.assertTrue(webDriver.findElement(By.cssSelector("a[aria-expanded='true'][aria-controls='collapseCard5']")).isDisplayed());
-        Assertions.assertTrue(webDriver.findElement(By.cssSelector("a[aria-expanded='true'][aria-controls='collapseCard6']")).isDisplayed());
-
     }
 
     @Then("An ideal consultant image appears")
