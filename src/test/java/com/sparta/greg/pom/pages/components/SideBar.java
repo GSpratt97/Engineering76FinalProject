@@ -14,6 +14,15 @@ public abstract class SideBar {
     By sideBarSizeSelector = new By.ByCssSelector("ul[id='accordionSidebar'] button[id='sidebarToggle']");
     By sideBar = new By.ByCssSelector("nav[class*='sidebar']");
 
+    public boolean isViewExpanded() {
+        boolean isExpanded = !webDriver.findElement(viewLink).getAttribute("class").contains("collapsed");
+        if (!isExpanded) {
+            System.err.println("WARNING: 'View' tab is not expanded. Expand it by calling the 'selectView()' method.");
+            return false;
+        }
+        return true;
+    }
+
     public SideBar(WebDriver webDriver) {
         this.webDriver = webDriver;
     }

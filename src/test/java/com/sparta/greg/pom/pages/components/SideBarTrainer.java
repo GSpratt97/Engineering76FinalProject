@@ -21,6 +21,15 @@ public class SideBarTrainer extends SideBar {
         super(webDriver);
     }
 
+    public boolean isTrainerOptionsExpanded() {
+        boolean isExpanded = !webDriver.findElement(trainerOptionsButton).getAttribute("class").contains("collapsed");
+        if (!isExpanded) {
+            System.err.println("WARNING: 'Trainer Options' tab is not expanded. Expand it by calling the 'clickTrainerOptions()' method.");
+            return false;
+        }
+        return true;
+    }
+
     public void clickTrainerOptions() {
         webDriver.findElement(trainerOptionsButton).click();
     }
@@ -36,48 +45,56 @@ public class SideBarTrainer extends SideBar {
     }
 
     public TrainerConsultancySkills goToConsultancySkills() {
+        isViewExpanded();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(consultancySkillsLink).click();
         return new TrainerConsultancySkills(webDriver);
     }
 
     public TrainerGuide goToTraineeGuide() {
+        isViewExpanded();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(traineeGuideLink).click();
         return new TrainerGuide(webDriver);
     }
 
     public ClassManagement goToClassManagement() {
+        isTrainerOptionsExpanded();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(classManagementLink).click();
         return new ClassManagement(webDriver);
     }
 
     public ManageTrainee goToTraineeManagement() {
+        isTrainerOptionsExpanded();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(traineeManagementLink).click();
         return new ManageTrainee(webDriver);
     }
 
     public AddWeeks goToAddWeeks() {
+        isTrainerOptionsExpanded();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(addWeeksLink).click();
         return new AddWeeks(webDriver);
     }
 
     public Assessments goToAssessments() {
+        isTrainerOptionsExpanded();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(assessmentsLink).click();
         return new Assessments(webDriver);
     }
 
     public EnterAttendance goToEnterAttendance() {
+        isTrainerOptionsExpanded();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(enterAttendanceLink).click();
         return new EnterAttendance(webDriver);
     }
 
     public WeeklyAttendance goToWeeklyAttendance() {
+        isTrainerOptionsExpanded();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(weeklyAttendanceLink).click();
         return new WeeklyAttendance(webDriver);
