@@ -8,6 +8,10 @@ public class ReportTrainee extends Report {
 
     private final SideBarTrainee sideBarTrainee;
 
+    /**
+     * http://localhost:8080/trainee/report
+     * @param webDriver
+     */
     public ReportTrainee(WebDriver webDriver) {
         super(webDriver);
         sideBarTrainee = new SideBarTrainee(webDriver);

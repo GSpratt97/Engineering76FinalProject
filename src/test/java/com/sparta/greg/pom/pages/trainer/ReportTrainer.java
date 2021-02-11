@@ -15,7 +15,10 @@ public class ReportTrainer extends Report {
     By viewTraineeReport    = new By.ByCssSelector("a[href*='trainer/report']");
     By backToTraineeProfile = new By.ByCssSelector("a[href*='traineeProfile']");
 
-
+    /**
+     * http://localhost:8080/trainer/report/41
+     * @param webDriver
+     */
     public ReportTrainer(WebDriver webDriver) {
         super(webDriver);
         sideBarTrainer = new SideBarTrainer(webDriver);
