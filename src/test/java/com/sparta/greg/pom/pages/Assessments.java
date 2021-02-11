@@ -2,6 +2,7 @@ package com.sparta.greg.pom.pages;
 
 import com.sparta.greg.pom.pages.components.SideBarTrainer;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -32,8 +33,7 @@ public class Assessments extends Page {
         if (listOfTrainees.get(0) != null) {
             return listOfTrainees.get(0);
         } else {
-            System.out.println("No Trainees found");
-            throw new NullPointerException();
+            throw new NoSuchElementException("No Trainees found");
         }
 
     }
@@ -56,10 +56,11 @@ public class Assessments extends Page {
                 }
             }
 
-            return null;
+            throw new NoSuchElementException("No Trainees found");
+
 
         } else {
-            throw new NullPointerException("Enter a non null or non empty string");
+            throw new NullPointerException("Enter a non null string");
         }
 
     }
@@ -69,7 +70,7 @@ public class Assessments extends Page {
             selectTraineeByName(name).click();
             return new AssessmentBreakdown(webDriver);
         } else {
-            throw new NullPointerException("Enter a non null or non empty string");
+            throw new NullPointerException("Enter a non null string");
         }
 
     }

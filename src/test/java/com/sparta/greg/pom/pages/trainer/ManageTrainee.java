@@ -1,6 +1,7 @@
 package com.sparta.greg.pom.pages.trainer;
 
-import com.sparta.greg.pom.pages.TrainerPage;
+import com.sparta.greg.pom.pages.Page;
+import com.sparta.greg.pom.pages.components.SideBarTrainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -17,8 +18,12 @@ import java.util.Locale;
  * @author Samurah
  * @version 1.0
  */
-public class ManageTrainee extends TrainerPage {
+public class ManageTrainee extends Page {
 
+    /**
+     * Sidebar abstract class added
+     */
+    private static SideBarTrainer sideBarTrainer;
     /**
      * Css selector for {@code Create Trainee Form}.
      */
@@ -47,10 +52,11 @@ public class ManageTrainee extends TrainerPage {
      *                                at trainer/manageTrainee page when the object is trying to be instantiated.
      */
     public ManageTrainee(WebDriver webDriver) {
+        super(webDriver);
+        sideBarTrainer = new SideBarTrainer(webDriver);
         if (!webDriver.getCurrentUrl().toUpperCase(Locale.ROOT).contains("TRAINER/MANAGETRAINEE")) {
             throw new IllegalCallerException("Web driver is not at the correct location to instantiate this page.");
         }
-        this.webDriver = webDriver;
         loadPage();
     }
 
@@ -230,14 +236,13 @@ public class ManageTrainee extends TrainerPage {
         public CreateTraineeForm selectClass(String className) {
             new Actions(webDriver).click(classDropDownElement).click().perform();
             List<WebElement> listElements = webElement.findElements(classDropDownListSelector);
-            for (WebElement listElement : listElements) {
-                if (listElement.getText().equalsIgnoreCase(className)) {
-                    System.out.println(listElement.getText());
-                    new Actions(webDriver).moveToElement(listElement).click(listElement).perform();
-                    return this;
-                }
+            Select dropdown = new Select(classDropDownElement);
+            try {
+                dropdown.selectByVisibleText(className);
+            } catch (NoSuchElementException e) {
+                throw new NoSuchElementException(String.format("In class dropdown, class: %s does not exist!", className));
             }
-            throw new NoSuchElementException(String.format("In class dropdown, class: %s does not exist!", className));
+            return this;
         }
 
         /**
@@ -327,14 +332,14 @@ public class ManageTrainee extends TrainerPage {
          * @return {@link DeleteTraineeForm the same instance}.
          * @throws NoSuchElementException if {@code name} could not be found in
          *                                {@code Trainees Dropdown} list.
-         * @hidden Not working properly yet.
          */
         public DeleteTraineeForm selectTrainee(String name) {
             new Actions(webDriver).moveToElement(traineesDropDownElement).click().perform();
+            Select dropdown = new Select(traineesDropDownElement);
             try {
-                new Select(traineesDropDownElement).selectByValue(name);
-            }catch (Exception e) {
-                throw new NoSuchElementException(String.format("In trainees dropdown, trainee with name: %s does not exist!", name));
+                dropdown.selectByVisibleText(name);
+            } catch (NoSuchElementException e) {
+                throw new NoSuchElementException(String.format("In trainees dropdown, trainee: %s does not exist!", name));
             }
             return this;
         }
