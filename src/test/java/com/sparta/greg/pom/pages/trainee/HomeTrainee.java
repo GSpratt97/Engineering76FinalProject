@@ -47,7 +47,6 @@ public class HomeTrainee extends Page {
     public HomeTrainee(WebDriver webDriver) {
         super(webDriver);
         sideBarTrainee = new SideBarTrainee(webDriver);
-        webDriver.get("http://localhost:8080/trainee/home");
     }
 
     public SideBarTrainee getSideBarTrainee() {
