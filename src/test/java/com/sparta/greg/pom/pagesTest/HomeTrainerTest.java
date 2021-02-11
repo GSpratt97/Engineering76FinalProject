@@ -2,10 +2,7 @@ package com.sparta.greg.pom.pagesTest;
 
 import com.sparta.greg.pom.pages.HomeTrainer;
 import com.sparta.greg.pom.pages.Login;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -24,8 +21,8 @@ public class HomeTrainerTest {
     private static String trainerPassword;
 
 
-    @BeforeAll
-    static void setup() {
+    @BeforeEach
+    void setup() {
         webDriver = new ChromeDriver();
         login = new Login(webDriver);
         try {
@@ -57,7 +54,7 @@ public class HomeTrainerTest {
     @Test
     @DisplayName("Go to view trainee profile")
     void goToViewTraineeProfile() {
-        homeTrainer.goToTraineeManagement();
+        homeTrainer.goToTraineeProfile();
         //for DAVID TRIEU!!!!
         //the expected will change, depends on the trainee selected
         Assertions.assertEquals("http://localhost:8080/trainer/traineeProfile/10", webDriver.getCurrentUrl());
@@ -76,9 +73,47 @@ public class HomeTrainerTest {
     }
 
     @Test
+    @DisplayName("Get Trainer Course Assigned")
+    void getTrainerCourseAssigned() {
+        Assertions.assertEquals("Java Development", homeTrainer.getCourseAssigned());
+    }
+
+    @Test
+    @DisplayName("Get Current Week of Course")
+    void getCurrentWeekOfCourse() {
+        Assertions.assertEquals("12", homeTrainer.getCurrentWeekOfCourse());
+    }
+
+    @Test
     @DisplayName("Get Average On Time ")
     void getAverageOnTime() {
         //the expected result will probably need to change as time goes
-        Assertions.assertEquals("89.84%", homeTrainer.getOnTime());
+        Assertions.assertEquals("89.47%", homeTrainer.getOnTime());
+    }
+
+    @Test
+    @DisplayName("Get Average Late")
+    void getAverageLate() {
+        Assertions.assertEquals("7.24%", homeTrainer.getLate());
+    }
+
+    @Test
+    @DisplayName("Get Excused Absence")
+    void getExcusedAbsence() {
+        Assertions.assertEquals("1.97%", homeTrainer.getExcusedAbsence());
+    }
+
+    @Test
+    @DisplayName("Get Unexcused Absence")
+    void getUnexcusedAbsence() {
+        Assertions.assertEquals("1.32%", homeTrainer.getUnexcusedAbsence());
+    }
+
+    @Test
+    @DisplayName("Find Specific Trainee in Dropdown")
+    void findSpecificTraineeInDropdown() {
+        homeTrainer.findTraineeFromDropdown("Reece Louch");
+        homeTrainer.goToTraineeProfile();
+        Assertions.assertEquals("http://localhost:8080/trainer/traineeProfile/187", webDriver.getCurrentUrl());
     }
 }

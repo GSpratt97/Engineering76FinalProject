@@ -1,14 +1,13 @@
 package com.sparta.greg.pom.pagesTest;
 
 import com.sparta.greg.pom.pages.HomeTrainee;
-import com.sparta.greg.pom.pages.HomeTrainer;
 import com.sparta.greg.pom.pages.Login;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,8 +24,8 @@ public class HomeTraineeTest {
     private static String traineePassword;
 
 
-    @BeforeAll
-    static void setup() {
+    @BeforeEach
+    void setup() {
         webDriver = new ChromeDriver();
         login = new Login(webDriver);
         try {
@@ -57,20 +56,19 @@ public class HomeTraineeTest {
     @Test
     @DisplayName("Get Trainee Assigned Class")
     void getTraineeAssignedClass() {
-        Assertions.assertEquals("Engineering 65", homeTrainee.getAssignedClass());
+        Assertions.assertEquals("Engineering 72", homeTrainee.getAssignedClass());
     }
 
     @Test
-    @DisplayName("testTraineePage")
-    void testTraineePage() {
-        homeTrainee.selectView();
-        homeTrainee.selectConsultancySkills();
+    @DisplayName("Go to Consultancy Skills")
+    void goToConsultancySkills() {
+        homeTrainee.getSideBarTrainee().goToConsultancySkills();
     }
 
     @Test
     @DisplayName("Get Trainee Course Assigned")
     void getTraineeCourseAssigned() {
-        Assertions.assertEquals("C# SDET", homeTrainee.getCourseAssigned());
+        Assertions.assertEquals("Java Development", homeTrainee.getCourseAssigned());
     }
 
     @Test
@@ -121,5 +119,118 @@ public class HomeTraineeTest {
     void getTraineeOverallGrade() {
         Assertions.assertEquals("C", homeTrainee.getOverallGrade());
     }
+
+    @Nested
+    @DisplayName("Assessments Breakdown")
+    class AssessmentsBreakdown {
+        @Test
+        @DisplayName("Get SQL Click")
+        void getSqlClick() {
+            homeTrainee.sqlTabExtend();
+        }
+
+        @Test
+        @DisplayName("Get NonSQl Click")
+        void getNonSQlClick() {
+            homeTrainee.notSqlTabExtend();
+        }
+
+        @Test
+        @DisplayName("Get SQL Score")
+        void getSqlScore() {
+            homeTrainee.sqlTabExtend();
+            Assertions.assertEquals("30.9%", homeTrainee.getSqlScore());
+        }
+
+        @Test
+        @DisplayName("Get SQL Duration")
+        void getSqlDuration() {
+            homeTrainee.sqlTabExtend();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseSQL > div:nth-child(2) > div.col-4")));
+            Assertions.assertEquals("77 mins", homeTrainee.getSqlDuration());
+        }
+
+        @Test
+        @DisplayName("Get SQL Comparative Score")
+        void getSqlComparativeScore() {
+            homeTrainee.sqlTabExtend();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseSQL > div:nth-child(3) > div.col-4")));
+            Assertions.assertEquals("27%", homeTrainee.getSqlComparativeScore());
+        }
+
+        @Test
+        @DisplayName("Get SQL Design Score")
+        void getSqlDesignScore() {
+            homeTrainee.sqlTabExtend();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseSQL > div:nth-child(1) > div.col-4")));
+            Assertions.assertEquals("16%", homeTrainee.getSqlDesignScore());
+        }
+
+        @Test
+        @DisplayName("Get SQL Language and Knowledge Score")
+        void getSqlLanguageAndKnowledgeScore() {
+            homeTrainee.sqlTabExtend();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseSQL > div:nth-child(2) > div.col-4")));
+            Assertions.assertEquals("29%", homeTrainee.getSqlLanguageAndKnowledgeScore());
+        }
+
+        @Test
+        @DisplayName("Get SQL Problem Solving Score")
+        void getSqlProblemSolvingScore() {
+            homeTrainee.sqlTabExtend();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseSQL > div:nth-child(3) > div.col-4")));
+            Assertions.assertEquals("40%", homeTrainee.getSqlProblemSolvingScore());
+        }
+
+        @Test
+        @DisplayName("Get Not SQL Score")
+        void getNotSqlScore() {
+            homeTrainee.notSqlTabExtend();
+            Assertions.assertEquals("78.0%", homeTrainee.getNotSqlScore());
+        }
+
+        @Test
+        @DisplayName("Get Not SQL Duration")
+        void getNonSqlDuration() {
+            homeTrainee.notSqlTabExtend();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseNotSQL > div:nth-child(2) > div.col-4")));
+            Assertions.assertEquals("77 mins", homeTrainee.getNotSqlDuration());
+        }
+
+        @Test
+        @DisplayName("Get Not SQL Design Score")
+        void getNotSqlDesignScore() {
+            homeTrainee.notSqlTabExtend();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseNotSQL > div:nth-child(1) > div.col-4")));
+            Assertions.assertEquals("16%", homeTrainee.getNotSqlDesignScore());
+        }
+
+        @Test
+        @DisplayName("Get Not SQL Language and Knowledge Score")
+        void getNotSqlLanguageAndKnowledgeScore() {
+            homeTrainee.notSqlTabExtend();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseNotSQL > div:nth-child(2) > div.col-4")));
+            Assertions.assertEquals("29%", homeTrainee.getNotSqlLanguageAndKnowledgeScore());
+        }
+
+        @Test
+        @DisplayName("Get Not SQL Problem Solving Score")
+        void getNotSqlProblemSolvingScore() {
+            homeTrainee.notSqlTabExtend();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseNotSQL > div:nth-child(3) > div.col-4")));
+            Assertions.assertEquals("40%", homeTrainee.getNotSqlProblemSolvingScore());
+        }
+
+    }
+
 
 }

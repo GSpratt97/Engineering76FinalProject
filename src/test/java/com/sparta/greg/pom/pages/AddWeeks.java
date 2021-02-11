@@ -1,44 +1,33 @@
 package com.sparta.greg.pom.pages;
 
+import com.sparta.greg.pom.pages.components.SideBarTrainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
-import java.sql.Driver;
-import java.util.concurrent.TimeUnit;
+public class AddWeeks extends Page{
 
-public class AddWeeks {
+    private final SideBarTrainer sideBarTrainer;
 
-    WebDriver driver;
-    By dropDownMenu = By.linkText("Select Group");
-    By dropDownMenu2 = By.id("dropdown");
-    By dropDownMenu3 = By.cssSelector("#dropdown");
-    By addWeekButton = By.linkText("Add Week");
-    By addWeekButton2 = By.cssSelector("button[name='submit']");
-    By addWeekButton3 = By.cssSelector("button[type='submit']");
-    By addWeekButton4 = By.cssSelector("button[value='submit']");
+    By dropDownMenu = By.id("dropdown");
+    By addWeekButton = By.cssSelector("button[name='submit']");
 
-
-    public AddWeeks(){}
-
-    public AddWeeks(WebDriver driver){
-        this.driver = driver;
+    public AddWeeks(WebDriver webDriver){
+        super(webDriver);
+        sideBarTrainer = new SideBarTrainer(webDriver);
     }
 
     public void selectGroupToAdd(String group){
+        Select course = new Select(webDriver.findElement(dropDownMenu));
+        course.selectByVisibleText(group);
 
-        driver.findElement(dropDownMenu2).click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        driver.findElement(selectGroup(group)).click();
     }
 
     public void pressAddWeekButton(){
-        driver.findElement(addWeekButton).click();
+        webDriver.findElement(addWeekButton).click();
     }
 
-    private By selectGroup(String group){
-        return By.linkText("Add Week");
-    }
 
 
 

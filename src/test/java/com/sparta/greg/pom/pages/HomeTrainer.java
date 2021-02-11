@@ -1,9 +1,14 @@
 package com.sparta.greg.pom.pages;
 
+import com.sparta.greg.pom.pages.components.SideBarTrainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
-public class HomeTrainer extends TrainerPage {
+public class HomeTrainer extends Page {
+
+    private final SideBarTrainer sideBarTrainer;
 
     By enterClassAttendanceButton = By.linkText("Enter Class Attendance");
     By viewTraineeProfile = By.cssSelector("button[type='submit'][value='profile']");
@@ -15,10 +20,23 @@ public class HomeTrainer extends TrainerPage {
     By late = By.cssSelector("main > div > div:nth-of-type(2) div[class='card-deck'] > div:nth-of-type(2) > div[class='card-body']");
     By excusedAbsence = By.cssSelector("main > div > div:nth-of-type(2) div[class='card-deck'] > div:nth-of-type(3) > div[class='card-body']");
     By unexcusedAbsence = By.cssSelector("main > div > div:nth-of-type(2) div[class='card-deck'] > div:nth-of-type(4) > div[class='card-body']");
+    By traineeDropdown = By.id("traineeSelector");
 
-    public HomeTrainer(WebDriver driver) {
-        this.webDriver = driver;
+    public HomeTrainer(WebDriver webDriver) {
+        super(webDriver);
+        sideBarTrainer = new SideBarTrainer(webDriver);
         webDriver.get("http://localhost:8080/trainer/home");
+    }
+
+    public SideBarTrainer getSideBarTrainer() {
+        return sideBarTrainer;
+    }
+
+
+    public void findTraineeFromDropdown(String traineeName) {
+        webDriver.findElement(traineeDropdown).click();
+        Select select = new Select(webDriver.findElement(traineeDropdown));
+        select.selectByVisibleText(traineeName);
     }
 
     public EnterAttendance goToEnterAttendanceThroughDashboard() {
@@ -26,10 +44,10 @@ public class HomeTrainer extends TrainerPage {
         return new EnterAttendance(webDriver);
     }
 
-//    public TraineeProfile goToTraineeProfile() {
-//        webDriver.findElement(viewTraineeProfile).click();
-//        return new TraineeProfile(webDriver);
-//    }
+    public TraineeProfile goToTraineeProfile() {
+        webDriver.findElement(viewTraineeProfile).click();
+        return new TraineeProfile(webDriver);
+    }
 
     public String getFullName() {
         return webDriver.findElement(trainerName).getText();

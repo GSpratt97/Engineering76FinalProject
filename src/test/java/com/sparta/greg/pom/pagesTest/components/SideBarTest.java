@@ -1,4 +1,4 @@
-package com.sparta.greg.pom.pagesTest;
+package com.sparta.greg.pom.pagesTest.components;
 
 import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.WeeklyAttendance;
@@ -10,9 +10,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class WeeklyAttendanceTest {
+class SideBarTest {
 
     private static final Properties properties = new Properties();
     private static WebDriver webDriver;
@@ -47,23 +47,9 @@ public class WeeklyAttendanceTest {
         webDriver.quit();
     }
 
-    //TODO: remove this after finish
     @Test
-    @DisplayName("TempSideBarTest")
-    void tempSideBarTest() {
-        weeklyAttendance.getSideBarTrainer().clickTrainerOptions();
-        weeklyAttendance.getSideBarTrainer().goToEnterAttendance();
-    }
-
-    @Test
-    @DisplayName("Page type is WeeklyAttendance")
-    void pageTypeIsWeeklyAttendance() {
-        Assertions.assertEquals(WeeklyAttendance.class, weeklyAttendance.getClass());
-    }
-
-    @Test
-    @DisplayName("clickWeekRow returns true for populated list")
-    void clickWeekRowReturnsTrueForPopulatedList() {
-        Assertions.assertTrue(weeklyAttendance.clickWeekRow(1));
+    @DisplayName("SideBar.goToHomePage returns HomePage")
+    void sideBarGoToHomePageReturnsHomePage() {
+        Assertions.assertEquals(Home);
     }
 }

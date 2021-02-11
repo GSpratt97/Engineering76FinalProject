@@ -1,6 +1,8 @@
-package com.sparta.greg.cucumber.stepDefs;
+package com.sparta.greg.cucumber.stepdefs;
 
 import com.sparta.greg.pom.pages.EnterAttendance;
+import com.sparta.greg.pom.pages.HomeTrainer;
+import com.sparta.greg.pom.pages.Login;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,19 +12,28 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
 public class EnterAttendSD {
 
     private static WebDriver webDriver;
     EnterAttendance attendancePage;
+    Properties properties = new Properties();
 
     @Given("I am on the attendance page")
     public void iAmOnTheAttendancePage() {
         webDriver = new ChromeDriver();
+        try {
+            properties.load(new FileReader("src/test/resources/login.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //SignIn
-        webDriver.get("http://localhost:8080");
-        webDriver.findElement(By.name("username")).sendKeys();
-        webDriver.findElement(By.name("password")).sendKeys();
-        webDriver.findElement(By.cssSelector("button[type='submit']")).click();
+        Login login = new Login(webDriver);
+        HomeTrainer trainer = login.logInAsTrainer(properties.getProperty("trainerUsername"),properties.getProperty("trainerPassword") );
+        attendancePage = trainer.goToEnterAttendanceThroughDashboard();
 
         //Go to right page
         webDriver.get("http://localhost:8080/trainer/attendanceEntry");
@@ -71,7 +82,7 @@ public class EnterAttendSD {
         Assertions.assertTrue(webDriver.findElement(By.id("attendanceId1")).isSelected());
     }
 
-    @And("I click submit")
+    @And("I click submit Attendance")
     public void iClickSubmit() {
         attendancePage.submit();
     }
@@ -104,4 +115,47 @@ public class EnterAttendSD {
         Assertions.assertTrue(attendancePage.getSubmitMessage().contains(string));
     }
 
+    @Given("I have selected a date")
+    public void iHaveSelectedADate() {
+        webDriver.get("http://localhost:8080/trainer/attendanceEntry");
+        attendancePage = new EnterAttendance(webDriver);
+        attendancePage.setPageConfirm();
+        Assertions.assertEquals("Set Trainee Attendance", attendancePage.getPageConfirm());
+        attendancePage.selectDate("22-09-2020");
+    }
+
+    @When("I submit my request")
+    public void iSubmitMyRequest() {
+        attendancePage.submit();
+    }
+
+    @Then("I will receive a completed successfully message with a matching date")
+    public void iWillReceiveACompletedSuccessfullyMessageWithAMatchingDate()
+    {
+        String string = "2020-09-22";
+        attendancePage.setSubmitMessage("success");
+        Assertions.assertTrue(attendancePage.getSubmitMessage().contains(string));
+    }
+
+    @Given("I have multiple trainee")
+    public void iHaveMultipleTrainee() {
+        webDriver.get("http://localhost:8080/trainer/attendanceEntry");
+        attendancePage = new EnterAttendance(webDriver);
+        attendancePage.setPageConfirm();
+    }
+
+    @When("I change the employee")
+    public void iChangeTheEmployee() {
+        attendancePage.selectTrainee("Bill");
+        Assertions.assertTrue(webDriver.findElement(By.name("traineeId")).getText().contains("Bill"));
+    }
+
+    @Then("I can add their attendance easily")
+    public void iCanAddTheirAttendanceEasily() {
+        attendancePage.selectDate("22-09-2020");
+        attendancePage.selectTrainee("Reece");
+        attendancePage.submit();
+        attendancePage.setSubmitMessage("success");
+        Assertions.assertTrue(attendancePage.getSubmitMessage().contains("Reece"));
+    }
 }

@@ -1,39 +1,40 @@
 package com.sparta.greg.pom.pages;
 
+import com.sparta.greg.pom.pages.components.SideBarTrainee;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class FeedbackForm extends TraineePage {
+public class FeedbackForm extends Page {
 
     private By stop = By.name("stopTrainee");
     private By start = By.name("startTrainee");
     private By continueTrainee = By.name("continueTrainee");
     private By input = By.tagName("input");
     private List<WebElement> radioButtons;
+    private SideBarTrainee sideBarTrainee;
 
     public FeedbackForm(WebDriver webDriver){
-        this.webDriver = webDriver;
+        super(webDriver);
+        sideBarTrainee = new SideBarTrainee(webDriver);
+        PageFactory.initElements(webDriver, this);
+
+    }
+
+    public SideBarTrainee getSideBarTrainee(){
+        return sideBarTrainee;
     }
 
     public boolean enterStart(String sentence){
 
         if (sentence != null && !sentence.equals(" ")){
-            webDriver.findElement(start).sendKeys(
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    sentence);
-
+            pressBackSpace(10, start);
+            webDriver.findElement(start).sendKeys(sentence);
             return true;
         }else{
             System.out.println("Enter a non null or non empty string");
@@ -45,17 +46,8 @@ public class FeedbackForm extends TraineePage {
 
     public boolean enterStop(String sentence){
         if (sentence != null && !sentence.equals(" ")){
-            webDriver.findElement(stop).sendKeys(
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    sentence);
+            pressBackSpace(12, stop);
+            webDriver.findElement(stop).sendKeys(sentence);
             return true;
         }else{
             System.out.println("Enter a non null or non empty string");
@@ -66,19 +58,9 @@ public class FeedbackForm extends TraineePage {
 
     public boolean enterContinue(String sentence){
         if (sentence != null && !sentence.equals(" ")){
-            webDriver.findElement(continueTrainee).sendKeys(
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    Keys.BACK_SPACE,
-                    sentence);
+
+            pressBackSpace(25, continueTrainee);
+            webDriver.findElement(continueTrainee).sendKeys(sentence);
             return true;
         }else{
             System.out.println("Enter a non null or non empty string");
@@ -88,8 +70,10 @@ public class FeedbackForm extends TraineePage {
     }
 
     public boolean isTechnicalGradeSelected(String grade){
+
         if (grade != null && !grade.equals(" ")) {
-            WebElement element = accessRadioButton(grade, "traineeTechGrade");
+            grade = grade.toUpperCase();
+            WebElement element = accessRadioButton(grade, "tech"+grade);
             return checkElement(element);
         }else{
             System.out.println("Enter a non null or non empty string");
@@ -99,8 +83,10 @@ public class FeedbackForm extends TraineePage {
 
 
     public boolean isConsultantGradeSelected(String grade){
+
         if (grade != null && !grade.equals(" ")) {
-            WebElement element = accessRadioButton(grade, "traineeConsulGrade");
+            grade = grade.toUpperCase();
+            WebElement element = accessRadioButton(grade, "consul"+grade);
             return checkElement(element);
         }else{
             System.out.println("Enter a non null or non empty string");
@@ -113,27 +99,34 @@ public class FeedbackForm extends TraineePage {
     }
 
 
-    private WebElement accessRadioButton(String letter, String name){
+    private WebElement accessRadioButton(String letter, String id){
         radioButtons = webDriver.findElements(input);
         for (WebElement webElement : radioButtons) {
-            if (webElement.getAttribute("name").equals(name) &&
-                    webElement.getAttribute("value").equals(letter)) {
+            if (webElement.getAttribute("id").equals(id)) {
                 return webElement;
             }
         }
         return null;
     }
 
-    private boolean checkElement(WebElement element){
+    public boolean checkElement(WebElement element){
         if (element == null){
             System.out.println("Could not find element");
             return false;
         }
-        element.click();
+        Actions actions = new Actions(webDriver);
+        actions.moveToElement(element).click().perform();
         if (element.isSelected()){
             return true;
         }
         return false;
+    }
+
+    private void pressBackSpace(int numberOfPresses, By element){
+        for(int i=0; i<numberOfPresses; i++){
+            webDriver.findElement(element).sendKeys(Keys.BACK_SPACE);
+        }
+
     }
 
 
