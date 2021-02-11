@@ -16,7 +16,7 @@ public class TraineeChangePassword extends ChangePassword {
         sideBarTrainee = new SideBarTrainee(webDriver);
     }
 
-    public HomeTrainee traineeChangePassword(String oldPassword, String newPassword) {
+    public HomeTrainee changePassword(String oldPassword, String newPassword) {
         enterOldPassword(oldPassword);
         enterNewPassword(newPassword);
 //        clickSubmitButton();

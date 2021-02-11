@@ -18,8 +18,6 @@ public class TrainerChangePasswordTest {
     private static WebDriver webDriver;
     private static String trainerUsername;
     private static String trainerPassword;
-    private static HomeTrainer homeTrainer;
-    private static TrainerChangePassword trainerChangePassword;
 
     @BeforeEach
     void setup() {
@@ -37,14 +35,13 @@ public class TrainerChangePasswordTest {
     }
 
 
-//    I don't know what this method is supposed to return because cannot change password, but made an educated guess
     @Test
     void changePasswordAsTrainerReturnsHomeTrainer() {
-        homeTrainer = login.logInAsTrainer(trainerUsername, trainerPassword);
+        login.logInAsTrainer(trainerUsername, trainerPassword);
         webDriver.get("http://localhost:8080/changePassword");
-        trainerChangePassword = new TrainerChangePassword(webDriver);
-        HomeTrainer homeTrainer = trainerChangePassword.changeTrainerPassword(trainerPassword, "new");
-        Assertions.assertEquals("http://localhost:8080/trainer/home", webDriver.getCurrentUrl());
+        TrainerChangePassword trainerChangePassword = new TrainerChangePassword(webDriver);
+        HomeTrainer homeTrainer = trainerChangePassword.changePassword(trainerPassword, "new");
+        Assertions.assertEquals(HomeTrainer.class, homeTrainer.getClass());
     }
 
 }
