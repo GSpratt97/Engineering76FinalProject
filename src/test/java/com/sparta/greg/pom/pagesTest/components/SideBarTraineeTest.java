@@ -93,4 +93,17 @@ public class SideBarTraineeTest {
         homeTrainee.getSideBarTrainee().clickTraineeOptions();
         Assertions.assertEquals(TraineeAttendance.class, homeTrainee.getSideBarTrainee().goToTraineeAttendance().getClass());
     }
+
+    @Test
+    @DisplayName("isTraineeOptionsExpanded returns false when not expanded")
+    void isTraineeOptionsExpandedReturnsFalseWhenNotExpanded() {
+        Assertions.assertFalse(homeTrainee.getSideBarTrainee().isTraineeOptionsExpanded());
+    }
+
+    @Test
+    @DisplayName("isTraineeOptionsExpanded returns true when expanded")
+    void isTraineeOptionsExpandedReturnsTrueWhenExpanded() {
+        homeTrainee.getSideBarTrainee().clickTraineeOptions();
+        Assertions.assertTrue(homeTrainee.getSideBarTrainee().isTraineeOptionsExpanded());
+    }
 }

@@ -68,4 +68,16 @@ public class SideBarTest {
         weeklyAttendance.getSideBarTrainer().selectView();
     }
 
+    @Test
+    @DisplayName("isViewExpanded returns false when not expanded")
+    void isViewExpandedReturnsFalseWhenNotExpanded() {
+        Assertions.assertFalse(weeklyAttendance.getSideBarTrainer().isViewExpanded());
+    }
+
+    @Test
+    @DisplayName("isViewExpanded returns true when expanded")
+    void isViewExpandedReturnsTrueWhenExpanded() {
+        weeklyAttendance.getSideBarTrainer().selectView();
+        Assertions.assertTrue(weeklyAttendance.getSideBarTrainer().isViewExpanded());
+    }
 }
