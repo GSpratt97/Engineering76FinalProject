@@ -1,14 +1,18 @@
 package com.sparta.greg.pom.pages;
 
+import com.sparta.greg.pom.pages.components.SideBar;
+import com.sparta.greg.pom.pages.components.SideBarTrainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class EnterAttendance extends TrainerPage{
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class EnterAttendance extends Page {
 
     private String submitMessage;
-
     private String pageConfirm;
-
+    private final SideBarTrainer sideBarTrainer;
     public String getSubmitMessage() {
         return submitMessage;
     }
@@ -22,7 +26,8 @@ public class EnterAttendance extends TrainerPage{
 
     public EnterAttendance(WebDriver webDriver)
     {
-        this.webDriver = webDriver;
+        super(webDriver);
+        sideBarTrainer = new SideBarTrainer(webDriver);
     }
 
     public String getPageConfirm() {
@@ -69,6 +74,7 @@ public class EnterAttendance extends TrainerPage{
 
     public void selectDate(String string)
     {
+        //String formatted = dateFormatter(webDriver.findElement(By.name("attendanceDate")).getAttribute("value"), string);
         webDriver.findElement(By.name("attendanceDate")).sendKeys(string);
     }
 
@@ -94,5 +100,35 @@ public class EnterAttendance extends TrainerPage{
                 webDriver.findElement(By.id("attendanceId4")).click();
                 break;
         }
+    }
+
+    public String dateFormatter(String date, String newDate)
+    {
+        String[] dates = null;
+        String[] formattedDate = null;
+        StringBuilder build = new StringBuilder();
+        if(date.contains("/"))
+        {
+            dates = date.split(("/"));
+            formattedDate = newDate.split(("/"));
+        }
+        else
+        {
+            dates = date.split("-");
+            formattedDate = newDate.split("-");
+        }
+        if(dates[0].length() != 2){
+            build.append(formattedDate[2]);
+            build.append("-");
+            build.append(formattedDate[1]);
+            build.append("-");
+            build.append(formattedDate[0]);
+        }
+        else
+        {
+            return newDate;
+        }
+
+        return build.toString();
     }
 }
