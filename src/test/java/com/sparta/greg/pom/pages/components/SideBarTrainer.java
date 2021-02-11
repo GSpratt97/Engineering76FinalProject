@@ -1,7 +1,6 @@
 package com.sparta.greg.pom.pages.components;
 
-import com.sparta.greg.pom.pages.*;
-import com.sparta.greg.pom.pages.trainer.ManageTrainee;
+import com.sparta.greg.pom.pages.trainer.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

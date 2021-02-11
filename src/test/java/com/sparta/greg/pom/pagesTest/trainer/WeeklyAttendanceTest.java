@@ -1,4 +1,4 @@
-package com.sparta.greg.pom.pagesTest.components;
+package com.sparta.greg.pom.pagesTest.trainer;
 
 import com.sparta.greg.pom.pages.components.Login;
 import com.sparta.greg.pom.pages.trainer.WeeklyAttendance;
@@ -12,7 +12,7 @@ import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class SideBarTest {
+public class WeeklyAttendanceTest {
 
     private static final Properties properties = new Properties();
     private static WebDriver webDriver;
@@ -47,25 +47,23 @@ public class SideBarTest {
         webDriver.quit();
     }
 
+    //TODO: remove this after finish
     @Test
-    @DisplayName("change side bar size test")
-    void changeSideBarSizeTest() {
-        String initialSideBarSize = weeklyAttendance.getSideBarTrainer().getSideBarSize();
-        weeklyAttendance.getSideBarTrainer().changeSideBarSize();
-        String postSideBarSize = weeklyAttendance.getSideBarTrainer().getSideBarSize();
-        Assertions.assertNotEquals(initialSideBarSize, postSideBarSize);
+    @DisplayName("TempSideBarTest")
+    void tempSideBarTest() {
+        weeklyAttendance.getSideBarTrainer().clickTrainerOptions();
+        weeklyAttendance.getSideBarTrainer().goToEnterAttendance();
     }
 
     @Test
-    @DisplayName("get sidebar size returns String")
-    void getSidebarSizeReturnsString() {
-        Assertions.assertEquals(String.class, weeklyAttendance.getSideBarTrainer().getSideBarSize().getClass());
+    @DisplayName("Page type is WeeklyAttendance")
+    void pageTypeIsWeeklyAttendance() {
+        Assertions.assertEquals(WeeklyAttendance.class, weeklyAttendance.getClass());
     }
 
     @Test
-    @DisplayName("select view icon test")
-    void selectViewIconTest() {
-        weeklyAttendance.getSideBarTrainer().selectView();
+    @DisplayName("clickWeekRow returns true for populated list")
+    void clickWeekRowReturnsTrueForPopulatedList() {
+        Assertions.assertTrue(weeklyAttendance.clickWeekRow(1));
     }
-
 }
