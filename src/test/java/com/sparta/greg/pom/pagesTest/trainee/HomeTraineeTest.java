@@ -232,7 +232,7 @@ public class HomeTraineeTest {
         }
 
         @Test
-        @DisplayName("Get SQL Comparative Score")
+        @DisplayName("Get Not SQL Comparative Score")
         void getNotSqlComparativeScore() {
             homeTrainee.notSqlTabExtend();
             WebDriverWait wait = new WebDriverWait(webDriver, 10);
