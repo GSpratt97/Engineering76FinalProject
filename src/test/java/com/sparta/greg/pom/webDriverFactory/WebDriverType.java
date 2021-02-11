@@ -5,6 +5,6 @@ public enum WebDriverType {
     FIREFOX,
     INTERNET_EXPLORER,
     SAFARI,
-    MICROSOFT_EDGE,
-    OPERA
+    MICROSOFT_EDGE
+
 }
