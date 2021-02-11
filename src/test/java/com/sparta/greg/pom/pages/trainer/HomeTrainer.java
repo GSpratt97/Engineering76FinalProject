@@ -25,7 +25,6 @@ public class HomeTrainer extends Page {
     public HomeTrainer(WebDriver webDriver) {
         super(webDriver);
         sideBarTrainer = new SideBarTrainer(webDriver);
-        webDriver.get("http://localhost:8080/trainer/home");
     }
 
     public SideBarTrainer getSideBarTrainer() {

@@ -6,11 +6,14 @@ import com.sparta.greg.pom.pages.trainee.TraineeAttendance;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.trainer.ReportTrainer;
 import com.sparta.greg.pom.pages.trainer.TraineeProfile;
+import com.sparta.greg.pom.pages.trainer.WeeklyAttendance;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -54,7 +57,7 @@ public class TraineeProfileTest {
 
     @Test
     void canClickAttendanceDetails() {
-        Assertions.assertEquals(TraineeAttendance.class, traineeProfilePage.goToTraineeAttendance().getClass());
+        Assertions.assertEquals(WeeklyAttendance.class, traineeProfilePage.goToTraineeWeeklyAttendance().getClass());
     }
 
     @Test
@@ -190,6 +193,116 @@ public class TraineeProfileTest {
             Assertions.assertEquals(String.class, traineeProfilePage.getGradeNotSQL().getClass());
             Assertions.assertEquals("B-", traineeProfilePage.getGradeNotSQL());
         }
+    }
+
+    @Nested
+    @DisplayName("Assessments Breakdown")
+    class AssessmentsBreakdown {
+
+        @Test
+        @DisplayName("Get SQL Score")
+        void getSqlScore() {
+            traineeProfilePage.toggleExpandSQLBreakdown();
+            Assertions.assertEquals("30.9%", traineeProfilePage.getSqlScore());
+        }
+
+        @Test
+        @DisplayName("Get SQL Duration")
+        void getSqlDuration() {
+            traineeProfilePage.toggleExpandSQLBreakdown();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseSQL > div:nth-child(2) > div.col-4")));
+            Assertions.assertEquals("77 mins", traineeProfilePage.getSqlDuration());
+        }
+
+        @Test
+        @DisplayName("Get SQL Comparative Score")
+        void getSqlComparativeScore() {
+            traineeProfilePage.toggleExpandSQLBreakdown();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseSQL > div:nth-child(3) > div.col-4")));
+            Assertions.assertEquals("27%", traineeProfilePage.getSqlComparativeScore());
+        }
+
+        @Test
+        @DisplayName("Get SQL Design Score")
+        void getSqlDesignScore() {
+            traineeProfilePage.toggleExpandSQLBreakdown();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseSQL > div:nth-child(1) > div.col-4")));
+            Assertions.assertEquals("16%", traineeProfilePage.getSqlDesignScore());
+        }
+
+        @Test
+        @DisplayName("Get SQL Language and Knowledge Score")
+        void getSqlLanguageAndKnowledgeScore() {
+            traineeProfilePage.toggleExpandSQLBreakdown();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseSQL > div:nth-child(2) > div.col-4")));
+            Assertions.assertEquals("29%", traineeProfilePage.getSqlLanguageAndKnowledgeScore());
+        }
+
+        @Test
+        @DisplayName("Get SQL Problem Solving Score")
+        void getSqlProblemSolvingScore() {
+            traineeProfilePage.toggleExpandSQLBreakdown();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseSQL > div:nth-child(3) > div.col-4")));
+            Assertions.assertEquals("40%", traineeProfilePage.getSqlProblemSolvingScore());
+        }
+
+        @Test
+        @DisplayName("Get Not SQL Score")
+        void getNotSqlScore() {
+            traineeProfilePage.toggleExpandNotSQLBreakdown();
+            Assertions.assertEquals("78.0%", traineeProfilePage.getNotSqlScore());
+        }
+
+        @Test
+        @DisplayName("Get Not SQL Duration")
+        void getNonSqlDuration() {
+            traineeProfilePage.toggleExpandNotSQLBreakdown();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseNotSQL > div:nth-child(2) > div.col-4")));
+            Assertions.assertEquals("77 mins", traineeProfilePage.getNotSqlDuration());
+        }
+
+        @Test
+        @DisplayName("Get Not SQL Design Score")
+        void getNotSqlDesignScore() {
+            traineeProfilePage.toggleExpandNotSQLBreakdown();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseNotSQL > div:nth-child(1) > div.col-4")));
+            Assertions.assertEquals("16%", traineeProfilePage.getNotSqlDesignScore());
+        }
+
+        @Test
+        @DisplayName("Get Not SQL Language and Knowledge Score")
+        void getNotSqlLanguageAndKnowledgeScore() {
+            traineeProfilePage.toggleExpandNotSQLBreakdown();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseNotSQL > div:nth-child(2) > div.col-4")));
+            Assertions.assertEquals("29%", traineeProfilePage.getNotSqlLanguageAndKnowledgeScore());
+        }
+
+        @Test
+        @DisplayName("Get Not SQL Problem Solving Score")
+        void getNotSqlProblemSolvingScore() {
+            traineeProfilePage.toggleExpandNotSQLBreakdown();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseNotSQL > div:nth-child(3) > div.col-4")));
+            Assertions.assertEquals("40%", traineeProfilePage.getNotSqlProblemSolvingScore());
+        }
+
+        @Test
+        @DisplayName("Get Not SQL Comparative Score")
+        void getNotSqlComparativeScore() {
+            traineeProfilePage.toggleExpandNotSQLBreakdown();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseNotSQL > div:nth-child(3) > div.col-4")));
+            Assertions.assertEquals("27%", traineeProfilePage.getNotSqlComparativeScore());
+        }
+
     }
 
 

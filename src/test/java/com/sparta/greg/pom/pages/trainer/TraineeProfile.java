@@ -27,13 +27,27 @@ public class TraineeProfile extends Page {
     By overallGrade = By.cssSelector("main > div > div:nth-child(3) > div > div.card-body > div > div > div > div:nth-child(3) > div.card-body > big");
 
     By backToDashboard = By.cssSelector("a[class='btn btn-primary']");
-    By attendanceDetails = By.cssSelector("a[href*='/trainer/traineeAttendance/']");
-    By traineeReport = By.cssSelector("a[href*='/trainer/report/41']");
+    By attendanceDetails = By.cssSelector("a[href*='trainer/traineeAttendance']");
+    By traineeReport = By.cssSelector("a[href*='trainer/report]");
     By toggleButtons = By.cssSelector("tr[class*='accordion-toggle");
     By generalCard = By.cssSelector("div[class='card shadow mb-4']");
     By findSQL = By.cssSelector("tr[href*='collapseSQL']");
     By finNotSQL = By.cssSelector("tr[href*='collapseNotSQL']");
     By findLetterGrade = By.cssSelector("span[class*='letterGrade']");
+
+    By sqlScore = By.cssSelector("#collapseSQL > div:nth-child(1) > div.col-4");
+    By sqlDuration = By.cssSelector("#collapseSQL > div:nth-child(2) > div.col-4");
+    By sqlComparativeScore = By.cssSelector("#collapseSQL > div:nth-child(3) > div.col-4");
+    By sqlDesignScore = By.cssSelector("#collapseSQL > div:nth-child(1) > div.col-4");
+    By sqlLanguageAndKnowledgeScore = By.cssSelector("#collapseSQL > div:nth-child(2) > div.col-4");
+    By sqlProblemSolvingScore = By.cssSelector("#collapseSQL > div:nth-child(3) > div.col-4");
+
+    By notSqlScore = By.cssSelector("#collapseNotSQL > div:nth-child(1) > div.col-4");
+    By notSqlDuration = By.cssSelector("#collapseNotSQL > div:nth-child(2) > div.col-4");
+    By notSqlComparativeScore = By.cssSelector("#collapseNotSQL > div:nth-child(3) > div.col-4");
+    By notSqlDesignScore = By.cssSelector("#collapseNotSQL > div:nth-child(1) > div.col-4");
+    By notSqlLanguageAndKnowledgeScore = By.cssSelector("#collapseNotSQL > div:nth-child(2) > div.col-4");
+    By notSqlProblemSolvingScore = By.cssSelector("#collapseNotSQL > div:nth-child(3) > div.col-4");
 
     public TraineeProfile(WebDriver webDriver) {
         super(webDriver);
@@ -57,11 +71,11 @@ public class TraineeProfile extends Page {
         return null;
     }
 
-    public TraineeAttendance goToTraineeAttendance() {
+    public WeeklyAttendance goToTraineeWeeklyAttendance() {
         if (webDriver.findElement(attendanceDetails) != null) {
             WebElement attendanceBreakdown = webDriver.findElement(attendanceDetails);
             attendanceBreakdown.click();
-            return new TraineeAttendance(webDriver);
+            return new WeeklyAttendance(webDriver);
         }
 
         throw new NoSuchElementException("No attendance details available");
@@ -186,6 +200,60 @@ public class TraineeProfile extends Page {
         }
 
         return grade;
+    }
+
+    public String getSqlScore() {
+        return webDriver.findElement(sqlScore).getText();
+    }
+
+    public String getSqlDuration() {
+        return webDriver.findElement(sqlDuration).getText();
+    }
+
+    public String getSqlComparativeScore() {
+        return webDriver.findElement(sqlComparativeScore).getText();
+    }
+
+    public String getSqlDesignScore() {
+        List<WebElement> list = webDriver.findElements(sqlDesignScore);
+        return list.get(1).getText();
+    }
+
+    public String getSqlLanguageAndKnowledgeScore() {
+        List<WebElement> list = webDriver.findElements(sqlLanguageAndKnowledgeScore);
+        return list.get(1).getText();
+    }
+
+    public String getSqlProblemSolvingScore() {
+        List<WebElement> list = webDriver.findElements(sqlProblemSolvingScore);
+        return list.get(1).getText();
+    }
+
+    public String getNotSqlScore() {
+        return webDriver.findElement(notSqlScore).getText();
+    }
+
+    public String getNotSqlDuration() {
+        return webDriver.findElement(notSqlDuration).getText();
+    }
+
+    public String getNotSqlComparativeScore() {
+        return webDriver.findElement(notSqlComparativeScore).getText();
+    }
+
+    public String getNotSqlDesignScore() {
+        List<WebElement> list = webDriver.findElements(notSqlDesignScore);
+        return list.get(1).getText();
+    }
+
+    public String getNotSqlLanguageAndKnowledgeScore() {
+        List<WebElement> list = webDriver.findElements(notSqlLanguageAndKnowledgeScore);
+        return list.get(1).getText();
+    }
+
+    public String getNotSqlProblemSolvingScore() {
+        List<WebElement> list = webDriver.findElements(notSqlProblemSolvingScore);
+        return list.get(1).getText();
     }
 
 

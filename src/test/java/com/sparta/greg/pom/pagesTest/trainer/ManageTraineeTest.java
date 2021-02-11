@@ -2,7 +2,6 @@ package com.sparta.greg.pom.pagesTest.trainer;
 
 import com.sparta.greg.pom.pages.trainer.ManageTrainee;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

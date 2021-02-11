@@ -9,7 +9,7 @@ public class AssessmentsStepdefs {
     public void iAmOnTheAssessmentsPage() {
     }
 
-    @When("I select a Trainee")
+    @When("I select a Trainee on the Assessments Page")
     public void iSelectATrainee() {
     }
 
@@ -17,7 +17,7 @@ public class AssessmentsStepdefs {
     public void iStayOnTheAssessmentsPage() {
     }
 
-    @When("I click on a Trainee")
+    @When("I click on a Trainee on the Assessments Page")
     public void iClickOnATrainee() {
     }
 

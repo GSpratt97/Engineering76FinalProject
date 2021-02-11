@@ -88,25 +88,25 @@ public class HomeTrainerTest {
     @DisplayName("Get Average On Time ")
     void getAverageOnTime() {
         //the expected result will probably need to change as time goes
-        Assertions.assertEquals("89.47%", homeTrainer.getOnTime());
+        Assertions.assertEquals("90%", homeTrainer.getOnTime());
     }
 
     @Test
     @DisplayName("Get Average Late")
     void getAverageLate() {
-        Assertions.assertEquals("7.24%", homeTrainer.getLate());
+        Assertions.assertEquals("7%", homeTrainer.getLate());
     }
 
     @Test
     @DisplayName("Get Excused Absence")
     void getExcusedAbsence() {
-        Assertions.assertEquals("1.97%", homeTrainer.getExcusedAbsence());
+        Assertions.assertEquals("2%", homeTrainer.getExcusedAbsence());
     }
 
     @Test
     @DisplayName("Get Unexcused Absence")
     void getUnexcusedAbsence() {
-        Assertions.assertEquals("1.32%", homeTrainer.getUnexcusedAbsence());
+        Assertions.assertEquals("1%", homeTrainer.getUnexcusedAbsence());
     }
 
     @Test

@@ -62,6 +62,7 @@ public class HomeTraineeTest {
     @Test
     @DisplayName("Go to Consultancy Skills")
     void goToConsultancySkills() {
+        homeTrainee.getSideBarTrainee().selectView();
         homeTrainee.getSideBarTrainee().goToConsultancySkills();
     }
 
@@ -228,6 +229,15 @@ public class HomeTraineeTest {
             WebDriverWait wait = new WebDriverWait(webDriver, 10);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseNotSQL > div:nth-child(3) > div.col-4")));
             Assertions.assertEquals("40%", homeTrainee.getNotSqlProblemSolvingScore());
+        }
+
+        @Test
+        @DisplayName("Get Not SQL Comparative Score")
+        void getNotSqlComparativeScore() {
+            homeTrainee.notSqlTabExtend();
+            WebDriverWait wait = new WebDriverWait(webDriver, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#collapseNotSQL > div:nth-child(3) > div.col-4")));
+            Assertions.assertEquals("27%", homeTrainee.getNotSqlComparativeScore());
         }
 
     }
