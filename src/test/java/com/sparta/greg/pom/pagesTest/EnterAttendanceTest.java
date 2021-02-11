@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
@@ -37,6 +38,7 @@ public class EnterAttendanceTest {
         webDriver.findElement(By.cssSelector("button[type='submit']")).click();
         webDriver.get("http://localhost:8080/trainer/attendanceEntry");
         attendancePage = new EnterAttendance(webDriver);
+        ChromeOptions options = new ChromeOptions();
     }
 
 
