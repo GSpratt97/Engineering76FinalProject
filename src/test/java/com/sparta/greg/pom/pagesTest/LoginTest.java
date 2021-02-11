@@ -1,5 +1,7 @@
 package com.sparta.greg.pom.pagesTest;
 
+import com.sparta.greg.pom.pages.HomeTrainee;
+import com.sparta.greg.pom.pages.HomeTrainer;
 import com.sparta.greg.pom.pages.Login;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,14 +46,16 @@ public class LoginTest {
 
     @Test
     void canSignInAsTrainer() {
-        login.logInAsTrainer(trainerUsername, trainerPassword);
-        Assertions.assertEquals("http://localhost:8080/trainer/home", webDriver.getCurrentUrl());
+        HomeTrainer homeTrainer = login.logInAsTrainer(trainerUsername, trainerPassword);
+//        Assertions.assertEquals("http://localhost:8080/trainer/home", webDriver.getCurrentUrl());
+        Assertions.assertEquals(HomeTrainer.class, homeTrainer.getClass());
     }
 
     @Test
     void canSignInAsTrainee() {
-        login.logInAsTrainee(traineeUsername, traineePassword);
-        Assertions.assertEquals("http://localhost:8080/trainee/home", webDriver.getCurrentUrl());
+        HomeTrainee homeTrainee = login.logInAsTrainee(traineeUsername, traineePassword);
+//        Assertions.assertEquals("http://localhost:8080/trainee/home", webDriver.getCurrentUrl());
+        Assertions.assertEquals(HomeTrainee.class, homeTrainee.getClass());
     }
 
 }
