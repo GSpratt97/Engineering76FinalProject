@@ -25,8 +25,9 @@ public class ConsultancySkills {
     private static String trainerPassword;
     private static TrainerConsultancySkills trainerConsultancySkills;
 
-    @Given("I am on the Consultancy Skills page with Trainer login")
-    public void iAmOnTheConsultancySkillsPageWithTrainerLogin() {
+
+    @Given("I am logged in as Trainer and on consultancy skills page")
+    public void iAmLoggedInAsTrainerAndOnConsultancySkillsPage() {
         Properties properties = new Properties();
         webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080/login");
@@ -46,8 +47,8 @@ public class ConsultancySkills {
         trainerConsultancySkills = new TrainerConsultancySkills(webDriver);
     }
 
-    @Given("I am on the Consultancy Skills page with Trainee Login")
-    public void iAmOnTheConsultancySkillsPageWithTraineeLogin() {
+    @Given("I am logged in as Trainee and on consultancy skills page")
+    public void iAmLoggedInAsTraineeAndOnConsultancySkillsPage() {
         Properties properties = new Properties();
         webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080/login");
@@ -129,4 +130,5 @@ public class ConsultancySkills {
         Assertions.assertEquals("http://localhost:8080/trainee/home",webDriver.getCurrentUrl());
         webDriver.close();
     }
+
 }
