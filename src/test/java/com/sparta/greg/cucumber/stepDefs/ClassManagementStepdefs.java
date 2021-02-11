@@ -76,7 +76,7 @@ public class ClassManagementStepdefs {
 
 	@When("I fill out the form and click create class")
 	public void iFillOutTheFormAndClickCreateClass() {
-		//UNCOMMENT IF YOU WANNA CREATE A CLASS
+		//UNCOMMENT IF CREATING A CLASS
 		//classManagement.enterClassName("Testing 103");
 		classManagement.selectCourse("Java SDET");
 		classManagement.enterStartDate("01", "03", "2021", "00", "00");
@@ -115,7 +115,7 @@ public class ClassManagementStepdefs {
 
 	@When("I fill out the form, with invalid dates and click create class")
 	public void iFillOutTheFormWithInvalidDatesAndClickCreateClass() {
-		//UNCOMMENT IF YOU WANNA CREATE A CLASS
+		//UNCOMMENT IF WANTING TO CREATE A CLASS
 		//classManagement.enterClassName("Testing 113");
 		classManagement.selectCourse("Java SDET");
 		classManagement.enterStartDate("01", "03", "2021", "00", "00");
