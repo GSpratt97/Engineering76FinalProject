@@ -6,20 +6,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
-
-import java.util.concurrent.TimeUnit;
 
 public class EnterAttendance extends Page {
 
-    private String submitMessage;
-    private String pageConfirm;
+    private String submitMessage, pageConfirm;
+    private String[] dates;
     private final SideBarTrainer sideBarTrainer;
+
     public String getSubmitMessage() {
         return submitMessage;
     }
-
 
     public void setPageConfirm() {
         this.pageConfirm = webDriver
@@ -31,10 +28,6 @@ public class EnterAttendance extends Page {
     {
         super(webDriver);
         sideBarTrainer = new SideBarTrainer(webDriver);
-    }
-
-    public String getPageConfirm() {
-        return pageConfirm;
     }
 
     public void setSubmitMessage(String isSuccess) {
@@ -94,7 +87,7 @@ public class EnterAttendance extends Page {
 
     public void selectDate(String string)
     {
-        string = dateFormatter(string, webDriver);
+        string = formatDateForDriverType(string, webDriver);
         webDriver.findElement(By.name("attendanceDate")).sendKeys(string);
     }
 
@@ -102,6 +95,7 @@ public class EnterAttendance extends Page {
     {
         if(webDriver.getClass() == SafariDriver.class)
         {
+            //Safari browser not working with selenium click function, so it needs to executed with javascript
             WebElement element = webDriver.findElement(By.cssSelector("button[type*='submit']"));
             JavascriptExecutor executor = (JavascriptExecutor)webDriver;
             executor.executeScript("arguments[0].click();", element);
@@ -131,9 +125,8 @@ public class EnterAttendance extends Page {
         }
     }
 
-    public String dateFormatter(String date, WebDriver webDriver)
+    public String formatDateForDriverType(String date, WebDriver webDriver)
     {
-        String[] dates = null;
         StringBuilder build = new StringBuilder();
         if(date.contains("/"))
         {
@@ -154,5 +147,55 @@ public class EnterAttendance extends Page {
         }
 
         return date;
+    }
+
+    public Boolean areOnAttendanceEntryPage(String string) {
+        return pageConfirm.contains(string);
+    }
+
+    public boolean isCorrectAttendanceType(String type)
+    {
+
+        switch (type)
+        {
+            case "On Time":
+                type = "attendanceId1";
+                break;
+            case "Late":
+                type = "attendanceId2";
+                break;
+            case "Absent (Excused)":
+                type = "attendanceId3";
+                break;
+            case "Absent (Unexcused)":
+                type = "attendanceId4";
+                break;
+        }
+
+        return webDriver.findElement(By.id(type)).isSelected();
+    }
+
+    public boolean isCorrectDate(String date)
+    {
+        String[] foundDate = webDriver
+                .findElement(By.id("attendanceDate")).getAttribute("value").split("-");
+        StringBuilder build = new StringBuilder();
+        if(foundDate[0].length() != 2)
+        {
+            build.append(foundDate[2]);
+            build.append("-");
+            build.append(foundDate[1]);
+            build.append("-");
+            build.append(foundDate[0]);
+        }
+        else
+        {
+            build.append(foundDate[0]);
+            build.append("-");
+            build.append(foundDate[1]);
+            build.append("-");
+            build.append(foundDate[2]);
+        }
+        return date.equals(build.toString());
     }
 }
