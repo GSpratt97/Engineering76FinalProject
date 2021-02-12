@@ -77,6 +77,6 @@ public class AddWeeksStepdefs {
 
     @Then("I am taken to the {string} Page from the {string} page")
     public void iAmTakenToThePageFromThePage(String arg0, String arg1) {
-        
+
     }
 }
