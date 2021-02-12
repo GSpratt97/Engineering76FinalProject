@@ -56,7 +56,7 @@ Feature: Home for Trainers Features
 
   Scenario: Trainer goes to Assessments page from Home Trainer page
     Given I am logged in as a trainer and I am on the Home Trainer page
-    When I click Assessments on the trainer sidebar
+    When I click Trainer Options on the trainer sidebar
     And I click on Assessments
     Then I am taken to the Add Weeks page from Home Trainer page
 
