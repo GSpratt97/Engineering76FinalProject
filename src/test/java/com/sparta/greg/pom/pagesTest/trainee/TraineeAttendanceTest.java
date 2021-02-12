@@ -1,8 +1,9 @@
 package com.sparta.greg.pom.pagesTest.trainee;
 
+import com.sparta.greg.pom.pages.trainee.AttendanceTrainee;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
 import com.sparta.greg.pom.pages.components.Login;
-import com.sparta.greg.pom.pages.trainee.TraineeAttendance;
+import com.sparta.greg.pom.pages.trainee.Attendance;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +20,7 @@ public class TraineeAttendanceTest {
     protected WebDriver webDriver;
     private Login loginPage;
     private HomeTrainee homePage;
-    private TraineeAttendance traineeAttendance;
+    private AttendanceTrainee traineeAttendance;
     private Properties properties = new Properties();
     private String usernameTrainee;
     private String passwordTrainee;
@@ -59,11 +60,13 @@ public class TraineeAttendanceTest {
     public void doesToggleWork(){
         traineeAttendance = homePage.goToWeeklyAttendance();
         traineeAttendance.clickWeek(11);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         Assertions.assertTrue(traineeAttendance.isToggledOnWeek(11));
+    }
+
+    @Test
+    @DisplayName("Count days in week")
+    public void doesCountWork(){
+        traineeAttendance = homePage.goToWeeklyAttendance();
+        Assertions.assertEquals(5, traineeAttendance.getNumberOfDaysInWeek(6));
     }
 }

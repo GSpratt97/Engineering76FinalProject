@@ -2,7 +2,6 @@ package com.sparta.greg.pom.pages.trainer;
 
 import com.sparta.greg.pom.pages.components.Page;
 import com.sparta.greg.pom.pages.components.SideBarTrainer;
-import com.sparta.greg.pom.pages.trainee.TraineeAttendance;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;

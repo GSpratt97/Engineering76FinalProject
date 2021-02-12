@@ -2,7 +2,7 @@ package com.sparta.greg.demo;
 
 import com.sparta.greg.pom.pages.components.Login;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
-import com.sparta.greg.pom.pages.trainee.TraineeAttendance;
+import com.sparta.greg.pom.pages.trainee.Attendance;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -21,7 +21,7 @@ public class TraineeAttendanceDemo {
     protected WebDriver webDriver;
     private Login loginPage;
     private HomeTrainee homePage;
-    private TraineeAttendance traineeAttendance;
+    private Attendance traineeAttendance;
     private Properties properties = new Properties();
     private String usernameTrainee;
     private String passwordTrainee;

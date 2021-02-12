@@ -70,11 +70,11 @@ public class SideBarTrainee extends SideBar {
         return new ReportTrainee(webDriver);
     }
 
-    public TraineeAttendance goToTraineeAttendance() {
+    public AttendanceTrainee goToTraineeAttendance() {
         isTraineeOptionsExpanded();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(attendanceHistoryLink).click();
-        return new TraineeAttendance(webDriver);
+        return new AttendanceTrainee(webDriver);
     }
 
     public TraineeChangePassword changePassword() {

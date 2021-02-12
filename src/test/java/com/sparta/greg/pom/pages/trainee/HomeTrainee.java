@@ -116,9 +116,9 @@ public class HomeTrainee extends Page {
         return list.get(1).getText();
     }
 
-    public TraineeAttendance goToWeeklyAttendance() {
+    public AttendanceTrainee goToWeeklyAttendance() {
         webDriver.findElement(attendanceDetailsButton).click();
-        return new TraineeAttendance(webDriver);
+        return new AttendanceTrainee(webDriver);
     }
 
     public ReportTrainee goToReportForTrainee() {

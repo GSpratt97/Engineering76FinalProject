@@ -2,7 +2,7 @@ package com.sparta.greg.cucumber.stepdefs;
 
 import com.sparta.greg.pom.pages.components.Login;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
-import com.sparta.greg.pom.pages.trainee.TraineeAttendance;
+import com.sparta.greg.pom.pages.trainee.Attendance;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -19,13 +19,13 @@ public class TraineeAttendanceStepdefs {
     protected WebDriver webDriver;
     private Login loginPage;
     private HomeTrainee homePage;
-    private TraineeAttendance traineeAttendance;
+    private Attendance traineeAttendance;
     private Properties properties = new Properties();
     String usernameTrainee;
     String passwordTrainee;
 
-    @Given("I am on the trainee attendance page")
-    public void iAmOnTheTraineeAttendancePage() {
+    @Given("I am logged in as a trainee and on the Trainee Attendance page")
+    public void iAmLoggedInAsATraineeAndOnTheTraineeAttendancePage() {
         webDriver = new ChromeDriver();
         loginPage = new Login(webDriver);
 
@@ -47,11 +47,9 @@ public class TraineeAttendanceStepdefs {
 
     @Then("The dropdown for week {int} will be toggled")
     public void theDropdownForWeekWillBeToggled(int arg0) {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         Assertions.assertTrue(traineeAttendance.isToggledOnWeek(arg0));
+        webDriver.close();
+        webDriver.quit();
     }
+
 }
