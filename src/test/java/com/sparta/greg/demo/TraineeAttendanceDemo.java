@@ -63,11 +63,6 @@ public class TraineeAttendanceDemo {
     public void doesToggleWorkPom(){
         traineeAttendance = homePage.goToWeeklyAttendance();
         traineeAttendance.clickWeek(12);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         Assertions.assertTrue(traineeAttendance.isToggledOnWeek(12));
         webDriver.close();
     }
@@ -107,11 +102,6 @@ public class TraineeAttendanceDemo {
         webDriver.findElement(By.cssSelector("button[type='submit']")).click();
         webDriver.findElement(By.linkText("Attendance Details")).click();
         webDriver.findElements(By.tagName("tbody")).get(0).click();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         Assertions.assertEquals("true", webDriver.findElements(By.tagName("tbody")).get(0).findElements(By.tagName("tr")).get(0).getAttribute("aria-expanded"));
         webDriver.close();
     }

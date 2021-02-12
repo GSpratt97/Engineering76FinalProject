@@ -43,7 +43,7 @@ public class TraineeAttendanceTest {
     @DisplayName("Click on a week homepage path")
     public void clickOnAWeekHomePageToAttendance(){
         traineeAttendance = homePage.goToWeeklyAttendance();
-        traineeAttendance.clickWeek(12);
+        traineeAttendance.clickWeek(11);
     }
 
     @Test
@@ -58,12 +58,12 @@ public class TraineeAttendanceTest {
     @DisplayName("Toggle method test")
     public void doesToggleWork(){
         traineeAttendance = homePage.goToWeeklyAttendance();
-        traineeAttendance.clickWeek(12);
+        traineeAttendance.clickWeek(11);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Assertions.assertTrue(traineeAttendance.isToggledOnWeek(12));
+        Assertions.assertTrue(traineeAttendance.isToggledOnWeek(11));
     }
 }

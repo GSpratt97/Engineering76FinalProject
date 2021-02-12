@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TraineeAttendance extends Page {
 
-    @FindBy(id = "accordion1")
+    @FindBy(tagName = "tbody")
     List<WebElement> weeks;
 
     SideBarTrainee sideBarTrainee;
@@ -28,13 +28,17 @@ public class TraineeAttendance extends Page {
     }
 
     public void clickWeek(int week){
+        System.out.println(weeks);
+        System.out.println(weeks.size());
         if (week > 0 && week <= weeks.size()) {
             weeks.get(weeks.size() - week).click();
         }
     }
 
     public boolean isToggledOnWeek(int week){
-        String isToggled = webDriver.findElements(By.tagName("tbody")).get(weeks.size() - week).findElements(By.tagName("tr")).get(0).getAttribute("aria-expanded");
+        List<WebElement> trTags = weeks.get(weeks.size() - week).findElements(By.tagName("tr"));
+        System.out.println(trTags.size());
+        String isToggled = weeks.get(weeks.size() - week).findElements(By.tagName("tr")).get(0).getAttribute("aria-expanded");
         if (isToggled.equals("true")){
             return true;
         }
