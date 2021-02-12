@@ -19,6 +19,7 @@ public class AddWeeks extends Page {
     }
 
     public void selectGroupToAdd(String group){
+        //todo: add exception if group not found
         Select course = new Select(webDriver.findElement(dropDownMenu));
         course.selectByVisibleText(group);
 
@@ -28,6 +29,9 @@ public class AddWeeks extends Page {
         webDriver.findElement(addWeekButton).click();
     }
 
+    public SideBarTrainer getSideBarTrainer() {
+        return sideBarTrainer;
+    }
 
 
 
