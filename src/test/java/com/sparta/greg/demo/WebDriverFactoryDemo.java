@@ -141,7 +141,7 @@ public class WebDriverFactoryDemo {
     @Test
     @DisplayName("Running a smaller window in edge")
     void smallerEdgeTest(){
-        edgeDriver = WebDriverFactory.getWebDriverWithWindowSize(WebDriverType.e, 411, 823);
+        edgeDriver = WebDriverFactory.getWebDriverWithWindowSize(WebDriverType.MICROSOFT_EDGE, 411, 823);
 
         Login login = new Login(chromeDriver);
         FeedbackForm feedbackForm = new FeedbackForm(chromeDriver);
