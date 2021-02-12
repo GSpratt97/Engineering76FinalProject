@@ -67,39 +67,9 @@ public class EnterAttendSD {
         Assertions.assertTrue(attendancePage.getSubmitMessage().contains(string));
     }
 
-    @Given("I am signed in for radioButton check")
-    public void iAmSignedInForRadioButtonCheck() {
-        webDriver.get("http://localhost:8080/trainer/attendanceEntry");
-        attendancePage = new EnterAttendance(webDriver);
-        attendancePage.setPageConfirm();
-        Assertions.assertEquals("Set Trainee Attendance", attendancePage.getPageConfirm());
-    }
-
-    @When("I change the radio button attendance type")
-    public void iChangeTheRadioButtonAttendanceType() {
-        attendancePage.selectDate("22-09-2020");
-        attendancePage.selectAttendanceType("On Time");
-        Assertions.assertTrue(webDriver.findElement(By.id("attendanceId1")).isSelected());
-    }
-
     @And("I click submit Attendance")
     public void iClickSubmit() {
         attendancePage.submit();
-    }
-
-    @Then("I will still receive a completed successfully message")
-    public void iWillStillReceiveACompletedSuccessfullyMessage() {
-        attendancePage.setSubmitMessage("success");
-        String string = "Attendance successfully";
-        Assertions.assertTrue(attendancePage.getSubmitMessage().contains(string));
-    }
-
-    @Given("I am signed in on the attendance page")
-    public void iAmSignedInOnTheAttendancePage() {
-        webDriver.get("http://localhost:8080/trainer/attendanceEntry");
-        attendancePage = new EnterAttendance(webDriver);
-        attendancePage.setPageConfirm();
-        Assertions.assertEquals("Set Trainee Attendance", attendancePage.getPageConfirm());
     }
 
     @When("I put in a date that's outside the course bounds")
@@ -115,18 +85,13 @@ public class EnterAttendSD {
         Assertions.assertTrue(attendancePage.getSubmitMessage().contains(string));
     }
 
-    @Given("I have selected a date")
+    @Given("I have selected a date on Attendance Page")
     public void iHaveSelectedADate() {
         webDriver.get("http://localhost:8080/trainer/attendanceEntry");
         attendancePage = new EnterAttendance(webDriver);
         attendancePage.setPageConfirm();
         Assertions.assertEquals("Set Trainee Attendance", attendancePage.getPageConfirm());
         attendancePage.selectDate("22-09-2020");
-    }
-
-    @When("I submit my request")
-    public void iSubmitMyRequest() {
-        attendancePage.submit();
     }
 
     @Then("I will receive a completed successfully message with a matching date")
@@ -137,25 +102,16 @@ public class EnterAttendSD {
         Assertions.assertTrue(attendancePage.getSubmitMessage().contains(string));
     }
 
-    @Given("I have multiple trainee")
-    public void iHaveMultipleTrainee() {
-        webDriver.get("http://localhost:8080/trainer/attendanceEntry");
-        attendancePage = new EnterAttendance(webDriver);
-        attendancePage.setPageConfirm();
-    }
-
-    @When("I change the employee")
-    public void iChangeTheEmployee() {
-        attendancePage.selectTrainee("Bill");
-        Assertions.assertTrue(webDriver.findElement(By.name("traineeId")).getText().contains("Bill"));
-    }
-
-    @Then("I can add their attendance easily")
-    public void iCanAddTheirAttendanceEasily() {
+    @When("I change the trainee to {string}")
+    public void iChangeTheTraineeTo(String arg0) {
         attendancePage.selectDate("22-09-2020");
-        attendancePage.selectTrainee("Reece");
+        attendancePage.selectTrainee(arg0);
+    }
+
+    @Then("I get a success message containing {string}")
+    public void iGetASuccessMessageContaining(String arg0) {
         attendancePage.submit();
         attendancePage.setSubmitMessage("success");
-        Assertions.assertTrue(attendancePage.getSubmitMessage().contains("Reece"));
+        Assertions.assertTrue(attendancePage.getSubmitMessage().contains(arg0));
     }
 }
