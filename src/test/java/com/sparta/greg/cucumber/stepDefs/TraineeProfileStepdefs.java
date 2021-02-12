@@ -1,6 +1,7 @@
 package com.sparta.greg.cucumber.stepdefs;
 
 import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.TraineeProfile;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -17,7 +18,6 @@ import java.util.Properties;
 
 public class TraineeProfileStepdefs {
     WebDriver webDriver;
-    Properties properties;
     String usernameTrainer;
     String passwordTrainer;
     TraineeProfile traineeProfilePage;
@@ -25,17 +25,12 @@ public class TraineeProfileStepdefs {
     HashMap<String, String> detailsBillBird = new HashMap<>();
 
     private void loadPropertiesLoginAsTrainerGoToTraineeProfile() {
-        properties = new Properties();
         webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080/login");
 
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        usernameTrainer = properties.getProperty("trainerUsername");
-        passwordTrainer = properties.getProperty("trainerPassword");
+        PropertyLoader.loadProperties();
+        usernameTrainer = PropertyLoader.properties.getProperty("trainerUsername");
+        passwordTrainer = PropertyLoader.properties.getProperty("trainerPassword");
 
         Login login = new Login(webDriver);
         login.logInAsTrainer(usernameTrainer, passwordTrainer);
