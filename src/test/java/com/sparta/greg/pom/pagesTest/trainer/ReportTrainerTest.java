@@ -49,6 +49,37 @@ public class ReportTrainerTest {
         Assertions.assertEquals("http://localhost:8080/trainer/report/41", reportTrainer.getURL());
     }
 
+    @Test
+    @DisplayName("Does the first 'expand' button expand its weekly report?")
+    void doesReportExpand() {
+        Assertions.assertTrue(reportTrainer.doesExpandButtonExpand(reportTrainer.getWeekReports().get(0)));
+    }
+
+    @Test
+    @DisplayName("Does the first 'expand' button collapse its weekly report?")
+    void doesReportCollapse() {
+        Assertions.assertTrue(reportTrainer.doesExpandButtonCollapse(reportTrainer.getWeekReports().get(0)));
+    }
+
+    @Test
+    @DisplayName("Do all 'expand' buttons expand their weekly report and collapse it?")
+    void doAllReportsExpandAndCollapse() {
+        Assertions.assertTrue(reportTrainer.doAllExpandButtonsWork());
+    }
+
+    @Test
+    @DisplayName("Do week numbers descend chronologically?")
+    void isWeekNumberCorrect() {
+        Assertions.assertTrue(reportTrainer.isWeekNumberCorrect());
+    }
+
+    @Test
+    @DisplayName("Does the 'Back To Trainee Profile' button navigate to the previous page?")
+    void canNavigateBackToTraineeProfile() {
+        reportTrainer.backToTraineeProfile();
+        Assertions.assertEquals("http://localhost:8080/trainer/traineeProfile/41", reportTrainer.getURL());
+    }
+
     @AfterAll
     static void tearDown() {
         webDriver.quit();
