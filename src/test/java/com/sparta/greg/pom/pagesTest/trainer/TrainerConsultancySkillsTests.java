@@ -60,7 +60,7 @@ public class TrainerConsultancySkillsTests {
     }
     @Test
     @DisplayName("Click All Skills Button On Consultancy Skills")
-    public void clickAllButtonOnConsultancySkills() {
+    public void clickAllButtonOnConsultancySkills() throws InterruptedException {
         trainerConsultancySkills.clickAllCollapsableButtonOnConsultancySkills();
     }
     @AfterEach
