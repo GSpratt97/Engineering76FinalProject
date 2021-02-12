@@ -3,7 +3,13 @@ package com.sparta.greg.pom.pages.trainer;
 import com.sparta.greg.pom.pages.components.Page;
 import com.sparta.greg.pom.pages.components.SideBarTrainer;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.safari.SafariDriver;
+
+import java.util.concurrent.TimeUnit;
 
 public class EnterAttendance extends Page {
 
@@ -32,6 +38,11 @@ public class EnterAttendance extends Page {
     }
 
     public void setSubmitMessage(String isSuccess) {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if(isSuccess.equals("success"))
         {
             this.submitMessage = webDriver.findElement(By.cssSelector("p[class*='letterGradeA mt-3']")).getText();
@@ -47,6 +58,11 @@ public class EnterAttendance extends Page {
 
     public void selectTrainee(String name)
     {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         switch(name)
         {
             case "David":
@@ -70,18 +86,30 @@ public class EnterAttendance extends Page {
             case "Emmanuel":
                 webDriver.findElement(By.cssSelector("option[value*=\"192\"]")).click();
                 break;
+            case "Bill":
+                webDriver.findElement(By.cssSelector("option[value*=\"41\"]")).click();
+                break;
         }
     }
 
     public void selectDate(String string)
     {
-        //String formatted = dateFormatter(webDriver.findElement(By.name("attendanceDate")).getAttribute("value"), string);
+        string = dateFormatter(string, webDriver);
         webDriver.findElement(By.name("attendanceDate")).sendKeys(string);
     }
 
     public void submit()
     {
-        webDriver.findElement(By.cssSelector("button[type*=submit]")).click();
+        if(webDriver.getClass() == SafariDriver.class)
+        {
+            WebElement element = webDriver.findElement(By.cssSelector("button[type*='submit']"));
+            JavascriptExecutor executor = (JavascriptExecutor)webDriver;
+            executor.executeScript("arguments[0].click();", element);
+        }
+        else
+        {
+            webDriver.findElement(By.cssSelector("button[type*='submit']")).click();
+        }
     }
 
     public void selectAttendanceType(String type)
@@ -103,7 +131,7 @@ public class EnterAttendance extends Page {
         }
     }
 
-    public String dateFormatter(String date)
+    public String dateFormatter(String date, WebDriver webDriver)
     {
         String[] dates = null;
         StringBuilder build = new StringBuilder();
@@ -115,14 +143,16 @@ public class EnterAttendance extends Page {
         {
             dates = date.split("-");
         }
-        if(dates[0].length() != 2){
+        if(webDriver.getClass() == SafariDriver.class)
+        {
             build.append(dates[2]);
             build.append("-");
             build.append(dates[1]);
             build.append("-");
             build.append(dates[0]);
+            date = build.toString();
         }
 
-        return build.toString();
+        return date;
     }
 }
