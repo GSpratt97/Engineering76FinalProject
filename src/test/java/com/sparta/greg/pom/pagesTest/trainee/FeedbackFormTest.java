@@ -45,57 +45,57 @@ public class FeedbackFormTest {
     @Test
     @DisplayName("Checking can access and edit the start text box")
     void checkCanAccessStart(){
-        Assertions.assertTrue(feedbackForm.enterStart("Editing start"));
+        Assertions.assertTrue(feedbackForm.enterStart("Editing start", 10));
     }
 
 
     @Test
     @DisplayName("Checking start method can handle null")
     void checkStartCanHandleNull(){
-        Assertions.assertFalse(feedbackForm.enterStart(null));
+        Assertions.assertFalse(feedbackForm.enterStart(null, 0));
     }
 
     @Test
     @DisplayName("Checking start method can handle empty values")
     void checkStartCanHandleEmpty(){
-        Assertions.assertFalse(feedbackForm.enterStart(" "));
+        Assertions.assertFalse(feedbackForm.enterStart(" ", 0));
     }
 
 
     @Test
     @DisplayName("Checking can access and edit the stop text box")
     void checkCanAccessStop(){
-        Assertions.assertTrue(feedbackForm.enterStop("Editing stop"));
+        Assertions.assertTrue(feedbackForm.enterStop("Editing stop", 12));
     }
 
     @Test
     @DisplayName("Checking stop method can handle empty String")
     void checkStopCanHandleEmpty(){
-        Assertions.assertFalse(feedbackForm.enterStop(" "));
+        Assertions.assertFalse(feedbackForm.enterStop(" ", 0));
     }
 
     @Test
     @DisplayName("Checking stop method can handle null values")
     void checkStopCanHandleNull(){
-        Assertions.assertFalse(feedbackForm.enterStop(null));
+        Assertions.assertFalse(feedbackForm.enterStop(null, 0));
     }
 
     @Test
     @DisplayName("Checking can access and edit the continue text box")
     void checkCanAccessContinue(){
-        Assertions.assertTrue(feedbackForm.enterContinue("Editing continue"));
+        Assertions.assertTrue(feedbackForm.enterContinue("Editing continue", 25));
     }
 
     @Test
     @DisplayName("Checking continue method can handle empty String")
     void checkContinueCanHandleEmpty(){
-        Assertions.assertFalse(feedbackForm.enterContinue(" "));
+        Assertions.assertFalse(feedbackForm.enterContinue(" ", 0));
     }
 
     @Test
     @DisplayName("Checking continue method can handle null values")
     void checkContinueCanHandleNull(){
-        Assertions.assertFalse(feedbackForm.enterContinue(null));
+        Assertions.assertFalse(feedbackForm.enterContinue(null, 0));
     }
 
 
