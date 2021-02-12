@@ -83,7 +83,7 @@ public class EnterAttendanceTest {
         String date = "22-09-2020";
         attendancePage.selectDate(date);
         Assertions.assertEquals(attendancePage.dateFormatter(webDriver
-                .findElement(By.id("attendanceDate")).getAttribute("value")), date);
+                .findElement(By.id("attendanceDate")).getAttribute("value"), webDriver), date);
     }
 
     @After
