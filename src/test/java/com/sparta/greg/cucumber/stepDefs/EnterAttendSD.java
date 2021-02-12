@@ -8,10 +8,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.safari.SafariDriver;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -100,8 +98,9 @@ public class EnterAttendSD {
         webDriver.get("http://localhost:8080/trainer/attendanceEntry");
         attendancePage = new EnterAttendance(webDriver);
         attendancePage.setPageConfirm();
-        Assertions.assertEquals("Set Trainee Attendance", attendancePage.getPageConfirm());
+        Assertions.assertTrue(attendancePage.areOnAttendanceEntryPage("Set Trainee Attendance"));
         attendancePage.selectDate("22-09-2020");
+        Assertions.assertTrue(attendancePage.isCorrectDate("22-09-2020"));
     }
 
     @Then("I will receive a completed successfully message with a matching date")
@@ -124,6 +123,17 @@ public class EnterAttendSD {
         attendancePage.submit();
         attendancePage.setSubmitMessage("success");
         Assertions.assertTrue(attendancePage.getSubmitMessage().contains(arg0));
+        webDriver.close();
+    }
+
+    @When("I select the radio button {string}")
+    public void iSelectTheRadioButton(String arg0) {
+        attendancePage.selectAttendanceType(arg0);
+    }
+
+    @Then("The radio button selected will be {string}")
+    public void theRadioButtonSelectedWillBe(String arg0) {
+        Assertions.assertTrue(attendancePage.isCorrectAttendanceType(arg0));
         webDriver.close();
     }
 }

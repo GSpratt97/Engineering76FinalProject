@@ -43,3 +43,15 @@ Feature: Attendance page features
               | "David"  | "David"        |
               | "Toyin"  | "Toyin"        |
               | "Shahid" | "Shahid"       |
+
+            @AttendanceRadioCheck
+            Scenario Outline: Attendance Type changeable
+              Given I am logged in as a trainer and I am on the attendance page
+              When I select the radio button <TypeSelected>
+              Then The radio button selected will be <TypeCheck>
+              Examples:
+                | TypeSelected         | TypeCheck            |
+                | "Late"               | "Late"               |
+                | "On Time"            | "On Time"            |
+                | "Absent (Excused)"   | "Absent (Excused)"   |
+                | "Absent (Unexcused)" | "Absent (Unexcused)" |
