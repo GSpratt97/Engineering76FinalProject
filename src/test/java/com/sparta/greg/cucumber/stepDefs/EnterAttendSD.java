@@ -8,13 +8,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class EnterAttendSD {
 
@@ -22,7 +22,7 @@ public class EnterAttendSD {
     EnterAttendance attendancePage;
     Properties properties = new Properties();
 
-    @Given("I am on the attendance page")
+    @Given("I am logged in as a trainer and I am on the attendance page")
     public void iAmOnTheAttendancePage() {
         webDriver = new ChromeDriver();
         try {
@@ -37,34 +37,41 @@ public class EnterAttendSD {
 
         //Go to right page
         webDriver.get("http://localhost:8080/trainer/attendanceEntry");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         attendancePage = new EnterAttendance(webDriver);
+        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         attendancePage.setPageConfirm();
-        Assertions.assertEquals("Set Trainee Attendance", attendancePage.getPageConfirm());
+       // Assertions.assertEquals("Set Trainee Attendance", attendancePage.getPageConfirm());
     }
 
-    @When("I select a trainee")
+    @When("I select a trainee on attendance page")
     public void iSelectATrainee() {
         webDriver.get("http://localhost:8080/trainer/attendanceEntry");
         attendancePage.selectTrainee("Bill");
     }
 
-    @And("Select the desired radio button")
+    @And("Select the desired radio button for attendance type")
     public void selectTheDesiredRadioButton() {
         attendancePage.selectAttendanceType("Late");
     }
 
-    @And("Select a date within the course limits")
+    @And("Select a date within the course limits on attendance page")
     public void selectADateWithinTheCourseLimits() {
         attendancePage.selectDate("22-09-2020");
     }
 
-    @Then("I will receive a completed successfully message")
+    @Then("I will receive a completed successfully message on attendance page")
     public void iWillReceiveACompletedSuccessfullyMessage()
     {
         attendancePage.submit();
         attendancePage.setSubmitMessage("success");
         String string = "Attendance successfully";
         Assertions.assertTrue(attendancePage.getSubmitMessage().contains(string));
+        webDriver.close();
     }
 
     @And("I click submit Attendance")
@@ -72,17 +79,18 @@ public class EnterAttendSD {
         attendancePage.submit();
     }
 
-    @When("I put in a date that's outside the course bounds")
+    @When("I put in a date that's outside the course bounds on attendance page")
     public void iPutInADateThatSOutsideTheCourseBounds() {
         attendancePage.selectDate("08-02-2021");
         attendancePage.submit();
     }
 
-    @Then("I should receive an error message")
+    @Then("I will receive an error message on attendance page")
     public void iShouldReceiveAnErrorMessage() {
         attendancePage.setSubmitMessage("fail");
         String string = "This course has finished!";
         Assertions.assertTrue(attendancePage.getSubmitMessage().contains(string));
+        webDriver.close();
     }
 
     @Given("I have selected a date on Attendance Page")
@@ -90,8 +98,9 @@ public class EnterAttendSD {
         webDriver.get("http://localhost:8080/trainer/attendanceEntry");
         attendancePage = new EnterAttendance(webDriver);
         attendancePage.setPageConfirm();
-        Assertions.assertEquals("Set Trainee Attendance", attendancePage.getPageConfirm());
+        Assertions.assertTrue(attendancePage.areOnAttendanceEntryPage("Set Trainee Attendance"));
         attendancePage.selectDate("22-09-2020");
+        Assertions.assertTrue(attendancePage.isCorrectDate("22-09-2020"));
     }
 
     @Then("I will receive a completed successfully message with a matching date")
@@ -100,6 +109,7 @@ public class EnterAttendSD {
         String string = "2020-09-22";
         attendancePage.setSubmitMessage("success");
         Assertions.assertTrue(attendancePage.getSubmitMessage().contains(string));
+        webDriver.close();
     }
 
     @When("I change the trainee to {string}")
@@ -113,5 +123,17 @@ public class EnterAttendSD {
         attendancePage.submit();
         attendancePage.setSubmitMessage("success");
         Assertions.assertTrue(attendancePage.getSubmitMessage().contains(arg0));
+        webDriver.close();
+    }
+
+    @When("I select the radio button {string}")
+    public void iSelectTheRadioButton(String arg0) {
+        attendancePage.selectAttendanceType(arg0);
+    }
+
+    @Then("The radio button selected will be {string}")
+    public void theRadioButtonSelectedWillBe(String arg0) {
+        Assertions.assertTrue(attendancePage.isCorrectAttendanceType(arg0));
+        webDriver.close();
     }
 }
