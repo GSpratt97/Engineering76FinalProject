@@ -2,6 +2,7 @@ package com.sparta.greg.pom.pages.trainer;
 
 import com.sparta.greg.pom.pages.components.Page;
 import com.sparta.greg.pom.pages.components.SideBarTrainer;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,7 +18,7 @@ public class WeeklyAttendance extends Page {
 
     private final SideBarTrainer sideBarTrainer;
 
-    @FindBy(id = "accordion1")
+    @FindBy(tagName = "tbody")
     private List<WebElement> weekList;
 
     public WeeklyAttendance(WebDriver webDriver) {
@@ -27,7 +28,7 @@ public class WeeklyAttendance extends Page {
     }
 
     public boolean isWeekExpanded(int weekNumber) {
-        return !getWeekRow(weekNumber).getAttribute("class").contains("collapsed");
+        return !getWeekRow(weekNumber).findElement(By.id("accordion1")).getAttribute("class").contains("collapsed");
     }
 
     public boolean clickWeekRow(int weekNumber) {
@@ -46,6 +47,14 @@ public class WeeklyAttendance extends Page {
             return null;
         }
         return weekList.get(weekCount - weekNumber);
+    }
+
+    public List<WebElement> getStudentListForWeek(int weekNumber) {
+        return getWeekRow(weekNumber).findElements(new By.ByClassName("hide-table-padding"));
+    }
+
+    public List<WebElement> getDayListForStudent(int weekNumber, int studentNo) {
+        return getStudentListForWeek(weekNumber).get(studentNo).findElements(new By.ById("collapse1"));
     }
 
     public List<WebElement> getWeekList() {

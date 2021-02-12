@@ -1,9 +1,9 @@
 Feature: Viewing class attendance
 
-  Scenario Outline: Viewing the attendance for weeks <number> on Weekly Attendance
+  Scenario Outline: Viewing the attendance for week <number> on Weekly Attendance
     Given I am logged in as a trainer and on the Weekly Attendance page
-    When I click on the tabs for weeks <number> on the Weekly Attendance page
-    Then The week <number> tabs should expand on the Weekly Attendance page
+    When I click on the tab for week <number> on the Weekly Attendance page
+    Then The week <number> tab should expand on the Weekly Attendance page
     Examples:
       | number |
       | 1      |
@@ -19,11 +19,12 @@ Feature: Viewing class attendance
       | 11     |
       | 12     |
 
-  Scenario Outline: Closing the attendance tabs for weeks <number> on Weekly Attendance
+  Scenario Outline: Closing the attendance tabs for week <number> on Weekly Attendance after opening them for 1 second
     Given I am logged in as a trainer and on the Weekly Attendance page
-    And I have opened the attendance tabs for weeks <number> on the Weekly Attendance page
-    When I click on the tabs for weeks <number> on the Weekly Attendance page
-    Then The week 1, 2 and 3 tabs should close on the Weekly Attendance page
+    And I have opened the attendance tab for week <number> on the Weekly Attendance page
+    When I click on the tab for week <number> on the Weekly Attendance page
+    #When I wait for 1.0 seconds, then click on the tab for week <number> on the Weekly Attendance page
+    Then The week <number> tab should close on the Weekly Attendance page
     Examples:
       | number |
       | 1      |
@@ -39,11 +40,35 @@ Feature: Viewing class attendance
       | 11     |
       | 12     |
 
-  Scenario: Clicking the week 1 tab 6 times in quick succession on Weekly Attendance
+  Scenario Outline: Opening the tab for each week and checking that each one has 5 days
     Given I am logged in as a trainer and on the Weekly Attendance page
-    When I click on the week 1 tab 6 times in quick succession on the Weekly Attendance page
-    Then The week 1 tab should open and close 3 times on the Weekly Attendance page
-    And The week 1 attendance table should not be visible at all on the Weekly Attendance page
+    When I click on the tab for week <number> on the Weekly Attendance page
+    Then The week <number> tab should show a table with 5 columns
+    Examples:
+      | number |
+      | 1      |
+      | 2      |
+      | 3      |
+      | 4      |
+      | 5      |
+      | 6      |
+      | 7      |
+      | 8      |
+      | 9      |
+      | 10     |
+      | 11     |
+      | 12     |
+
+  Scenario: Clicking the week 1 tab 10 times in quick succession on Weekly Attendance should open and close it 5 times
+    Given I am logged in as a trainer and on the Weekly Attendance page
+    When I click on the week 1 tab 10 times in quick succession on the Weekly Attendance page
+    Then The week 1 tab should be closed on the Weekly Attendance page
+
+  Scenario: After clicking the week 1 tab 10 times in quick succession on Weekly Attendance and closing the tab, no table should be shown
+    Given I am logged in as a trainer and on the Weekly Attendance page
+    When I click on the week 1 tab 20 times in quick succession on the Weekly Attendance page
+    And If the week 1 tab is open, it is closed
+    Then The week 1 attendance table should not be visible at all on the Weekly Attendance page
 
   Scenario: Trainer goes to Trainer Home page from Weekly Attendance by clicking Dashboard
     Given I am logged in as a trainer and on the Weekly Attendance page
