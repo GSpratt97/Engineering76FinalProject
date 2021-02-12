@@ -81,7 +81,7 @@ public class ConsultancySkills {
     }
 
     @When("I click tabs to collapse all the menus")
-    public void iClickTabsToCollapseAllTheMenus() {
+    public void iClickTabsToCollapseAllTheMenus() throws InterruptedException {
         trainerConsultancySkills.clickAllCollapsableButtonOnConsultancySkills();
     }
 
