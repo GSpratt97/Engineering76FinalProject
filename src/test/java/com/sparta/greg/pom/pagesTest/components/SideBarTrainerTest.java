@@ -1,5 +1,6 @@
 package com.sparta.greg.pom.pagesTest.components;
 
+import com.sparta.greg.pom.pages.components.ChangePassword;
 import com.sparta.greg.pom.pages.components.Login;
 import com.sparta.greg.pom.pages.trainer.*;
 import org.junit.jupiter.api.*;
@@ -135,6 +136,12 @@ class SideBarTrainerTest {
         Assertions.assertEquals("true", status);
     }
 
+    @Test
+    @DisplayName("change password test")
+    void changePasswordTest() {
+        homeTrainer.selectProfileImage();
+        Assertions.assertEquals(TrainerChangePassword.class, homeTrainer.getSideBarTrainer().changePassword().getClass());
+    }
 
 }
 

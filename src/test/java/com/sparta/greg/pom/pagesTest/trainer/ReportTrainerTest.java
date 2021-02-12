@@ -35,7 +35,10 @@ public class ReportTrainerTest {
         }
 
         login.logInAsTrainer(trainerUsername, trainerPassword);
+        webDriver.get("http://localhost:8080/trainer/report/41"); //Bill Bird
+
         reportTrainer = new ReportTrainer(webDriver);
+        reportTrainer.setWeekReports();
     }
 
     @AfterEach
