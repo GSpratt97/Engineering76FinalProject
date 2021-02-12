@@ -1,5 +1,6 @@
 package com.sparta.greg.pom.webDriverFactory;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -23,6 +24,7 @@ public class WebDriverFactory {
             case FIREFOX:
                 return new FirefoxDriver();
             case INTERNET_EXPLORER:
+                System.setProperty("webdriver.ie.driver", "IEDriverServer.exe");
                 return new InternetExplorerDriver();
             case MICROSOFT_EDGE:
                 System.setProperty("webdriver.edge.driver","msedgedriver.exe");
@@ -45,6 +47,35 @@ public class WebDriverFactory {
                 return new FirefoxDriver(firefoxOptions);
         }
 
+        return null;
+    }
+
+
+    public static WebDriver getWebDriverWithWindowSize(WebDriverType webDriverType, int width, int height ){
+        switch (webDriverType){
+            case CHROME:
+                WebDriver chromeDriver = new ChromeDriver();
+                chromeDriver.manage().window().setSize(new Dimension(width, height));
+                return chromeDriver;
+            case SAFARI:
+                WebDriver safariDriver = new SafariDriver();
+                safariDriver.manage().window().setSize(new Dimension(width, height));
+                return safariDriver;
+            case FIREFOX:
+                WebDriver firefoxDriver = new FirefoxDriver();
+                firefoxDriver.manage().window().setSize(new Dimension(width, height));
+                return firefoxDriver;
+            case INTERNET_EXPLORER:
+                System.setProperty("webdriver.ie.driver", "IEDriverServer.exe");
+                WebDriver IEDriver = new InternetExplorerDriver();
+                IEDriver.manage().window().setSize(new Dimension(width, height));
+                return IEDriver;
+            case MICROSOFT_EDGE:
+                System.setProperty("webdriver.edge.driver","msedgedriver.exe");
+                WebDriver edgeDriver = new EdgeDriver();
+                edgeDriver.manage().window().setSize(new Dimension(width, height));
+                return edgeDriver;
+        }
         return null;
     }
 
