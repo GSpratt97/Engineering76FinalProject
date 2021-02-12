@@ -41,6 +41,10 @@ public class EnterAttendance extends Page {
         }
     }
 
+    public SideBarTrainer getSideBarTrainer() {
+        return sideBarTrainer;
+    }
+
     public void selectTrainee(String name)
     {
         switch(name)
