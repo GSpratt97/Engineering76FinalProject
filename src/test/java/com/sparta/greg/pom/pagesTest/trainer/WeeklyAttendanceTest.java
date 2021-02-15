@@ -4,8 +4,11 @@ import com.sparta.greg.pom.pages.components.Login;
 import com.sparta.greg.pom.pages.trainer.WeeklyAttendance;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.RemoteWebElement;
 
+import java.awt.*;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -47,14 +50,6 @@ public class WeeklyAttendanceTest {
         webDriver.quit();
     }
 
-    //TODO: remove this after finish
-    @Test
-    @DisplayName("TempSideBarTest")
-    void tempSideBarTest() {
-        weeklyAttendance.getSideBarTrainer().clickTrainerOptions();
-        weeklyAttendance.getSideBarTrainer().goToEnterAttendance();
-    }
-
     @Test
     @DisplayName("Page type is WeeklyAttendance")
     void pageTypeIsWeeklyAttendance() {
@@ -65,5 +60,36 @@ public class WeeklyAttendanceTest {
     @DisplayName("clickWeekRow returns true for populated list")
     void clickWeekRowReturnsTrueForPopulatedList() {
         Assertions.assertTrue(weeklyAttendance.clickWeekRow(1));
+    }
+
+    @Test
+    @DisplayName("isWeekExpanded returns false for not expanded week")
+    void isWeekExpandedReturnsFalseForNotExpandedWeek() {
+        Assertions.assertFalse(weeklyAttendance.isWeekExpanded(1));
+    }
+
+    @Test
+    @DisplayName("isWeekExpanded returns true for expanded week")
+    void isWeekExpandedReturnsTrueForExpandedWeek() {
+        weeklyAttendance.clickWeekRow(1);
+        Assertions.assertTrue(weeklyAttendance.isWeekExpanded(1));
+    }
+
+    @Test
+    @DisplayName("getWeekRow returns WebElement")
+    void getWeekRowReturnsWebElement() {
+        Assertions.assertEquals(RemoteWebElement.class, weeklyAttendance.getWeekRow(1).getClass());
+    }
+
+    @Test
+    @DisplayName("getStudentListForWeek returns List<WebElement>")
+    void getStudentListForWeekReturnsListWebElement() {
+        Assertions.assertEquals(RemoteWebElement.class, weeklyAttendance.getStudentListForWeek(1).get(0).getClass());
+    }
+
+    @Test
+    @DisplayName("getDayListForStudent returns List<WebElement>")
+    void getDayListForStudentReturnsListWebElement() {
+        Assertions.assertEquals(RemoteWebElement.class, weeklyAttendance.getDayListForStudent(1, 1).get(0).getClass());
     }
 }
