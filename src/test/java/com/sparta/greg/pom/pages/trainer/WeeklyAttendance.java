@@ -2,6 +2,7 @@ package com.sparta.greg.pom.pages.trainer;
 
 import com.sparta.greg.pom.pages.components.Page;
 import com.sparta.greg.pom.pages.components.SideBarTrainer;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,7 +18,7 @@ public class WeeklyAttendance extends Page {
 
     private final SideBarTrainer sideBarTrainer;
 
-    @FindBy(id = "accordion1")
+    @FindBy(tagName = "tbody")
     private List<WebElement> weekList;
 
     public WeeklyAttendance(WebDriver webDriver) {
@@ -26,13 +27,37 @@ public class WeeklyAttendance extends Page {
         PageFactory.initElements(webDriver, this);
     }
 
+    public boolean isWeekExpanded(int weekNumber) {
+        return !getWeekRow(weekNumber).findElement(By.id("accordion1")).getAttribute("class").contains("collapsed");
+    }
+
     public boolean clickWeekRow(int weekNumber) {
-        int weekCount = weekList.size();
-        if (weekCount == 0) {
-            System.err.println("Cannot click week row - no weeks are available");
+        WebElement weekRow = getWeekRow(weekNumber);
+        if (weekRow.equals(null)) {
             return false;
         }
-        weekList.get(weekCount - weekNumber).click();
+        weekRow.click();
         return true;
+    }
+
+    public WebElement getWeekRow(int weekNumber) {
+        int weekCount = weekList.size();
+        if (weekCount == 0) {
+            System.err.println("Cannot get week row - no weeks are available");
+            return null;
+        }
+        return weekList.get(weekCount - weekNumber);
+    }
+
+    public List<WebElement> getStudentListForWeek(int weekNumber) {
+        return getWeekRow(weekNumber).findElements(new By.ByClassName("hide-table-padding"));
+    }
+
+    public List<WebElement> getDayListForStudent(int weekNumber, int studentNo) {
+        return getStudentListForWeek(weekNumber).get(studentNo).findElements(new By.ById("collapse1"));
+    }
+
+    public List<WebElement> getWeekList() {
+        return weekList;
     }
 }

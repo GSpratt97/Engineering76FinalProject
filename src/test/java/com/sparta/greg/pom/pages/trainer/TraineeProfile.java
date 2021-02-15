@@ -27,7 +27,8 @@ public class TraineeProfile extends Page {
 
     By backToDashboard = By.cssSelector("a[class='btn btn-primary']");
     By attendanceDetails = By.cssSelector("a[href*='trainer/traineeAttendance']");
-    By traineeReport = By.cssSelector("a[href*='trainer/report]");
+//    By traineeReport = By.cssSelector("a[href*='trainer/report]");
+    By traineeReport = By.linkText("Report Details");
     By toggleButtons = By.cssSelector("tr[class*='accordion-toggle");
     By generalCard = By.cssSelector("div[class='card shadow mb-4']");
     By findSQL = By.cssSelector("tr[href*='collapseSQL']");

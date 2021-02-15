@@ -1,5 +1,6 @@
 package com.sparta.greg.pom.pagesTest.trainer;
 
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.AssessmentBreakdown;
 import com.sparta.greg.pom.pages.trainer.Assessments;
 import com.sparta.greg.pom.pages.components.Login;
@@ -26,15 +27,10 @@ public class AssessmentsTest {
     void setup() {
         webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080/login");
-        Properties properties = new Properties();
 
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            usernameTrainer = properties.getProperty("trainerUsername");
-            passwordTrainer = properties.getProperty("trainerPassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        PropertyLoader.loadProperties();
+        usernameTrainer = PropertyLoader.properties.getProperty("trainerUsername");
+        passwordTrainer = PropertyLoader.properties.getProperty("trainerPassword");
 
         Login login = new Login(webDriver);
         login.logInAsTrainer(usernameTrainer, passwordTrainer);

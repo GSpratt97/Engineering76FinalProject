@@ -1,9 +1,8 @@
 package com.sparta.greg.cucumber.stepdefs;
 
-import com.sparta.greg.pom.pages.components.ConsultancySkills;
 import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.Assessments;
-import com.sparta.greg.pom.pages.trainer.TrainerGuide;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -19,23 +18,17 @@ import java.util.Properties;
 public class AssessmentsStepdefs {
 
     WebDriver webDriver;
-    Properties properties;
     String usernameTrainer;
     String passwordTrainer;
     Assessments assessmentsPage;
 
-    private void loadPropertiesAndLoginAsTrainer() {
-        properties = new Properties();
+    private void loadPropertiesLoginAsTrainerGoToAssessments() {
         webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080/login");
 
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        usernameTrainer = properties.getProperty("trainerUsername");
-        passwordTrainer = properties.getProperty("trainerPassword");
+        PropertyLoader.loadProperties();
+        usernameTrainer = PropertyLoader.properties.getProperty("trainerUsername");
+        passwordTrainer = PropertyLoader.properties.getProperty("trainerPassword");
 
         Login login = new Login(webDriver);
         login.logInAsTrainer(usernameTrainer, passwordTrainer);
@@ -48,7 +41,7 @@ public class AssessmentsStepdefs {
 
     @Given("I am logged in as a trainer and on the Assessments Page")
     public void iAmOnTheAssessmentsPage() {
-        loadPropertiesAndLoginAsTrainer();
+        loadPropertiesLoginAsTrainerGoToAssessments();
     }
 
     @When("I click on a Trainee called {string} on the Assessments Page")
@@ -132,6 +125,12 @@ public class AssessmentsStepdefs {
         assessmentsPage.getSideBarTrainer().goToAssessments();
     }
 
+    @Then("I am taken to the Assessments Page from the Assessments Page")
+    public void iAmTakenToTheAssessmentsPageFromTheAssessmentsPage() {
+        Assertions.assertEquals("http://localhost:8080/trainer/assessments", webDriver.getCurrentUrl());
+        webDriver.close();
+    }
+
     @And("I click on Enter Attendance on the trainer sidebar on the Assessments Page")
     public void iClickOnEnterAttendance() {
         assessmentsPage.getSideBarTrainer().goToEnterAttendance();
@@ -154,9 +153,5 @@ public class AssessmentsStepdefs {
         webDriver.close();
     }
 
-    @Then("I am taken to the Assessments Page from the Assessments Page")
-    public void iAmTakenToTheAssessmentsPageFromTheAssessmentsPage() {
-        Assertions.assertEquals("http://localhost:8080/trainer/assessments", webDriver.getCurrentUrl());
-        webDriver.close();
-    }
+
 }
