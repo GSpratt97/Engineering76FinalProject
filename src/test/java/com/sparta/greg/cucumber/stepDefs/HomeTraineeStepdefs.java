@@ -19,8 +19,6 @@ import java.util.Properties;
 
 public class HomeTraineeStepdefs {
 
-    private PropertyLoader propertyLoader = new PropertyLoader();
-
     private static WebDriver webDriver;
     private static Properties properties = new Properties();
     private Login login;
