@@ -5,6 +5,8 @@ import com.sparta.greg.pom.pages.components.SideBarTrainee;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -117,6 +119,8 @@ public class HomeTrainee extends Page {
     }
 
     public AttendanceTrainee goToWeeklyAttendance() {
+        WebDriverWait wait = new WebDriverWait(webDriver,5);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(attendanceDetailsButton));
         webDriver.findElement(attendanceDetailsButton).click();
         return new AttendanceTrainee(webDriver);
     }
@@ -176,8 +180,7 @@ public class HomeTrainee extends Page {
     }
 
     public String[] getAttendanceBreakdown() {
-        return new String[]{webDriver.findElement(onTime).getText(), webDriver.findElement(late).getText(),
-                webDriver.findElement(excusedAbsence).getText(), webDriver.findElement(unexcusedAbsence).getText()};
+        return new String[]{getOnTime(), getLate(), getExcusedAbsence(), getUnexcusedAbsence()};
     }
 
     public String[] getTraineeGrades() {

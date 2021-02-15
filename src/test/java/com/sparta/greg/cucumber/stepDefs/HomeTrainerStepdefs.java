@@ -1,6 +1,7 @@
 package com.sparta.greg.cucumber.stepdefs;
 
 import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import io.cucumber.java.bs.A;
 import io.cucumber.java.en.And;
@@ -23,25 +24,27 @@ import java.util.concurrent.TimeUnit;
 public class HomeTrainerStepdefs {
 
     private static WebDriver webDriver;
-    private static Properties properties = new Properties();
     private Login login;
     private HomeTrainer homeTrainer;
 
     private String trainerUsername;
     private String trainerPassword;
 
+    private void loadPropertiesLoginAsTrainerToGoHome() {
+        webDriver = new ChromeDriver();
+        webDriver.get("http://localhost:8080/login");
+
+        PropertyLoader.loadProperties();
+        trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
+        trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
+
+        Login login = new Login(webDriver);
+        login.logInAsTrainer(trainerUsername, trainerPassword);
+    }
+
     @Given("I am logged in as a trainer and on the Home Trainer Page")
     public void iAmLoggedInAsATrainerAndOnTheHomeTrainerPage() {
-        webDriver = new ChromeDriver();
-        login = new Login(webDriver);
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            trainerUsername = properties.getProperty("trainerUsername");
-            trainerPassword = properties.getProperty("trainerPassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        login.logInAsTrainer(trainerUsername, trainerPassword);
+        loadPropertiesLoginAsTrainerToGoHome();
         homeTrainer = new HomeTrainer(webDriver);
     }
 
