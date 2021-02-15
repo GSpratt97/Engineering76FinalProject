@@ -20,14 +20,13 @@ import java.util.Properties;
 public class HomeTraineeStepdefs {
 
     private static WebDriver webDriver;
-    private static Properties properties = new Properties();
     private Login login;
     private HomeTrainee homeTrainee;
 
     private String traineeUsername;
     private String traineePassword;
 
-    private void loadPropertiesLoginAsTrainerGoToAssessments() {
+    private void loadPropertiesLoginAsTraineeGoToAssessments() {
         webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080/login");
 
