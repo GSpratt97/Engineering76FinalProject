@@ -52,7 +52,7 @@ public class HomeTrainerStepdefs {
     @Then("I can see my Trainer details on the Home Trainer Page")
     public void iCanSeeMyTrainerDetails() {
         String[] trainerDetails = {"Manish Gadhvi", "Engineering 72", "Java Development", "12"};
-        Assertions.assertEquals(Arrays.toString(traineeDetails), Arrays.toString(homeTrainer.getTrainerDetails()));
+        Assertions.assertEquals(Arrays.toString(trainerDetails), Arrays.toString(homeTrainer.getTrainerDetails()));
     }
 
     @Then("I can see the overall group attendance on the Home Trainer Page")
