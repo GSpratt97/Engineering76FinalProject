@@ -1,9 +1,8 @@
 package com.sparta.greg.cucumber.stepdefs;
 
-import com.sparta.greg.pom.pages.components.ConsultancySkills;
 import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.Assessments;
-import com.sparta.greg.pom.pages.trainer.TrainerGuide;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -19,23 +18,17 @@ import java.util.Properties;
 public class AssessmentsStepdefs {
 
     WebDriver webDriver;
-    Properties properties;
     String usernameTrainer;
     String passwordTrainer;
     Assessments assessmentsPage;
 
-    private void loadPropertiesAndLoginAsTrainer() {
-        properties = new Properties();
+    private void loadPropertiesLoginAsTrainerGoToAssessments() {
         webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080/login");
 
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        usernameTrainer = properties.getProperty("trainerUsername");
-        passwordTrainer = properties.getProperty("trainerPassword");
+        PropertyLoader.loadProperties();
+        usernameTrainer = PropertyLoader.properties.getProperty("trainerUsername");
+        passwordTrainer = PropertyLoader.properties.getProperty("trainerPassword");
 
         Login login = new Login(webDriver);
         login.logInAsTrainer(usernameTrainer, passwordTrainer);
@@ -48,7 +41,7 @@ public class AssessmentsStepdefs {
 
     @Given("I am logged in as a trainer and on the Assessments Page")
     public void iAmOnTheAssessmentsPage() {
-        loadPropertiesAndLoginAsTrainer();
+        loadPropertiesLoginAsTrainerGoToAssessments();
     }
 
     @When("I click on a Trainee called {string} on the Assessments Page")
@@ -62,12 +55,12 @@ public class AssessmentsStepdefs {
         webDriver.close();
     }
 
-    @When("I click View on the trainer sidebar")
+    @When("I click View on the trainer sidebar on the Assessments Page")
     public void iClickViewOnTheTrainerSidebar() {
         assessmentsPage.getSideBarTrainer().selectView();
     }
 
-    @And("I click on Consultancy Skills")
+    @And("I click on Consultancy Skills on the trainer sidebar on the Assessments Page")
     public void iClickOnConsultancySkills() {
         assessmentsPage.getSideBarTrainer().goToConsultancySkills();
     }
@@ -78,7 +71,7 @@ public class AssessmentsStepdefs {
         webDriver.close();
     }
 
-    @And("I click on Trainee Guide")
+    @And("I click on Trainee Guide on the trainer sidebar the Assessments Page")
     public void iClickOnTraineeGuide() {
         assessmentsPage.getSideBarTrainer().goToTraineeGuide();
     }
@@ -89,12 +82,12 @@ public class AssessmentsStepdefs {
         webDriver.close();
     }
 
-    @When("I click Trainer Options on the trainer sidebar")
+    @When("I click Trainer Options on the trainer sidebar on the Assessments Page")
     public void iClickTrainerOptionsOnTheTrainerSidebar() {
         assessmentsPage.getSideBarTrainer().clickTrainerOptions();
     }
 
-    @And("I click on Class Management")
+    @And("I click on Class Management on the trainer sidebar on the Assessments Page")
     public void iClickOnClassManagement() {
         assessmentsPage.getSideBarTrainer().goToClassManagement();
     }
@@ -105,7 +98,7 @@ public class AssessmentsStepdefs {
         webDriver.close();
     }
 
-    @And("I click on Trainee Management")
+    @And("I click on Trainee Management on the trainer sidebar on the Assessments Page")
     public void iClickOnTraineeManagement() {
         assessmentsPage.getSideBarTrainer().goToTraineeManagement();
     }
@@ -116,7 +109,7 @@ public class AssessmentsStepdefs {
         webDriver.close();
     }
 
-    @And("I click on Add Weeks")
+    @And("I click on Add Weeks on the trainer sidebar on the Assessments Page")
     public void iClickOnAddWeeks() {
         assessmentsPage.getSideBarTrainer().goToAddWeeks();
     }
@@ -127,12 +120,18 @@ public class AssessmentsStepdefs {
         webDriver.close();
     }
 
-    @And("I click on Assessments")
+    @And("I click on Assessments on the trainer sidebar on the Assessments Page")
     public void iClickOnAssessments() {
         assessmentsPage.getSideBarTrainer().goToAssessments();
     }
 
-    @And("I click on Enter Attendance")
+    @Then("I am taken to the Assessments Page from the Assessments Page")
+    public void iAmTakenToTheAssessmentsPageFromTheAssessmentsPage() {
+        Assertions.assertEquals("http://localhost:8080/trainer/assessments", webDriver.getCurrentUrl());
+        webDriver.close();
+    }
+
+    @And("I click on Enter Attendance on the trainer sidebar on the Assessments Page")
     public void iClickOnEnterAttendance() {
         assessmentsPage.getSideBarTrainer().goToEnterAttendance();
     }
@@ -143,7 +142,7 @@ public class AssessmentsStepdefs {
         webDriver.close();
     }
 
-    @And("I click on Weekly Attendance")
+    @And("I click on Weekly Attendance on the trainer sidebar on the Assessments Page")
     public void iClickOnWeeklyAttendance() {
         assessmentsPage.getSideBarTrainer().goToWeeklyAttendance();
     }
@@ -154,9 +153,5 @@ public class AssessmentsStepdefs {
         webDriver.close();
     }
 
-    @Then("I am taken to the Assessments Page from the Assessments Page")
-    public void iAmTakenToTheAssessmentsPageFromTheAssessmentsPage() {
-        Assertions.assertEquals("http://localhost:8080/trainer/assessments", webDriver.getCurrentUrl());
-        webDriver.close();
-    }
+
 }

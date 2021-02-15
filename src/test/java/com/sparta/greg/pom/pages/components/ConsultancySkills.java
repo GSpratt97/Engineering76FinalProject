@@ -34,13 +34,19 @@ public abstract class ConsultancySkills extends Page {
     public void clickCollapsableButtonOnConsultancySkills(buttonsOnTheConsultancySkills buttonName) {
         webDriver.findElement(By.cssSelector("a[aria-controls=" + "'" + buttonName.getButton() + "']")).click();
     }
-    public void clickAllCollapsableButtonOnConsultancySkills(){
+    public void clickAllCollapsableButtonOnConsultancySkills() throws InterruptedException {
         webDriver.findElement(By.cssSelector("a[aria-controls=" + "'" + buttonsOnTheConsultancySkills.STUDIOUS.getButton() + "']")).click();
+        Thread.sleep(65);
         webDriver.findElement(By.cssSelector("a[aria-controls=" + "'" + buttonsOnTheConsultancySkills.PROFESSIONAL.getButton() + "']")).click();
+        Thread.sleep(65);
         webDriver.findElement(By.cssSelector("a[aria-controls=" + "'" + buttonsOnTheConsultancySkills.INDEPENDENT.getButton() + "']")).click();
+        Thread.sleep(65);
         webDriver.findElement(By.cssSelector("a[aria-controls=" + "'" + buttonsOnTheConsultancySkills.IMAGINATIVE.getButton() + "']")).click();
+        Thread.sleep(65);
         webDriver.findElement(By.cssSelector("a[aria-controls=" + "'" + buttonsOnTheConsultancySkills.DETERMINED.getButton() + "']")).click();
+        Thread.sleep(65);
         webDriver.findElement(By.cssSelector("a[aria-controls=" + "'" + buttonsOnTheConsultancySkills.ANALYTIC.getButton() + "']")).click();
+        Thread.sleep(65);
     }
 
 }
