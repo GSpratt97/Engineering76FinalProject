@@ -40,7 +40,7 @@ public class HomeTraineeStepdefs {
 
     @Given("I am logged in as a trainee and on the Home Trainee Page")
     public void iAmLoggedInAsATraineeAndOnTheHomeTraineePage() {
-        loadPropertiesLoginAsTrainerGoToAssessments();
+        loadPropertiesLoginAsTraineeGoToAssessments();
         homeTrainee = new HomeTrainee(webDriver);
     }
 
