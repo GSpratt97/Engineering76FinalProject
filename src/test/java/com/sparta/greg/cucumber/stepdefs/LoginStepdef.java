@@ -1,51 +1,59 @@
 package com.sparta.greg.cucumber.stepdefs;
 
 import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.trainer.HomeTrainer;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class LoginStepdef {
     WebDriver webDriver;
     Login login;
-    Properties properties = new Properties();
     String trainerUsername;
     String trainerPassword;
     String traineeUsername;
     String traineePassword;
 
-    {
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            trainerUsername = properties.getProperty("trainerUsername");
-            trainerPassword = properties.getProperty("trainerPassword");
-            traineeUsername = properties.getProperty("traineeUsername");
-            traineePassword = properties.getProperty("traineePassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    private void setup() {
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver.get("http://localhost:8080");
+        login = new Login(webDriver);
 
+        PropertyLoader.loadProperties();
+        trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
+        trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
+        traineeUsername = PropertyLoader.properties.getProperty("traineeUsername");
+        traineePassword = PropertyLoader.properties.getProperty("traineePassword");
+    }
 
 
     @Given("I am on the login page")
     public void iAmOnTheLoginPage() {
-        webDriver = new ChromeDriver();
-        login = new Login(webDriver);
+        setup();
     }
 
     @Given("I have been logged out")
     public void iHaveBeenLoggedOut() {
-        webDriver = new ChromeDriver();
-        login = new Login(webDriver);
-        webDriver.get("http://localhost:8080/login?logout");
+        setup();
+        HomeTrainer homeTrainer = login.logInAsTrainer(trainerUsername, trainerPassword);
+        login = homeTrainer.logout();
     }
 
     @When("I log in with trainer email and password")
@@ -67,16 +75,29 @@ public class LoginStepdef {
 
     @Then("I am taken to the trainer home page from the login page")
     public void iAmTakenToTheTrainerHomePageFromTheLoginPage() {
-        Assertions.assertEquals("http://localhost:8080/trainee/home", webDriver.getCurrentUrl());
+        Assertions.assertEquals("http://localhost:8080/trainer/home", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @Then("I am taken to the trainee home page from the login page")
     public void iAmTakenToTheTraineeHomePageFromTheLoginPage() {
-        Assertions.assertEquals("http://localhost:8080/trainer/home", webDriver.getCurrentUrl());
+        Assertions.assertEquals("http://localhost:8080/trainee/home", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @Then("I am taken to the login error page from the login page")
     public void iAmTakenToTheLoginErrorPageFromTheLoginPage() {
         Assertions.assertEquals("http://localhost:8080/login?error", webDriver.getCurrentUrl());
+        webDriver.quit();
+    }
+
+    @And("I log in as a trainer with correct details")
+    public void iLogInAsATrainerWithCorrectDetails() {
+        login.logInAsTrainer(trainerUsername, trainerPassword);
+    }
+
+    @And("I log in as a trainee with correct details")
+    public void iLogInAsATraineeWithCorrectDetails() {
+        login.logInAsTrainee(traineeUsername, traineePassword);
     }
 }
