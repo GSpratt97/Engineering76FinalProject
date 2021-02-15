@@ -8,9 +8,9 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions
         (
-                tags = "@AttendanceEntry",
+                tags = "@AttendanceMultiple",
                 features = {"src/test/resources/features"},
-                plugin = "pretty"
+                plugin = {"pretty", "html:target/reports/htmlReport.html", "json:target/reports/jsonReport.json"}
         )
 public class TestRunner {
 
