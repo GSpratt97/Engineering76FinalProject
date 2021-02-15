@@ -1,19 +1,14 @@
 package com.sparta.greg.pom.pagesTest.components;
 
+import com.sparta.greg.pom.pages.components.Login;
 import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
-import com.sparta.greg.pom.pages.components.Login;
-import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
-import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Properties;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class LoginTest {
 
@@ -26,7 +21,7 @@ public class LoginTest {
 
     @BeforeEach
     void setup() {
-        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080");
         login = new Login(webDriver);
 
