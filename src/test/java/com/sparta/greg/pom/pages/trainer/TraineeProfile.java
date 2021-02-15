@@ -2,7 +2,7 @@ package com.sparta.greg.pom.pages.trainer;
 
 import com.sparta.greg.pom.pages.components.Page;
 import com.sparta.greg.pom.pages.components.SideBarTrainer;
-import com.sparta.greg.pom.pages.trainee.TraineeAttendance;
+import com.sparta.greg.pom.pages.trainee.AttendanceTrainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -72,11 +72,11 @@ public class TraineeProfile extends Page {
         return null;
     }
 
-    public WeeklyAttendance goToTraineeWeeklyAttendance() {
+    public AttendanceTrainer goToTraineeAttendance() {
         if (webDriver.findElement(attendanceDetails) != null) {
             WebElement attendanceBreakdown = webDriver.findElement(attendanceDetails);
             attendanceBreakdown.click();
-            return new WeeklyAttendance(webDriver);
+            return new AttendanceTrainer(webDriver);
         }
 
         throw new NoSuchElementException("No attendance details available");
