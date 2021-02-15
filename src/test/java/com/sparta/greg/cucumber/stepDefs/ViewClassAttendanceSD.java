@@ -1,6 +1,7 @@
 package com.sparta.greg.cucumber.stepdefs;
 
 import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.WeeklyAttendance;
 import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
 import com.sparta.greg.pom.webDriverFactory.WebDriverType;
@@ -12,8 +13,6 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
@@ -25,18 +24,13 @@ public class ViewClassAttendanceSD {
     private WeeklyAttendance weeklyAttendance;
 
     private void loginAndGoToWeeklyAttendance() {
-        Properties properties = new Properties();
         //webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
         webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
         webDriver.get("http://localhost:8080/login");
 
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        username = properties.getProperty("trainerUsername");
-        password = properties.getProperty("trainerPassword");
+        PropertyLoader.loadProperties();
+        username = PropertyLoader.properties.getProperty("trainerUsername");
+        password = PropertyLoader.properties.getProperty("trainerPassword");
 
         Login login = new Login(webDriver);
         login.logInAsTrainer(username, password);
@@ -212,7 +206,7 @@ public class ViewClassAttendanceSD {
     @When("I wait for {double} seconds, then click on the tab for week {int} on the Weekly Attendance page")
     public void iWaitForSecondsThenClickOnTheTabForWeekNumberOnTheWeeklyAttendancePage(double arg0, int arg1) {
         try {
-            Thread.sleep(Math.round(arg0*1000));
+            Thread.sleep(Math.round(arg0 * 1000));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
