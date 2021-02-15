@@ -1,7 +1,7 @@
 # new feature
 # Tags: optional
 
-Feature: Trainee attendance page
+Feature: Attendance page
 
   Scenario Outline: Clicking week attendance rows on trainee attendance page
     Given I am logged in as a trainee and on the Trainee Attendance page

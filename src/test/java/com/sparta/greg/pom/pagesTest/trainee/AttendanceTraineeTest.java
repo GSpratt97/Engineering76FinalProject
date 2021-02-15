@@ -8,7 +8,7 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TraineeAttendanceTest {
+public class AttendanceTraineeTest {
 
     private static WebDriver webDriver;
     private static Login loginPage;
@@ -29,7 +29,7 @@ public class TraineeAttendanceTest {
 
     @Test
     @DisplayName("Click on a week homepage path")
-    void clickOnAWeekHomePageToAttendance(){
+    public void clickOnAWeekHomePageToAttendance(){
         traineeAttendance = homePage.goToWeeklyAttendance();
         traineeAttendance.clickWeek(11);
     }

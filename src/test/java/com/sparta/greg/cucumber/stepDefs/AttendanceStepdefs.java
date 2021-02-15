@@ -15,7 +15,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class TraineeAttendanceStepdefs {
+public class AttendanceStepdefs {
 
     WebDriver webDriver;
     Login loginPage;
@@ -29,8 +29,8 @@ public class TraineeAttendanceStepdefs {
         webDriver = new ChromeDriver();
         loginPage = new Login(webDriver);
         PropertyLoader.loadProperties();
-        usernameTrainee = PropertyLoader.properties.getProperty("usernameTrainee");
-        passwordTrainee = PropertyLoader.properties.getProperty("passwordTrainee");
+        usernameTrainee = PropertyLoader.properties.getProperty("traineeUsername");
+        passwordTrainee = PropertyLoader.properties.getProperty("traineePassword");
         homePage = loginPage.logInAsTrainee(usernameTrainee, passwordTrainee);
         traineeAttendance = homePage.goToWeeklyAttendance();
     }

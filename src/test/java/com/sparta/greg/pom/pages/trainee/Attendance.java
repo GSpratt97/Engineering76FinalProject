@@ -7,7 +7,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -18,15 +21,16 @@ public abstract class Attendance extends Page {
     String isExpanded = "aria-expanded";
 
     @FindBy(tagName = "tbody")
-    List<WebElement> weeks;
+    public List<WebElement> weeks;
 
     public Attendance(WebDriver webDriver) {
         super(webDriver);
     }
 
     public void clickWeek(int week){
+    WebElement weekRow = new WebDriverWait(webDriver, 5).until(ExpectedConditions.elementToBeClickable(weeks.get(weeks.size() - week)));
         if (week > 0 && week <= weeks.size()) {
-            weeks.get(weeks.size() - week).click();
+            weekRow.click();
         }
     }
 
