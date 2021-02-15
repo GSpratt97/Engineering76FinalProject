@@ -1,10 +1,8 @@
 package com.sparta.greg.pom.pagesTest.components;
 
-import com.sparta.greg.pom.pages.components.ChangePassword;
 import com.sparta.greg.pom.pages.components.Login;
 import com.sparta.greg.pom.pages.trainee.*;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -93,7 +91,7 @@ public class SideBarTraineeTest {
     @DisplayName("goToTraineeAttendance returns TraineeAttendance")
     void goToTraineeAttendanceReturnsTraineeAttendance() {
         homeTrainee.getSideBarTrainee().clickTraineeOptions();
-        Assertions.assertEquals(TraineeAttendance.class, homeTrainee.getSideBarTrainee().goToTraineeAttendance().getClass());
+        Assertions.assertEquals(Attendance.class, homeTrainee.getSideBarTrainee().goToTraineeAttendance().getClass());
     }
 
     @Test
