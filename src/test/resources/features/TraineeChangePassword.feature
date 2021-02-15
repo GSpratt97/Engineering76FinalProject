@@ -1,7 +1,4 @@
-# new feature
-# Tags: optional
-
-Feature: A description
+Feature: Change Password Page as Trainee
 
   Scenario: Change password as Trainee
     Given I am logged in as a Trainee and on the Trainee Change Password Page

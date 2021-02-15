@@ -1,4 +1,4 @@
-Feature: Change Password
+Feature: Change Password Page as Trainer
 
   Scenario: Change password as Trainer
     Given I am logged in as a Trainer and on the Trainer Change Password Page
