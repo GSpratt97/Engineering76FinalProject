@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class AttendanceTrainer extends Attendance{
 
     SideBarTrainer sideBarTrainer;
-    By backToProfileButton = By.className("btn btn-primary mb-3");
+    By backToProfileButton = By.cssSelector("#content-wrapper > main > div > div.card-body > div.accordion.mt-3 > div > a");
 
     public AttendanceTrainer(WebDriver webDriver){
         super(webDriver);

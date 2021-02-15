@@ -1,21 +1,17 @@
 package com.sparta.greg.pom.pagesTest.components;
 
+import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
-import com.sparta.greg.pom.pages.components.Login;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Properties;
-
 public class LoginTest {
 
-    private static final Properties properties = new Properties();
     private static Login login;
     private static WebDriver webDriver;
     private static String trainerUsername;
@@ -26,36 +22,66 @@ public class LoginTest {
     @BeforeEach
     void setup() {
         webDriver = new ChromeDriver();
+        webDriver.get("http://localhost:8080");
         login = new Login(webDriver);
 
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            trainerUsername = properties.getProperty("trainerUsername");
-            trainerPassword = properties.getProperty("trainerPassword");
-            traineeUsername = properties.getProperty("traineeUsername");
-            traineePassword = properties.getProperty("traineePassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        PropertyLoader.loadProperties();
+        trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
+        trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
+        traineeUsername = PropertyLoader.properties.getProperty("traineeUsername");
+        traineePassword = PropertyLoader.properties.getProperty("traineePassword");
     }
 
     @Test
     void checkLoginPageLoaded() {
         Assertions.assertEquals("http://localhost:8080/login", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @Test
     void canSignInAsTrainer() {
         HomeTrainer homeTrainer = login.logInAsTrainer(trainerUsername, trainerPassword);
-//        Assertions.assertEquals("http://localhost:8080/trainer/home", webDriver.getCurrentUrl());
         Assertions.assertEquals(HomeTrainer.class, homeTrainer.getClass());
+        webDriver.quit();
     }
 
     @Test
     void canSignInAsTrainee() {
         HomeTrainee homeTrainee = login.logInAsTrainee(traineeUsername, traineePassword);
-//        Assertions.assertEquals("http://localhost:8080/trainee/home", webDriver.getCurrentUrl());
         Assertions.assertEquals(HomeTrainee.class, homeTrainee.getClass());
+        webDriver.quit();
+    }
+
+    @Test
+    void canSignInAsTraineeFromLogout() {
+        webDriver.get("http://localhost:8080/login?logout");
+        HomeTrainee homeTrainee = login.logInAsTrainee(traineeUsername, traineePassword);
+        Assertions.assertEquals(HomeTrainee.class, homeTrainee.getClass());
+        webDriver.quit();
+    }
+
+    @Test
+    void canSignInAsTrainerFromLogout() {
+        webDriver.get("http://localhost:8080/login?logout");
+        HomeTrainer homeTrainer = login.logInAsTrainer(trainerUsername, trainerPassword);
+        Assertions.assertEquals(HomeTrainer.class, homeTrainer.getClass());
+        webDriver.quit();
+    }
+
+    @Test
+    void canSignInAsTraineeFromError() {
+        webDriver.get("http://localhost:8080/login?error");
+        HomeTrainee homeTrainee = login.logInAsTrainee(traineeUsername, traineePassword);
+        Assertions.assertEquals(HomeTrainee.class, homeTrainee.getClass());
+        webDriver.quit();
+    }
+
+    @Test
+    void canSignInAsTrainerFromError() {
+        webDriver.get("http://localhost:8080/login?error");
+        HomeTrainer homeTrainer = login.logInAsTrainer(trainerUsername, trainerPassword);
+        Assertions.assertEquals(HomeTrainer.class, homeTrainer.getClass());
+        webDriver.quit();
     }
 
 }

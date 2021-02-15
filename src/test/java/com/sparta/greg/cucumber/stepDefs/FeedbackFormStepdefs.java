@@ -133,4 +133,26 @@ public class FeedbackFormStepdefs {
         Assertions.assertEquals(webDriver.getCurrentUrl(), "http://localhost:8080/login");
         webDriver.quit();
     }
+
+    @When("I click on the Reports History from the Feedback Page")
+    public void iClickOnTheReportsHistoryFromTheFeedbackPage() {
+        feedbackForm.getSideBarTrainee().clickTraineeOptions();
+        feedbackForm.getSideBarTrainee().goToReportTrainee();
+    }
+
+    @Then("I should be directed to the Reports History page from the Feedback Page")
+    public void iShouldBeDirectedToTheReportsHistoryPageFromTheFeedbackPage() {
+        Assertions.assertEquals(webDriver.getCurrentUrl(), "http://localhost:8080/trainee/report");
+    }
+
+    @When("I click on the Attendance History page from the Feedback Page")
+    public void iClickOnTheAttendanceHistoryPageFromTheFeedbackPage() {
+        feedbackForm.getSideBarTrainee().clickTraineeOptions();
+        feedbackForm.getSideBarTrainee().goToTraineeAttendance();
+    }
+
+    @Then("I should be directed to the Attendance History page from the Feedback Page")
+    public void iShouldBeDirectedToTheAttendanceHistoryPageFromTheFeedbackPage() {
+        Assertions.assertEquals(webDriver.getCurrentUrl(), "http://localhost:8080/trainee/trainee-attendance");
+    }
 }

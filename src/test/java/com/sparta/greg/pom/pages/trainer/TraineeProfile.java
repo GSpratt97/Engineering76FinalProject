@@ -27,7 +27,7 @@ public class TraineeProfile extends Page {
     By overallGrade = By.cssSelector("main > div > div:nth-child(3) > div > div.card-body > div > div > div > div:nth-child(3) > div.card-body > big");
 
     By backToDashboard = By.cssSelector("a[class='btn btn-primary']");
-    By attendanceDetails = By.cssSelector("a[href*='trainer/traineeAttendance']");
+    By attendanceDetails = By.cssSelector("#content-wrapper > main > div > div:nth-child(2) > div > div.card-footer.py-3 > h6 > div > a");
 //    By traineeReport = By.cssSelector("a[href*='trainer/report]");
     By traineeReport = By.linkText("Report Details");
     By toggleButtons = By.cssSelector("tr[class*='accordion-toggle");

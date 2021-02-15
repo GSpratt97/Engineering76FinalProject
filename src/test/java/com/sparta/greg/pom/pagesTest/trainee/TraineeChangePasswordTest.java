@@ -44,5 +44,6 @@ public class TraineeChangePasswordTest {
         TraineeChangePassword traineeChangePassword = new TraineeChangePassword(webDriver);
         HomeTrainee homeTrainee = traineeChangePassword.changePassword(traineePassword, "new");
         Assertions.assertEquals(HomeTrainee.class, homeTrainee.getClass());
+        webDriver.quit();
     }
 }
