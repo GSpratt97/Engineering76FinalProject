@@ -1,8 +1,10 @@
 package com.sparta.greg.pom.pagesTest.components;
 
+import com.sparta.greg.pom.pages.components.ChangePassword;
 import com.sparta.greg.pom.pages.components.Login;
 import com.sparta.greg.pom.pages.trainee.*;
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -106,4 +108,12 @@ public class SideBarTraineeTest {
         homeTrainee.getSideBarTrainee().clickTraineeOptions();
         Assertions.assertTrue(homeTrainee.getSideBarTrainee().isTraineeOptionsExpanded());
     }
+
+    @Test
+    @DisplayName("change password test")
+    void changePasswordTest() {
+        homeTrainee.selectProfileImage();
+        Assertions.assertEquals(TraineeChangePassword.class, homeTrainee.getSideBarTrainee().changePassword().getClass());
+    }
+
 }

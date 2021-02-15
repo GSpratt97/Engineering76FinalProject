@@ -5,6 +5,7 @@ import com.sparta.greg.pom.pages.trainee.ReportTrainee;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -35,7 +36,10 @@ public class ReportTraineeTest {
         }
 
         login.logInAsTrainee(traineeUsername, traineePassword);
+        webDriver.get("http://localhost:8080/trainee/report");
+
         reportTrainee = new ReportTrainee(webDriver);
+        reportTrainee.setWeekReports();
     }
 
     @AfterEach

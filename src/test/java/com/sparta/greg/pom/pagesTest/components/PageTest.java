@@ -67,5 +67,25 @@ public class PageTest {
         Assertions.assertEquals("http://localhost:8080/trainer/home", homeTrainer.getURL());
     }
 
+    @Test
+    @DisplayName("Get address information")
+    void getAddressInformation() {
+        Assertions.assertEquals("6th Floor\n125 London Wall\nBarbican\nLondon EC2Y 5AS", homeTrainer.getAddressInfo());
+
+    }
+
+    @Test
+    @DisplayName("Get contact information")
+    void getContactInformation() {
+        Assertions.assertEquals("Contact Us:\nPhone: +44 (0) 208 940 2333\nEmail: contact@spartaglobal.com", homeTrainer.getContactInfo());
+
+    }
+
+    @Test
+    @DisplayName("Get copyright information")
+    void getCopyrightInformation() {
+        Assertions.assertEquals("Copyright © Sparta Global: Panda in Spring", homeTrainer.getCopyrightInfo());
+    }
+
 
 }
