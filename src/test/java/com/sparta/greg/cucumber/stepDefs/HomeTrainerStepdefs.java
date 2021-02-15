@@ -104,7 +104,6 @@ public class HomeTrainerStepdefs {
     @When("I click View on the trainer sidebar on the Home Trainer Page")
     public void iClickViewOnTheTrainerSidebarOnTheHomeTrainerPage() {
         homeTrainer.getSideBarTrainer().selectView();
-        homeTrainer.getSideBarTrainer().selectView();
     }
 
     @And("I click on Consultancy Skills on the Home Trainer Page")
