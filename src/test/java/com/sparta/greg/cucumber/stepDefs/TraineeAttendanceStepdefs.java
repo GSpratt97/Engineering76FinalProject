@@ -1,6 +1,7 @@
 package com.sparta.greg.cucumber.stepdefs;
 
 import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
 import com.sparta.greg.pom.pages.trainee.Attendance;
 import io.cucumber.java.en.Given;
@@ -16,11 +17,10 @@ import java.util.Properties;
 
 public class TraineeAttendanceStepdefs {
 
-    protected WebDriver webDriver;
-    private Login loginPage;
-    private HomeTrainee homePage;
-    private Attendance traineeAttendance;
-    private Properties properties = new Properties();
+    WebDriver webDriver;
+    Login loginPage;
+    HomeTrainee homePage;
+    Attendance traineeAttendance;
     String usernameTrainee;
     String passwordTrainee;
 
@@ -28,14 +28,9 @@ public class TraineeAttendanceStepdefs {
     public void iAmLoggedInAsATraineeAndOnTheTraineeAttendancePage() {
         webDriver = new ChromeDriver();
         loginPage = new Login(webDriver);
-
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            usernameTrainee = properties.getProperty("traineeUsername");
-            passwordTrainee = properties.getProperty("traineePassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        PropertyLoader.loadProperties();
+        usernameTrainee = PropertyLoader.properties.getProperty("usernameTrainee");
+        passwordTrainee = PropertyLoader.properties.getProperty("passwordTrainee");
         homePage = loginPage.logInAsTrainee(usernameTrainee, passwordTrainee);
         traineeAttendance = homePage.goToWeeklyAttendance();
     }
