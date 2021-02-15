@@ -43,6 +43,7 @@ public class HomeTrainerStepdefs {
         }
         login.logInAsTrainer(trainerUsername, trainerPassword);
         homeTrainer = new HomeTrainer(webDriver);
+        webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     @When("I am on the Home Trainer Page")
@@ -103,8 +104,7 @@ public class HomeTrainerStepdefs {
 
     @When("I click View on the trainer sidebar on the Home Trainer Page")
     public void iClickViewOnTheTrainerSidebarOnTheHomeTrainerPage() {
-        WebDriverWait wait = new WebDriverWait(webDriver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a.nav-link[data-target='#collapseTwo']")));
+        homeTrainer.getSideBarTrainer().selectView();
         homeTrainer.getSideBarTrainer().selectView();
     }
 
