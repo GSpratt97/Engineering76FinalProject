@@ -9,22 +9,19 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-public class TraineeAttendance extends Page {
+public abstract class Attendance extends Page {
 
-    @FindBy(id = "accordion1")
+    By rows = By.tagName("tr");
+    By columns = By.tagName("td");
+    String isExpanded = "aria-expanded";
+
+    @FindBy(tagName = "tbody")
     List<WebElement> weeks;
 
-    SideBarTrainee sideBarTrainee;
-
-    public SideBarTrainee getSideBarTrainee(){
-        return sideBarTrainee;
-    }
-
-    public TraineeAttendance(WebDriver webDriver){
+    public Attendance(WebDriver webDriver) {
         super(webDriver);
-        PageFactory.initElements(webDriver, this);
-        sideBarTrainee = new SideBarTrainee(webDriver);
     }
 
     public void clickWeek(int week){
@@ -34,10 +31,15 @@ public class TraineeAttendance extends Page {
     }
 
     public boolean isToggledOnWeek(int week){
-        String isToggled = webDriver.findElements(By.tagName("tbody")).get(weeks.size() - week).findElements(By.tagName("tr")).get(0).getAttribute("aria-expanded");
+        String isToggled = weeks.get(weeks.size() - week).findElements(rows).get(0).getAttribute(isExpanded);
         if (isToggled.equals("true")){
             return true;
         }
         return false;
     }
+
+    public int getNumberOfDaysInWeek(int week){
+        return weeks.get(weeks.size() - week).findElements(rows).get(0).findElements(columns).size() - 2;
+    }
+
 }
