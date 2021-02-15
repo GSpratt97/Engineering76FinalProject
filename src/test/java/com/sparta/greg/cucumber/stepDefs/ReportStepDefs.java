@@ -160,120 +160,140 @@ public class ReportStepDefs {
     //----------Then----------//
     @Then("the selected weekly report is expanded as Trainee")
     public void theSelectedWeeklyReportIsExpandedAsTrainee() {
+        reportTrainee.waitForClick();
         Assertions.assertTrue(reportTrainee.doesExpandButtonExpand(reportTrainee.getWeekReports().get(0)));
         webDriver.quit();
     }
 
     @Then("the expanded weekly report is collapsed as Trainee")
     public void theExpandedWeeklyReportIsCollapsedAsTrainee() {
+        reportTrainee.waitForClick();
         Assertions.assertTrue(reportTrainee.doesExpandButtonCollapse(reportTrainee.getWeekReports().get(0)));
         webDriver.quit();
     }
 
     @Then("the weekly reports are in descending order as Trainee")
     public void theWeeklyReportsAreInDescendingOrderAsTrainee() {
+        reportTrainee.waitForClick();
         Assertions.assertTrue(reportTrainee.isWeekNumberCorrect());
         webDriver.quit();
     }
 
     @Then("the selected weekly report is expanded as Trainer")
     public void theSelectedWeeklyReportIsExpandedAsTrainer() {
+        reportTrainer.waitForClick();
         Assertions.assertTrue(reportTrainer.doesExpandButtonExpand(reportTrainer.getWeekReports().get(0)));
         webDriver.quit();
     }
 
     @Then("the expanded weekly report is collapsed as Trainer")
     public void theExpandedWeeklyReportIsCollapsedAsTrainer() {
+        reportTrainer.waitForClick();
         Assertions.assertTrue(reportTrainer.doesExpandButtonCollapse(reportTrainer.getWeekReports().get(0)));
         webDriver.quit();
     }
 
     @Then("the weekly reports are in descending order as Trainer")
     public void theWeeklyReportsAreInDescendingOrderAsTrainer() {
+        reportTrainer.waitForClick();
         Assertions.assertTrue(reportTrainer.isWeekNumberCorrect());
         webDriver.quit();
     }
 
     @Then("I have returned to Trainee Profile")
     public void iHaveReturnedToTraineeProfile() {
+        reportTrainer.waitForClick();
         Assertions.assertEquals("http://localhost:8080/trainer/traineeProfile/41", reportTrainer.getURL());
         webDriver.quit();
     }
 
     @Then("I am taken to the Trainee Consultancy Skills page")
     public void iAmTakenToTheTraineeConsultancySkillsPage() {
+        reportTrainee.waitForClick();
         Assertions.assertEquals("http://localhost:8080/consultancy", reportTrainee.getURL());
         webDriver.quit();
     }
 
     @Then("I am taken to the Trainee Guide page")
     public void iAmTakenToTheTraineeGuidePage() {
+        reportTrainee.waitForClick();
         Assertions.assertEquals("http://localhost:8080/guide", reportTrainee.getURL());
         webDriver.quit();
     }
 
     @Then("I am taken to the Trainee Feedback Form page")
     public void iAmTakenToTheTraineeFeedbackFormPage() {
+        reportTrainee.waitForClick();
         Assertions.assertEquals("http://localhost:8080/trainee/report/12", reportTrainee.getURL());
         webDriver.quit();
     }
 
     @Then("I am taken to the Trainee Reports History page")
     public void iAmTakenToTheTraineeReportsHistoryPage() {
+        reportTrainee.waitForClick();
         Assertions.assertEquals("http://localhost:8080/trainee/report", reportTrainee.getURL());
         webDriver.quit();
     }
 
     @Then("I am taken to the Trainee Attendance History page")
     public void iAmTakenToTheTraineeAttendanceHistoryPage() {
+        reportTrainee.waitForClick();
         Assertions.assertEquals("http://localhost:8080/trainee/trainee-attendance", reportTrainee.getURL());
         webDriver.quit();
     }
 
     @Then("I am taken to the Trainer Consultancy Skills page")
     public void iAmTakenToTheTrainerConsultancySkillsPage() {
+        reportTrainer.waitForClick();
         Assertions.assertEquals("http://localhost:8080/consultancy", reportTrainer.getURL());
         webDriver.quit();
     }
 
     @Then("I am taken to the Trainer Trainee Guide page")
     public void iAmTakenToTheTrainerTraineeGuidePage() {
+        reportTrainer.waitForClick();
         Assertions.assertEquals("http://localhost:8080/guide", reportTrainer.getURL());
         webDriver.quit();
     }
 
     @Then("I am taken to the Class Management page")
     public void iAmTakenToTheClassManagementPage() {
+        reportTrainer.waitForClick();
         Assertions.assertEquals("http://localhost:8080/trainer/manageClass", reportTrainer.getURL());
         webDriver.quit();
     }
 
     @Then("I am taken to the Trainee Management page")
     public void iAmTakenToTheTraineeManagementPage() {
+        reportTrainer.waitForClick();
         Assertions.assertEquals("http://localhost:8080/trainer/manageTrainee", reportTrainer.getURL());
         webDriver.quit();
     }
 
     @Then("I am taken to the Add Weeks page")
     public void iAmTakenToTheAddWeeksPage() {
+        reportTrainer.waitForClick();
         Assertions.assertEquals("http://localhost:8080/trainer/newWeek", reportTrainer.getURL());
         webDriver.quit();
     }
 
     @Then("I am taken to the Assessments page")
     public void iAmTakenToTheAssessmentsPage() {
+        reportTrainer.waitForClick();
         Assertions.assertEquals("http://localhost:8080/trainer/assessments", reportTrainer.getURL());
         webDriver.quit();
     }
 
     @Then("I am taken to the Enter Attendance page")
     public void iAmTakenToTheEnterAttendancePage() {
+        reportTrainer.waitForClick();
         Assertions.assertEquals("http://localhost:8080/trainer/attendanceEntry", reportTrainer.getURL());
         webDriver.quit();
     }
 
     @Then("I am taken to the Weekly Attendance page")
     public void iAmTakenToTheWeeklyAttendancePage() {
+        reportTrainer.waitForClick();
         Assertions.assertEquals("http://localhost:8080/trainer/weekly-attendance", reportTrainer.getURL());
         webDriver.quit();
     }
