@@ -35,6 +35,16 @@ Feature: Actions on the Feedback Form page
    When I click on the Trainee Guide from the Feedback Page
    Then I should be directed to the Trainee Guide page from the Feedback Page
 
+  Scenario: Going to the Reports History
+    Given I am logged in as a trainee on the Feedback Page
+    When I click on the Reports History from the Feedback Page
+    Then I should be directed to the Reports History page from the Feedback Page
+
+  Scenario: Going to the Attendance History
+    Given I am logged in as a trainee on the Feedback Page
+    When I click on the Attendance History page from the Feedback Page
+    Then I should be directed to the Attendance History page from the Feedback Page
+
   Scenario: Logging out
     Given I am logged in as a trainee on the Feedback Page
     When I click on logout from the Feedback Page
