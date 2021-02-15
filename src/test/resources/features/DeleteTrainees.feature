@@ -1,4 +1,4 @@
-@ManageTrainee
+@ManageTrainee @DeleteTrainee
 Feature: Deleting a trainee profile
 
   Background: Logged in as a trainer and navigated to Manage Trainee Page.
@@ -9,6 +9,7 @@ Feature: Deleting a trainee profile
     When I click on Delete Trainee on Manage Trainee Page.
     Then I am getting a validation warning for invalid data in Delete Trainee form.
 
+  @DeletingTrainee
   Scenario: Deleting a trainee as normal.
     Given I have created a trainee with name "Andrei" "Pavel", email "apavel@spartaglobal.com" in "Engineering 76".
     And I am selecting "Andrei Pavel" trainee in Delete Trainee form.

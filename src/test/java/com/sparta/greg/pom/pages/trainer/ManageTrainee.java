@@ -89,6 +89,14 @@ public class ManageTrainee extends Page {
     }
 
     /**
+     * Returns the navigation sidebar.
+     * @return {@link SideBarTrainer}
+     */
+    public SideBarTrainer getSidebar(){
+        return sideBarTrainer;
+    }
+
+    /**
      * Enum of available fields in {@code 'Create New Trainee' form}
      */
     public enum CreateTraineeField {
@@ -243,8 +251,7 @@ public class ManageTrainee extends Page {
          *                                {@code Class Dropdown} list.
          */
         public CreateTraineeForm selectClass(String className) {
-            new Actions(webDriver).click(classDropDownElement).click().perform();
-            List<WebElement> listElements = webElement.findElements(classDropDownListSelector);
+//            new Actions(webDriver).click(classDropDownElement).perform();
             Select dropdown = new Select(classDropDownElement);
             try {
                 dropdown.selectByVisibleText(className);
@@ -266,7 +273,7 @@ public class ManageTrainee extends Page {
          * e.g. validation message is empty when data is valid
          *
          * @param field available in {@code 'Create New Trainee' form}
-         * @return true if the field has validation error
+         * @return false if the field has validation error
          */
         public boolean isValid(CreateTraineeField field) {
             switch (field) {
@@ -403,7 +410,7 @@ public class ManageTrainee extends Page {
          * Checks if validation message pops up
          * e.g. validation message is empty when data is valid
          *
-         * @return true if the Dropdown element has validation error.
+         * @return false if the Dropdown element has validation error.
          */
         public boolean isValid() {
             return traineesDropDownElement.getAttribute("validationMessage").isBlank();
