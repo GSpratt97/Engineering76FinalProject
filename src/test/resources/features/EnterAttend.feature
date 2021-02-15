@@ -26,7 +26,7 @@ Feature: Attendance page features
           Then I will receive an error message on attendance page
 
         @AttendanceEntry
-        Scenario: Correct date added to
+        Scenario: Correct date added
           Given I am logged in as a trainer and I am on the attendance page
           And I have selected a date on Attendance Page
           When I click submit Attendance

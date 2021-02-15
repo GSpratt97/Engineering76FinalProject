@@ -1,5 +1,6 @@
 package com.sparta.greg.pom.pagesTest.trainer;
 
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.EnterAttendance;
 import org.junit.After;
 import org.junit.Before;
@@ -27,11 +28,8 @@ public class EnterAttendanceTest {
     public void setUp()
     {
         // Get properties for sign in
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        PropertyLoader.loadProperties();
+        properties = PropertyLoader.properties;
         //set up a webpage in isolation for testing
         ChromeOptions option = new ChromeOptions();
         option.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors");
