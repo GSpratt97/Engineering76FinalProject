@@ -7,12 +7,12 @@ Feature: Home for Trainers Features
   Scenario: Trainer sees correct details on the Home Trainer Page
     Given I am logged in as a trainer and on the Home Trainer Page
     When I am on the Home Trainer Page
-    Then I can see my Trainer details
+    Then I can see my Trainer details on the Home Trainer Page
 
   Scenario: Trainer sees overall group attendance
     Given I am logged in as a trainer and on the Home Trainer Page
     When I am on the Home Trainer Page
-    Then I can see the overall group attendance
+    Then I can see the overall group attendance on the Home Trainer Page
 
   Scenario: Trainer can view trainee profile
     Given I am logged in as a trainer and on the Home Trainer Page
