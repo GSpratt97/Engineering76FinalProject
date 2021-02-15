@@ -43,7 +43,6 @@ public class HomeTrainerStepdefs {
         }
         login.logInAsTrainer(trainerUsername, trainerPassword);
         homeTrainer = new HomeTrainer(webDriver);
-        webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     @When("I am on the Home Trainer Page")
@@ -130,7 +129,6 @@ public class HomeTrainerStepdefs {
 
     @When("I click Trainer Options on the trainer sidebar on the Home Trainer Page")
     public void iClickTrainerOptionsOnTheTrainerSidebarOnTheHomeTrainerPage() {
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         homeTrainer.getSideBarTrainer().clickTrainerOptions();
     }
 
