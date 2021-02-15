@@ -45,7 +45,7 @@ Feature: Home for Trainees features
     And I click on Consultancy Skills on the Home Trainee Page
     Then I am taken to the Consultancy Skills Page from the Home Trainee Page
 
-  Scenario: Trainee goes to the Trainee Guide Page from Home Trainee Page
+  Scenario: Trainee goes to the Trainee Guide Page from the Home Trainee Page
     Given I am logged in as a trainee and on the Home Trainee Page
     When I click View on the trainee sidebar on the Home Trainee Page
     And I click on Trainee Guide on the Home Trainee Page
