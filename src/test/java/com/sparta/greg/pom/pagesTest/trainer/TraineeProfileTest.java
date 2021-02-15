@@ -3,6 +3,7 @@ package com.sparta.greg.pom.pagesTest.trainer;
 
 import com.sparta.greg.pom.pages.components.Login;
 import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.trainee.AttendanceTrainer;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.trainer.ReportTrainer;
 import com.sparta.greg.pom.pages.trainer.TraineeProfile;
@@ -14,10 +15,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Properties;
 
 public class TraineeProfileTest {
 
@@ -52,7 +49,7 @@ public class TraineeProfileTest {
 
     @Test
     void canClickAttendanceDetails() {
-        Assertions.assertEquals(WeeklyAttendance.class, traineeProfilePage.goToTraineeWeeklyAttendance().getClass());
+        Assertions.assertEquals(AttendanceTrainer.class, traineeProfilePage.goToTraineeAttendance().getClass());
     }
 
     @Test

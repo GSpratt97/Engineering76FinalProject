@@ -11,10 +11,7 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.Properties;
 
 public class TraineeProfileStepdefs {
     WebDriver webDriver;
@@ -94,7 +91,7 @@ public class TraineeProfileStepdefs {
             System.out.println("This @Then should not be used for any trainee apart from Bill Bird");
             Assertions.fail();
         }
-        webDriver.close();
+        webDriver.quit();
 
     }
 
@@ -113,7 +110,7 @@ public class TraineeProfileStepdefs {
             System.out.println("This @Then should not be used for any trainee apart from Bill Bird");
             Assertions.fail();
         }
-        webDriver.close();
+        webDriver.quit();
     }
 
     @When("I look at the Grades for Previous Week of the trainee on the Trainee Profile Page")
@@ -130,7 +127,7 @@ public class TraineeProfileStepdefs {
             System.out.println("This @Then should not be used for any trainee apart from Bill Bird");
             Assertions.fail();
         }
-        webDriver.close();
+        webDriver.quit();
     }
 
     @When("I look at the General SQL Results of the trainee on the Trainee Profile Page")
@@ -150,7 +147,7 @@ public class TraineeProfileStepdefs {
             System.out.println("This @Then should not be used for any trainee apart from Bill Bird");
             Assertions.fail();
         }
-        webDriver.close();
+        webDriver.quit();
     }
 
     @When("I look at the General Not SQL Results of the trainee on the Trainee Profile Page")
@@ -170,7 +167,7 @@ public class TraineeProfileStepdefs {
             System.out.println("This @Then should not be used for any trainee apart from Bill Bird");
             Assertions.fail();
         }
-        webDriver.close();
+        webDriver.quit();
     }
 
     @When("I click on the toggle SQL breakdown button on the Trainee Profile Page")
@@ -195,7 +192,7 @@ public class TraineeProfileStepdefs {
             System.out.println("This @Then should not be used for any trainee apart from Bill Bird");
             Assertions.fail();
         }
-        webDriver.close();
+        webDriver.quit();
 
     }
 
@@ -221,18 +218,18 @@ public class TraineeProfileStepdefs {
             System.out.println("This @Then should not be used for any trainee apart from Bill Bird");
             Assertions.fail();
         }
-        webDriver.close();
+        webDriver.quit();
     }
 
     @When("I click on Attendance Details on the Trainee Profile Page")
     public void iClickOnAttendanceDetailsOnTheTraineeProfilePage() {
-        traineeProfilePage.goToTraineeWeeklyAttendance();
+        traineeProfilePage.goToTraineeAttendance();
     }
 
     @Then("I am taken to the Weekly Attendance Page from the Trainee Profile Page")
     public void iAmTakenToTheWeeklyAttendancePageFromTheTraineeProfilePage() {
-        Assertions.assertTrue(webDriver.getCurrentUrl().contains("http://localhost:8080/trainer/traineeAttendance/"));
-        webDriver.close();
+        Assertions.assertTrue(webDriver.getCurrentUrl().contains("http://localhost:8080/trainer/weekly-attendance"));
+        webDriver.quit();
     }
 
     @When("I click on Report Details on the Trainee Profile Page")
@@ -243,7 +240,7 @@ public class TraineeProfileStepdefs {
     @Then("I am taken to the Report Trainer Page from the Trainee Profile Page")
     public void iAmTakenToTheReportTrainerPageFromTheTraineeProfilePage() {
         Assertions.assertTrue(webDriver.getCurrentUrl().contains("http://localhost:8080/trainer/report/"));
-        webDriver.close();
+        webDriver.quit();
     }
 
     @When("I click on Back to Dashboard on the Trainee Profile Page")
@@ -254,7 +251,7 @@ public class TraineeProfileStepdefs {
     @Then("I am taken to the Home Trainer Page from the Trainee Profile Page")
     public void iAmTakenToTheHomeTrainerPageFromTheTraineeProfilePage() {
         Assertions.assertEquals(webDriver.getCurrentUrl(), "http://localhost:8080/trainer/home");
-        webDriver.close();
+        webDriver.quit();
     }
 
     // Standard Navigation using Sidebar
@@ -272,7 +269,7 @@ public class TraineeProfileStepdefs {
     @Then("I am taken to the Consultancy Skills Page from the Trainee Profile Page")
     public void iAmTakenToTheConsultancySkillsPageFromTheTraineeProfilePage() {
         Assertions.assertEquals("http://localhost:8080/consultancy", webDriver.getCurrentUrl());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @And("I click on Trainee Guide on the trainer sidebar the Trainee Profile Page")
@@ -283,7 +280,7 @@ public class TraineeProfileStepdefs {
     @Then("I am taken to the Trainee Guide Page from the Trainee Profile Page")
     public void iAmTakenToTheTraineeGuidePageFromTheTraineeProfilePage() {
         Assertions.assertEquals("http://localhost:8080/guide", webDriver.getCurrentUrl());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @When("I click Trainer Options on the trainer sidebar on the Trainee Profile Page")
@@ -299,7 +296,7 @@ public class TraineeProfileStepdefs {
     @Then("I am taken to the Class Management Page from the Trainee Profile Page")
     public void iAmTakenToTheClassManagementPageFromTheTraineeProfilePage() {
         Assertions.assertEquals("http://localhost:8080/trainer/manageClass", webDriver.getCurrentUrl());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @And("I click on Trainee Management on the trainer sidebar on the Trainee Profile Page")
@@ -310,7 +307,7 @@ public class TraineeProfileStepdefs {
     @Then("I am taken to the Manage Trainee Page from the Trainee Profile Page")
     public void iAmTakenToTheManageTraineePageFromTheTraineeProfilePage() {
         Assertions.assertEquals("http://localhost:8080/trainer/manageTrainee", webDriver.getCurrentUrl());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @And("I click on Add Weeks on the trainer sidebar on the Trainee Profile Page")
@@ -321,7 +318,7 @@ public class TraineeProfileStepdefs {
     @Then("I am taken to the Add Weeks Page from the Trainee Profile Page")
     public void iAmTakenToTheAddWeeksPageFromTheTraineeProfilePage() {
         Assertions.assertEquals("http://localhost:8080/trainer/newWeek", webDriver.getCurrentUrl());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @And("I click on Assessments on the trainer sidebar on the Trainee Profile Page")
@@ -332,7 +329,7 @@ public class TraineeProfileStepdefs {
     @Then("I am taken to the Assessments Page from the Trainee Profile Page")
     public void iAmTakenToTheAssessmentsPageFromTheTraineeProfilePage() {
         Assertions.assertEquals("http://localhost:8080/trainer/assessments", webDriver.getCurrentUrl());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @And("I click on Enter Attendance on the trainer sidebar on the Trainee Profile Page")
@@ -343,11 +340,17 @@ public class TraineeProfileStepdefs {
     @Then("I am taken to the Enter Attendance Page from the Trainee Profile Page")
     public void iAmTakenToTheEnterAttendancePageFromTheTraineeProfilePage() {
         Assertions.assertEquals("http://localhost:8080/trainer/attendanceEntry", webDriver.getCurrentUrl());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @And("I click on Weekly Attendance on the trainer sidebar on the Trainee Profile Page")
     public void iClickOnWeeklyAttendanceOnTheTrainerSidebarOnTheTraineeProfilePage() {
         traineeProfilePage.getSideBarTrainer().goToWeeklyAttendance();
+    }
+
+    @Then("I am taken to the Trainer Attendance Page from the Trainee Profile Page")
+    public void iAmTakenToTheTrainerAttendancePageFromTheTraineeProfilePage() {
+        Assertions.assertEquals("http://localhost:8080/trainer/traineeAttendance/41", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 }
