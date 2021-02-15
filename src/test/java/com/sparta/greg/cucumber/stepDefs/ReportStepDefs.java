@@ -2,14 +2,15 @@ package com.sparta.greg.cucumber.stepdefs;
 
 import com.sparta.greg.pom.pages.components.Login;
 import com.sparta.greg.pom.pages.components.PropertyLoader;
-import com.sparta.greg.pom.pages.components.SideBarTrainee;
-import com.sparta.greg.pom.pages.components.SideBarTrainer;
 import com.sparta.greg.pom.pages.trainee.ReportTrainee;
 import com.sparta.greg.pom.pages.trainer.ReportTrainer;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -17,6 +18,7 @@ public class ReportStepDefs {
 
     private static WebDriver        webDriver;
     private static Login            login;
+
     private static ReportTrainee    reportTrainee;
     private static ReportTrainer    reportTrainer;
 
@@ -92,134 +94,187 @@ public class ReportStepDefs {
     //----------And----------//
     @And("I click Consultancy Skills as a Trainee")
     public void iClickConsultancySkillsAsATrainee() {
+        reportTrainee.getSideBarTrainee().goToConsultancySkills();
     }
 
     @And("I click Trainee Guide as a Trainee")
     public void iClickTraineeGuideAsATrainee() {
+        reportTrainee.getSideBarTrainee().goToTraineeGuide();
     }
 
     @And("I click Consultancy Skills as a Trainer")
     public void iClickConsultancySkillsAsATrainer() {
+        reportTrainer.getSideBarTrainer().goToConsultancySkills();
     }
 
     @And("I click Trainee Guide as a Trainer")
     public void iClickTraineeGuideAsATrainer() {
+        reportTrainer.getSideBarTrainer().goToTraineeGuide();
     }
 
     @And("I click Feedback Form")
     public void iClickFeedbackForm() {
+        reportTrainee.getSideBarTrainee().goToFeedbackForm();
     }
 
     @And("I click Reports History")
     public void iClickReportsHistory() {
+        reportTrainee.getSideBarTrainee().goToReportTrainee();
     }
 
     @And("I click Attendance History")
     public void iClickAttendanceHistory() {
+        reportTrainee.getSideBarTrainee().goToTraineeAttendance();
     }
 
     @And("I click Class Management")
     public void iClickClassManagement() {
+        reportTrainer.getSideBarTrainer().goToClassManagement();
     }
 
     @And("I click Trainee Management")
     public void iClickTraineeManagement() {
+        reportTrainer.getSideBarTrainer().goToTraineeManagement();
     }
 
     @And("I click Add Weeks")
     public void iClickAddWeeks() {
+        reportTrainer.getSideBarTrainer().goToAddWeeks();
     }
 
     @And("I click Assessments")
     public void iClickAssessments() {
+        reportTrainer.getSideBarTrainer().goToAssessments();
     }
 
     @And("I click Enter Attendance")
     public void iClickEnterAttendance() {
+        reportTrainer.getSideBarTrainer().goToEnterAttendance();
     }
 
     @And("I click Weekly Attendance")
     public void iClickWeeklyAttendance() {
+        reportTrainer.getSideBarTrainer().goToWeeklyAttendance();
     }
 
     //----------Then----------//
     @Then("the selected weekly report is expanded as Trainee")
     public void theSelectedWeeklyReportIsExpandedAsTrainee() {
+        Assertions.assertTrue(reportTrainee.doesExpandButtonExpand(reportTrainee.getWeekReports().get(0)));
+        webDriver.quit();
     }
 
     @Then("the expanded weekly report is collapsed as Trainee")
     public void theExpandedWeeklyReportIsCollapsedAsTrainee() {
+        Assertions.assertTrue(reportTrainee.doesExpandButtonCollapse(reportTrainee.getWeekReports().get(0)));
+        webDriver.quit();
     }
 
     @Then("the weekly reports are in descending order as Trainee")
     public void theWeeklyReportsAreInDescendingOrderAsTrainee() {
+        Assertions.assertTrue(reportTrainee.isWeekNumberCorrect());
+        webDriver.quit();
     }
 
     @Then("the selected weekly report is expanded as Trainer")
     public void theSelectedWeeklyReportIsExpandedAsTrainer() {
+        Assertions.assertTrue(reportTrainer.doesExpandButtonExpand(reportTrainer.getWeekReports().get(0)));
+        webDriver.quit();
     }
 
     @Then("the expanded weekly report is collapsed as Trainer")
     public void theExpandedWeeklyReportIsCollapsedAsTrainer() {
+        Assertions.assertTrue(reportTrainer.doesExpandButtonCollapse(reportTrainer.getWeekReports().get(0)));
+        webDriver.quit();
     }
 
     @Then("the weekly reports are in descending order as Trainer")
     public void theWeeklyReportsAreInDescendingOrderAsTrainer() {
+        Assertions.assertTrue(reportTrainer.isWeekNumberCorrect());
+        webDriver.quit();
     }
 
     @Then("I have returned to Trainee Profile")
     public void iHaveReturnedToTraineeProfile() {
+        Assertions.assertEquals("http://localhost:8080/trainer/traineeProfile/41", reportTrainer.getURL());
+        webDriver.quit();
     }
 
     @Then("I am taken to the Trainee Consultancy Skills page")
     public void iAmTakenToTheTraineeConsultancySkillsPage() {
+        Assertions.assertEquals("http://localhost:8080/consultancy", reportTrainee.getURL());
+        webDriver.quit();
     }
 
     @Then("I am taken to the Trainee Guide page")
     public void iAmTakenToTheTraineeGuidePage() {
+        Assertions.assertEquals("http://localhost:8080/guide", reportTrainee.getURL());
+        webDriver.quit();
     }
 
     @Then("I am taken to the Trainee Feedback Form page")
     public void iAmTakenToTheTraineeFeedbackFormPage() {
+        Assertions.assertEquals("http://localhost:8080/trainee/report/12", reportTrainee.getURL());
+        webDriver.quit();
     }
 
     @Then("I am taken to the Trainee Reports History page")
     public void iAmTakenToTheTraineeReportsHistoryPage() {
+        Assertions.assertEquals("http://localhost:8080/trainee/report", reportTrainee.getURL());
+        webDriver.quit();
     }
 
     @Then("I am taken to the Trainee Attendance History page")
     public void iAmTakenToTheTraineeAttendanceHistoryPage() {
+        Assertions.assertEquals("http://localhost:8080/trainee/trainee-attendance", reportTrainee.getURL());
+        webDriver.quit();
     }
 
     @Then("I am taken to the Trainer Consultancy Skills page")
     public void iAmTakenToTheTrainerConsultancySkillsPage() {
+        Assertions.assertEquals("http://localhost:8080/consultancy", reportTrainer.getURL());
+        webDriver.quit();
     }
 
     @Then("I am taken to the Trainer Trainee Guide page")
     public void iAmTakenToTheTrainerTraineeGuidePage() {
+        Assertions.assertEquals("http://localhost:8080/guide", reportTrainer.getURL());
+        webDriver.quit();
     }
 
     @Then("I am taken to the Class Management page")
     public void iAmTakenToTheClassManagementPage() {
+        Assertions.assertEquals("http://localhost:8080/trainer/manageClass", reportTrainer.getURL());
+        webDriver.quit();
     }
 
     @Then("I am taken to the Trainee Management page")
     public void iAmTakenToTheTraineeManagementPage() {
+        Assertions.assertEquals("http://localhost:8080/trainer/manageTrainee", reportTrainer.getURL());
+        webDriver.quit();
     }
 
     @Then("I am taken to the Add Weeks page")
     public void iAmTakenToTheAddWeeksPage() {
+        Assertions.assertEquals("http://localhost:8080/trainer/newWeek", reportTrainer.getURL());
+        webDriver.quit();
     }
 
     @Then("I am taken to the Assessments page")
     public void iAmTakenToTheAssessmentsPage() {
+        Assertions.assertEquals("http://localhost:8080/trainer/assessments", reportTrainer.getURL());
+        webDriver.quit();
     }
 
     @Then("I am taken to the Enter Attendance page")
     public void iAmTakenToTheEnterAttendancePage() {
+        Assertions.assertEquals("http://localhost:8080/trainer/attendanceEntry", reportTrainer.getURL());
+        webDriver.quit();
     }
 
     @Then("I am taken to the Weekly Attendance page")
     public void iAmTakenToTheWeeklyAttendancePage() {
+        Assertions.assertEquals("http://localhost:8080/trainer/weekly-attendance", reportTrainer.getURL());
+        webDriver.quit();
     }
 }
