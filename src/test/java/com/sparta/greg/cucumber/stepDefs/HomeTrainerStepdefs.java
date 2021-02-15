@@ -49,13 +49,13 @@ public class HomeTrainerStepdefs {
     public void iAmOnTheHomeTrainerPage() {
     }
 
-    @Then("I can see my Trainer details")
+    @Then("I can see my Trainer details on the Home Trainer Page")
     public void iCanSeeMyTrainerDetails() {
         String[] traineeDetails = {"Manish Gadhvi", "Engineering 72", "Java Development", "12"};
         Assertions.assertEquals(Arrays.toString(traineeDetails), Arrays.toString(homeTrainer.getTrainerDetails()));
     }
 
-    @Then("I can see the overall group attendance")
+    @Then("I can see the overall group attendance on the Home Trainer Page")
     public void iCanSeeTheOverallGroupAttendance() {
         String[] overallGroupAttendance = {"89.74%", "7.28%", "1.99%", "0.99%"};
         Assertions.assertEquals(Arrays.toString(overallGroupAttendance), Arrays.toString(homeTrainer.getOverallGroupAttendance()));
