@@ -1,7 +1,9 @@
 package com.sparta.greg.cucumber.stepdefs;
 
 import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
+import com.sparta.greg.pom.pages.trainer.Assessments;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -17,6 +19,8 @@ import java.util.Properties;
 
 public class HomeTraineeStepdefs {
 
+    private PropertyLoader propertyLoader = new PropertyLoader();
+
     private static WebDriver webDriver;
     private static Properties properties = new Properties();
     private Login login;
@@ -25,18 +29,21 @@ public class HomeTraineeStepdefs {
     private String traineeUsername;
     private String traineePassword;
 
+    private void loadPropertiesLoginAsTrainerGoToAssessments() {
+        webDriver = new ChromeDriver();
+        webDriver.get("http://localhost:8080/login");
+
+        PropertyLoader.loadProperties();
+        traineeUsername = PropertyLoader.properties.getProperty("traineeUsername");
+        traineePassword = PropertyLoader.properties.getProperty("traineePassword");
+
+        Login login = new Login(webDriver);
+        login.logInAsTrainer(traineeUsername, traineePassword);
+    }
+
     @Given("I am logged in as a trainee and on the Home Trainee Page")
     public void iAmLoggedInAsATraineeAndOnTheHomeTraineePage() {
-        webDriver = new ChromeDriver();
-        login = new Login(webDriver);
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            traineeUsername = properties.getProperty("traineeUsername");
-            traineePassword = properties.getProperty("traineePassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        login.logInAsTrainee(traineeUsername, traineePassword);
+        loadPropertiesLoginAsTrainerGoToAssessments();
         homeTrainee = new HomeTrainee(webDriver);
     }
 
@@ -154,7 +161,7 @@ public class HomeTraineeStepdefs {
 
     @Then("I can see my Attendance details on the Home Trainee Page")
     public void iCanSeeMyAttendanceDetailsOnTheHomeTraineePage() {
-        String[] attendanceBreakdown = {"NO ENTRY", "NO ENTRY", "NO ENTRY", "NO ENTRY"};
+        String[] attendanceBreakdown = {"0%", "100%", "0%", "0%"};
         Assertions.assertEquals(Arrays.toString(attendanceBreakdown), Arrays.toString(homeTrainee.getAttendanceBreakdown()));
     }
 }
