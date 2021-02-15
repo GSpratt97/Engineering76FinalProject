@@ -2,33 +2,33 @@
 
   Scenario: Select Weekly Report as Trainee
     Given I am logged in as a Trainee and I am on the Report page
-    When I select a weekly report
-    Then the selected weekly report is expanded
+    When I select a weekly report as a Trainee
+    Then the selected weekly report is expanded as Trainee
 
   Scenario: Collapse Weekly Report as Trainee
     Given I am logged in as a Trainee and I am on the Report page
-    When I select a weekly report
-    And I select a weekly report
-    Then the expanded weekly report is collapsed
+    When I select a weekly report as a Trainee
+    And I select a weekly report as a Trainee
+    Then the expanded weekly report is collapsed as Trainee
 
   Scenario: Weekly Reports Descend Chronologically as Trainee
     Given I am logged in as a Trainee and I am on the Report page
-    Then the weekly reports are in descending order
+    Then the weekly reports are in descending order as Trainee
 
   Scenario: Select Weekly Report as Trainer
     Given I am logged in as a Trainer and I am on Bill Birds Report Page
-    When I select a weekly report
-    Then the selected weekly report is expanded
+    When I select a weekly report as a Trainer
+    Then the selected weekly report is expanded as Trainer
 
   Scenario: Collapse Weekly Report as Trainer
     Given I am logged in as a Trainer and I am on Bill Birds Report Page
-    When I select a weekly report
-    And I select a weekly report
-    Then the expanded weekly report is collapsed
+    When I select a weekly report as a Trainer
+    And I select a weekly report as a Trainer
+    Then the expanded weekly report is collapsed as Trainer
 
   Scenario: Weekly Reports Descend Chronologically as Trainer
     Given I am logged in as a Trainer and I am on Bill Birds Report Page
-    Then the weekly reports are in descending order
+    Then the weekly reports are in descending order as Trainer
 
   Scenario: Return to Trainee Profile as Trainer
     Given I am logged in as a Trainer and I am on Bill Birds Report Page
@@ -38,13 +38,13 @@
   Scenario: Navigate to Consultancy Skills from Report Details as Trainee
     Given I am logged in as a Trainee and I am on the Report page
     When I click View on the Trainee Sidebar
-    And I click Consultancy Skills
+    And I click Consultancy Skills as a Trainee
     Then I am taken to the Trainee Consultancy Skills page
 
   Scenario: Navigate to Trainee Guide from Report as Trainee
     Given I am logged in as a Trainee and I am on the Report page
     When I click View on the Trainee Sidebar
-    And I click Trainee Guide
+    And I click Trainee Guide as a Trainee
     Then I am taken to the Trainee Guide page
 
   Scenario: Navigate to Feedback Form from Report as Trainee
@@ -68,13 +68,13 @@
   Scenario: Navigate to Consultancy Skills from Report Details as Trainer
     Given I am logged in as a Trainer and I am on Bill Birds Report Page
     When I click View on the Trainer Sidebar
-    And I click Consultancy Skills
+    And I click Consultancy Skills as a Trainer
     Then I am taken to the Trainer Consultancy Skills page
 
   Scenario: Navigate to Trainee Guide from Report as Trainer
     Given I am logged in as a Trainer and I am on Bill Birds Report Page
     When I click View on the Trainer Sidebar
-    And I click Trainee Guide
+    And I click Trainee Guide as a Trainer
     Then I am taken to the Trainer Trainee Guide page
 
   Scenario: Navigate to Class Management from Report as Trainer

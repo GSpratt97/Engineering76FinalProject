@@ -1,54 +1,109 @@
 package com.sparta.greg.cucumber.stepdefs;
 
+import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.components.SideBarTrainee;
+import com.sparta.greg.pom.pages.components.SideBarTrainer;
+import com.sparta.greg.pom.pages.trainee.ReportTrainee;
+import com.sparta.greg.pom.pages.trainer.ReportTrainer;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ReportStepDefs {
+
+    private static WebDriver        webDriver;
+    private static Login            login;
+    private static ReportTrainee    reportTrainee;
+    private static ReportTrainer    reportTrainer;
 
     //----------Given----------//
     @Given("I am logged in as a Trainee and I am on the Report page")
     public void iAmLoggedInAsATraineeAndIAmOnTheReportPage() {
-        
+        webDriver   = new ChromeDriver();
+        login       = new Login(webDriver);
+
+        PropertyLoader.loadProperties();
+        String traineeUsername = PropertyLoader.properties.getProperty("traineeUsername");
+        String traineePassword = PropertyLoader.properties.getProperty("traineePassword");
+
+        login.logInAsTrainee(traineeUsername, traineePassword);
+        webDriver.get("http://localhost:8080/trainee/report");
+
+        reportTrainee = new ReportTrainee(webDriver);
+        reportTrainee.setWeekReports();
     }
 
     @Given("I am logged in as a Trainer and I am on Bill Birds Report Page")
     public void iAmLoggedInAsATrainerAndIAmOnBillBirdsReportPage() {
+        webDriver   = new ChromeDriver();
+        login       = new Login(webDriver);
+
+        PropertyLoader.loadProperties();
+        String trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
+        String trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
+
+        login.logInAsTrainer(trainerUsername, trainerPassword);
+        webDriver.get("http://localhost:8080/trainer/report/41");
+
+        reportTrainer = new ReportTrainer(webDriver);
+        reportTrainer.setWeekReports();
     }
 
     //----------When----------//
-    @When("I select a weekly report")
-    public void iSelectAWeeklyReport() {
+    @When("I select a weekly report as a Trainee")
+    public void iSelectAWeeklyReportAsATrainee() {
+        reportTrainee.clickExpandButton(reportTrainee.getWeekReports().get(0));
+    }
+
+    @When("I select a weekly report as a Trainer")
+    public void iSelectAWeeklyReportAsATrainer() {
+        reportTrainer.clickExpandButton(reportTrainer.getWeekReports().get(0));
     }
 
     @When("I return to Trainee Profile")
     public void iReturnToTraineeProfile() {
+        reportTrainer.backToTraineeProfile();
     }
 
     @When("I click View on the Trainee Sidebar")
     public void iClickViewOnTheTraineeSidebar() {
+        reportTrainee.getSideBarTrainee().selectView();
     }
 
     @When("I click Trainee Options on the Trainee Sidebar")
     public void iClickTraineeOptionsOnTheTraineeSidebar() {
+        reportTrainee.getSideBarTrainee().clickTraineeOptions();
     }
 
     @When("I click View on the Trainer Sidebar")
     public void iClickViewOnTheTrainerSidebar() {
+        reportTrainer.getSideBarTrainer().selectView();
     }
 
     @When("I click Trainer Options on the Trainer Sidebar")
     public void iClickTrainerOptionsOnTheTrainerSidebar() {
+        reportTrainer.getSideBarTrainer().clickTrainerOptions();
     }
 
     //----------And----------//
-    @And("I click Consultancy Skills")
-    public void iClickConsultancySkills() {
+    @And("I click Consultancy Skills as a Trainee")
+    public void iClickConsultancySkillsAsATrainee() {
     }
 
-    @And("I click Trainee Guide")
-    public void iClickTraineeGuide() {
+    @And("I click Trainee Guide as a Trainee")
+    public void iClickTraineeGuideAsATrainee() {
+    }
+
+    @And("I click Consultancy Skills as a Trainer")
+    public void iClickConsultancySkillsAsATrainer() {
+    }
+
+    @And("I click Trainee Guide as a Trainer")
+    public void iClickTraineeGuideAsATrainer() {
     }
 
     @And("I click Feedback Form")
@@ -88,16 +143,28 @@ public class ReportStepDefs {
     }
 
     //----------Then----------//
-    @Then("the selected weekly report is expanded")
-    public void theSelectedWeeklyReportIsExpanded() {
+    @Then("the selected weekly report is expanded as Trainee")
+    public void theSelectedWeeklyReportIsExpandedAsTrainee() {
     }
 
-    @Then("the expanded weekly report is collapsed")
-    public void theExpandedWeeklyReportIsCollapsed() {
+    @Then("the expanded weekly report is collapsed as Trainee")
+    public void theExpandedWeeklyReportIsCollapsedAsTrainee() {
     }
 
-    @Then("the weekly reports are in descending order")
-    public void theWeeklyReportsAreInDescendingOrder() {
+    @Then("the weekly reports are in descending order as Trainee")
+    public void theWeeklyReportsAreInDescendingOrderAsTrainee() {
+    }
+
+    @Then("the selected weekly report is expanded as Trainer")
+    public void theSelectedWeeklyReportIsExpandedAsTrainer() {
+    }
+
+    @Then("the expanded weekly report is collapsed as Trainer")
+    public void theExpandedWeeklyReportIsCollapsedAsTrainer() {
+    }
+
+    @Then("the weekly reports are in descending order as Trainer")
+    public void theWeeklyReportsAreInDescendingOrderAsTrainer() {
     }
 
     @Then("I have returned to Trainee Profile")
