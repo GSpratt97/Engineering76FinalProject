@@ -30,12 +30,7 @@ public class WebDriverFactoryDemo {
     @BeforeAll
     static void setup(){
 
-
-
-
-        //safariDriver = WebDriverFactory.getWebDriver(WebDriverType.SAFARI);
-
-
+        safariDriver = WebDriverFactory.getWebDriver(WebDriverType.SAFARI);
 
         properties = new Properties();
         try {
@@ -151,6 +146,9 @@ public class WebDriverFactoryDemo {
         feedbackForm.getSideBarTrainee().goToFeedbackForm();
 
         Assertions.assertTrue(feedbackForm.enterStop("Editing stop", 12));
+
+
+
     }
 
 

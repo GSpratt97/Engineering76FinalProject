@@ -39,15 +39,15 @@ public class FeedbackFormDemo {
     static void setup(){
         chromeDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
 
-        firefoxDriver = WebDriverFactory.getWebDriver(WebDriverType.FIREFOX);
+        //firefoxDriver = WebDriverFactory.getWebDriver(WebDriverType.FIREFOX);
 
-        safariDriver = WebDriverFactory.getWebDriver(WebDriverType.SAFARI);
+        //safariDriver = WebDriverFactory.getWebDriver(WebDriverType.SAFARI);
 
-        explorerDriver = WebDriverFactory.getWebDriver(WebDriverType.INTERNET_EXPLORER);
+        //explorerDriver = WebDriverFactory.getWebDriver(WebDriverType.INTERNET_EXPLORER);
 
-        edgeDriver = WebDriverFactory.getWebDriver(WebDriverType.MICROSOFT_EDGE);
+        //edgeDriver = WebDriverFactory.getWebDriver(WebDriverType.MICROSOFT_EDGE);
 
-        headlessDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
+        //headlessDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
 
         
 
@@ -62,8 +62,6 @@ public class FeedbackFormDemo {
         login = new Login(chromeDriver);
 
         feedbackForm = new FeedbackForm(chromeDriver);
-
-        chromeDriver.get("http://localhost:8080/login");
 
         login.logInAsTrainee(properties.getProperty("traineeUsername"), properties.getProperty("traineePassword"));
 
