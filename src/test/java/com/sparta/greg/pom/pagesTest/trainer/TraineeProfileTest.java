@@ -3,7 +3,6 @@ package com.sparta.greg.pom.pagesTest.trainer;
 
 import com.sparta.greg.pom.pages.components.Login;
 import com.sparta.greg.pom.pages.components.PropertyLoader;
-import com.sparta.greg.pom.pages.trainee.TraineeAttendance;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.trainer.ReportTrainer;
 import com.sparta.greg.pom.pages.trainer.TraineeProfile;
