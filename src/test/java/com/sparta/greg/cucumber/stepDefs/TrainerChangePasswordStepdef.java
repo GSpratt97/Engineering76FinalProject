@@ -22,7 +22,6 @@ public class TrainerChangePasswordStepdef {
     WebDriver webDriver;
     Login login;
     Login loginLogout;
-    Properties properties = new Properties();
     String trainerUsername;
     String trainerPassword;
     HomeTrainer homeTrainer;

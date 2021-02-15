@@ -35,21 +35,21 @@ public class LoginTest {
     @Test
     void checkLoginPageLoaded() {
         Assertions.assertEquals("http://localhost:8080/login", webDriver.getCurrentUrl());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @Test
     void canSignInAsTrainer() {
         HomeTrainer homeTrainer = login.logInAsTrainer(trainerUsername, trainerPassword);
         Assertions.assertEquals(HomeTrainer.class, homeTrainer.getClass());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @Test
     void canSignInAsTrainee() {
         HomeTrainee homeTrainee = login.logInAsTrainee(traineeUsername, traineePassword);
         Assertions.assertEquals(HomeTrainee.class, homeTrainee.getClass());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @Test
@@ -57,7 +57,7 @@ public class LoginTest {
         webDriver.get("http://localhost:8080/login?logout");
         HomeTrainee homeTrainee = login.logInAsTrainee(traineeUsername, traineePassword);
         Assertions.assertEquals(HomeTrainee.class, homeTrainee.getClass());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @Test
@@ -65,7 +65,7 @@ public class LoginTest {
         webDriver.get("http://localhost:8080/login?logout");
         HomeTrainer homeTrainer = login.logInAsTrainer(trainerUsername, trainerPassword);
         Assertions.assertEquals(HomeTrainer.class, homeTrainer.getClass());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @Test
@@ -73,7 +73,7 @@ public class LoginTest {
         webDriver.get("http://localhost:8080/login?error");
         HomeTrainee homeTrainee = login.logInAsTrainee(traineeUsername, traineePassword);
         Assertions.assertEquals(HomeTrainee.class, homeTrainee.getClass());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @Test
@@ -81,7 +81,7 @@ public class LoginTest {
         webDriver.get("http://localhost:8080/login?error");
         HomeTrainer homeTrainer = login.logInAsTrainer(trainerUsername, trainerPassword);
         Assertions.assertEquals(HomeTrainer.class, homeTrainer.getClass());
-        webDriver.close();
+        webDriver.quit();
     }
 
 }
