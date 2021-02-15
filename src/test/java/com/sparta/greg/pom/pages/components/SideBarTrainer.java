@@ -1,5 +1,6 @@
 package com.sparta.greg.pom.pages.components;
 
+import com.sparta.greg.pom.pages.trainee.TraineeChangePassword;
 import com.sparta.greg.pom.pages.trainer.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,7 @@ public class SideBarTrainer extends SideBar {
     By assessmentsLink = new By.ByCssSelector("a[href*='/trainer/assessments']");
     By enterAttendanceLink = new By.ByCssSelector("a[href*='/trainer/attendanceEntry']");
     By weeklyAttendanceLink = new By.ByCssSelector("a[href*='/trainer/weekly-attendance']");
+    By changePasswordLink = new By.ByCssSelector("a[href*='/changePassword']");
 
     public SideBarTrainer(WebDriver webDriver) {
         super(webDriver);
@@ -99,4 +101,10 @@ public class SideBarTrainer extends SideBar {
         webDriver.findElement(weeklyAttendanceLink).click();
         return new WeeklyAttendance(webDriver);
     }
+
+    public TrainerChangePassword changePassword() {
+        webDriver.findElement(changePasswordLink).click();
+        return new TrainerChangePassword(webDriver);
+    }
+
 }
