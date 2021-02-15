@@ -2,6 +2,7 @@ package com.sparta.greg.pom.pages.components;
 
 import com.sparta.greg.pom.pages.trainee.TraineeChangePassword;
 import com.sparta.greg.pom.pages.trainer.*;
+import io.cucumber.java.ro.Si;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -32,8 +33,9 @@ public class SideBarTrainer extends SideBar {
         return true;
     }
 
-    public void clickTrainerOptions() {
+    public SideBarTrainer clickTrainerOptions() {
         webDriver.findElement(trainerOptionsButton).click();
+        return this;
     }
 
     public HomeTrainer goToHomePageByClickingLogo() {

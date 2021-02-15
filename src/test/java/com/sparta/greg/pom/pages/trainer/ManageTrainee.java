@@ -21,7 +21,7 @@ import java.util.Locale;
 public class ManageTrainee extends Page {
 
     /**
-     * Sidebar abstract class added
+     * Navigation sidebar
      */
     private static SideBarTrainer sideBarTrainer;
     /**
@@ -89,6 +89,24 @@ public class ManageTrainee extends Page {
     }
 
     /**
+     * Returns the navigation sidebar.
+     * @return {@link SideBarTrainer}
+     */
+    public SideBarTrainer getSidebar(){
+        return sideBarTrainer;
+    }
+
+    /**
+     * Enum of available fields in {@code 'Create New Trainee' form}
+     */
+    public enum CreateTraineeField {
+        EMAIL,
+        FIRST_NAME,
+        LAST_NAME,
+        CLASS;
+    }
+
+    /**
      * Section of Page Object Model of 'trainer/manageTrainee' pointing at {@code Create Trainee Form}.
      *
      * @author Samurah
@@ -124,7 +142,12 @@ public class ManageTrainee extends Page {
         /**
          * Css selector for {@code Class Dropdown elements}.
          */
-        private final By classDropDownListSelector = By.cssSelector("select[id*='groupId'] option:not([value=''])");
+        private final By classDropDownListSelector = By.cssSelector("select[id*='groupId'] option)");
+
+        /**
+         * Css selector for {@code Message element}.
+         */
+        private final By messageSelector = By.cssSelector("p[class*='letter']");
 
         /**
          * The instance of {@link WebDriver} used to navigate the web page.
@@ -228,8 +251,7 @@ public class ManageTrainee extends Page {
          *                                {@code Class Dropdown} list.
          */
         public CreateTraineeForm selectClass(String className) {
-            new Actions(webDriver).click(classDropDownElement).click().perform();
-            List<WebElement> listElements = webElement.findElements(classDropDownListSelector);
+//            new Actions(webDriver).click(classDropDownElement).perform();
             Select dropdown = new Select(classDropDownElement);
             try {
                 dropdown.selectByVisibleText(className);
@@ -244,6 +266,40 @@ public class ManageTrainee extends Page {
          */
         public void perform() {
             new Actions(webDriver).click(createNewTraineeButtonElement).perform();
+        }
+
+        /**
+         * Checks if validation message pops up
+         * e.g. validation message is empty when data is valid
+         *
+         * @param field available in {@code 'Create New Trainee' form}
+         * @return false if the field has validation error
+         */
+        public boolean isValid(CreateTraineeField field) {
+            switch (field) {
+                case EMAIL:
+                    return emailTextBoxElement.getAttribute("validationMessage").isBlank();
+                case FIRST_NAME:
+                    return firstNameTextBoxElement.getAttribute("validationMessage").isBlank();
+                case LAST_NAME:
+                    return lastNameTextBoxElement.getAttribute("validationMessage").isBlank();
+                case CLASS:
+                    return classDropDownElement.getAttribute("validationMessage").isBlank();
+            }
+            return false;
+        }
+
+        /**
+         * Gets the message returned after pressing {@code Create New Trainee Button}
+         *
+         * @return the message returned after {@code post} operation
+         */
+        public String getMessage() {
+            try {
+                return webElement.findElement(messageSelector).getText();
+            } catch (NoSuchElementException ignored) {
+                return "";
+            }
         }
 
     }
@@ -264,12 +320,17 @@ public class ManageTrainee extends Page {
         /**
          * Css selector for {@code Trainees Dropdown elements}.
          */
-        private final By traineesDropDownListSelector = By.cssSelector("select[name*='trainee'] option:not([value=''])");
+        private final By traineesDropDownListSelector = By.cssSelector("select[name*='trainee'] option)");
 
         /**
          * Css selector for {@code Delete Trainee Button}.
          */
         private final By deleteTraineeButtonSelector = By.cssSelector("button[type='submit']");
+
+        /**
+         * Css selector for {@code Message element}.
+         */
+        private final By messageSelector = By.cssSelector("p[class*='letter']");
 
         /**
          * {@link WebElement} containing {@code Delete Trainee Form}.
@@ -343,6 +404,29 @@ public class ManageTrainee extends Page {
          */
         public void perform() {
             new Actions(webDriver).click(deleteTraineeButtonElement).perform();
+        }
+
+        /**
+         * Checks if validation message pops up
+         * e.g. validation message is empty when data is valid
+         *
+         * @return false if the Dropdown element has validation error.
+         */
+        public boolean isValid() {
+            return traineesDropDownElement.getAttribute("validationMessage").isBlank();
+        }
+
+        /**
+         * Gets the message returned after pressing {@code Create New Trainee Button}
+         *
+         * @return the message returned after {@code post} operation
+         */
+        public String getMessage() {
+            try {
+                return webElement.findElement(messageSelector).getText();
+            } catch (NoSuchElementException ignored) {
+                return "";
+            }
         }
     }
 }
