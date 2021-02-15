@@ -19,11 +19,10 @@ Feature: Viewing class attendance
       | 11     |
       | 12     |
 
-  Scenario Outline: Closing the attendance tabs for week <number> on Weekly Attendance after opening them for 1 second
+  Scenario Outline: Closing the attendance tabs for week <number> on Weekly Attendance after opening them
     Given I am logged in as a trainer and on the Weekly Attendance page
     And I have opened the attendance tab for week <number> on the Weekly Attendance page
     When I click on the tab for week <number> on the Weekly Attendance page
-    #When I wait for 1.0 seconds, then click on the tab for week <number> on the Weekly Attendance page
     Then The week <number> tab should close on the Weekly Attendance page
     Examples:
       | number |
@@ -64,7 +63,7 @@ Feature: Viewing class attendance
     When I click on the week 1 tab 10 times in quick succession on the Weekly Attendance page
     Then The week 1 tab should be closed on the Weekly Attendance page
 
-  Scenario: After clicking the week 1 tab 10 times in quick succession on Weekly Attendance and closing the tab, no table should be shown
+  Scenario: After clicking the week 1 tab 20 times in quick succession on Weekly Attendance and closing the tab, no table should be shown
     Given I am logged in as a trainer and on the Weekly Attendance page
     When I click on the week 1 tab 20 times in quick succession on the Weekly Attendance page
     And If the week 1 tab is open, it is closed
