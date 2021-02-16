@@ -14,8 +14,6 @@ public class HomeTrainerTest {
     private static WebDriver webDriver;
     private static Login login;
     private static HomeTrainer homeTrainer;
-
-    private static Properties properties = new Properties();
     private static String trainerUsername;
     private static String trainerPassword;
 
@@ -27,7 +25,7 @@ public class HomeTrainerTest {
         PropertyLoader.loadProperties();
         trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
         trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
-        Login login = new Login(webDriver);
+        login = new Login(webDriver);
         login.logInAsTrainer(trainerUsername, trainerPassword);
         homeTrainer = new HomeTrainer(webDriver);
     }
