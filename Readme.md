@@ -11,6 +11,8 @@ The framework was built following the Page Object Model (POM) design pattern to 
 
 Each page has its own Java class. Each class contains methods to cover all the current functionality on each page of the current website.
 
+![](src/test/resources/images/Page.png)
+
 ## Aim
 
 To test the sparta trainee tracker website using Selenium and Cucumber/Gherkin syntax.
