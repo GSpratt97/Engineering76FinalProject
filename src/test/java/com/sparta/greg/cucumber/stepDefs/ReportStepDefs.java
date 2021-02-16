@@ -25,8 +25,10 @@ public class ReportStepDefs {
     //----------Given----------//
     @Given("I am logged in as a Trainee and I am on the Report page")
     public void iAmLoggedInAsATraineeAndIAmOnTheReportPage() {
-        webDriver   = new ChromeDriver();
-        login       = new Login(webDriver);
+        webDriver = new ChromeDriver();
+        login     = new Login(webDriver);
+
+        webDriver.get("http://localhost:8080");
 
         PropertyLoader.loadProperties();
         String traineeUsername = PropertyLoader.properties.getProperty("traineeUsername");
@@ -44,6 +46,8 @@ public class ReportStepDefs {
         webDriver   = new ChromeDriver();
         login       = new Login(webDriver);
 
+        webDriver.get("http://localhost:8080/");
+
         PropertyLoader.loadProperties();
         String trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
         String trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
@@ -56,14 +60,14 @@ public class ReportStepDefs {
     }
 
     //----------When----------//
-    @When("I select a weekly report as a Trainee")
-    public void iSelectAWeeklyReportAsATrainee() {
-        reportTrainee.clickExpandButton(reportTrainee.getWeekReports().get(0));
+    @When("I select a weekly report as a Trainee on week {int}")
+    public void iSelectAWeeklyReportAsATrainee(int weekNumber) {
+        reportTrainee.clickExpandButton(reportTrainee.getWeekReports().get(12 - weekNumber));
     }
 
-    @When("I select a weekly report as a Trainer")
-    public void iSelectAWeeklyReportAsATrainer() {
-        reportTrainer.clickExpandButton(reportTrainer.getWeekReports().get(0));
+    @When("I select a weekly report as a Trainer on week {int}")
+    public void iSelectAWeeklyReportAsATrainer(int weekNumber) {
+        reportTrainer.clickExpandButton(reportTrainer.getWeekReports().get(12 - weekNumber));
     }
 
     @When("I return to Trainee Profile")
