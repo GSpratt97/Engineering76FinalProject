@@ -21,3 +21,9 @@ Here is a diagram to show the POM structure:
 
 ## Using the Framework
 
+Due to the project being based on the POM design pattern the framework is very easy to use for designing tests. Most of the methods are abstracted away from the end user. This enables the tester to write complex tests with little code, greatly improving the readability of the endpoint tests.
+
+The best way to use the framework would be to follow the Behaviour Driven Development (BDD) process in the form of Gherkin syntax. Gherkin syntax tests are extremely readable. This enables much greater collaboration among the developers, QA, non-technical and business participants of the organisation. 
+
+To create a Gherkin statement a .feature file will need to be created in the resources directory (there are already plenty of example files here) following the Given, When, Then 
+'step definition' class will need to be created which 
