@@ -1,13 +1,12 @@
 package com.sparta.greg.pom.pagesTest.trainer;
 
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.components.Login;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Properties;
 
 public class HomeTrainerTest {
@@ -24,17 +23,12 @@ public class HomeTrainerTest {
     @BeforeEach
     void setup() {
         webDriver = new ChromeDriver();
-        login = new Login(webDriver);
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            trainerUsername = properties.getProperty("trainerUsername");
-            trainerPassword = properties.getProperty("trainerPassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        login.enterUsernameAddress(trainerUsername);
-        login.enterPassword(trainerPassword);
-        login.clickSubmitButton();
+        webDriver.get("http://localhost:8080/login");
+        PropertyLoader.loadProperties();
+        trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
+        trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
+        Login login = new Login(webDriver);
+        login.logInAsTrainer(trainerUsername, trainerPassword);
         homeTrainer = new HomeTrainer(webDriver);
     }
 
