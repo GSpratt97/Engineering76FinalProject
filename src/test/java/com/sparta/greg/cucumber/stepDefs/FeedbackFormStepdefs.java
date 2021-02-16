@@ -16,7 +16,7 @@ import java.util.Properties;
 public class FeedbackFormStepdefs {
 
     private Properties properties;
-    private WebDriver webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+    private WebDriver webDriver = WebDriverFactory.getWebDriver(WebDriverType.FIREFOX);
 
     private Login login;
 
@@ -34,7 +34,7 @@ public class FeedbackFormStepdefs {
     public void iAmLoggedInATraineeOnTheFeedbackPage() {
         properties = PropertyLoader.properties;
         PropertyLoader.loadProperties();
-
+        webDriver.get("http://localhost:8080/login");
         login = new Login(webDriver);
         feedbackForm = new FeedbackForm(webDriver);
         login.logInAsTrainee(properties.getProperty("traineeUsername"), properties.getProperty("traineePassword"));
@@ -143,6 +143,7 @@ public class FeedbackFormStepdefs {
     @Then("I should be directed to the Reports History page from the Feedback Page")
     public void iShouldBeDirectedToTheReportsHistoryPageFromTheFeedbackPage() {
         Assertions.assertEquals(webDriver.getCurrentUrl(), "http://localhost:8080/trainee/report");
+        webDriver.quit();
     }
 
     @When("I click on the Attendance History page from the Feedback Page")
@@ -154,5 +155,6 @@ public class FeedbackFormStepdefs {
     @Then("I should be directed to the Attendance History page from the Feedback Page")
     public void iShouldBeDirectedToTheAttendanceHistoryPageFromTheFeedbackPage() {
         Assertions.assertEquals(webDriver.getCurrentUrl(), "http://localhost:8080/trainee/trainee-attendance");
+        webDriver.quit();
     }
 }
