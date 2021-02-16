@@ -11,7 +11,7 @@ The framework was built following the Page Object Model (POM) design pattern to 
 
 Each page has its own Java class. Each class contains methods to cover all the current functionality on each page of the current website.
 
-A diagram of the POM class structure can be seen below.
+Here is a diagram to show the POM structure:
 
 ![](src/test/resources/images/Page.png)
 
