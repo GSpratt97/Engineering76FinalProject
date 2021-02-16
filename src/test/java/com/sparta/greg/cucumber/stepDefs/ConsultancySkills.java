@@ -1,6 +1,7 @@
 package com.sparta.greg.cucumber.stepdefs;
 
 import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.TraineeConsultancySkills;
 import com.sparta.greg.pom.pages.trainer.TrainerConsultancySkills;
 import io.cucumber.java.en.Given;
@@ -19,26 +20,17 @@ public class ConsultancySkills {
 
     private static WebDriver webDriver;
     private static TraineeConsultancySkills traineeConsultancySkills;
-    private static String traineeUsername;
-    private static String traineePassword;
-    private static String trainerUsername;
-    private static String trainerPassword;
     private static TrainerConsultancySkills trainerConsultancySkills;
 
 
     @Given("I am logged in as Trainer and on consultancy skills page")
     public void iAmLoggedInAsTrainerAndOnConsultancySkillsPage() {
-        Properties properties = new Properties();
         webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080/login");
+        PropertyLoader.loadProperties();
+        String trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
+        String trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
 
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            trainerUsername = properties.getProperty("trainerUsername");
-            trainerPassword = properties.getProperty("trainerPassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         Login login = new Login(webDriver);
         login.logInAsTrainer(trainerUsername, trainerPassword);
@@ -49,17 +41,11 @@ public class ConsultancySkills {
 
     @Given("I am logged in as Trainee and on consultancy skills page")
     public void iAmLoggedInAsTraineeAndOnConsultancySkillsPage() {
-        Properties properties = new Properties();
         webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080/login");
-
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            traineeUsername = properties.getProperty("traineeUsername");
-            traineePassword = properties.getProperty("traineePassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        PropertyLoader.loadProperties();
+        String traineeUsername = PropertyLoader.properties.getProperty("traineeUsername");
+        String traineePassword = PropertyLoader.properties.getProperty("traineePassword");
 
         Login login = new Login(webDriver);
         login.logInAsTrainee(traineeUsername, traineePassword);
