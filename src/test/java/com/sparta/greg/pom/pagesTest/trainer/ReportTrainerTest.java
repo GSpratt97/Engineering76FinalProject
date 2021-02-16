@@ -1,6 +1,7 @@
 package com.sparta.greg.pom.pagesTest.trainer;
 
 import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.ReportTrainer;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
@@ -26,19 +27,18 @@ public class ReportTrainerTest {
         webDriver = new ChromeDriver();
         login     = new Login(webDriver);
 
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            trainerUsername = properties.getProperty("traineeUsername");
-            trainerPassword = properties.getProperty("traineePassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        webDriver.get("http://localhost:8080/");
+
+        PropertyLoader.loadProperties();
+        String trainerUsername = PropertyLoader.properties.getProperty("traineeUsername");
+        String trainerPassword = PropertyLoader.properties.getProperty("traineePassword");
 
         login.logInAsTrainer(trainerUsername, trainerPassword);
         webDriver.get("http://localhost:8080/trainer/report/41"); //Bill Bird
 
         reportTrainer = new ReportTrainer(webDriver);
         reportTrainer.setWeekReports();
+        reportTrainer.setReportDataForWeek(12);
     }
 
     @AfterEach
@@ -81,6 +81,84 @@ public class ReportTrainerTest {
     void canNavigateBackToTraineeProfile() {
         reportTrainer.backToTraineeProfile();
         Assertions.assertEquals("http://localhost:8080/trainer/traineeProfile/41", reportTrainer.getURL());
+    }
+
+    @Test
+    @DisplayName("Are the grades correct for Bill Bird's Week 12 report?")
+    void areMainGradesCorrectForWeekTwelve() {
+        Assertions.assertEquals("A", reportTrainer.getOverallGrade());
+        Assertions.assertEquals("A", reportTrainer.getTechnicalGrade());
+        Assertions.assertEquals("B", reportTrainer.getConsultantGrade());
+    }
+
+    @Test
+    @DisplayName("Are the Start, Stop, Continues correct for Bill Bird's Week 12 report?")
+    void areSscCorrectForWeekTwelve() {
+        reportTrainer.clickExpandButton(reportTrainer.getWeekReports().get(0));
+        reportTrainer.waitForClick();
+
+        Assertions.assertEquals("Start This", reportTrainer.getTraineeStart());
+        Assertions.assertEquals("Stop That", reportTrainer.getTraineeStop());
+        Assertions.assertEquals("Continue Everything Else!", reportTrainer.getTraineeContinue());
+    }
+
+    @Test
+    @DisplayName("Are the Bill Bird's Feedback Form grades correct for Week 12?")
+    void areTraineeGradesCorrectForWeekTwelve() {
+        reportTrainer.clickExpandButton(reportTrainer.getWeekReports().get(0));
+        reportTrainer.waitForClick();
+
+        Assertions.assertEquals("B", reportTrainer.getTraineeTechnicalGrade());
+        Assertions.assertEquals("B", reportTrainer.getTraineeConsultantGrade());
+    }
+
+    @Test
+    @DisplayName("Are the Trainer's Start, Stop, Continues correct for Bill Bird's Week 12 report?")
+    void areTrainerSscCorrectForWeekTwelve() {
+        reportTrainer.clickExpandButton(reportTrainer.getWeekReports().get(0));
+        reportTrainer.waitForClick();
+
+        Assertions.assertEquals("Start This", reportTrainer.getTrainerStart());
+        Assertions.assertEquals("Stop That", reportTrainer.getTrainerStop());
+        Assertions.assertEquals("Continue Everything Else", reportTrainer.getTrainerContinue());
+    }
+
+    @Test
+    @DisplayName("Are the Trainer's Feedback grades correct for Week 12?")
+    void areTrainerGradesCorrectForWeekTwelve() {
+        reportTrainer.clickExpandButton(reportTrainer.getWeekReports().get(0));
+        reportTrainer.waitForClick();
+
+        Assertions.assertEquals("A", reportTrainer.getTrainerOverallGrade());
+        Assertions.assertEquals("A", reportTrainer.getTrainerTechnicalGrade());
+        Assertions.assertEquals("B", reportTrainer.getTrainerConsultantGrade());
+    }
+
+    @Test
+    @DisplayName("Are the Trainer's comments correct for Week 12?")
+    void isTrainerCommentsCorrectForWeekTwelve() {
+        reportTrainer.clickExpandButton(reportTrainer.getWeekReports().get(0));
+        reportTrainer.waitForClick();
+
+        Assertions.assertEquals("Trainer Comments", reportTrainer.getTrainerComments());
+    }
+
+    @Test
+    @DisplayName("Is the Deadline correct for Week 12?")
+    void isDeadlineCorrectForWeekTwelve() {
+        reportTrainer.clickExpandButton(reportTrainer.getWeekReports().get(0));
+        reportTrainer.waitForClick();
+
+        Assertions.assertEquals("11/12/2020 - 5:30 PM", reportTrainer.getDeadline());
+    }
+
+    @Test
+    @DisplayName("Is the Last Edited correct for Week 12?")
+    void isLastEditedCorrectForWeekTwelve() {
+        reportTrainer.clickExpandButton(reportTrainer.getWeekReports().get(0));
+        reportTrainer.waitForClick();
+
+        Assertions.assertEquals("10/12/2020 - 5:00 PM", reportTrainer.getLastEdited());
     }
 
     @AfterAll
