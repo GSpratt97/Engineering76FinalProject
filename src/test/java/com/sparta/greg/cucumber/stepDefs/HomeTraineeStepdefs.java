@@ -29,11 +29,9 @@ public class HomeTraineeStepdefs {
     private void loadPropertiesLoginAsTraineeGoToAssessments() {
         webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080/login");
-
         PropertyLoader.loadProperties();
         traineeUsername = PropertyLoader.properties.getProperty("traineeUsername");
         traineePassword = PropertyLoader.properties.getProperty("traineePassword");
-
         Login login = new Login(webDriver);
         login.logInAsTrainer(traineeUsername, traineePassword);
     }
