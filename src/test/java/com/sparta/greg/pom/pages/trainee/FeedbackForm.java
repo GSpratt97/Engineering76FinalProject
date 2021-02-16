@@ -31,10 +31,10 @@ public class FeedbackForm extends Page {
         return sideBarTrainee;
     }
 
-    public boolean enterStart(String sentence){
+    public boolean enterStart(String sentence, int numberOfBackSpaces){
 
-        if (sentence != null && !sentence.equals(" ")){
-            pressBackSpace(10, start);
+        if (sentence != null && !sentence.equals(" ") && numberOfBackSpaces >=0){
+            pressBackSpace(numberOfBackSpaces, start);
             webDriver.findElement(start).sendKeys(sentence);
             return true;
         }else{
@@ -45,9 +45,9 @@ public class FeedbackForm extends Page {
 
     }
 
-    public boolean enterStop(String sentence){
-        if (sentence != null && !sentence.equals(" ")){
-            pressBackSpace(12, stop);
+    public boolean enterStop(String sentence, int numberOfBackSpaces){
+        if (sentence != null && !sentence.equals(" ") && numberOfBackSpaces >=0){
+            pressBackSpace(numberOfBackSpaces, stop);
             webDriver.findElement(stop).sendKeys(sentence);
             return true;
         }else{
@@ -57,10 +57,10 @@ public class FeedbackForm extends Page {
 
     }
 
-    public boolean enterContinue(String sentence){
-        if (sentence != null && !sentence.equals(" ")){
+    public boolean enterContinue(String sentence, int numberOfBackSpaces){
+        if (sentence != null && !sentence.equals(" ") && numberOfBackSpaces >=0){
 
-            pressBackSpace(25, continueTrainee);
+            pressBackSpace(numberOfBackSpaces, continueTrainee);
             webDriver.findElement(continueTrainee).sendKeys(sentence);
             return true;
         }else{

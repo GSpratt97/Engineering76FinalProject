@@ -91,7 +91,7 @@ public class SideBarTraineeTest {
     @DisplayName("goToTraineeAttendance returns TraineeAttendance")
     void goToTraineeAttendanceReturnsTraineeAttendance() {
         homeTrainee.getSideBarTrainee().clickTraineeOptions();
-        Assertions.assertEquals(TraineeAttendance.class, homeTrainee.getSideBarTrainee().goToTraineeAttendance().getClass());
+        Assertions.assertEquals(Attendance.class, homeTrainee.getSideBarTrainee().goToTraineeAttendance().getClass());
     }
 
     @Test
@@ -106,4 +106,12 @@ public class SideBarTraineeTest {
         homeTrainee.getSideBarTrainee().clickTraineeOptions();
         Assertions.assertTrue(homeTrainee.getSideBarTrainee().isTraineeOptionsExpanded());
     }
+
+    @Test
+    @DisplayName("change password test")
+    void changePasswordTest() {
+        homeTrainee.selectProfileImage();
+        Assertions.assertEquals(TraineeChangePassword.class, homeTrainee.getSideBarTrainee().changePassword().getClass());
+    }
+
 }

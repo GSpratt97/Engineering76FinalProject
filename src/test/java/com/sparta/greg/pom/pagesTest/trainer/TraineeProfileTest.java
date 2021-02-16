@@ -2,7 +2,8 @@ package com.sparta.greg.pom.pagesTest.trainer;
 
 
 import com.sparta.greg.pom.pages.components.Login;
-import com.sparta.greg.pom.pages.trainee.TraineeAttendance;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.trainee.AttendanceTrainer;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.trainer.ReportTrainer;
 import com.sparta.greg.pom.pages.trainer.TraineeProfile;
@@ -14,10 +15,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Properties;
 
 public class TraineeProfileTest {
 
@@ -31,15 +28,10 @@ public class TraineeProfileTest {
     static void setup() {
         webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080/login");
-        Properties properties = new Properties();
 
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            usernameTrainer = properties.getProperty("trainerUsername");
-            passwordTrainer = properties.getProperty("trainerPassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        PropertyLoader.loadProperties();
+        usernameTrainer = PropertyLoader.properties.getProperty("trainerUsername");
+        passwordTrainer = PropertyLoader.properties.getProperty("trainerPassword");
 
         Login login = new Login(webDriver);
         login.logInAsTrainer(usernameTrainer, passwordTrainer);
@@ -57,7 +49,7 @@ public class TraineeProfileTest {
 
     @Test
     void canClickAttendanceDetails() {
-        Assertions.assertEquals(WeeklyAttendance.class, traineeProfilePage.goToTraineeWeeklyAttendance().getClass());
+        Assertions.assertEquals(AttendanceTrainer.class, traineeProfilePage.goToTraineeAttendance().getClass());
     }
 
     @Test

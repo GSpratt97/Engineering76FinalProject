@@ -16,7 +16,9 @@ public class Login {
 
     public Login(WebDriver webDriver) {
         this.webDriver = webDriver;
-        webDriver.get("http://localhost:8080");
+
+//        webDriver.get("http://localhost:8080");
+
     }
 
     public HomeTrainer logInAsTrainer(String username, String password) {

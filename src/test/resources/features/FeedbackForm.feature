@@ -1,47 +1,52 @@
 Feature: Actions on the Feedback Form page
 
-  Scenario: Entering start, stop, continue
-   Given I am on the feedback page
-   When I update my start, stop, continue
-   Then The text should update
+  Scenario: Entering start, stop, continue on the Feedback Page
+   Given I am logged in as a trainee on the Feedback Page
+   When I update my start, stop, continue on the Feedback Page
+   Then The text should update on the Feedback Page
 
-  Scenario: Selecting technical
-   Given I am on the feedback page
-   When I select a technical grade
-   Then The grade should be selected
+  Scenario: Selecting technical grade on the Feedback Page
+   Given I am logged in as a trainee on the Feedback Page
+   When I select a technical grade on the Feedback Page
+   Then The technical grade should be selected on the Feedback Page
 
-  Scenario: Selecting consultant grade
-   Given I am on the feedback page
-   When I select a consultant grade
-   Then The grade should be selected
+  Scenario: Selecting consultant grade on the Feedback Page
+   Given I am logged in as a trainee on the Feedback Page
+   When I select a consultant grade on the Feedback Page
+   Then The consultant grade should be selected on the Feedback Page
 
   Scenario: Going back to the Dashboard through the logo
-   Given I am on the feedback page
-   When I click the Sparta global logo
-   Then I should be directed to the Dashboard
+   Given I am logged in as a trainee on the Feedback Page
+   When I click the Sparta global logo from the Feedback Page
+   Then I should be directed to the Dashboard from the Feedback Page
 
   Scenario: Going back to the Dashboard through the profile
-    Given I am on the feedback page
-    When I click profile
-    Then I should be directed to the Dashboard
+    Given I am logged in as a trainee on the Feedback Page
+    When I click profile from the Feedback Page
+    Then I should be directed to the Dashboard from the Feedback Page
 
   Scenario: Going to the Consultancy skills page
-    Given I am on the feedback page
-    When I click Consultancy Skills
-    Then I should be directed to the Consultancy Skills page
+    Given I am logged in as a trainee on the Feedback Page
+    When I click Consultancy Skills from the Feedback Page
+    Then I should be directed to the Consultancy Skills page from the Feedback Page
 
   Scenario: Going to the Trainee guide
-   Given I am on the feedback page
-   When I click on the Trainee Guide
-   Then I should be directed to the Trainee Guide page
+   Given I am logged in as a trainee on the Feedback Page
+   When I click on the Trainee Guide from the Feedback Page
+   Then I should be directed to the Trainee Guide page from the Feedback Page
+
+  Scenario: Going to the Reports History
+    Given I am logged in as a trainee on the Feedback Page
+    When I click on the Reports History from the Feedback Page
+    Then I should be directed to the Reports History page from the Feedback Page
+
+  Scenario: Going to the Attendance History
+    Given I am logged in as a trainee on the Feedback Page
+    When I click on the Attendance History page from the Feedback Page
+    Then I should be directed to the Attendance History page from the Feedback Page
 
   Scenario: Logging out
-    Given I am on the feedback page
-    When I click on logout
-    Then I should be logged out
-
-  Scenario: Submitting form
-    Given I am on the feedback page
-    And  I have filled the form
-    When I click submit
-    Then #to do - figure what to test here for confirmation of submitting
+    Given I am logged in as a trainee on the Feedback Page
+    When I click on logout from the Feedback Page
+    Then I should be logged out from the Feedback Page
+    

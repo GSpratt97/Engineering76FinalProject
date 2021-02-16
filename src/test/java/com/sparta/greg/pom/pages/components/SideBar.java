@@ -13,6 +13,7 @@ public abstract class SideBar {
     By traineeGuideLink = new By.ByCssSelector("ul[id='accordionSidebar'] a[href*='guide']");
     By sideBarSizeSelector = new By.ByCssSelector("ul[id='accordionSidebar'] button[id='sidebarToggle']");
     By sideBar = new By.ByCssSelector("nav[class*='sidebar']");
+    By burgerMenuOption = new By.ByCssSelector("i[class*='fa-bars']");
 
     public boolean isViewExpanded() {
         boolean isExpanded = !webDriver.findElement(viewLink).getAttribute("class").contains("collapsed");
@@ -37,6 +38,10 @@ public abstract class SideBar {
 
     public String getSideBarSize() {
         return webDriver.findElement(sideBar).getCssValue("width");
+    }
+
+    public void clickBurgerMenuOption() {
+        webDriver.findElement(burgerMenuOption).click();
     }
 
 }

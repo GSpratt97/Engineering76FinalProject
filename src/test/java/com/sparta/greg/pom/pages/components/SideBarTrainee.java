@@ -13,6 +13,7 @@ public class SideBarTrainee extends SideBar {
     By feedbackFormLink = new By.ByCssSelector("a[href='/traineeRecentReport']");
     By reportsHistoryLink = new By.ByCssSelector("a[href='/trainee/report']");
     By attendanceHistoryLink = new By.ByCssSelector("a[href='/trainee/trainee-attendance']");
+    By changePasswordLink = new By.ByCssSelector("a[href*='/changePassword']");
 
     public SideBarTrainee(WebDriver webDriver) {
         super(webDriver);
@@ -69,10 +70,16 @@ public class SideBarTrainee extends SideBar {
         return new ReportTrainee(webDriver);
     }
 
-    public TraineeAttendance goToTraineeAttendance() {
+    public AttendanceTrainee goToTraineeAttendance() {
         isTraineeOptionsExpanded();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         webDriver.findElement(attendanceHistoryLink).click();
-        return new TraineeAttendance(webDriver);
+        return new AttendanceTrainee(webDriver);
     }
+
+    public TraineeChangePassword changePassword() {
+        webDriver.findElement(changePasswordLink).click();
+        return new TraineeChangePassword(webDriver);
+    }
+
 }

@@ -10,44 +10,32 @@ public class ReportTrainer extends Report {
 
     private final SideBarTrainer sideBarTrainer;
 
-
-    By traineeDropdown      = By.id("traineeSelector");
-    By viewTraineeProfile   = new By.ByCssSelector("button[value='profile']");
-    By viewTraineeReport    = new By.ByCssSelector("a[href*='trainer/report']");
     By backToTraineeProfile = new By.ByCssSelector("a[href*='traineeProfile']");
 
-
+    /**
+     * Instantiate {@link ReportTrainer} object which extends {@link Report}.
+     * This object used in testing to access methods in {@link Report} as well
+     * as Trainer-specific methods in this class.
+     * @param webDriver
+     */
     public ReportTrainer(WebDriver webDriver) {
         super(webDriver);
         sideBarTrainer = new SideBarTrainer(webDriver);
-
-        findTrainee("Bill Bird");
-        viewTraineeProfile();
-        viewTraineeReport();
-
     }
 
+    /**
+     * Getter for navigation sidebar present on every page when logged in as a Trainer
+     * @return {@link SideBarTrainer}
+     */
     public SideBarTrainer getSideBarTrainer() {
         return sideBarTrainer;
     }
 
-    public void findTrainee(String traineeName) {
-        webDriver.findElement(traineeDropdown).click();
-        Select select = new Select(webDriver.findElement(traineeDropdown));
-        select.selectByVisibleText(traineeName);
-    }
-
-
-    public void viewTraineeProfile() {
-        webDriver.findElement(viewTraineeProfile).click();
-    }
-
-    public void viewTraineeReport() {
-        webDriver.findElement(viewTraineeReport).click();
-    }
-
+    /**
+     * On the Report page there is a button to navigate back to the Trainee's profile;
+     * click that button.
+     */
     public void backToTraineeProfile() {
         webDriver.findElement(backToTraineeProfile).click();
-
     }
 }

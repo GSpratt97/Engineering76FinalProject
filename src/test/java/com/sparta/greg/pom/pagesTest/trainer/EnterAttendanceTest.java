@@ -1,7 +1,7 @@
 package com.sparta.greg.pom.pagesTest.trainer;
 
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.EnterAttendance;
-import com.sparta.greg.pom.pages.trainer.ManageTrainee;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,16 +27,15 @@ public class EnterAttendanceTest {
     @Before
     public void setUp()
     {
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // Get properties for sign in
+        PropertyLoader.loadProperties();
+        properties = PropertyLoader.properties;
+        //set up a webpage in isolation for testing
         ChromeOptions option = new ChromeOptions();
         option.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors");
         webDriver = new ChromeDriver(option);
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Path path = Paths.get("src/test/resources/localHtml/Attendance.html");
+        Path path = Paths.get("src/test/resources/pageTest/trainer/Attendance.html");
         webDriver.get(path.toUri().toString());
         Assertions.assertDoesNotThrow(()->attendancePage = new EnterAttendance(webDriver),
                 "Initializing /trainer/attendanceEntry page");
@@ -80,8 +79,7 @@ public class EnterAttendanceTest {
     {
         String date = "22-09-2020";
         attendancePage.selectDate(date);
-        Assertions.assertEquals(attendancePage.dateFormatter(webDriver
-                .findElement(By.id("attendanceDate")).getAttribute("value")), date);
+        Assertions.assertTrue(attendancePage.isCorrectDate(date));
     }
 
     @After
