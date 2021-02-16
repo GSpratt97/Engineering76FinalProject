@@ -1,5 +1,6 @@
 package com.sparta.greg.pom.pagesTest.trainee;
 
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.FeedbackForm;
 import com.sparta.greg.pom.pages.components.Login;
 import org.junit.jupiter.api.Assertions;
@@ -24,12 +25,9 @@ public class FeedbackFormTest {
     static void setup(){
         webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080/trainee/report/12");
-        Properties properties = new Properties();
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        Properties properties = PropertyLoader.properties;
+        PropertyLoader.loadProperties();
 
         Login login = new Login(webDriver);
         login.enterUsernameAddress(properties.getProperty("traineeUsername"));

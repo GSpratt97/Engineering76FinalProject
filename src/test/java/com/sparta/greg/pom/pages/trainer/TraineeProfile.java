@@ -2,7 +2,7 @@ package com.sparta.greg.pom.pages.trainer;
 
 import com.sparta.greg.pom.pages.components.Page;
 import com.sparta.greg.pom.pages.components.SideBarTrainer;
-import com.sparta.greg.pom.pages.trainee.TraineeAttendance;
+import com.sparta.greg.pom.pages.trainee.AttendanceTrainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -27,7 +27,7 @@ public class TraineeProfile extends Page {
     By overallGrade = By.cssSelector("main > div > div:nth-child(3) > div > div.card-body > div > div > div > div:nth-child(3) > div.card-body > big");
 
     By backToDashboard = By.cssSelector("a[class='btn btn-primary']");
-    By attendanceDetails = By.cssSelector("a[href*='trainer/traineeAttendance']");
+    By attendanceDetails = By.cssSelector("#content-wrapper > main > div > div:nth-child(2) > div > div.card-footer.py-3 > h6 > div > a");
 //    By traineeReport = By.cssSelector("a[href*='trainer/report]");
     By traineeReport = By.linkText("Report Details");
     By toggleButtons = By.cssSelector("tr[class*='accordion-toggle");
@@ -72,11 +72,11 @@ public class TraineeProfile extends Page {
         return null;
     }
 
-    public WeeklyAttendance goToTraineeWeeklyAttendance() {
+    public AttendanceTrainer goToTraineeAttendance() {
         if (webDriver.findElement(attendanceDetails) != null) {
             WebElement attendanceBreakdown = webDriver.findElement(attendanceDetails);
             attendanceBreakdown.click();
-            return new WeeklyAttendance(webDriver);
+            return new AttendanceTrainer(webDriver);
         }
 
         throw new NoSuchElementException("No attendance details available");

@@ -1,11 +1,16 @@
 package com.sparta.greg.cucumber.stepdefs;
 
+
 import com.sparta.greg.pom.pages.components.*;
 import com.sparta.greg.pom.pages.trainer.AddWeeks;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
+
+
+import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -83,6 +88,7 @@ public class AddWeeksStepdefs {
 
     @Then("I am taken to the {string} Page from the {string} page")
     public void iAmTakenToThePageFromThePage(String arg0, String arg1) {
+
         Assertions.assertEquals(previousPage,getPageUrl(arg1));
         Assertions.assertEquals(getPageUrl(arg0),webDriver.getCurrentUrl());
     }
@@ -174,5 +180,6 @@ public class AddWeeksStepdefs {
 
     @Then("thenTest")
     public void thentest() {
+
     }
 }

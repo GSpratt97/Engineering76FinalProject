@@ -52,7 +52,7 @@ public class AssessmentsStepdefs {
     @Then("I am taken to the Assessments Breakdown Page from the Assessments Page")
     public void iAmTakenToTheAssessmentsBreakdownPage() {
         Assertions.assertTrue(webDriver.getCurrentUrl().contains("http://localhost:8080/trainer/assessments/"));
-        webDriver.close();
+        webDriver.quit();
     }
 
     @When("I click View on the trainer sidebar on the Assessments Page")
@@ -68,7 +68,7 @@ public class AssessmentsStepdefs {
     @Then("I am taken to the Consultancy Skills Page from the Assessments Page")
     public void iAmTakenToTheConsultancySkillsPageFromTheAssessmentsPage() {
         Assertions.assertEquals("http://localhost:8080/consultancy", webDriver.getCurrentUrl());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @And("I click on Trainee Guide on the trainer sidebar the Assessments Page")
@@ -79,7 +79,7 @@ public class AssessmentsStepdefs {
     @Then("I am taken to the Trainee Guide Page from the Assessments Page")
     public void iAmTakenToTheTraineeGuidePageFromTheAssessmentsPage() {
         Assertions.assertEquals("http://localhost:8080/guide", webDriver.getCurrentUrl());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @When("I click Trainer Options on the trainer sidebar on the Assessments Page")
@@ -95,7 +95,7 @@ public class AssessmentsStepdefs {
     @Then("I am taken to the Class Management Page from the Assessments Page")
     public void iAmTakenToTheClassManagementPageFromTheAssessmentsPage() {
         Assertions.assertEquals("http://localhost:8080/trainer/manageClass", webDriver.getCurrentUrl());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @And("I click on Trainee Management on the trainer sidebar on the Assessments Page")
@@ -106,7 +106,7 @@ public class AssessmentsStepdefs {
     @Then("I am taken to the Manage Trainee Page from the Assessments Page")
     public void iAmTakenToTheManageTraineePageFromTheAssessmentsPage() {
         Assertions.assertEquals("http://localhost:8080/trainer/manageTrainee", webDriver.getCurrentUrl());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @And("I click on Add Weeks on the trainer sidebar on the Assessments Page")
@@ -117,7 +117,7 @@ public class AssessmentsStepdefs {
     @Then("I am taken to the Add Weeks Page from the Assessments Page")
     public void iAmTakenToTheAddWeeksPageFromTheAssessmentsPage() {
         Assertions.assertEquals("http://localhost:8080/trainer/newWeek", webDriver.getCurrentUrl());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @And("I click on Assessments on the trainer sidebar on the Assessments Page")
@@ -128,7 +128,7 @@ public class AssessmentsStepdefs {
     @Then("I am taken to the Assessments Page from the Assessments Page")
     public void iAmTakenToTheAssessmentsPageFromTheAssessmentsPage() {
         Assertions.assertEquals("http://localhost:8080/trainer/assessments", webDriver.getCurrentUrl());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @And("I click on Enter Attendance on the trainer sidebar on the Assessments Page")
@@ -139,7 +139,7 @@ public class AssessmentsStepdefs {
     @Then("I am taken to the Enter Attendance Page from the Assessments Page")
     public void iAmTakenToTheEnterAttendancePageFromTheAssessmentsPage() {
         Assertions.assertEquals("http://localhost:8080/trainer/attendanceEntry", webDriver.getCurrentUrl());
-        webDriver.close();
+        webDriver.quit();
     }
 
     @And("I click on Weekly Attendance on the trainer sidebar on the Assessments Page")
@@ -150,7 +150,7 @@ public class AssessmentsStepdefs {
     @Then("I am taken to the Weekly Attendance Page from the Assessments Page")
     public void iAmTakenToTheWeeklyAttendancePageFromTheAssessmentsPage() {
         Assertions.assertEquals("http://localhost:8080/trainer/weekly-attendance", webDriver.getCurrentUrl());
-        webDriver.close();
+        webDriver.quit();
     }
 
 

@@ -1,5 +1,6 @@
 package com.sparta.greg.cucumber.stepdefs;
 
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.EnterAttendance;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.components.Login;
@@ -20,16 +21,13 @@ public class EnterAttendSD {
 
     private static WebDriver webDriver;
     EnterAttendance attendancePage;
-    Properties properties = new Properties();
+    Properties properties;
 
     @Given("I am logged in as a trainer and I am on the attendance page")
     public void iAmOnTheAttendancePage() {
         webDriver = new ChromeDriver();
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        PropertyLoader.loadProperties();
+        properties = PropertyLoader.properties;
         //SignIn
         Login login = new Login(webDriver);
         HomeTrainer trainer = login.logInAsTrainer(properties.getProperty("trainerUsername"),properties.getProperty("trainerPassword") );
@@ -45,7 +43,7 @@ public class EnterAttendSD {
         attendancePage = new EnterAttendance(webDriver);
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         attendancePage.setPageConfirm();
-       // Assertions.assertEquals("Set Trainee Attendance", attendancePage.getPageConfirm());
+        Assertions.assertTrue(attendancePage.areOnAttendanceEntryPage("Set Trainee Attendance"));
     }
 
     @When("I select a trainee on attendance page")
