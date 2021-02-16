@@ -9,7 +9,7 @@ A web testing framework to enable automation testing on the trainee tracker webs
 
 The framework was built following the Page Object Model (POM) design pattern to enable effective test automation by creating an object repository for the web UI elements. The POM enables a reduction in code duplication and also improves the readability and test maintenance of the project.
 
-Each page has its own Java class which contains page methods to cover all the current functionality of the website.
+Each page has its own Java class. Each class contains methods to cover all the current functionality on each page of the current website.
 
 ## Aim
 
