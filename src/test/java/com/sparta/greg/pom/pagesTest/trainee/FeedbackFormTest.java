@@ -28,7 +28,7 @@ public class FeedbackFormTest {
 
         Properties properties = PropertyLoader.properties;
         PropertyLoader.loadProperties();
-
+        webDriver.get("http://localhost:8080/login");
         Login login = new Login(webDriver);
         login.enterUsernameAddress(properties.getProperty("traineeUsername"));
         login.enterPassword(properties.getProperty("traineePassword"));
