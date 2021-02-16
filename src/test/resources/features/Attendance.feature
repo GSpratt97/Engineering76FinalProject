@@ -3,6 +3,11 @@
 
 Feature: Attendance page
 
+  Scenario: Navigate back to trainee profile page using back button
+    Given I am logged in as a trainer and on the Trainee Attendance page
+    When I click on the back to profile button
+    Then I am taken to the trainee profile page from the trainer attendance page
+
   Scenario Outline: Clicking week attendance rows on trainee attendance page
     Given I am logged in as a trainee and on the Trainee Attendance page
     When I click on week <number>
