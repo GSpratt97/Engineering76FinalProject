@@ -1,5 +1,6 @@
 package com.sparta.greg.cucumber.stepdefs;
 
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.ClassManagement;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.components.Login;
@@ -25,24 +26,24 @@ public class ClassManagementStepdefs {
 	@Given("I am logged in as a trainer and on the Class Management page")
 	public void iAmLoggedInAsATrainerAndOnTheClassManagementPage() {
 		String username = "", password = "";
-		try {
-			properties.load(new FileReader("src/test/resources/login.properties"));
-			username = properties.getProperty("trainerUsername");
-			password = properties.getProperty("trainerPassword");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
-		if(headless) {
+		PropertyLoader.loadProperties();
+		username = PropertyLoader.properties.getProperty("trainerUsername");
+		password = PropertyLoader.properties.getProperty("trainerPassword");
+
+
+		if (headless) {
 			ChromeOptions chromeOptions = new ChromeOptions();
 			chromeOptions.addArguments("headless");
 			webDriver = new ChromeDriver(chromeOptions);
-		}else {
+		} else {
 			webDriver = new ChromeDriver();
 		}
 
+		webDriver.get("http://localhost:8080/login");
+
 		Login login = new Login(webDriver);
-		HomeTrainer homeTrainer= login.logInAsTrainer(username, password);
+		HomeTrainer homeTrainer = login.logInAsTrainer(username, password);
 
 		homeTrainer.getSideBarTrainer().clickTrainerOptions();
 		classManagement = homeTrainer.getSideBarTrainer().goToClassManagement();

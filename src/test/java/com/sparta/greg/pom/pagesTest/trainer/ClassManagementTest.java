@@ -27,7 +27,7 @@ public class ClassManagementTest {
 		PropertyLoader.loadProperties();
 		username = PropertyLoader.properties.getProperty("trainerUsername");
 		password = PropertyLoader.properties.getProperty("trainerPassword");
-		
+
 		if (headless) {
 			ChromeOptions chromeOptions = new ChromeOptions();
 			chromeOptions.addArguments("headless");
