@@ -33,11 +33,9 @@ public class HomeTrainerStepdefs {
     private void loadPropertiesLoginAsTrainerToGoHome() {
         webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080/login");
-
         PropertyLoader.loadProperties();
         trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
         trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
-
         Login login = new Login(webDriver);
         login.logInAsTrainer(trainerUsername, trainerPassword);
     }

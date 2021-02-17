@@ -1,5 +1,6 @@
 package com.sparta.greg.pom.pagesTest.trainer;
 
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.ClassManagement;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.components.Login;
@@ -22,25 +23,23 @@ public class ClassManagementTest {
 
 
 	@BeforeEach
-	void setup(){
-		try {
-			properties.load(new FileReader("src/test/resources/login.properties"));
-			username = properties.getProperty("trainerUsername");
-			password = properties.getProperty("trainerPassword");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	void setup() {
+		PropertyLoader.loadProperties();
+		username = PropertyLoader.properties.getProperty("trainerUsername");
+		password = PropertyLoader.properties.getProperty("trainerPassword");
 
-		if(headless) {
+		if (headless) {
 			ChromeOptions chromeOptions = new ChromeOptions();
 			chromeOptions.addArguments("headless");
 			webDriver = new ChromeDriver(chromeOptions);
-		}else {
+		} else {
 			webDriver = new ChromeDriver();
 		}
-		
+
+		webDriver.get("http://localhost:8080/login");
+
 		Login login = new Login(webDriver);
-		HomeTrainer homeTrainer= login.logInAsTrainer(username, password);
+		HomeTrainer homeTrainer = login.logInAsTrainer(username, password);
 
 		homeTrainer.getSideBarTrainer().clickTrainerOptions();
 		classManagement = homeTrainer.getSideBarTrainer().goToClassManagement();
@@ -48,12 +47,12 @@ public class ClassManagementTest {
 	}
 
 	@AfterEach
-	void close(){
+	void close() {
 		webDriver.close();
 	}
 
 	@AfterAll
-	static void quit(){
+	static void quit() {
 		webDriver.quit();
 	}
 
@@ -62,7 +61,7 @@ public class ClassManagementTest {
 	void assigningTrainee() {
 		classManagement.selectTrainee("Bill Bird");
 		classManagement.selectClass("Engineering 72");
-		
+
 		Assertions.assertEquals("Bill Bird", classManagement.getSelectTrainee().getFirstSelectedOption().getText());
 		Assertions.assertEquals("Engineering 72", classManagement.getSelectClass().getFirstSelectedOption().getText());
 
@@ -92,6 +91,6 @@ public class ClassManagementTest {
 		Assertions.assertNotNull(classManagement.getErrorMessage());
 
 	}
-	
+
 
 }

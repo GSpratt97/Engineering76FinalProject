@@ -5,9 +5,8 @@ import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class Login {
+public class Login extends BasePage{
 
-    WebDriver webDriver;
     By loginEmail = By.cssSelector("input[name='username'][type='email']");
     By loginPassword = By.cssSelector("input[name='password'][type='password']");
     By rememberMeButton = By.cssSelector("input[name='remember-me'][type='checkbox']");
@@ -15,8 +14,7 @@ public class Login {
     By forgotPasswordLink = By.cssSelector("div[class='text-center'] a[class='small']");
 
     public Login(WebDriver webDriver) {
-        this.webDriver = webDriver;
-
+        super(webDriver);
 //        webDriver.get("http://localhost:8080");
 
     }

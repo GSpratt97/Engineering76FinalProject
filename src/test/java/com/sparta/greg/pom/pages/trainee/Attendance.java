@@ -28,10 +28,17 @@ public abstract class Attendance extends Page {
     }
 
     public void clickWeek(int week){
-    WebElement weekRow = new WebDriverWait(webDriver, 5).until(ExpectedConditions.elementToBeClickable(weeks.get(weeks.size() - week)));
+        //Logging
+        //System.out.println("tbody: " + weeks);
+        //System.out.println(weeks.size());
+        //System.out.println("days:" + weeks.get(weeks.size() - week).findElements(rows));
+        //System.out.println(weeks.get(weeks.size() - week).findElements(rows).size());
+        //Logging
+        WebElement weekRow = new WebDriverWait(webDriver, 5).until(ExpectedConditions.elementToBeClickable(weeks.get(weeks.size() - week)));
         if (week > 0 && week <= weeks.size()) {
             weekRow.click();
         }
+
     }
 
     public boolean isToggledOnWeek(int week){
@@ -43,6 +50,10 @@ public abstract class Attendance extends Page {
     }
 
     public int getNumberOfDaysInWeek(int week){
+        //Logging
+//        System.out.println("tbody: " + weeks);
+//        System.out.println(weeks.size());
+        //Logging
         return weeks.get(weeks.size() - week).findElements(rows).get(0).findElements(columns).size() - 2;
     }
 

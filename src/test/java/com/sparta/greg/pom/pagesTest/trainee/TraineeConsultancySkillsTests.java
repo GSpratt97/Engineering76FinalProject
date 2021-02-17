@@ -1,6 +1,7 @@
 package com.sparta.greg.pom.pagesTest.trainee;
 
 import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.TraineeConsultancySkills;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,23 +16,14 @@ public class TraineeConsultancySkillsTests {
 
     private static WebDriver webDriver;
     private static TraineeConsultancySkills traineeConsultancySkills;
-    private static String traineeUsername;
-    private static String traineePassword;
 
     @Before
     public void setup() {
-        Properties properties = new Properties();
         webDriver = new ChromeDriver();
         webDriver.get("http://localhost:8080/login");
-
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            traineeUsername = properties.getProperty("traineeUsername");
-            traineePassword = properties.getProperty("traineePassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        PropertyLoader.loadProperties();
+        String traineeUsername = PropertyLoader.properties.getProperty("trainerUsername");
+        String traineePassword = PropertyLoader.properties.getProperty("trainerPassword");
         Login login = new Login(webDriver);
         login.logInAsTrainer(traineeUsername, traineePassword);
 

@@ -1,5 +1,6 @@
 package com.sparta.greg.pom.pagesTest.trainee;
 
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
 import com.sparta.greg.pom.pages.components.Login;
 import org.junit.jupiter.api.*;
@@ -18,8 +19,6 @@ public class HomeTraineeTest {
     private static WebDriver webDriver;
     private static Login login;
     private static HomeTrainee homeTrainee;
-
-    private static Properties properties = new Properties();
     private static String traineeUsername;
     private static String traineePassword;
 
@@ -27,17 +26,12 @@ public class HomeTraineeTest {
     @BeforeEach
     void setup() {
         webDriver = new ChromeDriver();
+        webDriver.get("http://localhost:8080/login");
+        PropertyLoader.loadProperties();
+        traineeUsername = PropertyLoader.properties.getProperty("traineeUsername");
+        traineePassword = PropertyLoader.properties.getProperty("traineePassword");
         login = new Login(webDriver);
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            traineeUsername = properties.getProperty("traineeUsername");
-            traineePassword = properties.getProperty("traineePassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        login.enterUsernameAddress(traineeUsername);
-        login.enterPassword(traineePassword);
-        login.clickSubmitButton();
+        login.logInAsTrainer(traineeUsername, traineePassword);
         homeTrainee = new HomeTrainee(webDriver);
     }
 
