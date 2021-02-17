@@ -1,8 +1,8 @@
 package com.sparta.greg.demo;
 
-import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
-import com.sparta.greg.pom.pages.trainee.Attendance;
+import com.sparta.greg.pom.pages.templates.Attendance;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;

@@ -1,11 +1,12 @@
-package com.sparta.greg.pom.pages.components;
+package com.sparta.greg.pom.pages;
 
+import com.sparta.greg.pom.pages.templates.BasePage;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class Login extends BasePage{
+public class Login extends BasePage {
 
     By loginEmail = By.cssSelector("input[name='username'][type='email']");
     By loginPassword = By.cssSelector("input[name='password'][type='password']");
