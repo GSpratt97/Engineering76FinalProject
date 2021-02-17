@@ -26,6 +26,7 @@ public class ViewClassAttendanceSD {
     private void loginAndGoToWeeklyAttendance() {
         //webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
         webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        //webDriver = WebDriverFactory.getWebDriver(WebDriverType.SAFARI);
         webDriver.get("http://localhost:8080/login");
 
         PropertyLoader.loadProperties();
