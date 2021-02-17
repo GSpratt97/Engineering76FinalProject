@@ -25,6 +25,7 @@ public class TrainerChangePasswordTest {
     void setup() {
         webDriver = new ChromeDriver();
         login = new Login(webDriver);
+        webDriver.get("http://localhost:8080");
 
 
         try {
