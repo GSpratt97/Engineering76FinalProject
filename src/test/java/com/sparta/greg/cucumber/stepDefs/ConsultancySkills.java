@@ -4,6 +4,8 @@ import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.TraineeConsultancySkills;
 import com.sparta.greg.pom.pages.trainer.TrainerConsultancySkills;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -21,7 +23,7 @@ public class ConsultancySkills {
 
     @Given("I am logged in as Trainer and on consultancy skills page")
     public void iAmLoggedInAsTrainerAndOnConsultancySkillsPage() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
         webDriver.get("http://localhost:8080/login");
         PropertyLoader.loadProperties();
         String trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");

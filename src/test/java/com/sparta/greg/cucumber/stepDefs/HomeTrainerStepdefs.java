@@ -3,6 +3,8 @@ package com.sparta.greg.cucumber.stepdefs;
 import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -23,7 +25,7 @@ public class HomeTrainerStepdefs {
     private String trainerPassword;
 
     private void loadPropertiesLoginAsTrainerToGoHome() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
         webDriver.get("http://localhost:8080/login");
         PropertyLoader.loadProperties();
         trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");

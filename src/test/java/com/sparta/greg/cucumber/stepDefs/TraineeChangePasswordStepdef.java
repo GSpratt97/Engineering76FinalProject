@@ -24,7 +24,7 @@ public class TraineeChangePasswordStepdef {
     TraineeChangePassword traineeChangePassword;
 
     private void setup() {
-        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
         webDriver.get("http://localhost:8080");
         login = new Login(webDriver);
 

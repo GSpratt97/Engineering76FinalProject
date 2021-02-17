@@ -23,8 +23,8 @@ public class ViewClassAttendanceSD {
     private WeeklyAttendance weeklyAttendance;
 
     private void loginAndGoToWeeklyAttendance() {
-        //webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
-        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
+        //webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
         //webDriver = WebDriverFactory.getWebDriver(WebDriverType.SAFARI);
         webDriver.get("http://localhost:8080/login");
 

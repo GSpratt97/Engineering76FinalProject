@@ -4,6 +4,8 @@ import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.ClassManagement;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -33,9 +35,9 @@ public class ClassManagementStepdefs {
 		if (headless) {
 			ChromeOptions chromeOptions = new ChromeOptions();
 			chromeOptions.addArguments("headless");
-			webDriver = new ChromeDriver(chromeOptions);
+			webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
 		} else {
-			webDriver = new ChromeDriver();
+			webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
 		}
 
 		webDriver.get("http://localhost:8080/login");
