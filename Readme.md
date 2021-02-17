@@ -25,5 +25,4 @@ Due to the project being based on the POM design pattern the framework is very e
 
 The best way to use the framework would be to follow the Behaviour Driven Development (BDD) process in the form of Gherkin syntax. Gherkin syntax tests are extremely readable. This enables much greater collaboration among the developers, QA, non-technical and business participants of the organisation. 
 
-To create a Gherkin statement a .feature file will need to be created in the resources directory (there are already plenty of example files here) following the Given, When, Then 
-'step definition' class will need to be created which 
+To create a Gherkin statement a .feature file will need to be created in the resources directory (there are already plenty of example files) following the 'Given, When, Then' structure. A step definition class linked to this Cucumber statement can then be created to define what each step should do, using the POM to enhance the tests.
