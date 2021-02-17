@@ -24,6 +24,7 @@ public class AddWeeksStepdefs {
     SideBarTrainer sideBarTrainer;
     SideBarTrainee sideBarTrainee;
     String previousPage;
+    AddWeeks page;
 
     @Given("course {string} is currently on week {int}")
     public void courseIsCurrentlyOnWeek(String course, int week) {
@@ -173,13 +174,22 @@ public class AddWeeksStepdefs {
         AddWeeks addWeeks = new AddWeeks(webDriver);
     }
 
-    private boolean isPageCorrect(){
-
-        return true;
-    }
-
     @Then("thenTest")
     public void thentest() {
 
+    }
+
+    @When("I log out from trainer")
+    public void iLogOutFromTrainer() {
+        page = new AddWeeks(webDriver);
+        previousPage = webDriver.getCurrentUrl();
+        page.selectProfileImage();
+        page.logout();
+    }
+
+    @When("I click on change password on add weeks page")
+    public void iClickOnChangePasswordOnAddWeeksPage() {
+        page.selectProfileImage();
+        page.getSideBarTrainer().changePassword();
     }
 }
