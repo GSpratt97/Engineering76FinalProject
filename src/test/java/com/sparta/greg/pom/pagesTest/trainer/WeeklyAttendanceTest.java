@@ -3,6 +3,8 @@ package com.sparta.greg.pom.pagesTest.trainer;
 import com.sparta.greg.pom.pages.components.Login;
 import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.WeeklyAttendance;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,7 +14,7 @@ import java.util.Properties;
 
 public class WeeklyAttendanceTest {
 
-    private static final Properties properties = new Properties();
+    //private static final Properties properties = new Properties();
     private static WebDriver webDriver;
     private static WeeklyAttendance weeklyAttendance;
     private static String trainerUsername;
@@ -20,12 +22,13 @@ public class WeeklyAttendanceTest {
 
     @BeforeAll
     static void setup() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver.get("http://localhost:8080/login");
         Login login = new Login(webDriver);
 
         PropertyLoader.loadProperties();
-        trainerUsername = properties.getProperty("trainerUsername");
-        trainerPassword = properties.getProperty("trainerPassword");
+        trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
+        trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
 
         login.logInAsTrainer(trainerUsername, trainerPassword);
         webDriver.get("http://localhost:8080/trainer/weekly-attendance");
