@@ -3,6 +3,8 @@ package com.sparta.greg.pom.pagesTest.trainee;
 import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
 import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -25,14 +27,22 @@ public class HomeTraineeTest {
 
     @BeforeEach
     void setup() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
         webDriver.get("http://localhost:8080/login");
+        Login login = new Login(webDriver);
         PropertyLoader.loadProperties();
         traineeUsername = PropertyLoader.properties.getProperty("traineeUsername");
         traineePassword = PropertyLoader.properties.getProperty("traineePassword");
-        login = new Login(webDriver);
-        login.logInAsTrainer(traineeUsername, traineePassword);
-        homeTrainee = new HomeTrainee(webDriver);
+        homeTrainee = login.logInAsTrainee(traineeUsername, traineePassword);
+
+//        webDriver = new ChromeDriver();
+//        webDriver.get("http://localhost:8080/login");
+//        PropertyLoader.loadProperties();
+//        traineeUsername = PropertyLoader.properties.getProperty("traineeUsername");
+//        traineePassword = PropertyLoader.properties.getProperty("traineePassword");
+//        login = new Login(webDriver);
+//        login.logInAsTrainer(traineeUsername, traineePassword);
+//        homeTrainee = new HomeTrainee(webDriver);
     }
 
     @Test

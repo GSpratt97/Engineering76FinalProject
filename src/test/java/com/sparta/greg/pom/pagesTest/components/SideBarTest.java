@@ -1,7 +1,12 @@
 package com.sparta.greg.pom.pagesTest.components;
 
 import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.trainee.HomeTrainee;
+import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.trainer.WeeklyAttendance;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,19 +27,29 @@ public class SideBarTest {
 
     @BeforeAll
     static void setup() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver.get("http://localhost:8080/login");
         Login login = new Login(webDriver);
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            trainerUsername = properties.getProperty("trainerUsername");
-            trainerPassword = properties.getProperty("trainerPassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        login.logInAsTrainer(trainerUsername, trainerPassword);
+        PropertyLoader.loadProperties();
+        trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
+        trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
+        login.logInAsTrainee(trainerUsername, trainerPassword);
         webDriver.get("http://localhost:8080/trainer/weekly-attendance");
         weeklyAttendance = new WeeklyAttendance(webDriver);
+
+//        webDriver = new ChromeDriver();
+//        Login login = new Login(webDriver);
+//        try {
+//            properties.load(new FileReader("src/test/resources/login.properties"));
+//            trainerUsername = properties.getProperty("trainerUsername");
+//            trainerPassword = properties.getProperty("trainerPassword");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        login.logInAsTrainer(trainerUsername, trainerPassword);
+//        webDriver.get("http://localhost:8080/trainer/weekly-attendance");
+//        weeklyAttendance = new WeeklyAttendance(webDriver);
     }
 
     @AfterEach

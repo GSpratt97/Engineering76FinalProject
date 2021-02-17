@@ -1,8 +1,11 @@
 package com.sparta.greg.pom.pagesTest.trainee;
 
 import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
 import com.sparta.greg.pom.pages.trainee.TraineeChangePassword;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,18 +26,25 @@ public class TraineeChangePasswordTest {
 
     @BeforeEach
     void setup() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver.get("http://localhost:8080/login");
         login = new Login(webDriver);
-        webDriver.get("http://localhost:8080");
+        PropertyLoader.loadProperties();
+        traineeUsername = PropertyLoader.properties.getProperty("traineeUsername");
+        traineePassword = PropertyLoader.properties.getProperty("traineePassword");
 
-
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            traineeUsername = properties.getProperty("traineeUsername");
-            traineePassword = properties.getProperty("traineePassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        webDriver = new ChromeDriver();
+//        login = new Login(webDriver);
+//        webDriver.get("http://localhost:8080");
+//
+//
+//        try {
+//            properties.load(new FileReader("src/test/resources/login.properties"));
+//            traineeUsername = properties.getProperty("traineeUsername");
+//            traineePassword = properties.getProperty("traineePassword");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
 

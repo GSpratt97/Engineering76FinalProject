@@ -2,7 +2,10 @@ package com.sparta.greg.pom.pagesTest.components;
 
 import com.sparta.greg.pom.pages.components.ChangePassword;
 import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.*;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +17,6 @@ import java.util.Properties;
 
 class SideBarTrainerTest {
 
-    private static final Properties properties = new Properties();
     private static WebDriver webDriver;
     private static HomeTrainer homeTrainer;
     private static String trainerUsername;
@@ -22,19 +24,28 @@ class SideBarTrainerTest {
 
     @BeforeAll
     static void setup() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver.get("http://localhost:8080/login");
         Login login = new Login(webDriver);
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            trainerUsername = properties.getProperty("trainerUsername");
-            trainerPassword = properties.getProperty("trainerPassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        PropertyLoader.loadProperties();
+        trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
+        trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
+        homeTrainer = login.logInAsTrainer(trainerUsername, trainerPassword);
 
-        login.logInAsTrainer(trainerUsername, trainerPassword);
-        webDriver.get("http://localhost:8080/trainer/home");
-        homeTrainer = new HomeTrainer(webDriver);
+//        webDriver = new ChromeDriver();
+//        Login login = new Login(webDriver);
+//        try {
+//            properties.load(new FileReader("src/test/resources/login.properties"));
+//            trainerUsername = properties.getProperty("trainerUsername");
+//            trainerPassword = properties.getProperty("trainerPassword");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        login.logInAsTrainer(trainerUsername, trainerPassword);
+//        webDriver.get("http://localhost:8080/trainer/home");
+//        homeTrainer = new HomeTrainer(webDriver);
+
     }
 
     @AfterEach
@@ -90,6 +101,7 @@ class SideBarTrainerTest {
     @Test
     @DisplayName("go to add weeks page test ")
     void goToAddWeeksPageTest() {
+        homeTrainer.getSideBarTrainer().isTrainerOptionsExpanded();
         homeTrainer.getSideBarTrainer().clickTrainerOptions();
         Assertions.assertEquals(AddWeeks.class, homeTrainer.getSideBarTrainer().goToAddWeeks().getClass());
     }

@@ -7,6 +7,8 @@ import com.sparta.greg.pom.pages.trainee.AttendanceTrainer;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.trainer.TraineeProfile;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -23,7 +25,8 @@ public class AttendanceTrainerTest {
 
     @BeforeEach
     void setup(){
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver.get("http://localhost:8080/login");
         loginPage = new Login(webDriver);
         PropertyLoader.loadProperties();
         usernameTrainer = PropertyLoader.properties.getProperty("trainerUsername");
@@ -32,6 +35,16 @@ public class AttendanceTrainerTest {
         //Need an explicit wait
         traineeProfile = homePage.goToTraineeProfile();
         trainerAttendance = traineeProfile.goToTraineeAttendance();
+
+//        webDriver = new ChromeDriver();
+//        loginPage = new Login(webDriver);
+//        PropertyLoader.loadProperties();
+//        usernameTrainer = PropertyLoader.properties.getProperty("trainerUsername");
+//        passwordTrainer = PropertyLoader.properties.getProperty("trainerPassword");
+//        homePage = loginPage.logInAsTrainer(usernameTrainer, passwordTrainer);
+//        //Need an explicit wait
+//        traineeProfile = homePage.goToTraineeProfile();
+//        trainerAttendance = traineeProfile.goToTraineeAttendance();
     }
 
     @Test

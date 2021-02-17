@@ -3,6 +3,8 @@ package com.sparta.greg.pom.pagesTest.trainer;
 import com.sparta.greg.pom.pages.components.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.AssessmentBreakdown;
 import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,15 +23,25 @@ AssessmentBreakDownTest {
 
     @BeforeEach
     public void setup() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
         webDriver.get("http://localhost:8080/login");
+        Login login = new Login(webDriver);
         PropertyLoader.loadProperties();
         usernameTrainer = PropertyLoader.properties.getProperty("trainerUsername");
         passwordTrainer = PropertyLoader.properties.getProperty("trainerPassword");
-        Login login = new Login(webDriver);
         login.logInAsTrainer(usernameTrainer, passwordTrainer);
         webDriver.get("http://localhost:8080/trainer/assessments/41");
         assessmentBreakdownPage = new AssessmentBreakdown(webDriver);
+
+//        webDriver = new ChromeDriver();
+//        webDriver.get("http://localhost:8080/login");
+//        PropertyLoader.loadProperties();
+//        usernameTrainer = PropertyLoader.properties.getProperty("trainerUsername");
+//        passwordTrainer = PropertyLoader.properties.getProperty("trainerPassword");
+//        Login login = new Login(webDriver);
+//        login.logInAsTrainer(usernameTrainer, passwordTrainer);
+//        webDriver.get("http://localhost:8080/trainer/assessments/41");
+//        assessmentBreakdownPage = new AssessmentBreakdown(webDriver);
     }
 
     @Test
