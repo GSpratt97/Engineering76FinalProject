@@ -30,7 +30,7 @@ To create a Gherkin statement a .feature file will need to be created in the res
 Here is an example of a test case using Gherkin syntax and Java
 
 ```gherkin
-  // Gherkin
+  # Gherkin
   Scenario: Logging in as trainer
     Given I am on the login page
     When I log in with trainer email and password
