@@ -21,7 +21,7 @@ public class AddWeeksStepdefs {
     SideBarTrainer sideBarTrainer;
     SideBarTrainee sideBarTrainee;
     String previousPage;
-    Page page;
+    AddWeeks page;
 
     @Given("course {string} is currently on week {int}")
     public void courseIsCurrentlyOnWeek(String course, int week) {
@@ -182,5 +182,11 @@ public class AddWeeksStepdefs {
         previousPage = webDriver.getCurrentUrl();
         page.selectProfileImage();
         page.logout();
+    }
+
+    @When("I click on change password on add weeks page")
+    public void iClickOnChangePasswordOnAddWeeksPage() {
+        page.selectProfileImage();
+        page.getSideBarTrainer().changePassword();
     }
 }
