@@ -101,7 +101,6 @@ class SideBarTrainerTest {
     @Test
     @DisplayName("go to add weeks page test ")
     void goToAddWeeksPageTest() {
-        homeTrainer.getSideBarTrainer().isTrainerOptionsExpanded();
         homeTrainer.getSideBarTrainer().clickTrainerOptions();
         Assertions.assertEquals(AddWeeks.class, homeTrainer.getSideBarTrainer().goToAddWeeks().getClass());
     }
