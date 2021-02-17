@@ -25,12 +25,8 @@ public class SideBarTrainer extends SideBar {
     }
 
     public boolean isTrainerOptionsExpanded() {
-        boolean isExpanded = !webDriver.findElement(trainerOptionsButton).getAttribute("class").contains("collapsed");
-        if (!isExpanded) {
-            System.err.println("WARNING: 'Trainer Options' tab is not expanded. Expand it by calling the 'clickTrainerOptions()' method.");
-            return false;
-        }
-        return true;
+        //            System.err.println("WARNING: 'Trainer Options' tab is not expanded. Expand it by calling the 'clickTrainerOptions()' method.");
+        return Boolean.parseBoolean(webDriver.findElement(trainerOptionsButton).getAttribute("aria-expanded"));
     }
 
     public SideBarTrainer clickTrainerOptions() {
