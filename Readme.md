@@ -33,6 +33,7 @@ To create a Gherkin statement a .feature file will need to be created in the res
     When I log in with trainer email and password
     Then I am taken to the trainer home page from the login page
     
+```java
   @Given("I am on the login page")
     public void iAmOnTheLoginPage() {
         setup();
