@@ -32,6 +32,7 @@ To create a Gherkin statement a .feature file will need to be created in the res
     Given I am on the login page
     When I log in with trainer email and password
     Then I am taken to the trainer home page from the login page
+```
     
 ```java
   @Given("I am on the login page")
@@ -49,3 +50,4 @@ To create a Gherkin statement a .feature file will need to be created in the res
         Assertions.assertEquals("http://localhost:8080/trainer/home", webDriver.getCurrentUrl());
         webDriver.quit();
     }
+```
