@@ -8,6 +8,8 @@ import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.trainer.ReportTrainer;
 import com.sparta.greg.pom.pages.trainer.TraineeProfile;
 import com.sparta.greg.pom.pages.trainer.WeeklyAttendance;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -24,9 +26,27 @@ public class TraineeProfileTest {
     private static TraineeProfile traineeProfilePage;
     private static TraineeProfile traineeProfilePageEmpty;
 
+//    @BeforeAll
+//    static void setup() {
+//        webDriver = new ChromeDriver();
+//        webDriver.get("http://localhost:8080/login");
+//
+//        PropertyLoader.loadProperties();
+//        usernameTrainer = PropertyLoader.properties.getProperty("trainerUsername");
+//        passwordTrainer = PropertyLoader.properties.getProperty("trainerPassword");
+//
+//        Login login = new Login(webDriver);
+//        login.logInAsTrainer(usernameTrainer, passwordTrainer);
+//
+//        // Bill Bird test profile
+//        webDriver.get("http://localhost:8080/trainer/traineeProfile/41");
+//
+//        traineeProfilePage = new TraineeProfile(webDriver);
+//    }
+
     @BeforeAll
     static void setup() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
         webDriver.get("http://localhost:8080/login");
 
         PropertyLoader.loadProperties();
