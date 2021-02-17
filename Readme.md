@@ -27,6 +27,7 @@ The best way to use the framework would be to follow the Behaviour Driven Develo
 
 To create a Gherkin statement a .feature file will need to be created in the resources directory (there are already plenty of example files) following the 'Given, When, Then' structure. A step definition class linked to this Cucumber statement can then be created to define what each step should do, using the POM to enhance the tests.
 
+```gherkin
   Scenario: Logging in as trainer
     Given I am on the login page
     When I log in with trainer email and password
