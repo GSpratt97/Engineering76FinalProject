@@ -26,3 +26,24 @@ Due to the project being based on the POM design pattern the framework is very e
 The best way to use the framework would be to follow the Behaviour Driven Development (BDD) process in the form of Gherkin syntax. Gherkin syntax tests are extremely readable. This enables much greater collaboration among the developers, QA, non-technical and business participants of the organisation. 
 
 To create a Gherkin statement a .feature file will need to be created in the resources directory (there are already plenty of example files) following the 'Given, When, Then' structure. A step definition class linked to this Cucumber statement can then be created to define what each step should do, using the POM to enhance the tests.
+
+  Scenario: Logging in as trainer
+    Given I am on the login page
+    When I log in with trainer email and password
+    Then I am taken to the trainer home page from the login page
+    
+  @Given("I am on the login page")
+    public void iAmOnTheLoginPage() {
+        setup();
+    }
+    
+  @When("I log in with trainer email and password")
+    public void iLogInWithTrainerEmailAndPassword() {
+        login.logInAsTrainer(trainerUsername, trainerPassword);
+    }
+    
+  @Then("I am taken to the trainer home page from the login page")
+    public void iAmTakenToTheTrainerHomePageFromTheLoginPage() {
+        Assertions.assertEquals("http://localhost:8080/trainer/home", webDriver.getCurrentUrl());
+        webDriver.quit();
+    }
