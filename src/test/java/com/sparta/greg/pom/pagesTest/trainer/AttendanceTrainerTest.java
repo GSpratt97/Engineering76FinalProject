@@ -1,17 +1,14 @@
 package com.sparta.greg.pom.pagesTest.trainer;
 
-import com.sparta.greg.pom.pages.components.Login;
-import com.sparta.greg.pom.pages.components.PropertyLoader;
-import com.sparta.greg.pom.pages.trainee.AttendanceTrainee;
-import com.sparta.greg.pom.pages.trainee.AttendanceTrainer;
-import com.sparta.greg.pom.pages.trainee.HomeTrainee;
+import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
+import com.sparta.greg.pom.pages.trainer.AttendanceTrainer;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.trainer.TraineeProfile;
 import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
 import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class AttendanceTrainerTest {
 

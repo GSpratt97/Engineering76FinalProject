@@ -1,5 +1,6 @@
-package com.sparta.greg.pom.pages.components;
+package com.sparta.greg.pom.pages.templates;
 
+import com.sparta.greg.pom.pages.templates.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

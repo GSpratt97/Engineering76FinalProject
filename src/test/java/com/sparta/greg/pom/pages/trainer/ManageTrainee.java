@@ -1,7 +1,7 @@
 package com.sparta.greg.pom.pages.trainer;
 
-import com.sparta.greg.pom.pages.components.Page;
-import com.sparta.greg.pom.pages.components.SideBarTrainer;
+import com.sparta.greg.pom.pages.templates.Page;
+import com.sparta.greg.pom.pages.fragments.SideBarTrainer;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;

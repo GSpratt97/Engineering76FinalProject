@@ -1,7 +1,7 @@
 package com.sparta.greg.pom.pages.trainee;
 
-import com.sparta.greg.pom.pages.components.Page;
-import com.sparta.greg.pom.pages.components.SideBarTrainee;
+import com.sparta.greg.pom.pages.templates.Page;
+import com.sparta.greg.pom.pages.fragments.SideBarTrainee;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;

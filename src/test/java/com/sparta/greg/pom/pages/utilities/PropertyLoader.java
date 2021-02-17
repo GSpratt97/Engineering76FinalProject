@@ -1,4 +1,4 @@
-package com.sparta.greg.pom.pages.components;
+package com.sparta.greg.pom.pages.utilities;
 
 import java.io.FileReader;
 import java.io.IOException;

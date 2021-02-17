@@ -1,8 +1,7 @@
 package com.sparta.greg.pom.pages.trainee;
 
-import com.sparta.greg.pom.pages.components.Report;
-import com.sparta.greg.pom.pages.components.SideBarTrainee;
-import com.sparta.greg.pom.pages.components.SideBarTrainer;
+import com.sparta.greg.pom.pages.templates.Report;
+import com.sparta.greg.pom.pages.fragments.SideBarTrainee;
 import org.openqa.selenium.WebDriver;
 
 public class ReportTrainee extends Report {

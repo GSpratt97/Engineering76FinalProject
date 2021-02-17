@@ -1,7 +1,7 @@
 package com.sparta.greg.pom.pages.trainer;
 
-import com.sparta.greg.pom.pages.components.ChangePassword;
-import com.sparta.greg.pom.pages.components.SideBarTrainer;
+import com.sparta.greg.pom.pages.templates.ChangePassword;
+import com.sparta.greg.pom.pages.fragments.SideBarTrainer;
 import org.openqa.selenium.WebDriver;
 
 public class TrainerChangePassword extends ChangePassword {

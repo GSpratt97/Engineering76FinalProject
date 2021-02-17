@@ -1,8 +1,8 @@
 package com.sparta.greg.pom.pagesTest.trainee;
 
-import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.FeedbackForm;
-import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
 import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.Assertions;
@@ -10,12 +10,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Properties;
-
 
 
 public class FeedbackFormTest {
