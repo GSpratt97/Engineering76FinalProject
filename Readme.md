@@ -39,9 +39,20 @@ Here is an example of a test case using Gherkin syntax and Java to log into the 
     
 ```java
   // Java
+  WebDriver webDriver;
+  Login login;
+  String trainerUsername;
+  String trainerPassword;
+
   @Given("I am on the login page")
     public void iAmOnTheLoginPage() {
-        setup();
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver.get("http://localhost:8080");
+        login = new Login(webDriver);
+
+        PropertyLoader.loadProperties();
+        trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
+        trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
     }
     
   @When("I log in with trainer email and password")
