@@ -276,7 +276,10 @@ public class ManageTrainee extends Page {
          *
          * @param field available in {@code 'Create New Trainee' form}
          * @return false if the field has validation error
+         *
+         * @deprecated DO NOT USE! Not working properly.
          */
+        @Deprecated
         public boolean isValid(CreateTraineeField field) {
             switch (field) {
                 case EMAIL:
@@ -412,7 +415,10 @@ public class ManageTrainee extends Page {
          * e.g. validation message is empty when data is valid
          *
          * @return false if the Dropdown element has validation error.
+         *
+         * @deprecated DO NOT USE! Not working properly.
          */
+        @Deprecated
         public boolean isValid() {
             return traineesDropDownElement.getAttribute("validationMessage").isBlank();
         }
