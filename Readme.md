@@ -45,24 +45,24 @@ Here is an example of a test case using Gherkin syntax and Java to log into the 
   String trainerPassword;
 
   @Given("I am on the login page")
-    public void iAmOnTheLoginPage() {
-        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
-        webDriver.get("http://localhost:8080");
-        login = new Login(webDriver);
+  public void iAmOnTheLoginPage() {
+      webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+      webDriver.get("http://localhost:8080");
+      login = new Login(webDriver);
 
-        PropertyLoader.loadProperties();
-        trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
-        trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
-    }
+      PropertyLoader.loadProperties();
+      trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
+      trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
+  }
     
   @When("I log in with trainer email and password")
-    public void iLogInWithTrainerEmailAndPassword() {
-        login.logInAsTrainer(trainerUsername, trainerPassword);
-    }
+  public void iLogInWithTrainerEmailAndPassword() {
+      login.logInAsTrainer(trainerUsername, trainerPassword);
+  }
     
   @Then("I am taken to the trainer home page from the login page")
-    public void iAmTakenToTheTrainerHomePageFromTheLoginPage() {
-        Assertions.assertEquals("http://localhost:8080/trainer/home", webDriver.getCurrentUrl());
-        webDriver.quit();
-    }
+  public void iAmTakenToTheTrainerHomePageFromTheLoginPage() {
+      Assertions.assertEquals("http://localhost:8080/trainer/home", webDriver.getCurrentUrl());
+      webDriver.quit();
+  }
 ```
