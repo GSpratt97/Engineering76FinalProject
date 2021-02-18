@@ -130,7 +130,7 @@ public class FeedbackFormStepdefs {
 
     @Then("I should be logged out from the Feedback Page")
     public void iShouldBeLoggedOutFromTheFeedbackPage() {
-        Assertions.assertEquals(webDriver.getCurrentUrl(), "http://localhost:8080/login");
+        Assertions.assertEquals(webDriver.getCurrentUrl(), "http://localhost:8080/login?logout");
         webDriver.quit();
     }
 
