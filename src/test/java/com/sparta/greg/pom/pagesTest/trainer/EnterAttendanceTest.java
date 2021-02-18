@@ -103,7 +103,7 @@ public class EnterAttendanceTest {
     public void changeDate()
     {
         webEdition();
-        Assertions.assertTrue(attendancePage.areOnAttendanceEntryPage("Set Trainee Attendance"));
+        Assertions.assertTrue(attendancePage.areOnAttendanceEntryPage("http://localhost:8080/trainer/attendanceEntry"));
         String date = "22-09-2020";
         String formattedDate = attendancePage.formatDateForDriverType(date, webDriver);
         attendancePage.selectDate(formattedDate);

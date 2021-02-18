@@ -23,7 +23,8 @@ public class EnterAttendSD {
 
     @Given("I am logged in as a trainer and I am on the attendance page")
     public void iAmOnTheAttendancePage() {
-        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
+        //webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
         PropertyLoader.loadProperties();
         properties = PropertyLoader.properties;
         //SignIn
@@ -42,7 +43,7 @@ public class EnterAttendSD {
         attendancePage = new EnterAttendance(webDriver);
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         attendancePage.setPageConfirm();
-        Assertions.assertTrue(attendancePage.areOnAttendanceEntryPage("Set Trainee Attendance"));
+        Assertions.assertTrue(attendancePage.areOnAttendanceEntryPage("http://localhost:8080/trainer/attendanceEntry"));
     }
 
     @When("I select a trainee on attendance page")
@@ -95,7 +96,7 @@ public class EnterAttendSD {
         webDriver.get("http://localhost:8080/trainer/attendanceEntry");
         attendancePage = new EnterAttendance(webDriver);
         attendancePage.setPageConfirm();
-        Assertions.assertTrue(attendancePage.areOnAttendanceEntryPage("Set Trainee Attendance"));
+        Assertions.assertTrue(attendancePage.areOnAttendanceEntryPage("http://localhost:8080/trainer/attendanceEntry"));
         attendancePage.selectDate("22-09-2020");
         Assertions.assertTrue(attendancePage.isCorrectDate("22-09-2020"));
     }
