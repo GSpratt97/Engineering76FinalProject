@@ -1,15 +1,17 @@
 package com.sparta.greg.cucumber.stepdefs;
 
 
-import com.sparta.greg.pom.pages.components.*;
+import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.pages.fragments.*;
 import com.sparta.greg.pom.pages.trainer.AddWeeks;
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 
-
-import org.openqa.selenium.By;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,6 +26,7 @@ public class AddWeeksStepdefs {
     SideBarTrainer sideBarTrainer;
     SideBarTrainee sideBarTrainee;
     String previousPage;
+    AddWeeks page;
 
     @Given("course {string} is currently on week {int}")
     public void courseIsCurrentlyOnWeek(String course, int week) {
@@ -106,7 +109,7 @@ public class AddWeeksStepdefs {
     }
 
     private void loadProperties() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
         webDriver.get("http://localhost:8080/login");
 
         PropertyLoader.loadProperties();
@@ -173,13 +176,22 @@ public class AddWeeksStepdefs {
         AddWeeks addWeeks = new AddWeeks(webDriver);
     }
 
-    private boolean isPageCorrect(){
-
-        return true;
-    }
-
     @Then("thenTest")
     public void thentest() {
 
+    }
+
+    @When("I log out from trainer")
+    public void iLogOutFromTrainer() {
+        page = new AddWeeks(webDriver);
+        previousPage = webDriver.getCurrentUrl();
+        page.selectProfileImage();
+        page.logout();
+    }
+
+    @When("I click on change password on add weeks page")
+    public void iClickOnChangePasswordOnAddWeeksPage() {
+        page.selectProfileImage();
+        page.getSideBarTrainer().changePassword();
     }
 }

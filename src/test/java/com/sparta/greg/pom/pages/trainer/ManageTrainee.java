@@ -1,7 +1,7 @@
 package com.sparta.greg.pom.pages.trainer;
 
-import com.sparta.greg.pom.pages.components.Page;
-import com.sparta.greg.pom.pages.components.SideBarTrainer;
+import com.sparta.greg.pom.pages.templates.Page;
+import com.sparta.greg.pom.pages.fragments.SideBarTrainer;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
@@ -276,7 +276,10 @@ public class ManageTrainee extends Page {
          *
          * @param field available in {@code 'Create New Trainee' form}
          * @return false if the field has validation error
+         *
+         * @deprecated DO NOT USE! Not working properly.
          */
+        @Deprecated
         public boolean isValid(CreateTraineeField field) {
             switch (field) {
                 case EMAIL:
@@ -412,7 +415,10 @@ public class ManageTrainee extends Page {
          * e.g. validation message is empty when data is valid
          *
          * @return false if the Dropdown element has validation error.
+         *
+         * @deprecated DO NOT USE! Not working properly.
          */
+        @Deprecated
         public boolean isValid() {
             return traineesDropDownElement.getAttribute("validationMessage").isBlank();
         }

@@ -1,16 +1,14 @@
 package com.sparta.greg.pom.pagesTest.trainer;
 
-import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.ClassManagement;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
-import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Properties;
 
 public class ClassManagementTest {
@@ -24,25 +22,35 @@ public class ClassManagementTest {
 
 	@BeforeEach
 	void setup() {
+		webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+		webDriver.get("http://localhost:8080/login");
+		Login login = new Login(webDriver);
 		PropertyLoader.loadProperties();
 		username = PropertyLoader.properties.getProperty("trainerUsername");
 		password = PropertyLoader.properties.getProperty("trainerPassword");
-
-		if (headless) {
-			ChromeOptions chromeOptions = new ChromeOptions();
-			chromeOptions.addArguments("headless");
-			webDriver = new ChromeDriver(chromeOptions);
-		} else {
-			webDriver = new ChromeDriver();
-		}
-
-		webDriver.get("http://localhost:8080/login");
-
-		Login login = new Login(webDriver);
 		HomeTrainer homeTrainer = login.logInAsTrainer(username, password);
-
 		homeTrainer.getSideBarTrainer().clickTrainerOptions();
 		classManagement = homeTrainer.getSideBarTrainer().goToClassManagement();
+
+//		PropertyLoader.loadProperties();
+//		username = PropertyLoader.properties.getProperty("trainerUsername");
+//		password = PropertyLoader.properties.getProperty("trainerPassword");
+//
+//		if (headless) {
+//			ChromeOptions chromeOptions = new ChromeOptions();
+//			chromeOptions.addArguments("headless");
+//			webDriver = new ChromeDriver(chromeOptions);
+//		} else {
+//			webDriver = new ChromeDriver();
+//		}
+//
+//		webDriver.get("http://localhost:8080/login");
+//
+//		Login login = new Login(webDriver);
+//		HomeTrainer homeTrainer = login.logInAsTrainer(username, password);
+//
+//		homeTrainer.getSideBarTrainer().clickTrainerOptions();
+//		classManagement = homeTrainer.getSideBarTrainer().goToClassManagement();
 
 	}
 

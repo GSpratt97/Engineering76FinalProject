@@ -1,25 +1,19 @@
 package com.sparta.greg.cucumber.stepdefs;
 
-import com.sparta.greg.pom.pages.components.Login;
-import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
-import io.cucumber.java.bs.A;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class HomeTrainerStepdefs {
 
@@ -31,7 +25,7 @@ public class HomeTrainerStepdefs {
     private String trainerPassword;
 
     private void loadPropertiesLoginAsTrainerToGoHome() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
         webDriver.get("http://localhost:8080/login");
         PropertyLoader.loadProperties();
         trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");

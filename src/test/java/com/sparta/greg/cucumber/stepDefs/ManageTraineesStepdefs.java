@@ -1,7 +1,9 @@
 package com.sparta.greg.cucumber.stepdefs;
 
-import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.trainer.ManageTrainee;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -25,7 +27,7 @@ public class ManageTraineesStepdefs {
 
     @Given("I am logged in as a Trainer and on the Manage Trainee Page.")
     public void iAmLoggedInAsATrainerAndOnTheManageTraineePage() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         webDriver.get("http://localhost:8080");
         login = new Login(webDriver);

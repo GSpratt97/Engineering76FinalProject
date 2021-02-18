@@ -1,8 +1,6 @@
-package com.sparta.greg.pom.pages.components;
+package com.sparta.greg.pom.pages.fragments;
 
-import com.sparta.greg.pom.pages.trainee.TraineeChangePassword;
 import com.sparta.greg.pom.pages.trainer.*;
-import io.cucumber.java.ro.Si;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

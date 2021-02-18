@@ -1,7 +1,7 @@
 package com.sparta.greg.demo;
 
 
-import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.trainee.FeedbackForm;
 import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
 import com.sparta.greg.pom.webDriverFactory.WebDriverType;

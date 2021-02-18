@@ -1,7 +1,7 @@
 package com.sparta.greg.cucumber.stepdefs;
 
-import com.sparta.greg.pom.pages.components.Login;
-import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.WeeklyAttendance;
 import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
 import com.sparta.greg.pom.webDriverFactory.WebDriverType;
@@ -14,7 +14,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
-import java.util.Properties;
 
 public class ViewClassAttendanceSD {
 
@@ -24,8 +23,9 @@ public class ViewClassAttendanceSD {
     private WeeklyAttendance weeklyAttendance;
 
     private void loginAndGoToWeeklyAttendance() {
-        //webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
-        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
+        //webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        //webDriver = WebDriverFactory.getWebDriver(WebDriverType.SAFARI);
         webDriver.get("http://localhost:8080/login");
 
         PropertyLoader.loadProperties();

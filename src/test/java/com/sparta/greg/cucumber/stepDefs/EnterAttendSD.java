@@ -1,19 +1,17 @@
 package com.sparta.greg.cucumber.stepdefs;
 
-import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.EnterAttendance;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
-import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -25,11 +23,12 @@ public class EnterAttendSD {
 
     @Given("I am logged in as a trainer and I am on the attendance page")
     public void iAmOnTheAttendancePage() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
         PropertyLoader.loadProperties();
         properties = PropertyLoader.properties;
         //SignIn
         Login login = new Login(webDriver);
+        webDriver.get("http://localhost:8080");
         HomeTrainer trainer = login.logInAsTrainer(properties.getProperty("trainerUsername"),properties.getProperty("trainerPassword") );
         attendancePage = trainer.goToEnterAttendanceThroughDashboard();
 

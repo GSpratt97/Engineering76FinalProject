@@ -1,4 +1,4 @@
-package com.sparta.greg.pom.pages.components;
+package com.sparta.greg.pom.pages.templates;
 
 import org.openqa.selenium.WebDriver;
 

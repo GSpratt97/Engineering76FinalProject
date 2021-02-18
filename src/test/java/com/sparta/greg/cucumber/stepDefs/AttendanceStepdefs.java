@@ -1,13 +1,14 @@
 package com.sparta.greg.cucumber.stepdefs;
 
-import com.sparta.greg.pom.pages.components.Login;
-import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.AttendanceTrainee;
-import com.sparta.greg.pom.pages.trainee.AttendanceTrainer;
+import com.sparta.greg.pom.pages.trainer.AttendanceTrainer;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
-import com.sparta.greg.pom.pages.trainee.Attendance;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.trainer.TraineeProfile;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -31,7 +32,7 @@ public class AttendanceStepdefs {
 
     @Given("I am logged in as a trainee and on the Trainee Attendance page")
     public void iAmLoggedInAsATraineeAndOnTheTraineeAttendancePage() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
         webDriver.get("http://localhost:8080");
         loginPage = new Login(webDriver);
         PropertyLoader.loadProperties();

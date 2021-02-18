@@ -1,37 +1,46 @@
 package com.sparta.greg.pom.pagesTest.trainer;
 
-import com.sparta.greg.pom.pages.components.Login;
-import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.ReportTrainer;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Properties;
 
 public class ReportTrainerTest {
-
-    private static final Properties     properties = new Properties();
 
     private static       Login          login;
     private static       ReportTrainer  reportTrainer;
     private static       WebDriver      webDriver;
 
-    private static       String         trainerUsername;
-    private static       String         trainerPassword;
+//    @BeforeEach
+//    void setup() {
+//        webDriver = new ChromeDriver();
+//        login     = new Login(webDriver);
+//
+//        webDriver.get("http://localhost:8080/");
+//
+//        PropertyLoader.loadProperties();
+//        String trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
+//        String trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
+//
+//        login.logInAsTrainer(trainerUsername, trainerPassword);
+//        webDriver.get("http://localhost:8080/trainer/report/41"); //Bill Bird
+//
+//        reportTrainer = new ReportTrainer(webDriver);
+//        reportTrainer.setWeekReports();
+//        reportTrainer.setReportDataForWeek(12);
+//    }
 
     @BeforeEach
     void setup() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver.get("http://localhost:8080/login");
         login     = new Login(webDriver);
-
-        webDriver.get("http://localhost:8080/");
-
         PropertyLoader.loadProperties();
-        String trainerUsername = PropertyLoader.properties.getProperty("traineeUsername");
-        String trainerPassword = PropertyLoader.properties.getProperty("traineePassword");
+        String trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
+        String trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
 
         login.logInAsTrainer(trainerUsername, trainerPassword);
         webDriver.get("http://localhost:8080/trainer/report/41"); //Bill Bird

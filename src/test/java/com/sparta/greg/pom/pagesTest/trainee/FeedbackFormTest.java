@@ -1,41 +1,49 @@
 package com.sparta.greg.pom.pagesTest.trainee;
 
-import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.FeedbackForm;
-import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Properties;
-
 
 
 public class FeedbackFormTest {
 
     private static WebDriver webDriver;
     private static FeedbackForm feedbackForm;
+    private static String trainerUsername;
+    private static String trainerPassword;
 
     @BeforeAll
     static void setup(){
-        webDriver = new ChromeDriver();
-        webDriver.get("http://localhost:8080/trainee/report/12");
-
-        Properties properties = PropertyLoader.properties;
-        PropertyLoader.loadProperties();
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
         webDriver.get("http://localhost:8080/login");
         Login login = new Login(webDriver);
-        login.enterUsernameAddress(properties.getProperty("traineeUsername"));
-        login.enterPassword(properties.getProperty("traineePassword"));
-        login.clickSubmitButton();
+        PropertyLoader.loadProperties();
+        trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
+        trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
+        login.logInAsTrainer(trainerUsername, trainerPassword);
         feedbackForm = new FeedbackForm(webDriver);
-
         webDriver.get("http://localhost:8080/trainee/report/12");
+
+//        webDriver = new ChromeDriver();
+//        webDriver.get("http://localhost:8080/trainee/report/12");
+//
+//        Properties properties = PropertyLoader.properties;
+//        PropertyLoader.loadProperties();
+//        webDriver.get("http://localhost:8080/login");
+//        Login login = new Login(webDriver);
+//        login.enterUsernameAddress(properties.getProperty("traineeUsername"));
+//        login.enterPassword(properties.getProperty("traineePassword"));
+//        login.clickSubmitButton();
+//        feedbackForm = new FeedbackForm(webDriver);
+//
+//        webDriver.get("http://localhost:8080/trainee/report/12");
 
     }
 

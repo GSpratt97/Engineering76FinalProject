@@ -1,11 +1,12 @@
-package com.sparta.greg.pom.pages.components;
+package com.sparta.greg.pom.pages.templates;
 
+import com.sparta.greg.pom.pages.Login;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public abstract class Page extends BasePage{
+public abstract class Page extends BasePage {
 //    public WebDriver webDriver;
 
     By userDropDownPhoto = new By.ByCssSelector("ul[class*='navbar-nav'] a[id*='userDropdown']");

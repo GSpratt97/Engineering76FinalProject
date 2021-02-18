@@ -1,6 +1,6 @@
 package com.sparta.greg.pom.smallWindowPagetest;
 
-import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
