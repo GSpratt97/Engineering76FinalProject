@@ -1,8 +1,6 @@
-package com.sparta.greg.pom.pages.components;
+package com.sparta.greg.pom.pages.fragments;
 
-import com.sparta.greg.pom.pages.trainee.TraineeChangePassword;
 import com.sparta.greg.pom.pages.trainer.*;
-import io.cucumber.java.ro.Si;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -25,12 +23,8 @@ public class SideBarTrainer extends SideBar {
     }
 
     public boolean isTrainerOptionsExpanded() {
-        boolean isExpanded = !webDriver.findElement(trainerOptionsButton).getAttribute("class").contains("collapsed");
-        if (!isExpanded) {
-            System.err.println("WARNING: 'Trainer Options' tab is not expanded. Expand it by calling the 'clickTrainerOptions()' method.");
-            return false;
-        }
-        return true;
+        //            System.err.println("WARNING: 'Trainer Options' tab is not expanded. Expand it by calling the 'clickTrainerOptions()' method.");
+        return Boolean.parseBoolean(webDriver.findElement(trainerOptionsButton).getAttribute("aria-expanded"));
     }
 
     public SideBarTrainer clickTrainerOptions() {

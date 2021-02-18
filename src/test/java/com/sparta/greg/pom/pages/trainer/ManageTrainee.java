@@ -1,15 +1,11 @@
 package com.sparta.greg.pom.pages.trainer;
 
-import com.sparta.greg.pom.pages.components.Page;
-import com.sparta.greg.pom.pages.components.SideBarTrainer;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.sparta.greg.pom.pages.templates.Page;
+import com.sparta.greg.pom.pages.fragments.SideBarTrainer;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.List;
 import java.util.Locale;
 
 /**
@@ -27,12 +23,12 @@ public class ManageTrainee extends Page {
     /**
      * Css selector for {@code Create Trainee Form}.
      */
-    private final By createTraineeFormSelector = By.cssSelector("main form[class*='form-signin']");
+    private static final By CREATE_TRAINEE_FORM_SELECTOR = By.cssSelector("main form[class*='form-signin']");
 
     /**
      * Css selector for {@code Delete Trainee Form}.
      */
-    private final By deleteTraineeFormSelector = By.cssSelector("main form[action*='delete']");
+    private static final By DELETE_TRAINEE_FORM_SELECTOR = By.cssSelector("main form[action*='delete']");
 
     /**
      * {@link WebElement} containing {@code Create Trainee Form}.
@@ -66,8 +62,8 @@ public class ManageTrainee extends Page {
      * @throws NoSuchElementException when a form cannot be found in the page.
      */
     private void loadPage() {
-        createTraineeFormElement = webDriver.findElement(createTraineeFormSelector);
-        deleteTraineeFormElement = webDriver.findElement(deleteTraineeFormSelector);
+        createTraineeFormElement = webDriver.findElement(CREATE_TRAINEE_FORM_SELECTOR);
+        deleteTraineeFormElement = webDriver.findElement(DELETE_TRAINEE_FORM_SELECTOR);
     }
 
     /**
@@ -103,7 +99,7 @@ public class ManageTrainee extends Page {
         EMAIL,
         FIRST_NAME,
         LAST_NAME,
-        CLASS;
+        CLASS
     }
 
     /**
@@ -140,14 +136,9 @@ public class ManageTrainee extends Page {
         private final By createNewTraineeButtonSelector = By.cssSelector("button[type='submit']");
 
         /**
-         * Css selector for {@code Class Dropdown elements}.
-         */
-        private final By classDropDownListSelector = By.cssSelector("select[id*='groupId'] option)");
-
-        /**
          * Css selector for {@code Message element}.
          */
-        private final By messageSelector = By.cssSelector("p[class*='letter']");
+        private final By messageSelector = By.cssSelector("p");
 
         /**
          * The instance of {@link WebDriver} used to navigate the web page.
@@ -155,9 +146,14 @@ public class ManageTrainee extends Page {
         private final WebDriver webDriver;
 
         /**
+         * {@link JavascriptExecutor} used to perform javascript actions on the webpage.
+         */
+        private final JavascriptExecutor javascriptExecutor;
+
+        /**
          * {@link WebElement} containing {@code Create Trainee Form}.
          */
-        private final WebElement webElement;
+        private WebElement webElement;
 
         /**
          * {@link WebElement} containing {@code E-mail Text Box}.
@@ -199,6 +195,7 @@ public class ManageTrainee extends Page {
             }
             this.webElement = webElement;
             this.webDriver = webDriver;
+            javascriptExecutor = (JavascriptExecutor) webDriver;
             loadForm();
         }
 
@@ -216,7 +213,7 @@ public class ManageTrainee extends Page {
         }
 
         public CreateTraineeForm withEmail(String email) {
-            emailTextBoxElement.sendKeys(email);
+            javascriptExecutor.executeScript("arguments[0].value='"+ email+ "';", emailTextBoxElement);
             return this;
         }
 
@@ -227,7 +224,7 @@ public class ManageTrainee extends Page {
          * @return {@link CreateTraineeForm the same instance}.
          */
         public CreateTraineeForm withFirstName(String firstName) {
-            firstNameTextBoxElement.sendKeys(firstName);
+            javascriptExecutor.executeScript("arguments[0].value='"+ firstName+ "';", firstNameTextBoxElement);
             return this;
         }
 
@@ -238,7 +235,7 @@ public class ManageTrainee extends Page {
          * @return {@link CreateTraineeForm the same instance}.
          */
         public CreateTraineeForm withLastName(String lastName) {
-            lastNameTextBoxElement.sendKeys(lastName);
+            javascriptExecutor.executeScript("arguments[0].value='"+ lastName+ "';", lastNameTextBoxElement);
             return this;
         }
 
@@ -251,21 +248,26 @@ public class ManageTrainee extends Page {
          *                                {@code Class Dropdown} list.
          */
         public CreateTraineeForm selectClass(String className) {
-//            new Actions(webDriver).click(classDropDownElement).perform();
-            Select dropdown = new Select(classDropDownElement);
-            try {
-                dropdown.selectByVisibleText(className);
-            } catch (NoSuchElementException e) {
-                throw new NoSuchElementException(String.format("In class dropdown, class: %s does not exist!", className));
+            if(!className.isBlank()) {
+                Select dropdown = new Select(classDropDownElement);
+                try {
+                    dropdown.selectByVisibleText(className);
+                } catch (NoSuchElementException e) {
+                    throw new NoSuchElementException(String.format("In class dropdown, class: %s does not exist!", className));
+                }
             }
             return this;
         }
 
         /**
          * Clicks {@code 'Create New Trainee' Button} and completes the action.
+         *
+         * @return the new DOM of the page.
          */
-        public void perform() {
-            new Actions(webDriver).click(createNewTraineeButtonElement).perform();
+        public CreateTraineeForm perform() {
+            javascriptExecutor.executeScript("arguments[0].click();", createNewTraineeButtonElement);
+            webElement = webDriver.findElement(ManageTrainee.CREATE_TRAINEE_FORM_SELECTOR);
+            return new CreateTraineeForm(webElement,webDriver);
         }
 
         /**
@@ -274,7 +276,10 @@ public class ManageTrainee extends Page {
          *
          * @param field available in {@code 'Create New Trainee' form}
          * @return false if the field has validation error
+         *
+         * @deprecated DO NOT USE! Not working properly.
          */
+        @Deprecated
         public boolean isValid(CreateTraineeField field) {
             switch (field) {
                 case EMAIL:
@@ -318,11 +323,6 @@ public class ManageTrainee extends Page {
         private final By traineesDropDownSelector = By.cssSelector("select[name*='trainee']");
 
         /**
-         * Css selector for {@code Trainees Dropdown elements}.
-         */
-        private final By traineesDropDownListSelector = By.cssSelector("select[name*='trainee'] option)");
-
-        /**
          * Css selector for {@code Delete Trainee Button}.
          */
         private final By deleteTraineeButtonSelector = By.cssSelector("button[type='submit']");
@@ -335,7 +335,7 @@ public class ManageTrainee extends Page {
         /**
          * {@link WebElement} containing {@code Delete Trainee Form}.
          */
-        private final WebElement webElement;
+        private WebElement webElement;
 
         /**
          * The instance of {@link WebDriver} used to navigate the web page.
@@ -401,9 +401,13 @@ public class ManageTrainee extends Page {
 
         /**
          * Clicks {@code 'Delete Trainee' Button} and completes the action.
+         *
+         * @return the new DOM of the page
          */
-        public void perform() {
+        public DeleteTraineeForm perform() {
             new Actions(webDriver).click(deleteTraineeButtonElement).perform();
+            webElement = webDriver.findElement(ManageTrainee.DELETE_TRAINEE_FORM_SELECTOR);
+            return new DeleteTraineeForm(webElement,webDriver);
         }
 
         /**
@@ -411,7 +415,10 @@ public class ManageTrainee extends Page {
          * e.g. validation message is empty when data is valid
          *
          * @return false if the Dropdown element has validation error.
+         *
+         * @deprecated DO NOT USE! Not working properly.
          */
+        @Deprecated
         public boolean isValid() {
             return traineesDropDownElement.getAttribute("validationMessage").isBlank();
         }

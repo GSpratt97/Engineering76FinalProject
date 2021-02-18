@@ -1,4 +1,4 @@
-package com.sparta.greg.pom.pages.components;
+package com.sparta.greg.pom.pages.templates;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,9 +22,9 @@ public abstract class Report extends Page {
     By                  letterGrade          = new By.ByCssSelector("td[class*='letterGrade']");
     By                  dataBlock            = new By.ByCssSelector("div[id='collapse12']");
     By                  dataRow              = new By.ByCssSelector("div[class='row']");
-    By                  startStopContinue    = new By.ByCssSelector("div[class='col-3']");
+    By                  startStopContinue    = new By.ByCssSelector("div[class*='col']");
     By                  commentText          = new By.ByCssSelector("div[class='col-7']");
-    By                  gradeType            = new By.ByCssSelector("div[class='col-4']");
+    By                  gradeType            = new By.ByCssSelector("div[class*='col']");
     By                  gradeValue           = new By.ByCssSelector("div[class='col-6']");
 
     List<WebElement>    weekReports;
@@ -224,7 +224,7 @@ public abstract class Report extends Page {
                 .get(12-weekNumber)
                 .findElements(dataBlock)
                 .get(1)
-                .findElements(dataRow);;
+                .findElements(dataRow);
     }
 
     public List<WebElement> getTraineeGrades() {

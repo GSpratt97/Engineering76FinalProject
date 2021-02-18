@@ -1,14 +1,14 @@
 package com.sparta.greg.pom.pagesTest.components;
 
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
-import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Properties;
 
 public class PageTest {
@@ -21,19 +21,27 @@ public class PageTest {
 
     @BeforeEach
     void setup() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver.get("http://localhost:8080/login");
         Login login = new Login(webDriver);
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            trainerUsername = properties.getProperty("trainerUsername");
-            trainerPassword = properties.getProperty("trainerPassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        PropertyLoader.loadProperties();
+        trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
+        trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
+        homeTrainer = login.logInAsTrainer(trainerUsername, trainerPassword);
 
-        login.logInAsTrainer(trainerUsername, trainerPassword);
-        webDriver.get("http://localhost:8080/trainer/home");
-        homeTrainer = new HomeTrainer(webDriver);
+//        webDriver = new ChromeDriver();
+//        Login login = new Login(webDriver);
+//        try {
+//            properties.load(new FileReader("src/test/resources/login.properties"));
+//            trainerUsername = properties.getProperty("trainerUsername");
+//            trainerPassword = properties.getProperty("trainerPassword");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        login.logInAsTrainer(trainerUsername, trainerPassword);
+//        webDriver.get("http://localhost:8080/trainer/home");
+//        homeTrainer = new HomeTrainer(webDriver);
     }
 
     @AfterEach

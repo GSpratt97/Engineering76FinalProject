@@ -1,18 +1,18 @@
 package com.sparta.greg.pom.pagesTest.trainer;
 
 
-import com.sparta.greg.pom.pages.components.Login;
-import com.sparta.greg.pom.pages.components.PropertyLoader;
-import com.sparta.greg.pom.pages.trainee.AttendanceTrainer;
+import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
+import com.sparta.greg.pom.pages.trainer.AttendanceTrainer;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.trainer.ReportTrainer;
 import com.sparta.greg.pom.pages.trainer.TraineeProfile;
-import com.sparta.greg.pom.pages.trainer.WeeklyAttendance;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -24,9 +24,27 @@ public class TraineeProfileTest {
     private static TraineeProfile traineeProfilePage;
     private static TraineeProfile traineeProfilePageEmpty;
 
+//    @BeforeAll
+//    static void setup() {
+//        webDriver = new ChromeDriver();
+//        webDriver.get("http://localhost:8080/login");
+//
+//        PropertyLoader.loadProperties();
+//        usernameTrainer = PropertyLoader.properties.getProperty("trainerUsername");
+//        passwordTrainer = PropertyLoader.properties.getProperty("trainerPassword");
+//
+//        Login login = new Login(webDriver);
+//        login.logInAsTrainer(usernameTrainer, passwordTrainer);
+//
+//        // Bill Bird test profile
+//        webDriver.get("http://localhost:8080/trainer/traineeProfile/41");
+//
+//        traineeProfilePage = new TraineeProfile(webDriver);
+//    }
+
     @BeforeAll
     static void setup() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
         webDriver.get("http://localhost:8080/login");
 
         PropertyLoader.loadProperties();

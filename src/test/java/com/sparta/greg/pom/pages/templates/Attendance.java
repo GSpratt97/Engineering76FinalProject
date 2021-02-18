@@ -1,18 +1,14 @@
-package com.sparta.greg.pom.pages.trainee;
+package com.sparta.greg.pom.pages.templates;
 
-import com.sparta.greg.pom.pages.components.Page;
-import com.sparta.greg.pom.pages.components.SideBarTrainee;
+import com.sparta.greg.pom.pages.templates.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public abstract class Attendance extends Page {
 
@@ -28,10 +24,17 @@ public abstract class Attendance extends Page {
     }
 
     public void clickWeek(int week){
-    WebElement weekRow = new WebDriverWait(webDriver, 5).until(ExpectedConditions.elementToBeClickable(weeks.get(weeks.size() - week)));
+        //Logging
+        //System.out.println("tbody: " + weeks);
+        //System.out.println(weeks.size());
+        //System.out.println("days:" + weeks.get(weeks.size() - week).findElements(rows));
+        //System.out.println(weeks.get(weeks.size() - week).findElements(rows).size());
+        //Logging
+        WebElement weekRow = new WebDriverWait(webDriver, 5).until(ExpectedConditions.elementToBeClickable(weeks.get(weeks.size() - week)));
         if (week > 0 && week <= weeks.size()) {
             weekRow.click();
         }
+
     }
 
     public boolean isToggledOnWeek(int week){
@@ -43,6 +46,10 @@ public abstract class Attendance extends Page {
     }
 
     public int getNumberOfDaysInWeek(int week){
+        //Logging
+//        System.out.println("tbody: " + weeks);
+//        System.out.println(weeks.size());
+        //Logging
         return weeks.get(weeks.size() - week).findElements(rows).get(0).findElements(columns).size() - 2;
     }
 

@@ -1,7 +1,7 @@
 package com.sparta.greg.cucumber.stepdefs;
 
-import com.sparta.greg.pom.pages.components.Login;
-import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
 import com.sparta.greg.pom.pages.trainee.TraineeChangePassword;
 import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
@@ -24,7 +24,7 @@ public class TraineeChangePasswordStepdef {
     TraineeChangePassword traineeChangePassword;
 
     private void setup() {
-        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
         webDriver.get("http://localhost:8080");
         login = new Login(webDriver);
 

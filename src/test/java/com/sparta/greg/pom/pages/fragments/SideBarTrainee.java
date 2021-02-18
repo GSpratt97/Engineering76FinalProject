@@ -1,4 +1,4 @@
-package com.sparta.greg.pom.pages.components;
+package com.sparta.greg.pom.pages.fragments;
 
 import com.sparta.greg.pom.pages.trainee.*;
 import org.openqa.selenium.By;

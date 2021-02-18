@@ -1,12 +1,13 @@
 package com.sparta.greg.pom.pagesTest.trainee;
 
-import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.AttendanceTrainee;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
-import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class AttendanceTraineeTest {
 
@@ -19,12 +20,20 @@ public class AttendanceTraineeTest {
 
     @BeforeEach
     void setup(){
-        webDriver = new ChromeDriver();
-        loginPage = new Login(webDriver);
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver.get("http://localhost:8080/login");
+        Login login = new Login(webDriver);
         PropertyLoader.loadProperties();
         usernameTrainee = PropertyLoader.properties.getProperty("traineeUsername");
         passwordTrainee = PropertyLoader.properties.getProperty("traineePassword");
-        homePage = loginPage.logInAsTrainee(usernameTrainee, passwordTrainee);
+        homePage = login.logInAsTrainee(usernameTrainee, passwordTrainee);
+
+//        webDriver = new ChromeDriver();
+//        loginPage = new Login(webDriver);
+//        PropertyLoader.loadProperties();
+//        usernameTrainee = PropertyLoader.properties.getProperty("traineeUsername");
+//        passwordTrainee = PropertyLoader.properties.getProperty("traineePassword");
+//        homePage = loginPage.logInAsTrainee(usernameTrainee, passwordTrainee);
     }
 
     @Test

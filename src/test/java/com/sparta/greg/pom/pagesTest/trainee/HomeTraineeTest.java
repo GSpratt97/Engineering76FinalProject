@@ -1,44 +1,43 @@
 package com.sparta.greg.pom.pagesTest.trainee;
 
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
-import com.sparta.greg.pom.pages.components.Login;
+import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Properties;
 
 public class HomeTraineeTest {
 
     private static WebDriver webDriver;
     private static Login login;
     private static HomeTrainee homeTrainee;
-
-    private static Properties properties = new Properties();
     private static String traineeUsername;
     private static String traineePassword;
 
 
     @BeforeEach
     void setup() {
-        webDriver = new ChromeDriver();
-        login = new Login(webDriver);
-        try {
-            properties.load(new FileReader("src/test/resources/login.properties"));
-            traineeUsername = properties.getProperty("traineeUsername");
-            traineePassword = properties.getProperty("traineePassword");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        login.enterUsernameAddress(traineeUsername);
-        login.enterPassword(traineePassword);
-        login.clickSubmitButton();
-        homeTrainee = new HomeTrainee(webDriver);
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver.get("http://localhost:8080/login");
+        Login login = new Login(webDriver);
+        PropertyLoader.loadProperties();
+        traineeUsername = PropertyLoader.properties.getProperty("traineeUsername");
+        traineePassword = PropertyLoader.properties.getProperty("traineePassword");
+        homeTrainee = login.logInAsTrainee(traineeUsername, traineePassword);
+
+//        webDriver = new ChromeDriver();
+//        webDriver.get("http://localhost:8080/login");
+//        PropertyLoader.loadProperties();
+//        traineeUsername = PropertyLoader.properties.getProperty("traineeUsername");
+//        traineePassword = PropertyLoader.properties.getProperty("traineePassword");
+//        login = new Login(webDriver);
+//        login.logInAsTrainer(traineeUsername, traineePassword);
+//        homeTrainee = new HomeTrainee(webDriver);
     }
 
     @Test

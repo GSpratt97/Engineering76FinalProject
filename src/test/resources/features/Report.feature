@@ -1,30 +1,86 @@
   Feature: Report page features
 
-  Scenario: Select Weekly Report as Trainee
+  Scenario Outline: Select Weekly Report as Trainee
     Given I am logged in as a Trainee and I am on the Report page
-    When I select a weekly report as a Trainee
+    When I select a weekly report as a Trainee on week <number>
     Then the selected weekly report is expanded as Trainee
+    Examples:
+      | number |
+      | 12     |
+      | 11     |
+      | 10     |
+      | 9      |
+      | 8      |
+      | 7      |
+      | 6      |
+      | 5      |
+      | 4      |
+      | 3      |
+      | 2      |
+      | 1      |
 
-  Scenario: Collapse Weekly Report as Trainee
+  Scenario Outline: Collapse Weekly Report as Trainee
     Given I am logged in as a Trainee and I am on the Report page
-    When I select a weekly report as a Trainee
-    And I select a weekly report as a Trainee
+    When I select a weekly report as a Trainee on week <number>
+    And I select a weekly report as a Trainee on week <number>
     Then the expanded weekly report is collapsed as Trainee
+    Examples:
+      | number |
+      | 12     |
+      | 11     |
+      | 10     |
+      | 9      |
+      | 8      |
+      | 7      |
+      | 6      |
+      | 5      |
+      | 4      |
+      | 3      |
+      | 2      |
+      | 1      |
 
   Scenario: Weekly Reports Descend Chronologically as Trainee
     Given I am logged in as a Trainee and I am on the Report page
     Then the weekly reports are in descending order as Trainee
 
-  Scenario: Select Weekly Report as Trainer
+  Scenario Outline: Select Weekly Report as Trainer
     Given I am logged in as a Trainer and I am on Bill Birds Report Page
-    When I select a weekly report as a Trainer
+    When I select a weekly report as a Trainer on week <number>
     Then the selected weekly report is expanded as Trainer
+    Examples:
+      | number |
+      | 12     |
+      | 11     |
+      | 10     |
+      | 9      |
+      | 8      |
+      | 7      |
+      | 6      |
+      | 5      |
+      | 4      |
+      | 3      |
+      | 2      |
+      | 1      |
 
-  Scenario: Collapse Weekly Report as Trainer
+  Scenario Outline: Collapse Weekly Report as Trainer
     Given I am logged in as a Trainer and I am on Bill Birds Report Page
-    When I select a weekly report as a Trainer
-    And I select a weekly report as a Trainer
+    When I select a weekly report as a Trainer on week <number>
+    And I select a weekly report as a Trainer on week <number>
     Then the expanded weekly report is collapsed as Trainer
+    Examples:
+      | number |
+      | 12     |
+      | 11     |
+      | 10     |
+      | 9      |
+      | 8      |
+      | 7      |
+      | 6      |
+      | 5      |
+      | 4      |
+      | 3      |
+      | 2      |
+      | 1      |
 
   Scenario: Weekly Reports Descend Chronologically as Trainer
     Given I am logged in as a Trainer and I am on Bill Birds Report Page

@@ -1,12 +1,13 @@
 package com.sparta.greg.pom.pages.trainee;
 
-import com.sparta.greg.pom.pages.components.SideBarTrainee;
+import com.sparta.greg.pom.pages.fragments.SideBarTrainee;
+import com.sparta.greg.pom.pages.templates.Attendance;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
-public class AttendanceTrainee extends Attendance{
+public class AttendanceTrainee extends Attendance {
 
     SideBarTrainee sideBarTrainee;
 

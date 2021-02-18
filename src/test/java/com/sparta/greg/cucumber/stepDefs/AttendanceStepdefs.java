@@ -1,11 +1,14 @@
 package com.sparta.greg.cucumber.stepdefs;
 
-import com.sparta.greg.pom.pages.components.Login;
-import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.Login;
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
+import com.sparta.greg.pom.pages.trainee.AttendanceTrainee;
+import com.sparta.greg.pom.pages.trainer.AttendanceTrainer;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
-import com.sparta.greg.pom.pages.trainee.Attendance;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.trainer.TraineeProfile;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -19,8 +22,8 @@ public class AttendanceStepdefs {
     Login loginPage;
     HomeTrainee homePageTrainee;
     HomeTrainer homePageTrainer;
-    Attendance traineeAttendance;
-    Attendance trainerAttendance;
+    AttendanceTrainee traineeAttendance;
+    AttendanceTrainer trainerAttendance;
     TraineeProfile traineeProfile;
     String usernameTrainee;
     String passwordTrainee;
@@ -29,7 +32,8 @@ public class AttendanceStepdefs {
 
     @Given("I am logged in as a trainee and on the Trainee Attendance page")
     public void iAmLoggedInAsATraineeAndOnTheTraineeAttendancePage() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
+        webDriver.get("http://localhost:8080");
         loginPage = new Login(webDriver);
         PropertyLoader.loadProperties();
         usernameTrainee = PropertyLoader.properties.getProperty("traineeUsername");
@@ -41,6 +45,7 @@ public class AttendanceStepdefs {
     @Given("I am logged in as a trainer and on the Trainee Attendance page")
     public void iAmLoggedInAsATrainerAndOnTheTraineeAttendancePage() {
         webDriver = new ChromeDriver();
+        webDriver.get("http://localhost:8080");
         loginPage = new Login(webDriver);
         PropertyLoader.loadProperties();
         usernameTrainer = PropertyLoader.properties.getProperty("trainerUsername");
@@ -117,4 +122,16 @@ public class AttendanceStepdefs {
         Assertions.assertEquals(arg0, trainerAttendance.getNumberOfDaysInWeek(arg1));
         webDriver.quit();
     }
+
+    @When("I click on the back to profile button")
+    public void iClickOnTheBackToProfileButton() {
+        traineeProfile = trainerAttendance.goToTraineeProfile();
+    }
+
+    @Then("I am taken to the trainee profile page from the trainer attendance page")
+    public void iAmTakenToTheTraineeProfilePageFromTheTrainerAttendancePage() {
+        Assertions.assertTrue(webDriver.getCurrentUrl().contains("http://localhost:8080/trainer/traineeProfile"));
+        webDriver.quit();
+    }
+
 }

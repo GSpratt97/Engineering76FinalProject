@@ -1,6 +1,6 @@
 package com.sparta.greg.pom.pagesTest.trainer;
 
-import com.sparta.greg.pom.pages.components.PropertyLoader;
+import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.EnterAttendance;
 import org.junit.After;
 import org.junit.Before;
@@ -11,8 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
