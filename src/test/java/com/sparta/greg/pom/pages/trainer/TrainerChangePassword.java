@@ -20,7 +20,7 @@ public class TrainerChangePassword extends ChangePassword {
     public HomeTrainer changePassword(String oldPassword, String newPassword) {
         enterOldPassword(oldPassword);
         enterNewPassword(newPassword);
-//        clickSubmitButton();
+        clickSubmitButton();
         return new HomeTrainer(webDriver);
     }
 
