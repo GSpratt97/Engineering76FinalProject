@@ -16,7 +16,7 @@ import java.util.Properties;
 public class FeedbackFormStepdefs {
 
     private Properties properties;
-    private WebDriver webDriver = WebDriverFactory.runHeadless(WebDriverType.FIREFOX);
+    private WebDriver webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
 
     private Login login;
 

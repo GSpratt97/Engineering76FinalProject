@@ -68,7 +68,7 @@ public class EnterAttendSD {
         attendancePage.setSubmitMessage("success");
         String string = "Attendance successfully";
         Assertions.assertTrue(attendancePage.getSubmitMessage().contains(string));
-        webDriver.close();
+        webDriver.quit();
     }
 
     @And("I click submit Attendance")
@@ -87,7 +87,7 @@ public class EnterAttendSD {
         attendancePage.setSubmitMessage("fail");
         String string = "This course has finished!";
         Assertions.assertTrue(attendancePage.getSubmitMessage().contains(string));
-        webDriver.close();
+        webDriver.quit();
     }
 
     @Given("I have selected a date on Attendance Page")
@@ -106,7 +106,7 @@ public class EnterAttendSD {
         String string = "2020-09-22";
         attendancePage.setSubmitMessage("success");
         Assertions.assertTrue(attendancePage.getSubmitMessage().contains(string));
-        webDriver.close();
+        webDriver.quit();
     }
 
     @When("I change the trainee to {string}")
@@ -120,7 +120,7 @@ public class EnterAttendSD {
         attendancePage.submit();
         attendancePage.setSubmitMessage("success");
         Assertions.assertTrue(attendancePage.getSubmitMessage().contains(arg0));
-        webDriver.close();
+        webDriver.quit();
     }
 
     @When("I select the radio button {string}")
@@ -131,6 +131,6 @@ public class EnterAttendSD {
     @Then("The radio button selected will be {string}")
     public void theRadioButtonSelectedWillBe(String arg0) {
         Assertions.assertTrue(attendancePage.isCorrectAttendanceType(arg0));
-        webDriver.close();
+        webDriver.quit();
     }
 }
