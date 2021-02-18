@@ -19,9 +19,10 @@ public class EnterAttendance extends Page {
     }
 
     public void setPageConfirm() {
-        this.pageConfirm = webDriver
-                .findElement(By.cssSelector("h1[class*='h3 mb-3 font-weight-normal']"))
-                .getText();
+//        this.pageConfirm = webDriver
+//                .findElement(By.cssSelector("h1[class*='h3 mb-3 font-weight-normal']"))
+//                .getText();
+        this.pageConfirm = webDriver.getCurrentUrl();
     }
 
     public EnterAttendance(WebDriver webDriver)
@@ -150,7 +151,7 @@ public class EnterAttendance extends Page {
     }
 
     public Boolean areOnAttendanceEntryPage(String string) {
-        return pageConfirm.contains(string);
+        return pageConfirm.equals(string);
     }
 
     public boolean isCorrectAttendanceType(String type)
