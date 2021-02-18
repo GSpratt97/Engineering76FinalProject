@@ -14,14 +14,7 @@ Feature: A description
       Given I am logged in as a "Trainer" and on the "Add Weeks" Page
       When no course is in dropdown
       And I press Add Week button
-      Then I am told nothing is in dropdown
-
-  Scenario: try to add a week to a class that has finished
-    Given I am logged in as a "trainer" and on the "Add Weeks" Page
-    And course "Engineering 65" has finished their course
-    When I enter course "Engineering 65" into dropdown menu
-    And I press Add Week button
-    Then I am told "Engineering 65" has finished their course
+      Then thenTest
 
   Scenario: Trainer goes to Dashboard page from Add Weeks page
     Given I am logged in as a "trainer" and on the "Add Weeks" Page
@@ -79,7 +72,7 @@ Feature: A description
   Scenario: Trainer goes to change password page from Add Weeks page
     Given I am logged in as a "trainer" and on the "Add Weeks" Page
     When I click on change password on add weeks page
-    Then I am taken to the "change password" Page from the "Add Weeks" page
+    Then I am taken to the "Consultancy Skills" Page from the "Add Weeks" page
 
   Scenario: Trainer logs out from Add Weeks page
     Given I am logged in as a "trainer" and on the "Add Weeks" Page
