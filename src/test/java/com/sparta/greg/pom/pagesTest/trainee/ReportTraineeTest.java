@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 
 public class ReportTraineeTest {
 
-
     private static          Login           login;
     private static          ReportTrainee   reportTrainee;
     private static          WebDriver       webDriver;
@@ -19,36 +18,29 @@ public class ReportTraineeTest {
     void setup() {
         webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
         webDriver.get("http://localhost:8080/login");
-        Login login = new Login(webDriver);
+        login = new Login(webDriver);
+
         PropertyLoader.loadProperties();
         String traineeUsername = PropertyLoader.properties.getProperty("traineeUsername");
         String traineePassword = PropertyLoader.properties.getProperty("traineePassword");
+
         login.logInAsTrainee(traineeUsername, traineePassword);
         webDriver.get("http://localhost:8080/trainee/report");
+
         reportTrainee = new ReportTrainee(webDriver);
         reportTrainee.setWeekReports();
         reportTrainee.setReportDataForWeek(12);
-
-//        webDriver = new ChromeDriver();
-//        login     = new Login(webDriver);
-//
-//        webDriver.get("http://localhost:8080/");
-//
-//        PropertyLoader.loadProperties();
-//        String traineeUsername = PropertyLoader.properties.getProperty("traineeUsername");
-//        String traineePassword = PropertyLoader.properties.getProperty("traineePassword");
-//
-//        login.logInAsTrainee(traineeUsername, traineePassword);
-//        webDriver.get("http://localhost:8080/trainee/report");
-//
-//        reportTrainee = new ReportTrainee(webDriver);
-//        reportTrainee.setWeekReports();
-//        reportTrainee.setReportDataForWeek(12);
     }
 
     @AfterEach
     void closeWindow() {
         webDriver.close();
+    }
+
+    @Test
+    @DisplayName("Is SidebarTrainee object set?")
+    void isSidebarSet() {
+        Assertions.assertNotNull(reportTrainee.getSideBarTrainee());
     }
 
     @Test

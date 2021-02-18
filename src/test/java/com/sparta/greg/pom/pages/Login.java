@@ -42,21 +42,17 @@ public class Login extends BasePage {
         webDriver.findElement(loginPassword).sendKeys(password);
     }
 
-    public void clickRememberMeButton() {
-        webDriver.findElement(rememberMeButton).click();
-    }
+//    public void clickRememberMeButton() {
+//        webDriver.findElement(rememberMeButton).click();
+//    }
 
     public void clickSubmitButton() {
         webDriver.findElement(submitButton).click();
     }
 
-    public void clickForgotPassword() {
-        webDriver.findElement(forgotPasswordLink).click();
-    }
-
-    public String getUrl() {
-        return webDriver.getCurrentUrl();
-    }
+//    public void clickForgotPassword() {
+//        webDriver.findElement(forgotPasswordLink).click();
+//    }
 
 
 }

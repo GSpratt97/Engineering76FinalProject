@@ -60,6 +60,7 @@ public class AddWeeksStepdefs {
         Assumptions.assumeTrue(webDriver.findElement(By.cssSelector("p[class*='letterGrade']"))!=null);
         String result = webDriver.findElement(By.cssSelector("p[class*='letterGrade']")).getText();
         Assertions.assertEquals(expectation2,result);
+        webDriver.quit();
     }
 
     @When("no course is in dropdown")
@@ -102,6 +103,7 @@ public class AddWeeksStepdefs {
 
         Assertions.assertEquals(previousPage,getPageUrl(arg1));
         Assertions.assertEquals(getPageUrl(arg0),webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @When("I click on change password on add weeks page")
@@ -196,5 +198,32 @@ public class AddWeeksStepdefs {
         }else if (pageName.equalsIgnoreCase("weekly attendance")) {
             sideBarTrainer.goToWeeklyAttendance();
         }
+    }
+
+    private void somethingElse() {
+        Login login = new Login(webDriver);
+        login.logInAsTrainer(usernameTrainer, passwordTrainer);
+
+        webDriver.get("http://localhost:8080/trainer/newWeek");
+        AddWeeks addWeeks = new AddWeeks(webDriver);
+    }
+
+    @Then("thenTest")
+    public void thentest() {
+        webDriver.quit();
+    }
+
+    @When("I log out from trainer")
+    public void iLogOutFromTrainer() {
+        page = new AddWeeks(webDriver);
+        previousPage = webDriver.getCurrentUrl();
+        page.selectProfileImage();
+        page.logout();
+    }
+
+    @When("I click on change password on add weeks page")
+    public void iClickOnChangePasswordOnAddWeeksPage() {
+        page.selectProfileImage();
+        page.getSideBarTrainer().changePassword();
     }
 }
