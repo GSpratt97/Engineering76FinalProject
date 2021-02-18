@@ -8,3 +8,5 @@ Feature: Creating a trainee profile
     Given I filled out the Create Trainee form with name "Andrei" "Pavel", email "apavel@spartaglobal.com" in "Engineering 76".
     When I click on Create New Trainee on Manage Trainee Page.
     Then I am getting "Added Andrei Pavel" message in Create Trainee form.
+
+

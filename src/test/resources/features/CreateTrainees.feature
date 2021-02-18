@@ -1,4 +1,5 @@
 @ManageTrainee @CreateTrainee
+@ManageTrainee @CreateTrainee
 Feature: Creating a trainee profile
 
   Background: Logged in as a trainer and navigated to Manage Trainee Page.

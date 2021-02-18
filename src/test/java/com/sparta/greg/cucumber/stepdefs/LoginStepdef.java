@@ -43,10 +43,27 @@ public class LoginStepdef {
         traineePassword = PropertyLoader.properties.getProperty("traineePassword");
     }
 
+    private void setupForPhone() {
+        webDriver = WebDriverFactory.getWebDriverWithWindowSize(WebDriverType.CHROME,360, 640);
+        webDriver.get("http://localhost:8080");
+        login = new Login(webDriver);
+
+        PropertyLoader.loadProperties();
+        trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
+        trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
+        traineeUsername = PropertyLoader.properties.getProperty("traineeUsername");
+        traineePassword = PropertyLoader.properties.getProperty("traineePassword");
+    }
+
 
     @Given("I am on the login page")
     public void iAmOnTheLoginPage() {
         setup();
+    }
+
+    @Given("I am on the login page on mobile")
+    public void iAmOnTheLoginPageOnMobile(){
+        setupForPhone();
     }
 
     @Given("I have been logged out")
