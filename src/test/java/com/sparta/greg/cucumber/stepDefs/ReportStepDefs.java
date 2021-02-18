@@ -5,6 +5,8 @@ import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainee.ReportTrainee;
 import com.sparta.greg.pom.pages.trainer.ReportTrainer;
 
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -25,7 +27,7 @@ public class ReportStepDefs {
     //----------Given----------//
     @Given("I am logged in as a Trainee and I am on the Report page")
     public void iAmLoggedInAsATraineeAndIAmOnTheReportPage() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
         login     = new Login(webDriver);
 
         webDriver.get("http://localhost:8080");

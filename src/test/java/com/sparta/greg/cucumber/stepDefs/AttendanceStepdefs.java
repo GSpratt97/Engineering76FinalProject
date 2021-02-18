@@ -7,6 +7,8 @@ import com.sparta.greg.pom.pages.trainer.AttendanceTrainer;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import com.sparta.greg.pom.pages.trainer.TraineeProfile;
+import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
+import com.sparta.greg.pom.webDriverFactory.WebDriverType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -30,7 +32,7 @@ public class AttendanceStepdefs {
 
     @Given("I am logged in as a trainee and on the Trainee Attendance page")
     public void iAmLoggedInAsATraineeAndOnTheTraineeAttendancePage() {
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
         webDriver.get("http://localhost:8080");
         loginPage = new Login(webDriver);
         PropertyLoader.loadProperties();
