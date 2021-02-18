@@ -11,6 +11,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assumptions;
+import org.openqa.selenium.By;
 
 
 import org.openqa.selenium.WebDriver;
@@ -46,8 +48,11 @@ public class AddWeeksStepdefs {
     }
 
     @Then("course {string} will be on week {int}")
-    public void courseWillBeOnWeek(String arg0, int arg1) {
-        //todo: either database or whats written on screen
+    public void courseWillBeOnWeek(String course, int week) {
+        String expectation2 = "Course Week has changed to Week " + week + " for " + course;
+        Assumptions.assumeTrue(webDriver.findElement(By.cssSelector("p[class*='letterGrade']"))!=null);
+        String result = webDriver.findElement(By.cssSelector("p[class*='letterGrade']")).getText();
+        Assertions.assertEquals(expectation2,result);
     }
 
     @When("no course is in dropdown")
@@ -193,5 +198,13 @@ public class AddWeeksStepdefs {
     public void iClickOnChangePasswordOnAddWeeksPage() {
         page.selectProfileImage();
         page.getSideBarTrainer().changePassword();
+    }
+
+    @Then("I am told {string} has finished their course")
+    public void iAmToldHasFinishedTheirCourse(String course) {
+        String expectation = course + " is currently in the final week of the course!";
+        Assumptions.assumeTrue(webDriver.findElement(By.cssSelector("p[class*='letterGrade']"))!=null);
+        String result = webDriver.findElement(By.cssSelector("p[class*='letterGrade']")).getText();
+        Assertions.assertEquals(expectation,result);
     }
 }

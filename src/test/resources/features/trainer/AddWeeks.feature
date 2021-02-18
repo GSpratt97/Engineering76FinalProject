@@ -5,16 +5,23 @@ Feature: A description
 
   Scenario: Add a week to a class
     Given I am logged in as a "trainer" and on the "Add Weeks" Page
-    And course "Engineering 65" is currently on week 1
+    And course "Engineering 80" is currently on week 7
+    When I enter course "Engineering 80" into dropdown menu
+    And I press Add Week button
+    Then course "Engineering 80" will be on week 8
+
+  Scenario: try to add a week when no class is selected
+    Given I am logged in as a "Trainer" and on the "Add Weeks" Page
+    When no course is in dropdown
+    And I press Add Week button
+    Then thenTest
+
+  Scenario: try to add a week to a class that has finished
+    Given I am logged in as a "trainer" and on the "Add Weeks" Page
+    And course "Engineering 65" has finished their course
     When I enter course "Engineering 65" into dropdown menu
     And I press Add Week button
-    Then course "Engineering 65" will be on week 2
-
-    Scenario: try to add a week when no class is selected
-      Given I am logged in as a "Trainer" and on the "Add Weeks" Page
-      When no course is in dropdown
-      And I press Add Week button
-      Then thenTest
+    Then I am told "Engineering 65" has finished their course
 
   Scenario: Trainer goes to Dashboard page from Add Weeks page
     Given I am logged in as a "trainer" and on the "Add Weeks" Page
