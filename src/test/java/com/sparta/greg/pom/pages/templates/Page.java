@@ -17,7 +17,6 @@ public abstract class Page extends BasePage {
     By contactInfo = By.cssSelector("footer div[class*='col-sm']:nth-child(2)");
     By copyrightInfo = By.cssSelector(".container > small");
 
-
     public Page(WebDriver webDriver) {
         super(webDriver);
     }

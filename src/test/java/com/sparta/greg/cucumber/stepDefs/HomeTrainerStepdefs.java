@@ -1,4 +1,4 @@
-package com.sparta.greg.cucumber.stepdefs;
+package com.sparta.greg.cucumber.stepDefs;
 
 import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.utilities.PropertyLoader;
@@ -11,7 +11,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.Arrays;
 
@@ -48,12 +47,14 @@ public class HomeTrainerStepdefs {
     public void iCanSeeMyTrainerDetails() {
         String[] trainerDetails = {"Manish Gadhvi", "Engineering 72", "Java Development", "12"};
         Assertions.assertEquals(Arrays.toString(trainerDetails), Arrays.toString(homeTrainer.getTrainerDetails()));
+        webDriver.quit();
     }
 
     @Then("I can see the overall group attendance on the Home Trainer Page")
     public void iCanSeeTheOverallGroupAttendance() {
         String[] overallGroupAttendance = {"89.74%", "7.28%", "1.99%", "0.99%"};
         Assertions.assertEquals(Arrays.toString(overallGroupAttendance), Arrays.toString(homeTrainer.getOverallGroupAttendance()));
+        webDriver.quit();
     }
 
     @When("I choose a trainee on the Home Trainer Page")
@@ -69,6 +70,7 @@ public class HomeTrainerStepdefs {
     @Then("I am taken to the Trainee Profile from the Home Trainer Page")
     public void iAmTakenToTheTraineeProfileFromTheHomeTrainerPage() {
         Assertions.assertEquals("http://localhost:8080/trainer/traineeProfile/187", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @When("I click on enter class attendance on the Home Trainer Page")
@@ -79,6 +81,7 @@ public class HomeTrainerStepdefs {
     @Then("I am taken to the Enter Attendance Page from the Home Trainer Page")
     public void iAmTakenToTheEnterAttendancePageFromTheHomeTrainerPage() {
         Assertions.assertEquals("http://localhost:8080/trainer/attendanceEntry", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @When("I click on Sparta Global Logo on the Home Trainer Page")
@@ -89,6 +92,7 @@ public class HomeTrainerStepdefs {
     @Then("I am taken to the Home Trainer Page from the Home Trainer Page")
     public void iAmTakenToTheHomeTrainerPageFromTheHomeTrainerPage() {
         Assertions.assertEquals("http://localhost:8080/trainer/home", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @When("I click on Dashboard on the Home Trainer Page")
@@ -109,6 +113,7 @@ public class HomeTrainerStepdefs {
     @Then("I am taken to the Consultancy Skills Page from the Home Trainer Page")
     public void iAmTakenToTheConsultancySkillsPageFromTheHomeTrainerPage() {
         Assertions.assertEquals("http://localhost:8080/consultancy", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @And("I click on Trainee Guide on the Home Trainer Page")
@@ -119,6 +124,7 @@ public class HomeTrainerStepdefs {
     @Then("I am taken to the Trainee Guide Page from the Home Trainer Page")
     public void iAmTakenToTheTraineeGuidePageFromTheHomeTrainerPage() {
         Assertions.assertEquals("http://localhost:8080/guide", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @When("I click Trainer Options on the trainer sidebar on the Home Trainer Page")
@@ -134,6 +140,7 @@ public class HomeTrainerStepdefs {
     @Then("I am taken to the Class Management Page from the Home Trainer Page")
     public void iAmTakenToTheClassManagementPageFromTheHomeTrainerPage() {
         Assertions.assertEquals("http://localhost:8080/trainer/manageClass", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @And("I click on Trainee Management on the Home Trainer Page")
@@ -144,6 +151,7 @@ public class HomeTrainerStepdefs {
     @Then("I am taken to the Manage Trainee Page from the Home Trainer Page")
     public void iAmTakenToTheManageTraineePageFromTheHomeTrainerPage() {
         Assertions.assertEquals("http://localhost:8080/trainer/manageTrainee", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @And("I click on Add Weeks on the Home Trainer Page")
@@ -154,6 +162,7 @@ public class HomeTrainerStepdefs {
     @Then("I am taken to the Add Weeks Page from the Home Trainer Page")
     public void iAmTakenToTheAddWeeksPageFromTheHomeTrainerPage() {
         Assertions.assertEquals("http://localhost:8080/trainer/newWeek", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @And("I click on Assessments on the Home Trainer Page")
@@ -164,6 +173,7 @@ public class HomeTrainerStepdefs {
     @Then("I am taken to the Assessments Page from the Home Trainer Page")
     public void iAmTakenToTheAssessmentsPageFromTheHomeTrainerPage() {
         Assertions.assertEquals("http://localhost:8080/trainer/assessments", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @And("I click on Enter Attendance on the Home Trainer Page")
@@ -180,6 +190,7 @@ public class HomeTrainerStepdefs {
     @Then("I am taken to the Weekly Attendance Page from the Home Trainer Page")
     public void iAmTakenToTheWeeklyAttendancePageFromTheHomeTrainerPage() {
         Assertions.assertEquals("http://localhost:8080/trainer/weekly-attendance", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
 }

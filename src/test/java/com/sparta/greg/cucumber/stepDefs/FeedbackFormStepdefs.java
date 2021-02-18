@@ -1,4 +1,4 @@
-package com.sparta.greg.cucumber.stepdefs;
+package com.sparta.greg.cucumber.stepDefs;
 
 import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.utilities.PropertyLoader;
@@ -16,7 +16,7 @@ import java.util.Properties;
 public class FeedbackFormStepdefs {
 
     private Properties properties;
-    private WebDriver webDriver = WebDriverFactory.runHeadless(WebDriverType.FIREFOX);
+    private WebDriver webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
 
     private Login login;
 

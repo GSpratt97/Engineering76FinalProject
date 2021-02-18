@@ -1,4 +1,4 @@
-package com.sparta.greg.cucumber.stepdefs;
+package com.sparta.greg.cucumber.stepDefs;
 
 import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.utilities.PropertyLoader;
@@ -71,6 +71,7 @@ public class ViewClassAttendanceSD {
     @Then("The week {int} tab should be closed on the Weekly Attendance page")
     public void theWeekTabShouldBeClosedOnTheWeeklyAttendancePage(int arg0) {
         Assertions.assertFalse(weeklyAttendance.isWeekExpanded(arg0));
+        webDriver.quit();
     }
 
     @And("The week {int} attendance table should not be visible at all on the Weekly Attendance page")

@@ -1,10 +1,9 @@
-package com.sparta.greg.cucumber.stepdefs;
+package com.sparta.greg.cucumber.stepDefs;
 
 import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.trainer.ManageTrainee;
 import com.sparta.greg.pom.webDriverFactory.WebDriverFactory;
 import com.sparta.greg.pom.webDriverFactory.WebDriverType;
-import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -66,6 +65,7 @@ public class ManageTraineesStepdefs {
             cleanupDelete(name);
         }
         Assertions.assertTrue(isWarning);
+        webDriver.quit();
     }
 
     @Then("I am getting {string} message in Create Trainee form.")
@@ -75,6 +75,7 @@ public class ManageTraineesStepdefs {
             cleanupDelete(name);
         }
         Assertions.assertTrue(message.contains(arg0));
+        webDriver.quit();
     }
 
     @Given("I have a trainee registered with {string}.")
@@ -98,6 +99,7 @@ public class ManageTraineesStepdefs {
     @Then("I am getting a validation warning for invalid data in Delete Trainee form.")
     public void iAmGettingAValidationWarningForInvalidDataInDeleteTraineeForm() {
         Assertions.assertFalse(deleteTrainee.isValid());
+        webDriver.quit();
     }
 
     @Given("I have created a trainee with name {string} {string}, email {string} in {string}.")
@@ -111,10 +113,10 @@ public class ManageTraineesStepdefs {
         deleteTrainee.selectTrainee(arg0);
     }
 
-    @After("ManageTrainee")
-    void quit() {
-        webDriver.quit();
-    }
+//    @After("ManageTrainee")
+//    void quit() {
+//        webDriver.quit();
+//    }
 
     void cleanupDelete(String name) {
         ChromeOptions option = new ChromeOptions();

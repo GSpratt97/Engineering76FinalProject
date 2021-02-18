@@ -1,4 +1,4 @@
-package com.sparta.greg.cucumber.stepdefs;
+package com.sparta.greg.cucumber.stepDefs;
 
 
 import com.sparta.greg.pom.pages.Login;
@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Assertions;
 
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class AddWeeksStepdefs {
     WebDriver webDriver;
@@ -48,6 +47,7 @@ public class AddWeeksStepdefs {
     @Then("course {string} will be on week {int}")
     public void courseWillBeOnWeek(String arg0, int arg1) {
         //todo: either database or whats written on screen
+        webDriver.quit();
     }
 
     @When("no course is in dropdown")
@@ -94,6 +94,7 @@ public class AddWeeksStepdefs {
 
         Assertions.assertEquals(previousPage,getPageUrl(arg1));
         Assertions.assertEquals(getPageUrl(arg0),webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     private void loginAsTrainee() {
@@ -178,7 +179,7 @@ public class AddWeeksStepdefs {
 
     @Then("thenTest")
     public void thentest() {
-
+    webDriver.quit();
     }
 
     @When("I log out from trainer")

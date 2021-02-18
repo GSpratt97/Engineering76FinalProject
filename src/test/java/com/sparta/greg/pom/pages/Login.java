@@ -16,7 +16,7 @@ public class Login extends BasePage {
 
     public Login(WebDriver webDriver) {
         super(webDriver);
-//        webDriver.get("http://localhost:8080");
+        webDriver.get("http://localhost:8080");
 
     }
 
