@@ -213,17 +213,5 @@ public class AddWeeksStepdefs {
         webDriver.quit();
     }
 
-    @When("I log out from trainer")
-    public void iLogOutFromTrainer() {
-        page = new AddWeeks(webDriver);
-        previousPage = webDriver.getCurrentUrl();
-        page.selectProfileImage();
-        page.logout();
-    }
 
-    @When("I click on change password on add weeks page")
-    public void iClickOnChangePasswordOnAddWeeksPage() {
-        page.selectProfileImage();
-        page.getSideBarTrainer().changePassword();
-    }
 }
