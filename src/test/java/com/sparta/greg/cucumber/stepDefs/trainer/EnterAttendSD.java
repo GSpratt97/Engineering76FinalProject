@@ -23,8 +23,8 @@ public class EnterAttendSD {
 
     @Given("I am logged in as a trainer and I am on the attendance page")
     public void iAmOnTheAttendancePage() {
-        //webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
-        webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
+        //webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
         PropertyLoader.loadProperties();
         properties = PropertyLoader.properties;
         //SignIn
