@@ -72,6 +72,7 @@ Here is an example of a test case using Gherkin syntax and Java to log into the 
 ## Reports
 
 Reports can be found in the reports directory in the project.
+
 Below is the link for the test runner HTML report created by Cucumber.
 
 https://htmlpreview.github.io/?https://github.com/GSpratt97/Engineering76FinalProject/blob/projectControl/reports/index.html
