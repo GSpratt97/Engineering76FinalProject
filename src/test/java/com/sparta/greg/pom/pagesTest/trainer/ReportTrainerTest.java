@@ -14,30 +14,12 @@ public class ReportTrainerTest {
     private static       ReportTrainer  reportTrainer;
     private static       WebDriver      webDriver;
 
-//    @BeforeEach
-//    void setup() {
-//        webDriver = new ChromeDriver();
-//        login     = new Login(webDriver);
-//
-//        webDriver.get("http://localhost:8080/");
-//
-//        PropertyLoader.loadProperties();
-//        String trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
-//        String trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
-//
-//        login.logInAsTrainer(trainerUsername, trainerPassword);
-//        webDriver.get("http://localhost:8080/trainer/report/41"); //Bill Bird
-//
-//        reportTrainer = new ReportTrainer(webDriver);
-//        reportTrainer.setWeekReports();
-//        reportTrainer.setReportDataForWeek(12);
-//    }
-
     @BeforeEach
     void setup() {
         webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
         webDriver.get("http://localhost:8080/login");
         login     = new Login(webDriver);
+
         PropertyLoader.loadProperties();
         String trainerUsername = PropertyLoader.properties.getProperty("trainerUsername");
         String trainerPassword = PropertyLoader.properties.getProperty("trainerPassword");
@@ -53,6 +35,12 @@ public class ReportTrainerTest {
     @AfterEach
     void closeWindow() {
         webDriver.close();
+    }
+
+    @Test
+    @DisplayName("Is SidebarTrainer object set?")
+    void isSidebarSet() {
+        Assertions.assertNotNull(reportTrainer.getSideBarTrainer());
     }
 
     @Test

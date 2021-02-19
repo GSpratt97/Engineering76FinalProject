@@ -1,4 +1,4 @@
-package com.sparta.greg.cucumber.stepdefs;
+package com.sparta.greg.cucumber.stepDefs.trainer;
 
 import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.utilities.PropertyLoader;
@@ -71,6 +71,7 @@ public class ViewClassAttendanceSD {
     @Then("The week {int} tab should be closed on the Weekly Attendance page")
     public void theWeekTabShouldBeClosedOnTheWeeklyAttendancePage(int arg0) {
         Assertions.assertFalse(weeklyAttendance.isWeekExpanded(arg0));
+        webDriver.quit();
     }
 
     @And("The week {int} attendance table should not be visible at all on the Weekly Attendance page")
@@ -81,7 +82,6 @@ public class ViewClassAttendanceSD {
             double height = Double.parseDouble(studentRow.getCssValue("height").replace("px", ""));
             Assertions.assertEquals(0, height);
         }
-        webDriver.quit();
     }
 
     @When("I click Dashboard on the trainer sidebar on the Weekly Attendance page")

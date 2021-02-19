@@ -1,4 +1,4 @@
-package com.sparta.greg.cucumber.stepdefs;
+package com.sparta.greg.cucumber.stepDefs.trainer;
 
 import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.ClassManagement;
@@ -61,6 +61,7 @@ public class ClassManagementStepdefs {
 	public void traineeShouldBeAssignedAndIShouldSeeASuccessMessage() {
 		Assertions.assertNotNull(classManagement.getSuccessMessage());
 		Assertions.assertEquals("http://localhost:8080/trainer/modifyGroup", classManagement.getURL());
+		webDriver.quit();
 	}
 
 	@When("I click assign trainee with empty fields")
@@ -71,7 +72,7 @@ public class ClassManagementStepdefs {
 	@Then("an error message or prompt should appear and I should stay on the same page")
 	public void anErrorMessageOrPromptShouldAppearAndIShouldStayOnTheSamePage() {
 		Assertions.assertEquals("http://localhost:8080/trainer/manageClass", classManagement.getURL());
-
+		webDriver.quit();
 	}
 
 
@@ -89,6 +90,7 @@ public class ClassManagementStepdefs {
 	@Then("class should be created and I should see a success message")
 	public void classShouldBeCreatedAndIShouldSeeASuccessMessage() {
 		Assertions.assertNotNull(classManagement.getSuccessMessage());
+		webDriver.quit();
 	}
 
 	@When("I fill out the form, with a pre-exisiting class name and click create class")
@@ -105,6 +107,7 @@ public class ClassManagementStepdefs {
 	@Then("an error message should appear")
 	public void anErrorMessageShouldAppear() {
 		Assertions.assertNotNull(classManagement.getErrorMessage());
+		webDriver.quit();
 	}
 
 

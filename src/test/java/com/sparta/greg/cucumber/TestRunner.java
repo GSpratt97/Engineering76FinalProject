@@ -8,8 +8,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions
         (
-                tags = "@WeekDefect",
-                features = {"src/test/resources/features", "src/test/resources/featuresDemo"},
+                features = {"src/test/resources/features"},
                 plugin = {"pretty", "html:target/reports/htmlReport.html", "json:target/reports/jsonReport.json"}
         )
 public class TestRunner {

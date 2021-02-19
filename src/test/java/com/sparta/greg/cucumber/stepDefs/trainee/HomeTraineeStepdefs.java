@@ -1,4 +1,4 @@
-package com.sparta.greg.cucumber.stepdefs;
+package com.sparta.greg.cucumber.stepDefs.trainee;
 
 import com.sparta.greg.pom.pages.Login;
 import com.sparta.greg.pom.pages.utilities.PropertyLoader;
@@ -48,6 +48,7 @@ public class HomeTraineeStepdefs {
     @Then("I am taken to the Weekly Attendance Page from the Home Trainee Page")
     public void iAmTakenToTheWeeklyAttendancePageFromTheHomeTraineePage() {
         Assertions.assertEquals("http://localhost:8080/trainee/trainee-attendance", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @When("I click on Report Details on the Home Trainee Page")
@@ -58,6 +59,7 @@ public class HomeTraineeStepdefs {
     @Then("I am taken to the Trainee Report Page from the Home Trainee Page")
     public void iAmTakenToTheTraineeReportPageFromTheHomeTraineePage() {
         Assertions.assertEquals("http://localhost:8080/trainee/report", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @When("I click on Sparta Global Logo on the Home Trainee Page")
@@ -68,6 +70,7 @@ public class HomeTraineeStepdefs {
     @Then("I am taken to the Home Trainee Page from the Home Trainee Page")
     public void iAmTakenToTheHomeTraineePageFromTheHomeTraineePage() {
         Assertions.assertEquals("http://localhost:8080/trainee/home", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @When("I click on Profile on the Home Trainee Page")
@@ -88,6 +91,7 @@ public class HomeTraineeStepdefs {
     @Then("I am taken to the Consultancy Skills Page from the Home Trainee Page")
     public void iAmTakenToTheConsultancySkillsPageFromTheHomeTraineePage() {
         Assertions.assertEquals("http://localhost:8080/consultancy", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @And("I click on Trainee Guide on the Home Trainee Page")
@@ -98,6 +102,7 @@ public class HomeTraineeStepdefs {
     @Then("I am taken to the Trainee Guide Page from the Home Trainee Page")
     public void iAmTakenToTheTraineeGuidePageFromTheHomeTraineePage() {
         Assertions.assertEquals("http://localhost:8080/guide", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @When("I click Trainee Options on the trainee sidebar on the Home Trainee Page")
@@ -113,6 +118,7 @@ public class HomeTraineeStepdefs {
     @Then("I am taken to the Feedback Form from the Home Trainee Page")
     public void iAmTakenToTheFeedbackFormFromTheHomeTraineePage() {
         Assertions.assertEquals("http://localhost:8080/trainee/report/12", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @And("I click on Report Trainee on the Home Trainee Page")
@@ -123,6 +129,7 @@ public class HomeTraineeStepdefs {
     @Then("I am taken to the Report Trainee Page from the Home Trainee Page")
     public void iAmTakenToTheReportTraineePageFromTheHomeTraineePage() {
         Assertions.assertEquals("http://localhost:8080/trainee/report", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @And("I click on Attendance History on the Home Trainee Page")
@@ -133,6 +140,7 @@ public class HomeTraineeStepdefs {
     @Then("I am taken to the Trainee Attendance Page from the Home Trainee Page")
     public void iAmTakenToTheTraineeAttendancePageFromTheHomeTraineePage() {
         Assertions.assertEquals("http://localhost:8080/trainee/trainee-attendance", webDriver.getCurrentUrl());
+        webDriver.quit();
     }
 
     @When("I am on the Home Trainee Page")
@@ -143,12 +151,14 @@ public class HomeTraineeStepdefs {
     public void iCanSeeMyTraineeDetailsOnTheHomeTraineePage() {
         String[] traineeDetails = {"Bill Bird", "Engineering 72", "Java Development", "12"};
         Assertions.assertEquals(Arrays.toString(traineeDetails), Arrays.toString(homeTrainee.getTraineeDetails()));
+        webDriver.quit();
     }
 
     @Then("I can see my Grade for previous week on the Home Trainee Page")
     public void iCanSeeMyGradeForPreviousWeekOnTheHomeTraineePage() {
         String[] gradeForPreviousWeek = {"C", "C", "C"};
         Assertions.assertEquals(Arrays.toString(gradeForPreviousWeek), Arrays.toString(homeTrainee.getTraineeGrades()));
+        webDriver.quit();
     }
 
 
@@ -156,5 +166,6 @@ public class HomeTraineeStepdefs {
     public void iCanSeeMyAttendanceDetailsOnTheHomeTraineePage() {
         String[] attendanceBreakdown = {"0%", "100%", "0%", "0%"};
         Assertions.assertEquals(Arrays.toString(attendanceBreakdown), Arrays.toString(homeTrainee.getAttendanceBreakdown()));
+        webDriver.quit();
     }
 }
