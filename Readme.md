@@ -1,3 +1,6 @@
+
+
+
 # Engineering 76
 ## Web development testing
 
@@ -66,3 +69,30 @@ Here is an example of a test case using Gherkin syntax and Java to log into the 
       webDriver.quit();
   }
 ```
+## Important usage notes
+
+A src/test/resources/login.properties file will be needed to save the login credentials. This file should be formatted as below
+
+```properties
+# login.properties
+
+# Trainer Login
+trainerUsername=<Trainer email>
+trainerPassword=<Trainer password>
+
+# Trainee Login
+traineeUsername=<Trainee email>
+traineePassword=<Trainee password>
+```
+
+A WebDriver is required in the project directory. 
+
+ChromeDriver can be downloaded here https://chromedriver.chromium.org
+
+## Reports
+
+Reports can be found in the reports directory in the project.
+
+Below is the link for the test runner HTML report created by Cucumber.
+
+https://htmlpreview.github.io/?https://github.com/GSpratt97/Engineering76FinalProject/blob/projectControl/reports/index.html
