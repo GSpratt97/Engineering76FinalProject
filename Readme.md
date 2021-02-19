@@ -83,7 +83,9 @@ traineeUsername=<Trainee email>
 traineePassword=<Trainee password>
 ```
 
-A WebDriver is required in the project directory. ChromeDriver can be downloaded here https://chromedriver.chromium.org
+A WebDriver is required in the project directory. 
+
+ChromeDriver can be downloaded here https://chromedriver.chromium.org
 
 ## Reports
 
