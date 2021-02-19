@@ -69,7 +69,7 @@ Here is an example of a test case using Gherkin syntax and Java to log into the 
       webDriver.quit();
   }
 ```
-# Reports
+## Reports
 
 Test report summary:
 https://htmlpreview.github.io/?https://github.com/GSpratt97/Engineering76FinalProject/blob/projectControl/reports/index.html
