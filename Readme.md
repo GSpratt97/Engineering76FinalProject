@@ -1,3 +1,6 @@
+https://htmlpreview.github.io/https://github.com/GSpratt97/Engineering76FinalProject/blob/projectControl/reports/docs/index.html
+
+
 # Engineering 76
 ## Web development testing
 
