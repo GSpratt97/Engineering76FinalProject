@@ -74,11 +74,13 @@ Here is an example of a test case using Gherkin syntax and Java to log into the 
 A src/test/resources/login.properties file will be needed to save the login credentials. This file should be formatted as below
 
 ```properties
-#Trainer Login
+# login.properties
+
+# Trainer Login
 trainerUsername=<Trainer email>
 trainerPassword=<Trainer password>
 
-#Trainee Login
+# Trainee Login
 traineeUsername=<Trainee email>
 traineePassword=<Trainee password>
 ```
