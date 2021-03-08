@@ -1,5 +1,6 @@
 package com.sparta.greg.cucumber.stepDefs.trainer;
 
+import com.sparta.greg.pom.pages.templates.Browser;
 import com.sparta.greg.pom.pages.utilities.PropertyLoader;
 import com.sparta.greg.pom.pages.trainer.EnterAttendance;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
@@ -23,26 +24,22 @@ public class EnterAttendSD {
 
     @Given("I am logged in as a trainer and I am on the attendance page")
     public void iAmOnTheAttendancePage() {
-        webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
-        //webDriver = WebDriverFactory.getWebDriver(WebDriverType.CHROME);
+        //webDriver = WebDriverFactory.runHeadless(WebDriverType.CHROME);
+        webDriver = WebDriverFactory.getWebDriver(WebDriverType.SAFARI);
+
+        //Load properties
         PropertyLoader.loadProperties();
         properties = PropertyLoader.properties;
+
         //SignIn
         Login login = new Login(webDriver);
         webDriver.get("http://localhost:8080");
-        HomeTrainer trainer = login.logInAsTrainer(properties.getProperty("trainerUsername"),properties.getProperty("trainerPassword") );
-        attendancePage = trainer.goToEnterAttendanceThroughDashboard();
+        HomeTrainer trainer = login.logInAsTrainer(properties.getProperty("trainerUsername")
+                ,properties.getProperty("trainerPassword") );
 
-        //Go to right page
-        webDriver.get("http://localhost:8080/trainer/attendanceEntry");
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        //Navigate to right page through sideBar
+        attendancePage = trainer.goToEnterAttendanceThroughDashboard();
         attendancePage = new EnterAttendance(webDriver);
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        attendancePage.setPageConfirm();
         Assertions.assertTrue(attendancePage.areOnAttendanceEntryPage("http://localhost:8080/trainer/attendanceEntry"));
     }
 
@@ -54,6 +51,8 @@ public class EnterAttendSD {
 
     @And("Select the desired radio button for attendance type")
     public void selectTheDesiredRadioButton() {
+
+        if(Browser.isSafari(webDriver))Browser.safariSleep();
         attendancePage.selectAttendanceType("Late");
     }
 
@@ -91,11 +90,10 @@ public class EnterAttendSD {
         webDriver.quit();
     }
 
-    @Given("I have selected a date on Attendance Page")
+    @And("I have selected a date on Attendance Page")
     public void iHaveSelectedADate() {
         webDriver.get("http://localhost:8080/trainer/attendanceEntry");
         attendancePage = new EnterAttendance(webDriver);
-        attendancePage.setPageConfirm();
         Assertions.assertTrue(attendancePage.areOnAttendanceEntryPage("http://localhost:8080/trainer/attendanceEntry"));
         attendancePage.selectDate("22-09-2020");
         Assertions.assertTrue(attendancePage.isCorrectDate("22-09-2020"));

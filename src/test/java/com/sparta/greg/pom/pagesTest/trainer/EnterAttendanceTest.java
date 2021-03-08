@@ -61,8 +61,6 @@ public class EnterAttendanceTest {
             e.printStackTrace();
         }
         attendancePage = new EnterAttendance(webDriver);
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        attendancePage.setPageConfirm();
     }
 
     @Test

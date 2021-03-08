@@ -1,6 +1,7 @@
 package com.sparta.greg.pom.pages;
 
 import com.sparta.greg.pom.pages.templates.BasePage;
+import com.sparta.greg.pom.pages.templates.Browser;
 import com.sparta.greg.pom.pages.trainee.HomeTrainee;
 import com.sparta.greg.pom.pages.trainer.HomeTrainer;
 import org.openqa.selenium.By;
@@ -23,14 +24,29 @@ public class Login extends BasePage {
     public HomeTrainer logInAsTrainer(String username, String password) {
         enterUsernameAddress(username);
         enterPassword(password);
-        clickSubmitButton();
+
+        if(Browser.isSafari(webDriver))
+        {
+            Browser.submit(webDriver);
+        }
+        else
+        {
+            clickSubmitButton();
+        }
         return new HomeTrainer(webDriver);
     }
 
     public HomeTrainee logInAsTrainee(String username, String password) {
         enterUsernameAddress(username);
         enterPassword(password);
-        clickSubmitButton();
+        if(Browser.isSafari(webDriver))
+        {
+            Browser.submit(webDriver);
+        }
+        else
+        {
+            clickSubmitButton();
+        }
         return new HomeTrainee(webDriver);
     }
 

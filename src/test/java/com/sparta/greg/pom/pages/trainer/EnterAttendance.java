@@ -1,28 +1,21 @@
 package com.sparta.greg.pom.pages.trainer;
 
+import com.sparta.greg.pom.pages.templates.Browser;
 import com.sparta.greg.pom.pages.templates.Page;
 import com.sparta.greg.pom.pages.fragments.SideBarTrainer;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.safari.SafariDriver;
 
 public class EnterAttendance extends Page {
 
-    private String submitMessage, pageConfirm;
+    private String submitMessage;
     private String[] dates;
     private final SideBarTrainer sideBarTrainer;
 
     public String getSubmitMessage() {
         return submitMessage;
-    }
-
-    public void setPageConfirm() {
-//        this.pageConfirm = webDriver
-//                .findElement(By.cssSelector("h1[class*='h3 mb-3 font-weight-normal']"))
-//                .getText();
-        this.pageConfirm = webDriver.getCurrentUrl();
     }
 
     public EnterAttendance(WebDriver webDriver)
@@ -32,17 +25,16 @@ public class EnterAttendance extends Page {
     }
 
     public void setSubmitMessage(String isSuccess) {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        if(Browser.isSafari(webDriver))Browser.safariSleep();
+
         if(isSuccess.equals("success"))
         {
             this.submitMessage = webDriver.findElement(By.cssSelector("p[class*='letterGradeA mt-3']")).getText();
+            System.out.println(submitMessage + "Success");
         }
         else{
             this.submitMessage = webDriver.findElement(By.cssSelector("p[class*='letterGradeF']")).getText();
+            System.out.println(submitMessage + "Fail");
         }
     }
 
@@ -52,11 +44,7 @@ public class EnterAttendance extends Page {
 
     public void selectTrainee(String name)
     {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        if(Browser.isSafari(webDriver))Browser.safariSleep();
         switch(name)
         {
             case "David":
@@ -94,12 +82,9 @@ public class EnterAttendance extends Page {
 
     public void submit()
     {
-        if(webDriver.getClass() == SafariDriver.class)
+        if(Browser.isSafari(webDriver))
         {
-            //Safari browser not working with selenium click function, so it needs to executed with javascript
-            WebElement element = webDriver.findElement(By.cssSelector("button[type*='submit']"));
-            JavascriptExecutor executor = (JavascriptExecutor)webDriver;
-            executor.executeScript("arguments[0].click();", element);
+            Browser.submit(webDriver);
         }
         else
         {
@@ -109,6 +94,7 @@ public class EnterAttendance extends Page {
 
     public void selectAttendanceType(String type)
     {
+        if(Browser.isSafari(webDriver))Browser.safariSleep();
         switch (type)
         {
             case "On Time":
@@ -137,21 +123,16 @@ public class EnterAttendance extends Page {
         {
             dates = date.split("-");
         }
-        if(webDriver.getClass() == SafariDriver.class)
+        if(Browser.isSafari(webDriver))
         {
-            build.append(dates[2]);
-            build.append("-");
-            build.append(dates[1]);
-            build.append("-");
-            build.append(dates[0]);
-            date = build.toString();
+            date = Browser.safariDateFormat(dates);
         }
 
         return date;
     }
 
     public Boolean areOnAttendanceEntryPage(String string) {
-        return pageConfirm.equals(string);
+        return webDriver.getCurrentUrl().equals(string);
     }
 
     public boolean isCorrectAttendanceType(String type)
