@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions
         (
+                tags = "@AttendanceRadioCheck",
                 features = {"src/test/resources/features"},
                 plugin = {"pretty", "html:target/reports/htmlReport.html", "json:target/reports/jsonReport.json"}
         )
